@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>考前衝刺</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">考前衝刺</div>
+  <div class="sub">會計練習題庫</div>
+</header>
+<main id="app">
+  <section id="home" class="screen active">
+    <div class="hero">
+      <span class="tag">ACCOUNTING</span>
+      <h1>考前衝刺</h1>
+      <p>從題庫隨機抽題，開始 25 題的會計測驗。</p>
+    </div>
+    <div class="subject-card" data-action="start">
+      <div>
+        <div class="subject-title">會計易如反掌67</div>
+        <div class="subject-meta"><span id="bankCount">353</span> 題題庫　·　每回 25 題　·　每題 4 分</div>
+      </div>
+      <button class="primary">開始測驗</button>
+    </div>
+    <div class="info-grid">
+      <div><b>25 題</b><span>隨機抽題</span></div>
+      <div><b>100 分</b><span>滿分</span></div>
+      <div><b>自動批改</b><span>完成後立即看結果</span></div>
+    </div>
+    <div class="notice">題目有誤請聯絡Eric；錯題若有詳解，會在交卷後顯示。</div>
+  </section>
+
+  <section id="quiz" class="screen">
+    <div class="quiz-head">
+      <button class="ghost" data-action="quit">退出</button>
+      <div class="progress-wrap">
+        <div class="progress-text"><span id="qNo">1</span> / 25</div>
+        <div class="progress"><i id="progressBar"></i></div>
+      </div>
+      <div class="score-mini">每題 4 分</div>
+    </div>
+    <article class="question-card">
+      <div class="question-image-wrap"><img id="questionImage" alt="會計題目"></div>
+      <div class="options" id="options"></div>
+    </article>
+    <div class="quiz-actions">
+      <button id="prevBtn" class="secondary">上一題</button>
+      <button id="nextBtn" class="primary">下一題</button>
+    </div>
+  </section>
+
+  <section id="result" class="screen">
+    <div class="result-card">
+      <div class="tag">TEST RESULT</div>
+      <h2>測驗完成</h2>
+      <div class="score" id="score">0</div>
+      <div class="score-label">分</div>
+      <div class="result-stats">
+        <div><b id="correctCount">0</b><span>答對</span></div>
+        <div><b id="wrongCount">0</b><span>答錯</span></div>
+        <div><b id="accuracy">0%</b><span>正確率</span></div>
+      </div>
+    </div>
+    <div class="wrong-head"><h3>錯題與詳解</h3><span id="wrongSummary"></span></div>
+    <div id="wrongList" class="wrong-list"></div>
+    <div class="result-actions">
+      <button class="secondary" data-action="home">回首頁</button>
+      <button class="primary" data-action="start">再測一次</button>
+    </div>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
