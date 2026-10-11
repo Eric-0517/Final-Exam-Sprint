@@ -1,0 +1,380 @@
+[
+  {
+    "id": "english-week-001",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Emily enjoys trying different things and traveling to different places, for she believes that _______ is the spice(調味料) of life.",
+    "options": {
+      "A": "quarrel(爭論/argue)",
+      "B": "variety(變化/change)",
+      "C": "wagon(馬車)",
+      "D": "zipper(拉鍊)"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-002",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "More and more students _______ that with a good knowledge(知識) of English, they will have more opportunities(機會/chance) to find a good job.",
+    "options": {
+      "A": "delay(延誤)",
+      "B": "launch(發射)",
+      "C": "realize(瞭解/understand)",
+      "D": "bother(打擾)"
+    },
+    "answer": "C",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-003",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "I sometimes order products online to save(節省) money and time _______ going to a store and buying what I am looking for.",
+    "options": {
+      "A": "instead of (而不是/rather than)",
+      "B": "inclusive of (包含)",
+      "C": "in sense of (以…而言)",
+      "D": "in spite of (儘管)"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-004",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "My parents are really _______ to me. They have always supported me in whatever I have wanted to do.",
+    "options": {
+      "A": "changeable (變動的)",
+      "B": "doubtful (懷疑的)",
+      "C": "medical (醫療的)",
+      "D": "precious (珍貴的/valuable)"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-005",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Anny’s grandson is always full of _______ and wants to go to the park every day.",
+    "options": {
+      "A": "energy (能量)",
+      "B": "hurry",
+      "C": "identity (身份)",
+      "D": "safety"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-006",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "When you use your _______, a book can become so interesting that you can find it difficult to stop reading it.",
+    "options": {
+      "A": "image (圖案)",
+      "B": "imagination (想像力)",
+      "C": "imagine (想像)",
+      "D": "imagining"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-007",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "May’s mother made a quick _______ from her sickness after taking the medicine.",
+    "options": {
+      "A": "recovery (康復)",
+      "B": "emotion (情緒)",
+      "C": "religion (宗教)",
+      "D": "energy"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-008",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "After four attempts(嘗試), Mike finally passed his driving test and started to drive happily to work right away.",
+    "options": {
+      "A": "obviously (明顯地)",
+      "B": "apparently (明顯地)",
+      "C": "immediately (立即地)",
+      "D": "eventually (最後)"
+    },
+    "answer": "C",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-009",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Marie Curie (居禮夫人) was a magnificent scientist who was the first woman to win the Nobel Prize.",
+    "options": {
+      "A": "brilliant (傑出的)",
+      "B": "believable (可信任的)",
+      "C": "critical (關鍵的)",
+      "D": "commercial (商業的)"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-010",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "You’ve used up(用完) all the excuses(藉口). Can’t you come up with a better one?",
+    "options": {
+      "A": "watch out (注意)",
+      "B": "go after (追逐/pursue)",
+      "C": "live with",
+      "D": "think of (想出)"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-011",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Secretary: Mr. Hubbard’s office. May I help you? Client: Yes, I’d like to speak to Mr. James, please. Secretary: _________ Client: This is Mrs. Stone from Sandhill.",
+    "options": {
+      "A": "Who is calling, please?",
+      "B": "May I ask what this call is about?",
+      "C": "How did you find us?",
+      "D": "Where are you going?"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-012",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Operator: Hello. This is Fashion Magazine. How may I help you? Nick: Good morning. It’s Nick, the designer from XYZ Company. _______________ Operator: Just a moment.(請稍等) I’ll put you through(轉接).",
+    "options": {
+      "A": "Could you call back?",
+      "B": "May I speak to the manager?",
+      "C": "Can you hold for a minute?",
+      "D": "Could I leave a message?"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-013",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Secretary: Good morning, Johnson’s Computers. Peter: Hello. May I speak to Mr. Chen, please? Secretary: I’m sorry. He’s not in right now. ____________ Peter: Yes. This is Peter Li. Please tell him to call me back.",
+    "options": {
+      "A": "He’s always busy.",
+      "B": "What’s your name?",
+      "C": "It’s a pity.",
+      "D": "May I take a message?"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-014",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Operator: City Hall(市政府). How may I direct(轉接) your call? Citizen: ____________.Operator: And the reason for your call? Citizen: Well, the park in our neighborhood looks terrible. I mean, there’s litter(=trash) everywhere and nobody has picked it up. Operator: I see. One moment please.",
+    "options": {
+      "A": "I’d like to speak to Environmental Services(環保局), please.",
+      "B": "Yes, you may direct the problem to our department.",
+      "C": "Read it before you hand it in to the director, please.",
+      "D": "Please turn right at the next corner to find the center."
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-015",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "I’m sorry I didn’t reply(回覆) yesterday, but I was ______ busy and could not find any time at all to return your phone call.",
+    "options": {
+      "A": "casually(輕便地)",
+      "B": "extremely(極度地)",
+      "C": "loosely(鬆地)",
+      "D": "scarcely(稀少地)"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-016",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Most job application(申請) forms(表格) ask for similar(類似的) _______ data(資料), including educational background, employment history, and references.",
+    "options": {
+      "A": "anxious(焦急的)",
+      "B": "creative(創意的)",
+      "C": "personal(私人的)",
+      "D": "dependent(依賴的)"
+    },
+    "answer": "C",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-017",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "A university president(校長) has a high social(社會) ____, and (s)he is highly respected by the people.",
+    "options": {
+      "A": "stage(舞台)",
+      "B": "statue(雕像)",
+      "C": "station(車站)",
+      "D": "status(地位)"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-018",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Distracted(分心的) walking, like distracted driving, is now a cause(原因) of injuries(受傷) and fatalities. A recent study shows that more and more people end up in hospital _______ walking while using their phones.",
+    "options": {
+      "A": "as a result of(因為)",
+      "B": "in addition to(除了)",
+      "C": "in the end",
+      "D": "in order that(為了)"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-019",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "The _______ of Taiwan is over 23 million. That is, there are more than 23 million people living in Taiwan.",
+    "options": {
+      "A": "pollution(汙染)",
+      "B": "calculation(計算)",
+      "C": "portion(部分)",
+      "D": "population(人口)"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-020",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Since water shortages(短缺) in many regions(地區) are getting worse, it is likely that the world will face a water _______ soon.",
+    "options": {
+      "A": "level",
+      "B": "energy",
+      "C": "crisis(危機)",
+      "D": "sink(下沉)"
+    },
+    "answer": "C",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-021",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "All city council(議會) members decided(決定) to _______ a percentage of their income(收入) to the poor.",
+    "options": {
+      "A": "rebuild(重建)",
+      "B": "bribe(賄賂)",
+      "C": "finish",
+      "D": "donate(捐出)"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-022",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "John’s father was so busy that he totally ignored(忽略) his own health.",
+    "options": {
+      "A": "neglected(忽略)",
+      "B": "founded(創立)",
+      "C": "persuaded(說服)",
+      "D": "discouraged(使沮喪)"
+    },
+    "answer": "A",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-023",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "The weather forecast(預測) said the temperature(溫度) would dip(下降) from 20 degrees during the day to 12 degrees at night.",
+    "options": {
+      "A": "dim(暗的)",
+      "B": "drop(掉落)",
+      "C": "fail",
+      "D": "leak(漏)"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-024",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "The police pursued(追逐) the bank robber through the streets last night.",
+    "options": {
+      "A": "begged(乞求)",
+      "B": "chased(追)",
+      "C": "praised(稱讚)",
+      "D": "treated(對待)"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-025",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Waitress: Would you like something for dessert(甜點)? Norman: ____________ Waitress: That’s too bad(真可惜/ What a pity!). We have the best cheesecake in town.",
+    "options": {
+      "A": "That’s not what I ordered.",
+      "B": "No, I’m full already.",
+      "C": "What’s new in town?",
+      "D": "Do you have cheese?"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-026",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Coffee Shop Clerk: What can I get for you?Customer: A mocha, please.Coffee Shop Clerk: ____________Customer: Half milk and no sugar. Thank you.",
+    "options": {
+      "A": "For here or to go?",
+      "B": "How would you like it?",
+      "C": "Cash or charge?",
+      "D": "How would you like to pay for it?"
+    },
+    "answer": "B",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  },
+  {
+    "id": "english-week-027",
+    "subject": "英文閱讀與寫作",
+    "source": "Week 1,2",
+    "question": "Waiter: Do you have a reservation(預約)/booking?George: No, I’m afraid not. Are there any tables available(有空的)?Waiter: We have a few left. ____________George: It’s just me.Waiter: OK, this way, please.",
+    "options": {
+      "A": "Some tables are on the right side.",
+      "B": "You need to come earlier next time.",
+      "C": "Who is going to reserve a table?",
+      "D": "How many people are there in your party?"
+    },
+    "answer": "D",
+    "explanation": "請依題幹語意、文法與選項意思理解本題。"
+  }
+]
