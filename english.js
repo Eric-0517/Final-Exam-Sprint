@@ -1,4 +1,4 @@
-
+```javascript
 const state = {
   bank: [],
   quiz: [],
@@ -34,11 +34,8 @@ function shuffle(a) {
 // 題目與選項只顯示英文，不影響詳解的中文翻譯
 function cleanQuestionText(value) {
   return String(value || '')
-    // 移除包含中文翻譯的括號內容
     .replace(/[（(][^）)]*[\u3400-\u9FFF\uF900-\uFAFF][^）)]*[）)]/g, '')
-    // 移除題目與選項中剩餘的中文字元
     .replace(/[\u3400-\u9FFF\uF900-\uFAFF]/g, '')
-    // 清理多餘空格
     .replace(/[ \t]{2,}/g, ' ')
     .replace(/\s+([,.;:!?])/g, '$1')
     .replace(/([,.;:!?])(?=[A-Za-z])/g, '$1 ')
@@ -53,7 +50,59 @@ function cleanExplanation(value) {
     .trim();
 }
 
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
+
+// 建立閱讀測驗圖片
+function createReadingImage(q) {
+  if (q.type !== 'reading' || !q.image) {
+    return null;
+  }
+
+  const img = document.createElement('img');
+  img.src = q.image;
+  img.alt = 'Reading passage';
+  img.className = 'reading-image';
+  img.loading = 'lazy';
+
+  img.onerror = () => {
+    img.alt = 'Reading passage image could not be loaded';
+    img.style.display = 'none';
+  };
+
+  return img;
+}
+
+// 顯示題目與閱讀圖片
+function renderQuestionContent(container, q, review = false) {
+  container.innerHTML = '';
+
+  const img = createReadingImage(q);
+
+  if (img) {
+    container.appendChild(img);
+  }
+
+  const prompt = document.createElement('div');
+  prompt.className = review ? 'review-question-text' : 'reading-question';
+  prompt.textContent = cleanQuestionText(q.question);
+
+  container.appendChild(prompt);
+}
+
 function start() {
+  if (state.bank.length === 0) {
+    alert('目前沒有可作答的題目。');
+    return;
+  }
+
   state.quiz = shuffle(state.bank).slice(
     0,
     Math.min(50, state.bank.length)
@@ -76,8 +125,7 @@ function render() {
   $('#progressBar').style.width =
     ((state.index + 1) / state.quiz.length * 100) + '%';
 
-  $('#questionText').textContent =
-    cleanQuestionText(q.question);
+  renderQuestionContent($('#questionText'), q);
 
   const box = $('#options');
   box.innerHTML = '';
@@ -108,16 +156,6 @@ function render() {
 
   $('#nextBtn').textContent =
     state.index === state.quiz.length - 1 ? '交卷' : '下一題';
-}
-
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c => ({
-    '&': '&amp;',
-    '<': '&lt;',
-    '>': '&gt;',
-    '"': '&quot;',
-    "'": '&#39;'
-  }[c]));
 }
 
 function next() {
@@ -159,30 +197,37 @@ function submit() {
     const item = document.createElement('div');
     item.className = 'wrong-item';
 
-    item.innerHTML =
-      '<div class="wrong-title">' +
+    const title = document.createElement('div');
+    title.className = 'wrong-title';
+    title.textContent =
       '第 ' + (i + 1) + ' 題｜你的答案：' +
       (state.answers[q.id] || '未作答') +
-      '｜正確答案：' + q.answer +
-      '</div>' +
+      '｜正確答案：' + q.answer;
 
-      '<div class="review-question">' +
-      escapeHtml(cleanQuestionText(q.question)) +
-      '</div>' +
+    item.appendChild(title);
 
-      '<div class="review-options">' +
-      ['A', 'B', 'C', 'D'].map(k =>
-        '<p><b>' + k + '.</b> ' +
-        escapeHtml(cleanQuestionText(q.options[k] || '')) +
-        (k === q.answer ? ' ✓ 正確答案' : '') +
-        '</p>'
-      ).join('') +
-      '</div>' +
+    const question = document.createElement('div');
+    question.className = 'review-question';
+    renderQuestionContent(question, q, true);
+    item.appendChild(question);
 
-      '<div class="explanation">' +
-      escapeHtml(cleanExplanation(q.explanation)) +
-      '</div>';
+    const options = document.createElement('div');
+    options.className = 'review-options';
 
+    options.innerHTML = ['A', 'B', 'C', 'D'].map(k =>
+      '<p><b>' + k + '.</b> ' +
+      escapeHtml(cleanQuestionText(q.options[k] || '')) +
+      (k === q.answer ? ' ✓ 正確答案' : '') +
+      '</p>'
+    ).join('');
+
+    item.appendChild(options);
+
+    const explanation = document.createElement('div');
+    explanation.className = 'explanation';
+    explanation.textContent = cleanExplanation(q.explanation);
+
+    item.appendChild(explanation);
     list.appendChild(item);
   });
 
@@ -222,3 +267,4 @@ fetch('english-questions.json')
   .catch(() => {
     alert('題庫載入失敗，請確認網站伺服器開啟。');
   });
+```
