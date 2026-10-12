@@ -1,305 +1,337 @@
-(() => {
-    "use strict";
 
-    const BANK_URL = "englishbook-questions.json";
-    const QUESTIONS_PER_QUIZ = 50;
-    const POINTS_PER_QUESTION = 2;
-    const LETTERS = ["A", "B", "C", "D"];
+const state = {
+  bank: [],
+  quiz: [],
+  answers: {},
+  index: 0
+};
 
-    const $ = (id) => document.getElementById(id);
-    const screens = ["home", "quiz", "result"];
+const $ = s => document.querySelector(s);
 
-    let questionBank = [];
-    let quizQuestions = [];
-    let userAnswers = [];
-    let currentIndex = 0;
+const screens = {
+  home: $('#home'),
+  quiz: $('#quiz'),
+  result: $('#result')
+};
 
-    function showScreen(id) {
-        screens.forEach((screenId) => {
-            $(screenId).classList.toggle(
-                "active",
-                screenId === id
-            );
-        });
-    }
+function show(n) {
+  Object.values(screens).forEach(x => x.classList.remove('active'));
+  screens[n].classList.add('active');
+  window.scrollTo(0, 0);
+}
 
-    function shuffle(items) {
-        const result = items.slice();
+function shuffle(a) {
+  const x = [...a];
 
-        for (let i = result.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [result[i], result[j]] = [result[j], result[i]];
-        }
+  for (let i = x.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [x[i], x[j]] = [x[j], x[i]];
+  }
 
-        return result;
-    }
+  return x;
+}
 
-    function escapeHTML(value) {
-        return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-            "&": "&amp;",
-            "<": "&lt;",
-            ">": "&gt;",
-            '"': "&quot;",
-            "'": "&#39;"
-        })[char]);
-    }
+// 題目與選項只顯示英文，不影響詳解的中文翻譯
+function cleanQuestionText(value) {
+  return String(value || '')
+    .replace(/[（(][^）)]*[\u3400-\u9FFF\uF900-\uFAFF][^）)]*[）)]/g, '')
+    .replace(/[\u3400-\u9FFF\uF900-\uFAFF]/g, '')
+    .replace(/[ \t]{2,}/g, ' ')
+    .replace(/\s+([,.;:!?])/g, '$1')
+    .replace(/([,.;:!?])(?=[A-Za-z])/g, '$1 ')
+    .trim();
+}
 
-    async function loadBank() {
-        const startButton = $("startBtn");
-        startButton.disabled = true;
+// 詳解保留中文，只移除指定的制式句子
+function cleanExplanation(value) {
+  return String(value || '請重新閱讀題幹與選項。')
+    .replace(/請依題幹語意、文法或文章內容判斷此選項。?/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 
-        try {
-            const response = await fetch(BANK_URL, {
-                cache: "no-store"
-            });
+function escapeHtml(s) {
+  return String(s ?? '').replace(/[&<>"']/g, c => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  }[c]));
+}
 
-            if (!response.ok) {
-                throw new Error(
-                    "題庫載入失敗（HTTP " + response.status + "）。"
-                );
-            }
+function createReadingImage(q) {
+  if (!q.image) {
+    return null;
+  }
 
-            const data = await response.json();
+  const img = document.createElement('img');
 
-            const rawQuestions = Array.isArray(data)
-                ? data
-                : data.questions;
+  img.src = new URL(q.image, document.baseURI).href;
+  img.alt = 'Reading passage';
+  img.className = 'reading-image';
+  img.loading = 'eager';
+  img.style.display = 'block';
+  img.style.maxWidth = '100%';
+  img.style.height = 'auto';
 
-            if (!Array.isArray(rawQuestions)) {
-                throw new Error(
-                    "題庫格式錯誤，找不到 questions 陣列。"
-                );
-            }
+  img.onerror = () => {
+    console.error('圖片載入失敗：', img.src);
+    img.alt = 'Reading passage image could not be loaded';
+    img.style.display = 'none';
+  };
 
-            questionBank = rawQuestions.map((question, index) => {
-                const options = question.options || {};
-                const answer = String(
-                    question.answer || ""
-                ).trim().toUpperCase();
+  return img;
+}
 
-                return {
-                    id: question.id || "englishbook-" + (index + 1),
-                    subject: question.subject || "英文第五冊 Unit 1",
-                    source: question.source || "",
-                    question: String(question.question || ""),
-                    options,
-                    answer,
-                    explanation:
-                        typeof question.explanation === "string"
-                            ? question.explanation
-                            : ""
-                };
-            }).filter((question) =>
-                question.question &&
-                LETTERS.every(
-                    (letter) =>
-                        question.options[letter] !== undefined
-                ) &&
-                LETTERS.includes(question.answer)
-            );
+// 顯示題目與閱讀圖片
+function renderQuestionContent(container, q, review = false) {
+  container.innerHTML = '';
 
-            if (!questionBank.length) {
-                throw new Error(
-                    "沒有格式正確且具有標準答案的 ABCD 選擇題。"
-                );
-            }
+  const img = createReadingImage(q);
 
-            $("bankCount").textContent = questionBank.length;
-            startButton.disabled = false;
+  if (img) {
+    container.appendChild(img);
+  }
 
-        } catch (error) {
-            $("bankCount").textContent = "載入失敗";
-            $("loadError").hidden = false;
-            $("loadError").textContent =
-                error.message +
-                " 請確認 HTML、JS、JSON 位於同一資料夾。";
-        }
-    }
+  const prompt = document.createElement('div');
+  prompt.className = review ? 'review-question-text' : 'reading-question';
+  prompt.textContent = cleanQuestionText(q.question);
 
-    function startQuiz() {
-        if (!questionBank.length) return;
+  container.appendChild(prompt);
+}
 
-        quizQuestions = shuffle(questionBank).slice(
-            0,
-            Math.min(
-                QUESTIONS_PER_QUIZ,
-                questionBank.length
-            )
-        );
+function start() {
+  if (state.bank.length === 0) {
+    alert('目前沒有可作答的題目。');
+    return;
+  }
 
-        userAnswers = new Array(
-            quizQuestions.length
-        ).fill(null);
+  state.quiz = shuffle(state.bank).slice(
+    0,
+    Math.min(50, state.bank.length)
+  );
 
-        currentIndex = 0;
+  state.answers = {};
+  state.index = 0;
 
-        $("total").textContent = quizQuestions.length;
+  $('#total').textContent = state.quiz.length;
 
-        showScreen("quiz");
-        renderQuestion();
-    }
+  show('quiz');
+  render();
+}
 
-    function renderQuestion() {
-        const question = quizQuestions[currentIndex];
+function render() {
+  const q = state.quiz[state.index];
 
-        $("qNo").textContent = currentIndex + 1;
-        $("total").textContent = quizQuestions.length;
+  $('#qNo').textContent = state.index + 1;
 
-        $("progressBar").style.width =
-            ((currentIndex + 1) /
-                quizQuestions.length * 100) + "%";
+  $('#progressBar').style.width =
+    ((state.index + 1) / state.quiz.length * 100) + '%';
 
-        $("questionText").textContent = question.question;
-        $("options").innerHTML = "";
+  renderQuestionContent($('#questionText'), q);
 
-        LETTERS.forEach((letter) => {
-            const button = document.createElement("button");
+  const box = $('#options');
+  box.innerHTML = '';
 
-            button.type = "button";
-            button.className = "option";
+  ['A', 'B', 'C', 'D'].forEach(k => {
+    const b = document.createElement('button');
 
-            button.classList.toggle(
-                "selected",
-                userAnswers[currentIndex] === letter
-            );
+    b.type = 'button';
+    b.className =
+      'option' +
+      (state.answers[q.id] === k ? ' selected' : '');
 
-            button.setAttribute(
-                "aria-pressed",
-                userAnswers[currentIndex] === letter
-                    ? "true"
-                    : "false"
-            );
+    b.setAttribute(
+      'aria-pressed',
+      state.answers[q.id] === k ? 'true' : 'false'
+    );
 
-            button.innerHTML =
-                '<span class="option-letter">' +
-                letter +
-                '</span><span class="option-text">' +
-                escapeHTML(question.options[letter]) +
-                '</span>';
+    const key = document.createElement('span');
+    key.className = 'option-key';
+    key.textContent = k;
 
-            button.addEventListener("click", () => {
-                userAnswers[currentIndex] = letter;
-                renderQuestion();
-            });
+    const text = document.createElement('span');
+    text.className = 'option-text';
+    text.textContent = cleanQuestionText(q.options[k] || '');
 
-            $("options").appendChild(button);
-        });
+    b.appendChild(key);
+    b.appendChild(text);
 
-        $("prevBtn").disabled = currentIndex === 0;
+    b.onclick = () => {
+      state.answers[q.id] = k;
+      render();
+    };
 
-        $("nextBtn").textContent =
-            currentIndex === quizQuestions.length - 1
-                ? "交卷並看結果"
-                : "下一題";
-    }
+    box.appendChild(b);
+  });
 
-    function finishQuiz() {
-        const total = quizQuestions.length;
+  $('#prevBtn').disabled = state.index === 0;
+  $('#prevBtn').style.opacity = state.index === 0 ? 0.45 : 1;
 
-        let correct = 0;
-        let wrong = 0;
+  $('#nextBtn').textContent =
+    state.index === state.quiz.length - 1 ? '交卷' : '下一題';
+}
 
-        quizQuestions.forEach((question, index) => {
-            if (userAnswers[index] === question.answer) {
-                correct++;
-            } else {
-                wrong++;
-            }
-        });
+function next() {
+  if (!state.answers[state.quiz[state.index].id]) {
+    alert('請先選擇答案。');
+    return;
+  }
 
-        const score = correct * POINTS_PER_QUESTION;
-        const accuracy = total
-            ? Math.round(correct / total * 100)
-            : 0;
+  if (state.index < state.quiz.length - 1) {
+    state.index++;
+    render();
+  } else {
+    submit();
+  }
+}
 
-        $("score").textContent = score;
-        $("correctCount").textContent = correct;
-        $("wrongCount").textContent = wrong;
-        $("accuracy").textContent = accuracy + "%";
+function submit() {
+  const correct = state.quiz.filter(
+    q => state.answers[q.id] === q.answer
+  ).length;
 
-        $("wrongSummary").textContent =
-            "共 " + wrong + " 題需要訂正";
+  const wrong = state.quiz.length - correct;
 
-        const wrongList = $("wrongList");
-        wrongList.innerHTML = "";
+  $('#score').textContent = correct * 2;
+  $('#correctCount').textContent = correct;
+  $('#wrongCount').textContent = wrong;
 
-        quizQuestions.forEach((question, index) => {
-            const selected = userAnswers[index];
+  $('#accuracy').textContent =
+    Math.round(correct / state.quiz.length * 100) + '%';
 
-            if (selected === question.answer) return;
+  $('#wrongSummary').textContent = '共 ' + wrong + ' 題錯題';
 
-            const item = document.createElement("article");
-            item.className = "wrong-item";
+  const list = $('#wrongList');
+  list.innerHTML = '';
 
-            const selectedText = selected
-                ? selected + "．" +
-                    escapeHTML(question.options[selected])
-                : "未作答";
+  state.quiz.forEach((q, i) => {
+    if (state.answers[q.id] === q.answer) return;
 
-            item.innerHTML =
-                '<div class="wrong-question">' +
-                    (index + 1) + ". " +
-                    escapeHTML(question.question) +
-                '</div>' +
-                '<p><strong>你的答案：</strong>' +
-                    selectedText +
-                '</p>' +
-                '<p><strong>正確答案：</strong>' +
-                    question.answer + "．" +
-                    escapeHTML(
-                        question.options[question.answer]
-                    ) +
-                '</p>' +
-                (
-                    question.explanation.trim()
-                        ? '<p><strong>詳解：</strong>' +
-                            escapeHTML(question.explanation) +
-                          '</p>'
-                        : ""
-                );
+    const item = document.createElement('div');
+    item.className = 'wrong-item';
 
-            wrongList.appendChild(item);
-        });
+    const title = document.createElement('div');
+    title.className = 'wrong-title';
+    title.textContent =
+      '第 ' + (i + 1) + ' 題｜你的答案：' +
+      (state.answers[q.id] || '未作答') +
+      '｜正確答案：' + q.answer;
 
-        if (wrong === 0) {
-            wrongList.innerHTML =
-                '<div class="notice">全部答對，沒有錯題！</div>';
-        }
+    item.appendChild(title);
 
-        showScreen("result");
-    }
+    const question = document.createElement('div');
+    question.className = 'review-question';
+    renderQuestionContent(question, q, true);
+    item.appendChild(question);
 
-    $("startBtn").addEventListener("click", startQuiz);
+    const options = document.createElement('div');
+    options.className = 'review-options';
 
-    $("prevBtn").addEventListener("click", () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-            renderQuestion();
-        }
+    ['A', 'B', 'C', 'D'].forEach(k => {
+      const p = document.createElement('p');
+
+      const key = document.createElement('strong');
+      key.textContent = k + '. ';
+
+      p.appendChild(key);
+      p.appendChild(
+        document.createTextNode(
+          cleanQuestionText(q.options[k] || '')
+        )
+      );
+
+      if (k === q.answer) {
+        const mark = document.createElement('span');
+        mark.textContent = ' ✓ 正確答案';
+        p.appendChild(mark);
+      }
+
+      options.appendChild(p);
     });
 
-    $("nextBtn").addEventListener("click", () => {
-        if (currentIndex < quizQuestions.length - 1) {
-            currentIndex++;
-            renderQuestion();
-        } else {
-            finishQuiz();
-        }
-    });
+    item.appendChild(options);
 
-    $("quitBtn").addEventListener("click", () => {
-        if (window.confirm(
-            "確定要退出測驗並查看目前成績嗎？未作答題目會計為答錯。"
-        )) {
-            finishQuiz();
-        }
-    });
+    const explanation = document.createElement('div');
+    explanation.className = 'explanation';
+    explanation.textContent = cleanExplanation(q.explanation);
 
-    $("homeBtn").addEventListener("click", () => {
-        showScreen("home");
-    });
+    item.appendChild(explanation);
+    list.appendChild(item);
+  });
 
-    $("againBtn").addEventListener("click", startQuiz);
+  if (wrong === 0) {
+    list.innerHTML = '<div class="notice">全部答對，沒有錯題！</div>';
+  }
 
-    loadBank();
-})();
+  show('result');
+}
+
+$('#startBtn').onclick = start;
+
+$('#quitBtn').onclick = () => {
+  if (confirm('確定要退出測驗嗎？目前作答進度將會結束。')) {
+    show('home');
+  }
+};
+
+$('#prevBtn').onclick = () => {
+  if (state.index > 0) {
+    state.index--;
+    render();
+  }
+};
+
+$('#nextBtn').onclick = next;
+
+$('#homeBtn').onclick = () => show('home');
+
+$('#againBtn').onclick = start;
+
+fetch('englishbook-questions.json', {
+  cache: 'no-store'
+})
+  .then(r => {
+    if (!r.ok) {
+      throw new Error('題庫讀取失敗');
+    }
+
+    return r.json();
+  })
+  .then(d => {
+    state.bank = Array.isArray(d) ? d : d.questions;
+
+    if (!Array.isArray(state.bank)) {
+      throw new Error('題庫格式錯誤');
+    }
+
+    state.bank = state.bank.filter(q =>
+      q &&
+      q.id !== undefined &&
+      q.question &&
+      q.options &&
+      ['A', 'B', 'C', 'D'].every(k => q.options[k] !== undefined) &&
+      ['A', 'B', 'C', 'D'].includes(
+        String(q.answer || '').trim().toUpperCase()
+      )
+    ).map(q => ({
+      ...q,
+      answer: String(q.answer).trim().toUpperCase()
+    }));
+
+    $('#bankCount').textContent = state.bank.length;
+    $('#startBtn').disabled = state.bank.length === 0;
+
+    if (state.bank.length === 0) {
+      throw new Error('沒有格式正確的選擇題');
+    }
+  })
+  .catch(error => {
+    console.error('題庫載入失敗：', error);
+
+    $('#bankCount').textContent = '載入失敗';
+    $('#startBtn').disabled = true;
+
+    alert('題庫載入失敗，請確認 englishbook-questions.json 的路徑與格式。');
+  });
