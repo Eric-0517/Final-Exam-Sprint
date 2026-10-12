@@ -59,26 +59,30 @@ function escapeHtml(s) {
   }[c]));
 }
 
-// 建立閱讀測驗圖片
 function createReadingImage(q) {
-  if (q.type !== 'reading' || !q.image) {
+  if (!q.image) {
     return null;
   }
 
   const img = document.createElement('img');
-  img.src = q.image;
+
+  // 以目前網站網址為基準解析圖片路徑
+  img.src = new URL(q.image, document.baseURI).href;
   img.alt = 'Reading passage';
   img.className = 'reading-image';
-  img.loading = 'lazy';
+  img.loading = 'eager';
+  img.style.display = 'block';
+  img.style.maxWidth = '100%';
+  img.style.height = 'auto';
 
   img.onerror = () => {
+    console.error('圖片載入失敗：', img.src);
     img.alt = 'Reading passage image could not be loaded';
     img.style.display = 'none';
   };
 
   return img;
 }
-
 // 顯示題目與閱讀圖片
 function renderQuestionContent(container, q, review = false) {
   container.innerHTML = '';
