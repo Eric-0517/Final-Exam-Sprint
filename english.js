@@ -1,4 +1,3 @@
-```javascript
 const state = {
   bank: [],
   quiz: [],
@@ -267,4 +266,3 @@ fetch('english-questions.json')
   .catch(() => {
     alert('題庫載入失敗，請確認網站伺服器開啟。');
   });
-```
