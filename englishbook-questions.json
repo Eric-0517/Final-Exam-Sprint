@@ -160,7 +160,7 @@
       "question": "Joe didn’t want to lose the hope ____ Bella would come back to him one day.",
       "options": {
         "A": "how",
-        "B": "（不填）",
+        "B": "×",
         "C": "what",
         "D": "that"
       },
@@ -185,7 +185,7 @@
       "source": "隨堂測驗 Test 2",
       "question": "Lily didn’t know the fact ____ she had a twin sister until her mom told her.",
       "options": {
-        "A": "（不填）",
+        "A": "×",
         "B": "that",
         "C": "who",
         "D": "what"
