@@ -2,8 +2,8 @@
     "use strict";
 
     const BANK_URL = "economics-questions.json";
-    const QUESTIONS_PER_QUIZ = 50;
-    const POINTS_PER_QUESTION = 2;
+    const QUESTIONS_PER_QUIZ = 40;
+    const POINTS_PER_QUESTION = 2.5;
     const LETTERS = ["A", "B", "C", "D"];
 
     const $ = (id) => document.getElementById(id);
