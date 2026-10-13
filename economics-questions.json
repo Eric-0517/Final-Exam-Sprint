@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "economics-001",
+    "subject": "經濟學",
+    "source": "經濟學第 1 題",
+    "question": "以下何者屬於「經濟行為」？",
+    "image": null,
+    "options": {
+      "A": "參加四技二專升學考試",
+      "B": "早起呼吸新鮮空氣",
+      "C": "飲用十分瀑布流下來的山泉水",
+      "D": "捐贈善款幫助臺南地震的受災戶"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-002",
+    "subject": "經濟學",
+    "source": "經濟學第 2 題",
+    "question": "假設一國將全部資源用於生產X及Y兩種財貨且技術不變，兩種財貨的最大可能組合如表所示，則下列敘述何者正確？",
+    "image": "economics-assets/image7.png",
+    "options": {
+      "A": "X財從0單位增加到10單位的邊際轉換率為5",
+      "B": "增產第40單位X財的機會成本為25單位的Y財",
+      "C": "從全部生產Y財改為全部生產X財的邊際轉換率為2",
+      "D": "X財從生產10單位增產20單位的機會成本為1.5單位的Y財"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-003",
+    "subject": "經濟學",
+    "source": "經濟學第 3 題",
+    "question": "下列哪一個學派主張「法則代替權衡」？",
+    "image": null,
+    "options": {
+      "A": "凱因斯學派",
+      "B": "重貨幣學派",
+      "C": "古典學派",
+      "D": "供給面學派"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-004",
+    "subject": "經濟學",
+    "source": "經濟學第 4 題",
+    "question": "「機會成本會隨著財貨數量增加而遞增」之特性，此特性會如何影響生產可能曲線？",
+    "image": null,
+    "options": {
+      "A": "呈現水平線",
+      "B": "凹向原點",
+      "C": "整條曲線向外移動",
+      "D": "通過原點"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-005",
+    "subject": "經濟學",
+    "source": "經濟學第 5 題",
+    "question": "下列何者認為金銀的多寡代表一國的國力強弱，並主張對外採取保護貿易？",
+    "image": null,
+    "options": {
+      "A": "揆內",
+      "B": "蒙恩",
+      "C": "李士特",
+      "D": "亞當斯密"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-006",
+    "subject": "經濟學",
+    "source": "經濟學第 6 題",
+    "question": "關於個體經濟學與總體經濟學的比較，下列何者有誤？",
+    "image": null,
+    "options": {
+      "A": "前者的研究重點是價格，後者則是所得",
+      "B": "前者採一般均衡分析法，後者採部分均衡分析法",
+      "C": "前者假設充分就業是常態，後者假設失業是常態",
+      "D": "前者包括福利經濟學，後者包括國際貿易理論"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-007",
+    "subject": "經濟學",
+    "source": "經濟學第 7 題",
+    "question": "已知某國的生產可能曲線(P.P.C)如圖所示，下列敘述何者正確？",
+    "image": "economics-assets/image5.png",
+    "options": {
+      "A": "增產資本財的邊際轉換率遞減",
+      "B": "從H點到G點生產資本財的邊際轉換率遞增",
+      "C": "F點是該國目前無法達到的生產組合",
+      "D": "G、H兩點均代表目前的資源與技術已達到充分利用"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-008",
+    "subject": "經濟學",
+    "source": "經濟學第 8 題",
+    "question": "討論政府是否應該推動年金改革，來解決政府的財政負擔。此議題屬於",
+    "image": null,
+    "options": {
+      "A": "個體經濟學",
+      "B": "唯真經濟學",
+      "C": "實證經濟學",
+      "D": "規範經濟學"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-009",
+    "subject": "經濟學",
+    "source": "經濟學第 9 題",
+    "question": "關於以下4個經濟學派出現的順序，下列何者正確？　(1)古典學派；(2)新古典學派；(3)新經濟學派；(4)歷史學派。",
+    "image": null,
+    "options": {
+      "A": "(1)(2)(3)(4)",
+      "B": "(1)(4)(2)(3)",
+      "C": "(1)(4)(3)(2)",
+      "D": "(1)(3)(2)(4)"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-010",
+    "subject": "經濟學",
+    "source": "經濟學第 10 題",
+    "question": "有關供給面學派（雷根經濟學派）的敘述，何者為非？",
+    "image": null,
+    "options": {
+      "A": "主張加強政府職能",
+      "B": "減稅以刺激民間投資",
+      "C": "減少政府支出以抑制物價",
+      "D": "其代表學者為美國的經濟學家拉弗爾"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-011",
+    "subject": "經濟學",
+    "source": "經濟學第 11 題",
+    "question": "下列有關學說與經濟學家的配對，何者有誤？",
+    "image": null,
+    "options": {
+      "A": "絕對地租說－馬歇爾",
+      "B": "差額地租說－李嘉圖",
+      "C": "忍慾說－辛尼爾",
+      "D": "迂迴生產說－龐巴衛克"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-012",
+    "subject": "經濟學",
+    "source": "經濟學第 12 題",
+    "question": "若一國生產兩財貨X與Y的生產可能曲線（PPC）如下圖，而邊際轉換率MRTXY表增加一單位的X財貨，所必需放棄的Y財貨的數量。下列敘述何者錯誤？",
+    "image": "economics-assets/image3.png",
+    "options": {
+      "A": "由D點到E點的MRTXY＝3",
+      "B": "D點的生產效率高於E點",
+      "C": "C點到D點的MRTXY＜3",
+      "D": "H點的生產效率低於E點"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-013",
+    "subject": "經濟學",
+    "source": "經濟學第 13 題",
+    "question": "在基本經濟問題中，生產什麼、如何生產、何時生產、為誰生產等4W問題，可以透過下列何者解決？",
+    "image": null,
+    "options": {
+      "A": "政府機能",
+      "B": "價格機能",
+      "C": "企業家才能",
+      "D": "法律規範"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-014",
+    "subject": "經濟學",
+    "source": "經濟學第 14 題",
+    "question": "以價格為研究重點的經濟學是",
+    "image": null,
+    "options": {
+      "A": "總體經濟學",
+      "B": "個體經濟學",
+      "C": "所得理論",
+      "D": "規範經濟學"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-015",
+    "subject": "經濟學",
+    "source": "經濟學第 15 題",
+    "question": "重量級韓國女團BLACKPINK世界巡迴演唱會，2023年在台灣高雄世運主場館演出。杰叡是超級鐵粉，當天向老闆請假4小時（時薪200元），買了一束鮮花1,000元要送給偶像，又花3,000元購票入場。請問杰叡參加演唱會的機會成本為多少？",
+    "image": null,
+    "options": {
+      "A": "4,800元",
+      "B": "4,200元",
+      "C": "4,000元",
+      "D": "3,800元"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-016",
+    "subject": "經濟學",
+    "source": "經濟學第 16 題",
+    "question": "下列何者被尊稱為「數理經濟學之父」？",
+    "image": null,
+    "options": {
+      "A": "凱因斯",
+      "B": "華拉斯",
+      "C": "盧卡斯",
+      "D": "孟格爾"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-017",
+    "subject": "經濟學",
+    "source": "經濟學第 17 題",
+    "question": "製鞋廠商在評估到底要多利用人工或是資本設備，並考慮生產成本和其對環境的影響，這是屬於哪一種經濟問題？",
+    "image": null,
+    "options": {
+      "A": "生產什麼",
+      "B": "如何生產",
+      "C": "何時生產",
+      "D": "為誰生產"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-018",
+    "subject": "經濟學",
+    "source": "經濟學第 18 題",
+    "question": "下列敘述何者正確？",
+    "image": null,
+    "options": {
+      "A": "首先將經濟學做有系統研究的學者是蒙恩",
+      "B": "馬歇爾、皮古屬於新古典學派，凱因斯、薩穆遜屬於新經濟學派",
+      "C": "盧卡斯和羅莫主張經濟成長主要取決於資本與勞動等生產要素",
+      "D": "新古典經濟成長理論是由傅利曼所提出"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-019",
+    "subject": "經濟學",
+    "source": "經濟學第 19 題",
+    "question": "從西元1776年亞當斯密著「國富論」至1848年約翰密爾著「政治經濟學原理」，這段期間的經濟學派稱為",
+    "image": null,
+    "options": {
+      "A": "古典學派",
+      "B": "新古典學派",
+      "C": "新興古典學派",
+      "D": "反古典學派"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-020",
+    "subject": "經濟學",
+    "source": "經濟學第 20 題",
+    "question": "「現代經濟學派」興起的背景原因是",
+    "image": null,
+    "options": {
+      "A": "金融海嘯",
+      "B": "全球暖化",
+      "C": "停滯性物價膨脹",
+      "D": "第二次世界大戰"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-021",
+    "subject": "經濟學",
+    "source": "經濟學第 21 題",
+    "question": "關於季芬財(Giffen goods)的敘述，何者錯誤？",
+    "image": null,
+    "options": {
+      "A": "所得減少，人們對季芬財的購買量會增加",
+      "B": "價格上漲，人們對季芬財的購買量會增加",
+      "C": "季芬財通常是占人們總所得比例很低的必需品",
+      "D": "季芬財的需求曲線和供給曲線一樣都是正斜率"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-022",
+    "subject": "經濟學",
+    "source": "經濟學第 22 題",
+    "question": "市場只有20個賣水梨的商人，每個商人的供給函數均為QS＝30＋2P。請問市場供給函數為",
+    "image": null,
+    "options": {
+      "A": "Q＝600＋40P",
+      "B": "20Q＝30＋2P",
+      "C": "20Q＝600＋40P",
+      "D": "Q＝20＋20P"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-023",
+    "subject": "經濟學",
+    "source": "經濟學第 23 題",
+    "question": "愛吃小白菜的媽媽每天都要花50元買小白菜，當小白菜一把由25元降價到10元時，媽媽由原先買2把增加到買5把，請問這是何故？",
+    "image": null,
+    "options": {
+      "A": "替代效果",
+      "B": "通貨膨脹",
+      "C": "所得效果",
+      "D": "景氣復甦"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-024",
+    "subject": "經濟學",
+    "source": "經濟學第 24 題",
+    "question": "若需求函數：Qx＝30－2Px＋3Py－4I，其中Qx是X財貨的數量，Pj是j財貨的價格，j＝x、y，I是所得，則下列敘述何者正確？",
+    "image": null,
+    "options": {
+      "A": "X財是正常財(normal goods)",
+      "B": "X財並不符合需求法則",
+      "C": "X財和Y財的關係是互補",
+      "D": "若Px變動，則會造成X財需求量的變動"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-025",
+    "subject": "經濟學",
+    "source": "經濟學第 25 題",
+    "question": "下列哪一種供給曲線，其線上任何一點的價格彈性值都不相同？",
+    "image": null,
+    "options": {
+      "A": "水平直線型的供給曲線",
+      "B": "垂直於橫軸的供給曲線",
+      "C": "通過原點的直線型供給曲線",
+      "D": "與縱軸相交的正斜率供給曲線"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-026",
+    "subject": "經濟學",
+    "source": "經濟學第 26 題",
+    "question": "X財的需求弧彈性為標準彈性，若X財價格由15元上漲為17元時，其需求量變動幅度為何？",
+    "image": null,
+    "options": {
+      "A": "－12.5%",
+      "B": "＋12.5%",
+      "C": "－13.3%",
+      "D": "＋13.3%"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-027",
+    "subject": "經濟學",
+    "source": "經濟學第 27 題",
+    "question": "下列哪一項因素不會造成國道客運的需求曲線移動？",
+    "image": null,
+    "options": {
+      "A": "高鐵票價祭出優惠活動",
+      "B": "消費者的偏好改變",
+      "C": "國道客運票價上漲",
+      "D": "春假期間返鄉人潮湧現"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-028",
+    "subject": "經濟學",
+    "source": "經濟學第 28 題",
+    "question": "商品X個別生產者的供給表如表所示，若市場有10個相同的生產者，則市場的供給函數為何？",
+    "image": "economics-assets/image1.png",
+    "options": {
+      "A": "Q＝－20＋100P",
+      "B": "Q＝－20＋200P",
+      "C": "Q＝－2＋10P",
+      "D": "Q＝10P"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-029",
+    "subject": "經濟學",
+    "source": "經濟學第 29 題",
+    "question": "假設X財的供給函數為QX＝100＋2PX＋3PY－PZ，其中PY、PZ分別為相關財貨的價格，則下列敘述何者有誤？",
+    "image": null,
+    "options": {
+      "A": "X財符合供給法則",
+      "B": "X財與Y財為聯合供給",
+      "C": "X財與Z財為生產上的替代品",
+      "D": "X財為正常財"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-030",
+    "subject": "經濟學",
+    "source": "經濟學第 30 題",
+    "question": "根據下圖比較A、B、C、D各點供給彈性大小依序為",
+    "image": "economics-assets/image9.png",
+    "options": {
+      "A": "A＞B＞C＞D",
+      "B": "A＝B＝C＜D",
+      "C": "A＞B＝D＞C",
+      "D": "C＞B＝D＞A"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-031",
+    "subject": "經濟學",
+    "source": "經濟學第 31 題",
+    "question": "若洋蔥的需求函數由Qd＝30－4P變成Qd＝50－4P，則可能的原因為",
+    "image": null,
+    "options": {
+      "A": "洋蔥的價格下跌",
+      "B": "研究發現洋蔥可以抗癌",
+      "C": "消費者的所得增加，而洋蔥是劣等財",
+      "D": "洋蔥的替代品－蒜頭的價格下跌"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-032",
+    "subject": "經濟學",
+    "source": "經濟學第 32 題",
+    "question": "已知某商品在市場只有二條個別供給曲線，分別為：P＝－9＋Q1，P＝－7＋Q2，且市場需求曲線為Q＝82－4P；當實際市價為15元時，下列敘述何者正確？",
+    "image": null,
+    "options": {
+      "A": "市場存在超額需求",
+      "B": "市價會有向下調整的壓力",
+      "C": "廠商會囤積居奇",
+      "D": "市場供給曲線為P＝－16＋2Q"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-033",
+    "subject": "經濟學",
+    "source": "經濟學第 33 題",
+    "question": "若一物的價格下跌一成，會使消費者的總支出也減少一成，則表示消費者的需求彈性",
+    "image": null,
+    "options": {
+      "A": "等於一",
+      "B": "小於一",
+      "C": "大於零",
+      "D": "等於零"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-034",
+    "subject": "經濟學",
+    "source": "經濟學第 34 題",
+    "question": "下列何者屬於「有效需求」？",
+    "image": null,
+    "options": {
+      "A": "我討厭榴槤，就算送我，我也不要",
+      "B": "我想要有一輛保時捷跑車，可惜我沒有錢",
+      "C": "我快渴死了，現在只要有一杯水，多少錢我都願意付",
+      "D": "等我存夠了錢，我就要買一台最新款的iPhone"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-035",
+    "subject": "經濟學",
+    "source": "經濟學第 35 題",
+    "question": "台灣鳳梨被中國禁止輸入事件，民眾紛紛發起搶救鳳梨農大作戰，家家戶戶都買進鳳梨以實際行動支持台灣的水果。已知波羅蜜是鳳梨在需求上的替代品，鳳梨果乾的原料是鳳梨。則下列敘述何者有誤？（各選項均假設其他條件不變）",
+    "image": null,
+    "options": {
+      "A": "此事件致使民眾多買鳳梨，此乃屬於需求變動",
+      "B": "此事件受惠的是鳳梨農，但受害的可能是波羅蜜業者，因為需求減少",
+      "C": "鳳梨需求增加，鳳梨果乾的需求也會增加，因為兩者是需求上的互補品",
+      "D": "鳳梨果乾的成本可能會因為民眾搶購鳳梨而上升"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-036",
+    "subject": "經濟學",
+    "source": "經濟學第 36 題",
+    "question": "若皮克斯對電影的供給函數為QS＝－1,600＋5P，則下列敘述何者有誤？",
+    "image": null,
+    "options": {
+      "A": "皮克斯的電影供給曲線是由左下向右上延伸的直線",
+      "B": "皮克斯對電影供給量和價格之間呈同向變動關係",
+      "C": "當皮克斯想拍100部電影時，願意供給的最低單位價格為340元",
+      "D": "當價格低於320元時，皮克斯仍會拍電影"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-037",
+    "subject": "經濟學",
+    "source": "經濟學第 37 題",
+    "question": "若X財的需求函數為Qd＝120－4P，供給函數為QS＝80＋P，則下列敘述何者錯誤？",
+    "image": null,
+    "options": {
+      "A": "消費者對X財所能接受的最高價格為30元",
+      "B": "即使X財的市場價格降至0元，廠商仍會有80單位的基本產量",
+      "C": "X財的價格為10元時，供給彈性絕對值會大於需求彈性絕對值",
+      "D": "X財的均衡價格為8元，均衡數量88單位"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-038",
+    "subject": "經濟學",
+    "source": "經濟學第 38 題",
+    "question": "關於需求彈性(Ed)與廠商策略，何者正確？",
+    "image": null,
+    "options": {
+      "A": "Ed＞1，廠商漲價有利",
+      "B": "Ed＝1，廠商降價有利",
+      "C": "Ed＜1，廠商漲價有利",
+      "D": "Ed＝0，廠商降價有利"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-039",
+    "subject": "經濟學",
+    "source": "經濟學第 39 題",
+    "question": "香瓜產量比去年減少三成，去年1斤20元，今年上漲為40元，其需求弧彈性為多少？",
+    "image": null,
+    "options": {
+      "A": "9/20",
+      "B": "20/9",
+      "C": "9/10",
+      "D": "10/9"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-040",
+    "subject": "經濟學",
+    "source": "經濟學第 40 題",
+    "question": "蘋果價格上漲，媽媽少買蘋果改買相對便宜的柳丁，此種價格對需求量的影響，在經濟學上稱為？",
+    "image": null,
+    "options": {
+      "A": "成本因素",
+      "B": "利潤因素",
+      "C": "替代效果",
+      "D": "所得效果"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-041",
+    "subject": "經濟學",
+    "source": "經濟學第 41 題",
+    "question": "日本的恩格爾係數在2014年達到24.3%，是日本自1993年以來的最高水平。這顯示日本的家庭生活水平處於何種階段？",
+    "image": null,
+    "options": {
+      "A": "上升",
+      "B": "下降",
+      "C": "持平",
+      "D": "資料不足，無法判斷"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-042",
+    "subject": "經濟學",
+    "source": "經濟學第 42 題",
+    "question": "在消費者保護的相關組織中，「設置消保官」與「目前最有成效的民間組織」分別為何？",
+    "image": null,
+    "options": {
+      "A": "前者為消費者保護會，後者為消費者協會",
+      "B": "前者為消費者保護會，後者為消費者文教基金會",
+      "C": "皆為消費者保護會",
+      "D": "皆為消費者協會"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-043",
+    "subject": "經濟學",
+    "source": "經濟學第 43 題",
+    "question": "已知娜美消費牛排的總效用函數為TU＝8Q－2Q2，邊際效用函數為MU＝8－4Q，請問當娜美達到總效用最大時，其值為多少",
+    "image": null,
+    "options": {
+      "A": "0",
+      "B": "2",
+      "C": "8",
+      "D": "16"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-044",
+    "subject": "經濟學",
+    "source": "經濟學第 44 題",
+    "question": "下列何種概念最能表達「消費者剩餘」的概念？",
+    "image": null,
+    "options": {
+      "A": "便宜沒好貨",
+      "B": "物美價廉",
+      "C": "邊際效用遞減法則",
+      "D": "物超所值"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-045",
+    "subject": "經濟學",
+    "source": "經濟學第 45 題",
+    "question": "農民購買農藥撲滅害蟲，以利農作物的生產，此消費行為屬於",
+    "image": null,
+    "options": {
+      "A": "直接消費",
+      "B": "間接消費",
+      "C": "補充消費",
+      "D": "最終消費"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-046",
+    "subject": "經濟學",
+    "source": "經濟學第 46 題",
+    "question": "下列哪一項消費者權利不是由美國甘迺迪總統於1962年「消費者權利的特別諮文」中所提出？",
+    "image": null,
+    "options": {
+      "A": "求安全的權利",
+      "B": "求償的權利",
+      "C": "選擇的權利",
+      "D": "求知的權利"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-047",
+    "subject": "經濟學",
+    "source": "經濟學第 47 題",
+    "question": "理性消費者的目標為",
+    "image": null,
+    "options": {
+      "A": "總效用最大",
+      "B": "邊際效用最小",
+      "C": "平均效用最大",
+      "D": "總效用等於0"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-048",
+    "subject": "經濟學",
+    "source": "經濟學第 48 題",
+    "question": "在其他條件不變下，何者會使消費者剩餘變小？",
+    "image": null,
+    "options": {
+      "A": "財貨價格下降",
+      "B": "購買數量減少",
+      "C": "財貨需求彈性變小",
+      "D": "需求曲線變陡峭"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-049",
+    "subject": "經濟學",
+    "source": "經濟學第 49 題",
+    "question": "慾望、消費、需求、效用的出現的順序為何？",
+    "image": null,
+    "options": {
+      "A": "效用→慾望→消費→需求",
+      "B": "慾望→消費→需求→效用",
+      "C": "慾望→需求→消費→效用",
+      "D": "需求→消費→效用→慾望"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-050",
+    "subject": "經濟學",
+    "source": "經濟學第 50 題",
+    "question": "水的用途很多、對人類很重要，但其價格卻遠不如非生活必需品的鑽石，有關這個價值的矛盾，可以用下列何項原理加以解釋？",
+    "image": null,
+    "options": {
+      "A": "價格決定於每增加一單位財貨帶給人們額外的滿足感",
+      "B": "價格決定於生產成本",
+      "C": "價格決定於需求彈性",
+      "D": "價格決定於財貨帶給人們的總滿足感"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-051",
+    "subject": "經濟學",
+    "source": "經濟學第 51 題",
+    "question": "水對某人煮飯、洗衣、澆花三種用途的效用如下表，今某人有水6桶，為獲得最大的總滿足，煮飯該用水",
+    "image": "economics-assets/image8.png",
+    "options": {
+      "A": "1桶",
+      "B": "2桶",
+      "C": "3桶",
+      "D": "4桶"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-052",
+    "subject": "經濟學",
+    "source": "經濟學第 52 題",
+    "question": "對房仲專員來說，手機是維持其基本生存所需的財貨，則對該專員而言，手機屬於",
+    "image": null,
+    "options": {
+      "A": "自由財",
+      "B": "必需品",
+      "C": "便利品",
+      "D": "奢侈品"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-053",
+    "subject": "經濟學",
+    "source": "經濟學第 53 題",
+    "question": "小華請亭亭吃霜淇淋，若亭亭的效用函數TU＝12X－2X2，MU＝12－4X，則亭亭應吃幾個，其效用最大：",
+    "image": null,
+    "options": {
+      "A": "5",
+      "B": "4",
+      "C": "3",
+      "D": "2"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-054",
+    "subject": "經濟學",
+    "source": "經濟學第 54 題",
+    "question": "根據恩格爾的調查，所得愈高的家庭，在教育、醫療保健、娛樂等方面的支出占總所得比例",
+    "image": null,
+    "options": {
+      "A": "不變",
+      "B": "愈低",
+      "C": "愈高",
+      "D": "恩格爾沒有做這方面的調查"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-055",
+    "subject": "經濟學",
+    "source": "經濟學第 55 題",
+    "question": "下列經濟學者何人屬於邊際效用學派？",
+    "image": null,
+    "options": {
+      "A": "李士特",
+      "B": "華拉斯",
+      "C": "薩穆遜",
+      "D": "馬歇爾"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-056",
+    "subject": "經濟學",
+    "source": "經濟學第 56 題",
+    "question": "花花在有限的預算下考慮購買X、Y兩種財貨，若X、Y的價格皆為10元，X、Y最後一單位的邊際效用分別為MUX＝40，MUY＝35。則在效用極大的原則下，花花應如何調整X、Y的消費組合？",
+    "image": null,
+    "options": {
+      "A": "多買X，少買Y",
+      "B": "同時增加對X與Y的購買",
+      "C": "少買X，多買Y",
+      "D": "已均衡，不必再調整"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-057",
+    "subject": "經濟學",
+    "source": "經濟學第 57 題",
+    "question": "假設阿嘉的貨幣邊際效用固定為3，消費4單位關東煮的總效用為42，消費6單位關東煮的總效用為72，則阿嘉對第6單位關東煮所支付的最高價格為",
+    "image": null,
+    "options": {
+      "A": "24元",
+      "B": "14元",
+      "C": "15元",
+      "D": "5元"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-058",
+    "subject": "經濟學",
+    "source": "經濟學第 58 題",
+    "question": "消費者對任何財貨所願支付的價格，通常決定於該財貨的",
+    "image": null,
+    "options": {
+      "A": "剩餘效用",
+      "B": "邊際效用",
+      "C": "平均效用",
+      "D": "總效用"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-059",
+    "subject": "經濟學",
+    "source": "經濟學第 59 題",
+    "question": "靜香對大雄說：「我們第一次約會，去迪士尼樂園或去看晴空塔都可以。」這表示慾望具有哪一種特性？",
+    "image": null,
+    "options": {
+      "A": "種類無限性",
+      "B": "強度遞減性",
+      "C": "替代性",
+      "D": "互補性"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-060",
+    "subject": "經濟學",
+    "source": "經濟學第 60 題",
+    "question": "根據恩格爾家庭消費法則，若恩格爾係數愈低，表示",
+    "image": null,
+    "options": {
+      "A": "生活水準愈低",
+      "B": "生活水準愈高",
+      "C": "所得分配愈不平均",
+      "D": "所得分配愈平均"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-061",
+    "subject": "經濟學",
+    "source": "經濟學第 61 題",
+    "question": "若工程師的勞動市場供給函數為L＝－210＋3PL（其中，L代表勞動時數，PL代表工資率），若PL為100元時，則工程師的生產者剩餘為",
+    "image": null,
+    "options": {
+      "A": "4,500",
+      "B": "2,700",
+      "C": "1,350",
+      "D": "2,250"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-062",
+    "subject": "經濟學",
+    "source": "經濟學第 62 題",
+    "question": "理性的廠商不會選擇在第一階段生產的原因是？",
+    "image": null,
+    "options": {
+      "A": "變動要素太少導致固定要素的浪費",
+      "B": "變動要素的邊際報酬下降",
+      "C": "因為變動要素的MP出現負數",
+      "D": "變動要素太多，導致產生負報酬"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-063",
+    "subject": "經濟學",
+    "source": "經濟學第 63 題",
+    "question": "生產理論長短期的概念是由下列哪一位學者提出？",
+    "image": null,
+    "options": {
+      "A": "馬爾薩斯",
+      "B": "馬歇爾",
+      "C": "李嘉圖",
+      "D": "凱因斯"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-064",
+    "subject": "經濟學",
+    "source": "經濟學第 64 題",
+    "question": "生產三階段中，所謂的「粗耕的極限」是指",
+    "image": null,
+    "options": {
+      "A": "MP最高點",
+      "B": "AP最高點",
+      "C": "MP＝0",
+      "D": "MP＜AP"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-065",
+    "subject": "經濟學",
+    "source": "經濟學第 65 題",
+    "question": "生產三階段中，所謂的「精耕的極限」是指",
+    "image": null,
+    "options": {
+      "A": "MP最高點",
+      "B": "AP最高點",
+      "C": "MP＝0",
+      "D": "MP＜AP"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-066",
+    "subject": "經濟學",
+    "source": "經濟學第 66 題",
+    "question": "台灣銀行提供民眾存放現金，讓民眾將閒餘資金留至未來使用。請問台灣銀行創造了下列何種效用？",
+    "image": null,
+    "options": {
+      "A": "原始效用",
+      "B": "空間效用",
+      "C": "所有權效用",
+      "D": "時間效用"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-067",
+    "subject": "經濟學",
+    "source": "經濟學第 67 題",
+    "question": "中川因為把資金借給阿兩，因此暫時只能就現有規模運作，目前工廠只有L一項可變動生產要素，當L＝15時，工廠的平均產量AP＝18；L＝20時，工廠的邊際產量MP＝30且AP曲線處於最高點，則此時的中川工廠的總產量TP為",
+    "image": null,
+    "options": {
+      "A": "600",
+      "B": "300",
+      "C": "270",
+      "D": "資料不足，無法判斷"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-068",
+    "subject": "經濟學",
+    "source": "經濟學第 68 題",
+    "question": "商業生產所能增創的效用包括哪些？　(1)空間效用；(2)產權效用；(3)本源效用、(4)勞務效用；(5)時間效用；(6)形式效用。",
+    "image": null,
+    "options": {
+      "A": "(1)(2)(5)",
+      "B": "(2)(4)(5)",
+      "C": "(1)(2)(4)",
+      "D": "(1)(2)(3)(4)(5)(6)"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-069",
+    "subject": "經濟學",
+    "source": "經濟學第 69 題",
+    "question": "在短期生產函數中，通常會假設「其他條件」不變。下列何者不屬於這些假設不變的項目？",
+    "image": null,
+    "options": {
+      "A": "生產要素價格",
+      "B": "生產技術水準",
+      "C": "資本投入量",
+      "D": "最大產出量"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-070",
+    "subject": "經濟學",
+    "source": "經濟學第 70 題",
+    "question": "生產三階段是由哪兩點來劃分？",
+    "image": null,
+    "options": {
+      "A": "TP最高點、AP＝0",
+      "B": "MP最高點、MP＝0",
+      "C": "AP最高點、AP＝0",
+      "D": "AP最高點、MP＝0"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-071",
+    "subject": "經濟學",
+    "source": "經濟學第 71 題",
+    "question": "在生產理論中，所謂短期是指",
+    "image": null,
+    "options": {
+      "A": "生產期間一年以下",
+      "B": "存在至少一種要素暫時無法調整投入量的期間",
+      "C": "所有要素投入量皆可調整的期間",
+      "D": "停工待料的期間"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-072",
+    "subject": "經濟學",
+    "source": "經濟學第 72 題",
+    "question": "關於「報酬三階段」與「生產三階段」的敘述，何者有誤？",
+    "image": null,
+    "options": {
+      "A": "兩者皆屬於短期的概念",
+      "B": "兩者的第三階段之範圍完全相同",
+      "C": "前者的第二階段是從總產量的反曲點開始",
+      "D": "後者的第二階段是從邊際產量的最高點開始"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-073",
+    "subject": "經濟學",
+    "source": "經濟學第 73 題",
+    "question": "生產上的「長期」是指",
+    "image": null,
+    "options": {
+      "A": "一年以上",
+      "B": "生產技術固定不變",
+      "C": "所有生產要素都可以變動",
+      "D": "至少有一生產要素固定不變"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-074",
+    "subject": "經濟學",
+    "source": "經濟學第 74 題",
+    "question": "關於馬爾薩斯的人口論，下列何者有誤？",
+    "image": null,
+    "options": {
+      "A": "被稱為「悲觀的科學」",
+      "B": "是「貧窮於富裕之中」的最佳寫照",
+      "C": "主張戰爭可解決糧食危機",
+      "D": "忽略生產技術進步的可能性"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-075",
+    "subject": "經濟學",
+    "source": "經濟學第 75 題",
+    "question": "有關短期產量TP、AP及MP曲線的關係敘述，何者錯誤？",
+    "image": null,
+    "options": {
+      "A": "MP最高點對應TP的反曲點",
+      "B": "AP最高點與MP相交於MP遞減處",
+      "C": "TP、AP、MP都是先增後減的型態",
+      "D": "MP＞AP時，TP曲線凹向上"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-076",
+    "subject": "經濟學",
+    "source": "經濟學第 76 題",
+    "question": "核能發電所創造的效用為",
+    "image": null,
+    "options": {
+      "A": "空間效用",
+      "B": "本源效用",
+      "C": "時間效用",
+      "D": "形式效用"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-077",
+    "subject": "經濟學",
+    "source": "經濟學第 77 題",
+    "question": "下列各項依序分別屬於何種生產要素？　(1)台積電的晶圓廠房座落的位置範圍；(2)LCD螢幕的零組件；(3)創辦人張忠謀運籌帷幄的能力；(4)代工廠現場作業員。",
+    "image": null,
+    "options": {
+      "A": "資本、土地、勞動、勞動",
+      "B": "土地、資本、勞動、勞動",
+      "C": "資本、資本、勞動、企業才能",
+      "D": "土地、資本、企業才能、勞動"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-078",
+    "subject": "經濟學",
+    "source": "經濟學第 78 題",
+    "question": "核能發電廠利用核子原料發電，此乃屬於",
+    "image": null,
+    "options": {
+      "A": "原始生產",
+      "B": "工業生產",
+      "C": "商業生產",
+      "D": "勞務生產"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-079",
+    "subject": "經濟學",
+    "source": "經濟學第 79 題",
+    "question": "先生產機器設備或生產工具，再利用這些工具來生產消費財的方式，稱為",
+    "image": null,
+    "options": {
+      "A": "直接生產",
+      "B": "迂迴生產",
+      "C": "工業生產",
+      "D": "商業生產"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-080",
+    "subject": "經濟學",
+    "source": "經濟學第 80 題",
+    "question": "人口論的立論基礎是",
+    "image": null,
+    "options": {
+      "A": "邊際報酬遞減法則",
+      "B": "邊際效用遞減法則",
+      "C": "規模報酬遞減法則",
+      "D": "邊際轉換率遞減法則"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-081",
+    "subject": "經濟學",
+    "source": "經濟學第 81 題",
+    "question": "有關短期各項成本曲線關係之敘述，下列何者正確？",
+    "image": null,
+    "options": {
+      "A": "在平均成本線的最低點，總變動成本處於遞減式增加",
+      "B": "邊際成本遞增時，平均成本也遞增",
+      "C": "總成本的起點為總固定成本",
+      "D": "平均變動成本最低點的產量大於平均成本最低點的產量"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-082",
+    "subject": "經濟學",
+    "source": "經濟學第 82 題",
+    "question": "在成本觀念中，下列哪一項與「即使是自己的貢獻，也應該付錢給自己」的概念相近？",
+    "image": null,
+    "options": {
+      "A": "隱含成本(implicit cost)",
+      "B": "會計成本(accounting cost)",
+      "C": "外顯成本(explicit cost)",
+      "D": "外部成本(externality cost)"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-083",
+    "subject": "經濟學",
+    "source": "經濟學第 83 題",
+    "question": "經濟成本等於",
+    "image": null,
+    "options": {
+      "A": "隱含成本",
+      "B": "支付成本＋非支付成本",
+      "C": "總成本－支付成本",
+      "D": "支付成本－非支付成本"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-084",
+    "subject": "經濟學",
+    "source": "經濟學第 84 題",
+    "question": "台北市政府有意釋出捷運聯開宅作為公共住宅，結果引發部分居民抗議，認為將使該地區的生活品質變差、房價下跌，因此強烈反對，甚至揚言控告政府。請問居民抗議的原因與下列何者有關？",
+    "image": null,
+    "options": {
+      "A": "外部經濟",
+      "B": "外部不經濟",
+      "C": "外部利益",
+      "D": "外部成本"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-085",
+    "subject": "經濟學",
+    "source": "經濟學第 85 題",
+    "question": "在長期成本結構中，STC與LTC的關係為",
+    "image": null,
+    "options": {
+      "A": "STC＜LTC",
+      "B": "STC ≤ LTC",
+      "C": "STC＝LTC",
+      "D": "STC ≥ LTC"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-086",
+    "subject": "經濟學",
+    "source": "經濟學第 86 題",
+    "question": "關於短期產量與成本的敘述，何者正確？",
+    "image": null,
+    "options": {
+      "A": "當AP遞增時，AVC必遞減",
+      "B": "當MP遞減時，AVC必遞增",
+      "C": "當AP遞減時，AVC亦遞減",
+      "D": "當MP遞增時，MC亦遞增"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-087",
+    "subject": "經濟學",
+    "source": "經濟學第 87 題",
+    "question": "下列等式何者有誤？",
+    "image": null,
+    "options": {
+      "A": "總收益＝會計成本＋內含成本＋經濟利潤",
+      "B": "會計利潤＝純粹利潤＋正常利潤",
+      "C": "內含成本＝會計利潤－經濟利潤",
+      "D": "經濟利潤＝會計利潤－支付成本"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-088",
+    "subject": "經濟學",
+    "source": "經濟學第 88 題",
+    "question": "下列有關經濟利潤與會計利潤的比較，何者正確？",
+    "image": null,
+    "options": {
+      "A": "經濟利潤必大於會計利潤",
+      "B": "會計利潤必不小於經濟利潤",
+      "C": "二者相等",
+      "D": "二者均必然為正"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-089",
+    "subject": "經濟學",
+    "source": "經濟學第 89 題",
+    "question": "廠商的短期成本曲線如圖所示，a點為TVC曲線的反曲點。則下列何者有誤？",
+    "image": "economics-assets/image2.png",
+    "options": {
+      "A": "Q＝10，總成本＝200",
+      "B": "Q＝50，平均固定成本＝2",
+      "C": "Q＝50，平均成本＝5",
+      "D": "a點會對應到邊際成本曲線的最低點"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-090",
+    "subject": "經濟學",
+    "source": "經濟學第 90 題",
+    "question": "下列敘述何者正確？",
+    "image": null,
+    "options": {
+      "A": "AC與AVC曲線之間的垂直距離會逐漸縮短，是因為邊際報酬遞減之故",
+      "B": "當TFC曲線整條上移，則其TC、TVC、MC曲線也都會跟著上移",
+      "C": "長期邊際成本曲線是由各種規模下，邊際成本最小的點所連接而成",
+      "D": "所有長、短期成本曲線中，以原點為出發點的只有TVC和LTC"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-091",
+    "subject": "經濟學",
+    "source": "經濟學第 91 題",
+    "question": "當LMC＞LAC時，表示廠商處於何種階段？",
+    "image": null,
+    "options": {
+      "A": "內部經濟",
+      "B": "內部不經濟",
+      "C": "規模報酬固定",
+      "D": "規模報酬先遞增而後遞減"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-092",
+    "subject": "經濟學",
+    "source": "經濟學第 92 題",
+    "question": "陳先生若受僱於人，其工作月薪為4萬元而其有一間店面，若出租之月租為3萬元。陳先生現以自有店面開飲料店，一個月開店各項費用為20萬元，但其不支薪給自己，也不用付店租，而營業收入為25萬元。下列有關其損益的敘述，何者正確？",
+    "image": null,
+    "options": {
+      "A": "有經濟利潤5萬元",
+      "B": "有經濟損失5萬元",
+      "C": "有經濟損失2萬元",
+      "D": "有經濟利潤2萬元"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-093",
+    "subject": "經濟學",
+    "source": "經濟學第 93 題",
+    "question": "企業生產過程所發生許多成本，如：(1)原料費用；(2)廠房租金；(3)高階主管薪資；(4)生產線員工薪資；(5)機器設備折舊；(6)營業稅。請判斷哪些是固定成本？",
+    "image": null,
+    "options": {
+      "A": "(2)(3)(5)",
+      "B": "(1)(4)(6)",
+      "C": "(1)(4)(5)(6)",
+      "D": "(2)(5)(6)"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-094",
+    "subject": "經濟學",
+    "source": "經濟學第 94 題",
+    "question": "下列哪一句話未隱含機會成本的概念？",
+    "image": null,
+    "options": {
+      "A": "天下沒有白吃的午餐",
+      "B": "魚與熊掌不可兼得",
+      "C": "不入虎穴，焉得虎子",
+      "D": "小時了了，大未必佳"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-095",
+    "subject": "經濟學",
+    "source": "經濟學第 95 題",
+    "question": "當AVC遞減時",
+    "image": null,
+    "options": {
+      "A": "AVC＜MC",
+      "B": "AVC＞MC",
+      "C": "MC亦遞減",
+      "D": "AVC＝MC"
+    },
+    "optionImages": {},
+    "answer": "B",
+    "explanation": ""
+  },
+  {
+    "id": "economics-096",
+    "subject": "經濟學",
+    "source": "經濟學第 96 題",
+    "question": "若廠商的總成本函數為TC＝16＋12Q＋Q2，邊際成本函數為MC＝12＋2Q，則該生產者的平均成本最小值為",
+    "image": null,
+    "options": {
+      "A": "4",
+      "B": "16",
+      "C": "18",
+      "D": "20"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-097",
+    "subject": "經濟學",
+    "source": "經濟學第 97 題",
+    "question": "王老師向裁縫師傅訂做了一件西裝，裁縫師量完尺寸後開價2,500元，王老師嫌說：「師傅，您要幫我算便宜一點啦！」裁縫師回答說：「已經算您很便宜了，扣掉布料費和工錢，我一丁點也沒賺啦！」。根據上述對話，下列敘述何者有誤？",
+    "image": null,
+    "options": {
+      "A": "裁縫師提到的布料費是屬於外露成本",
+      "B": "裁縫師提到的工錢是屬於自己應得的勞動價值，為其內含成本",
+      "C": "裁縫師有經濟損失",
+      "D": "裁縫師的意思是自己只賺到正常利潤"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  },
+  {
+    "id": "economics-098",
+    "subject": "經濟學",
+    "source": "經濟學第 98 題",
+    "question": "在短期之下，平均固定成本AFC會隨產量增加而：",
+    "image": null,
+    "options": {
+      "A": "逐漸減少",
+      "B": "逐漸增加",
+      "C": "不變",
+      "D": "先遞減後遞增"
+    },
+    "optionImages": {},
+    "answer": "A",
+    "explanation": ""
+  },
+  {
+    "id": "economics-099",
+    "subject": "經濟學",
+    "source": "經濟學第 99 題",
+    "question": "關於「規模報酬遞減」，何者正確？",
+    "image": null,
+    "options": {
+      "A": "產量增加的幅度＞要素投入增加的幅度",
+      "B": "LAC隨產量增加而遞減",
+      "C": "擴大規模對廠商有利",
+      "D": "此時LMC＞LAC"
+    },
+    "optionImages": {},
+    "answer": "D",
+    "explanation": ""
+  },
+  {
+    "id": "economics-100",
+    "subject": "經濟學",
+    "source": "經濟學第 100 題",
+    "question": "何者無法產生規模經濟？",
+    "image": null,
+    "options": {
+      "A": "規模擴大後採取專業分工",
+      "B": "大規模採購原物料",
+      "C": "組織擴大後管理階層增加",
+      "D": "出售大量副產品或廢料"
+    },
+    "optionImages": {},
+    "answer": "C",
+    "explanation": ""
+  }
+]
