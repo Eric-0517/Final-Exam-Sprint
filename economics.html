@@ -3,14 +3,63 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>考前衝刺｜英文第五冊 Unit1</title>
+    <title>考前衝刺｜經濟學</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .option {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            width: 100%;
+            text-align: left;
+        }
+        .option-key {
+            display: inline-flex;
+            flex: 0 0 28px;
+            width: 28px;
+            min-width: 28px;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+        .option-text {
+            display: block;
+            flex: 1;
+            min-width: 0;
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+        .option-image {
+            display: block;
+            max-width: min(100%, 420px);
+            max-height: 240px;
+            object-fit: contain;
+            margin-top: 8px;
+        }
+        .reading-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            margin: 0 0 16px;
+        }
+        .review-options p {
+            line-height: 1.7;
+            overflow-wrap: anywhere;
+        }
+        .review-option-image {
+            display: block;
+            max-width: min(100%, 420px);
+            max-height: 240px;
+            object-fit: contain;
+            margin: 8px 0;
+        }
+    </style>
 </head>
 <body>
     <header class="topbar">
         <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
         <div class="sub">
-            英文第五冊 Unit 1題庫　
+            經濟學題庫　
             <a href="index.html" style="color:inherit">切換題庫</a>
         </div>
     </header>
@@ -18,14 +67,14 @@
     <main id="app">
         <section id="home" class="screen active">
             <div class="hero">
-                <span class="tag">ENGLISH</span>
+                <span class="tag">ECONOMICS</span>
                 <h1>考前衝刺</h1>
-                <p>隨機抽題，範圍英文第五冊 Unit1。</p>
+                <p>隨機抽題，範圍經濟學第1~5章。</p>
             </div>
 
             <div class="subject-card">
                 <div>
-                    <div class="subject-title">英文第五冊 Unit1</div>
+                    <div class="subject-title">經濟學</div>
                     <div class="subject-meta">
                         <span id="bankCount">載入中</span> 題題庫　
                         ·　每回 50 題　
@@ -119,6 +168,6 @@
         </section>
     </main>
 
-    <script src="english-fifth-u1.js"></script>
+    <script src="economics.js"></script>
 </body>
 </html>
