@@ -30,7 +30,7 @@
       const rawQuestions = Array.isArray(data) ? data : data.questions;
       if (!Array.isArray(rawQuestions)) throw new Error("題庫格式錯誤，找不到題目陣列。");
       questionBank = rawQuestions.map((q, i) => ({
-        id: q.id || "chinese-" + (i + 1), year: q.year || "  ", topic: q.topic || " ",
+        id: q.id || "chinese-" + (i + 1), year: q.year || "翰林版", topic: q.topic || "L5",
         passage: q.passage || "", question: String(q.question || ""), options: q.options || {},
         answer: String(q.answer || "").trim().toUpperCase(), explanation: q.explanation || ""
       })).filter(q => q.question && LETTERS.every(letter => q.options[letter] !== undefined) && LETTERS.includes(q.answer) && !LETTERS.some(letter => String(q.options[letter]).includes("原始文件未顯示此選項內容")));
