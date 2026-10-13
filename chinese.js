@@ -35,7 +35,7 @@
         answer: String(q.answer || "").trim().toUpperCase(), explanation: q.explanation || ""
       })).filter(q => q.question && LETTERS.every(letter => q.options[letter] !== undefined) && LETTERS.includes(q.answer) && !LETTERS.some(letter => String(q.options[letter]).includes("原始文件未顯示此選項內容")));
       if (!questionBank.length) throw new Error("題庫沒有格式正確的選擇題。");
-      $("bankCount").textContent = questionBank.length + " 題（原卷共 " + rawQuestions.length + " 題）";
+      $("bankCount").textContent = questionBank.length + " 題";
       startButton.disabled = false;
     } catch (error) {
       $("bankCount").textContent = "載入失敗";
