@@ -40,22 +40,24 @@
         })[char]);
     }
 
-    function createImage(src, alt, className) {
-        if (!src) return null;
-
-        const img = document.createElement("img");
-        img.src = new URL(src, document.baseURI).href;
-        img.alt = alt;
-        img.className = className;
-        img.loading = "eager";
-
-        img.onerror = () => {
-            console.error("圖片載入失敗：", img.src);
-            img.style.display = "none";
-        };
-
-        return img;
+   
+function createImage(src, alt, className) {
+    if (typeof src !== "string" || !src.trim()) {
+        return null;
     }
+
+    const img = document.createElement("img");
+    img.src = new URL(src.trim(), document.baseURI).href;
+    img.alt = alt;
+    img.className = className;
+    img.loading = "eager";
+
+    img.onerror = () => {
+        img.remove();
+    };
+
+    return img;
+}
 
     function renderQuestionContent(container, question, review = false) {
         container.innerHTML = "";
