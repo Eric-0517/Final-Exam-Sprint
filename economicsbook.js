@@ -64,7 +64,7 @@ function createImage(src, alt, className) {
 
         const image = createImage(
             question.image,
-            "題目圖片",
+            "這題沒圖我懶得改",
             "reading-image"
         );
 
