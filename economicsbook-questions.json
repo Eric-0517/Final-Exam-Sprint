@@ -13,7 +13,8 @@
         "D": "為誰生產。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-001.png"
     },
     {
       "id": "econ-pdf-002",
@@ -28,7 +29,8 @@
         "D": "用途太少"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-002.png"
     },
     {
       "id": "econ-pdf-003",
@@ -43,7 +45,8 @@
         "D": "政黨輪替"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-003.png"
     },
     {
       "id": "econ-pdf-004",
@@ -58,7 +61,8 @@
         "D": "法律規範"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-004.png"
     },
     {
       "id": "econ-pdf-005",
@@ -73,7 +77,8 @@
         "D": "如何促進經濟成長。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-005.png"
     },
     {
       "id": "econ-pdf-006",
@@ -88,7 +93,8 @@
         "D": "生產什麼。"
       },
       "answer": "",
-      "explanation": "C"
+      "explanation": "C",
+      "image": "economics-question-images/econ-pdf-006.png"
     },
     {
       "id": "econ-pdf-007",
@@ -103,7 +109,8 @@
         "D": "消費活動。"
       },
       "answer": "",
-      "explanation": "C"
+      "explanation": "C",
+      "image": "economics-question-images/econ-pdf-007.png"
     },
     {
       "id": "econ-pdf-008",
@@ -118,7 +125,8 @@
         "D": "如何生產。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-008.png"
     },
     {
       "id": "econ-pdf-009",
@@ -133,7 +141,8 @@
         "D": "少數國家。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-009.png"
     },
     {
       "id": "econ-pdf-010",
@@ -148,7 +157,8 @@
         "D": "生產什麼。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-010.png"
     },
     {
       "id": "econ-pdf-011",
@@ -163,7 +173,8 @@
         "D": "生產什麼。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-011.png"
     },
     {
       "id": "econ-pdf-012",
@@ -178,7 +189,8 @@
         "D": "滿足父母的期待"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-012.png"
     },
     {
       "id": "econ-pdf-013",
@@ -193,7 +205,8 @@
         "D": "捐贈善款幫助臺南地震的受災戶。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-013.png"
     },
     {
       "id": "econ-pdf-014",
@@ -208,7 +221,8 @@
         "D": "資源稀少性及如何選擇的問題"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-014.png"
     },
     {
       "id": "econ-pdf-015",
@@ -223,7 +237,8 @@
         "D": "社會科學"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-015.png"
     },
     {
       "id": "econ-pdf-016",
@@ -238,7 +253,8 @@
         "D": "無形財"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-016.png"
     },
     {
       "id": "econ-pdf-017",
@@ -253,7 +269,8 @@
         "D": "清風明⺝"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-017.png"
     },
     {
       "id": "econ-pdf-018",
@@ -268,7 +285,8 @@
         "D": "微波爐。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-018.png"
     },
     {
       "id": "econ-pdf-019",
@@ -283,7 +301,8 @@
         "D": "自由財就是免費的財貨。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-019.png"
     },
     {
       "id": "econ-pdf-020",
@@ -298,7 +317,8 @@
         "D": "兩津過度使用信用卡，提前享受卻無力償還卡債"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-020.png"
     },
     {
       "id": "econ-pdf-021",
@@ -313,7 +333,8 @@
         "D": "人口的增加。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-021.png"
     },
     {
       "id": "econ-pdf-022",
@@ -328,7 +349,8 @@
         "D": "皮古"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-022.png"
     },
     {
       "id": "econ-pdf-023",
@@ -343,7 +365,8 @@
         "D": "孟格爾"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-023.png"
     },
     {
       "id": "econ-pdf-024",
@@ -358,7 +381,8 @@
         "D": "反古典學派"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-024.png"
     },
     {
       "id": "econ-pdf-025",
@@ -373,7 +397,8 @@
         "D": "國富論"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-025.png"
     },
     {
       "id": "econ-pdf-026",
@@ -389,7 +414,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page13.png"
+      "image": "economics-question-images/econ-pdf-026.png"
     },
     {
       "id": "econ-pdf-027",
@@ -404,7 +429,8 @@
         "D": "投資儲蓄說。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-027.png"
     },
     {
       "id": "econ-pdf-028",
@@ -419,7 +445,8 @@
         "D": "羅莫"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-028.png"
     },
     {
       "id": "econ-pdf-029",
@@ -434,7 +461,8 @@
         "D": "流動性偏好理論。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-029.png"
     },
     {
       "id": "econ-pdf-030",
@@ -449,7 +477,8 @@
         "D": "主張減稅以刺激投資增加產出。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-030.png"
     },
     {
       "id": "econ-pdf-031",
@@ -464,7 +493,8 @@
         "D": "第二次世界大戰。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-031.png"
     },
     {
       "id": "econ-pdf-032",
@@ -479,7 +509,8 @@
         "D": "新經濟學派。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-032.png"
     },
     {
       "id": "econ-pdf-033",
@@ -494,7 +525,8 @@
         "D": "現代經濟學派"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-033.png"
     },
     {
       "id": "econ-pdf-034",
@@ -509,7 +541,8 @@
         "D": "李士特。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-034.png"
     },
     {
       "id": "econ-pdf-035",
@@ -524,7 +557,8 @@
         "D": "3125476"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-035.png"
     },
     {
       "id": "econ-pdf-036",
@@ -539,7 +573,8 @@
         "D": "迂迴生產說－龐巴衛克。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-036.png"
     },
     {
       "id": "econ-pdf-037",
@@ -555,7 +590,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page14.png"
+      "image": "economics-question-images/econ-pdf-037.png"
     },
     {
       "id": "econ-pdf-038",
@@ -570,7 +605,8 @@
         "D": "廠商理論"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-038.png"
     },
     {
       "id": "econ-pdf-039",
@@ -585,7 +621,8 @@
         "D": "國際貿易"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-039.png"
     },
     {
       "id": "econ-pdf-040",
@@ -600,7 +637,8 @@
         "D": "規範經濟學。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-040.png"
     },
     {
       "id": "econ-pdf-041",
@@ -615,7 +653,8 @@
         "D": "實證經濟學"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-041.png"
     },
     {
       "id": "econ-pdf-042",
@@ -630,7 +669,8 @@
         "D": "模型法。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-042.png"
     },
     {
       "id": "econ-pdf-043",
@@ -645,7 +685,8 @@
         "D": "規範經濟學。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-043.png"
     },
     {
       "id": "econ-pdf-044",
@@ -660,7 +701,8 @@
         "D": "實證經濟學牽涉主觀價值判斷。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-044.png"
     },
     {
       "id": "econ-pdf-045",
@@ -675,7 +717,8 @@
         "D": "牽涉研究者個人的價值判斷。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-045.png"
     },
     {
       "id": "econ-pdf-046",
@@ -690,7 +733,8 @@
         "D": "現代經濟學者：模型法。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-046.png"
     },
     {
       "id": "econ-pdf-047",
@@ -705,7 +749,8 @@
         "D": "機會成本"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-047.png"
     },
     {
       "id": "econ-pdf-048",
@@ -720,7 +765,8 @@
         "D": "所有資源只用來生產兩種財貨。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-048.png"
     },
     {
       "id": "econ-pdf-049",
@@ -735,7 +781,8 @@
         "D": "邊際成本率"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-049.png"
     },
     {
       "id": "econ-pdf-050",
@@ -750,7 +797,8 @@
         "D": "社會成本"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-050.png"
     },
     {
       "id": "econ-pdf-051",
@@ -766,7 +814,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page25.png"
+      "image": "economics-question-images/econ-pdf-051.png"
     },
     {
       "id": "econ-pdf-052",
@@ -782,7 +830,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page25.png"
+      "image": "economics-question-images/econ-pdf-052.png"
     },
     {
       "id": "econ-pdf-053",
@@ -796,9 +844,9 @@
         "C": "遞增",
         "D": "無法判斷。"
       },
-      "answer": C"",
+      "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page25.png"
+      "image": "economics-question-images/econ-pdf-053.png"
     },
     {
       "id": "econ-pdf-054",
@@ -813,7 +861,8 @@
         "D": "0.1 個 菜包。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-054.png"
     },
     {
       "id": "econ-pdf-055",
@@ -829,7 +878,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page25.png"
+      "image": "economics-question-images/econ-pdf-055.png"
     },
     {
       "id": "econ-pdf-056",
@@ -844,7 +893,8 @@
         "D": "己"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-056.png"
     },
     {
       "id": "econ-pdf-057",
@@ -860,7 +910,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page26.png"
+      "image": "economics-question-images/econ-pdf-057.png"
     },
     {
       "id": "econ-pdf-058",
@@ -876,7 +926,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page26.png"
+      "image": "economics-question-images/econ-pdf-058.png"
     },
     {
       "id": "econ-pdf-059",
@@ -892,7 +942,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page26.png"
+      "image": "economics-question-images/econ-pdf-059.png"
     },
     {
       "id": "econ-pdf-060",
@@ -907,7 +957,8 @@
         "D": "經濟正在快速成長"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-060.png"
     },
     {
       "id": "econ-pdf-061",
@@ -922,7 +973,8 @@
         "D": "3 單位國防財。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-061.png"
     },
     {
       "id": "econ-pdf-062",
@@ -937,7 +989,8 @@
         "D": "今朝有酒今朝醉，莫使金樽空對⺝。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-062.png"
     },
     {
       "id": "econ-pdf-063",
@@ -953,7 +1006,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page26.png"
+      "image": "economics-question-images/econ-pdf-063.png"
     },
     {
       "id": "econ-pdf-064",
@@ -968,7 +1021,8 @@
         "D": "經濟原則符合效率的原則。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-064.png"
     },
     {
       "id": "econ-pdf-065",
@@ -983,7 +1037,8 @@
         "D": "股票市場。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-065.png"
     },
     {
       "id": "econ-pdf-066",
@@ -998,7 +1053,8 @@
         "D": "兩種市場、兩個決策單位"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-066.png"
     },
     {
       "id": "econ-pdf-067",
@@ -1013,7 +1069,8 @@
         "D": "分配制度"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-067.png"
     },
     {
       "id": "econ-pdf-068",
@@ -1028,7 +1085,8 @@
         "D": "由民間與政府共同來解決經濟問題。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-068.png"
     },
     {
       "id": "econ-pdf-069",
@@ -1043,7 +1101,8 @@
         "D": "社會主義經濟制度"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-069.png"
     },
     {
       "id": "econ-pdf-070",
@@ -1058,7 +1117,8 @@
         "D": "自由經濟制度。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-070.png"
     },
     {
       "id": "econ-pdf-071",
@@ -1073,7 +1133,8 @@
         "D": "資源配置最佳"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-071.png"
     },
     {
       "id": "econ-pdf-072",
@@ -1088,7 +1149,8 @@
         "D": "經濟活動全部由政府規劃"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-072.png"
     },
     {
       "id": "econ-pdf-073",
@@ -1103,7 +1165,8 @@
         "D": "共產主義經濟制度"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-073.png"
     },
     {
       "id": "econ-pdf-074",
@@ -1118,7 +1181,8 @@
         "D": "資本主義 經濟制度。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-074.png"
     },
     {
       "id": "econ-pdf-075",
@@ -1133,7 +1197,8 @@
         "D": "共產主義、新資本主義、資本主義"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-075.png"
     },
     {
       "id": "econ-pdf-076",
@@ -1148,7 +1213,8 @@
         "D": "資本主義下，有錢人更有錢、貧窮者更貧窮的貧富不均現象"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-076.png"
     },
     {
       "id": "econ-pdf-077",
@@ -1163,7 +1229,8 @@
         "D": "4312"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-077.png"
     },
     {
       "id": "econ-pdf-078",
@@ -1178,7 +1245,8 @@
         "D": "3412。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-078.png"
     },
     {
       "id": "econ-pdf-079",
@@ -1193,7 +1261,8 @@
         "D": "資源數量無限，大家都想要。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-079.png"
     },
     {
       "id": "econ-pdf-080",
@@ -1208,7 +1277,8 @@
         "D": "資源具有稀少性。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-080.png"
     },
     {
       "id": "econ-pdf-081",
@@ -1223,7 +1293,8 @@
         "D": "購票觀賞五⺝天的演唱會。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-081.png"
     },
     {
       "id": "econ-pdf-082",
@@ -1238,7 +1309,8 @@
         "D": "買東西，選最便宜的就對了。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-082.png"
     },
     {
       "id": "econ-pdf-083",
@@ -1253,7 +1325,8 @@
         "D": "以上皆非。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-083.png"
     },
     {
       "id": "econ-pdf-084",
@@ -1268,7 +1341,8 @@
         "D": "演算法。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-084.png"
     },
     {
       "id": "econ-pdf-085",
@@ -1283,7 +1357,8 @@
         "D": "14 萬元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-085.png"
     },
     {
       "id": "econ-pdf-086",
@@ -1298,7 +1373,8 @@
         "D": "人與人交往都是投桃報李的。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-086.png"
     },
     {
       "id": "econ-pdf-087",
@@ -1314,7 +1390,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page31.png"
+      "image": "economics-question-images/econ-pdf-087.png"
     },
     {
       "id": "econ-pdf-088",
@@ -1330,7 +1406,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page32.png"
+      "image": "economics-question-images/econ-pdf-088.png"
     },
     {
       "id": "econ-pdf-089",
@@ -1345,7 +1421,8 @@
         "D": "13。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-089.png"
     },
     {
       "id": "econ-pdf-090",
@@ -1360,7 +1437,8 @@
         "D": "電腦可能是生產財，亦可能是消費財。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-090.png"
     },
     {
       "id": "econ-pdf-091",
@@ -1375,7 +1453,8 @@
         "D": "經濟學的研究方法中，演繹法是較注重客觀與事實的觀察方法。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-091.png"
     },
     {
       "id": "econ-pdf-092",
@@ -1390,7 +1469,8 @@
         "D": "利率是廠商的投資成本，此乃屬於個體經濟學的課題。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-092.png"
     },
     {
       "id": "econ-pdf-093",
@@ -1405,7 +1485,8 @@
         "D": "小惠。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-093.png"
     },
     {
       "id": "econ-pdf-094",
@@ -1421,7 +1502,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page33.png"
+      "image": "economics-question-images/econ-pdf-094.png"
     },
     {
       "id": "econ-pdf-095",
@@ -1437,7 +1518,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page33.png"
+      "image": "economics-question-images/econ-pdf-095.png"
     },
     {
       "id": "econ-pdf-096",
@@ -1453,7 +1534,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page33.png"
+      "image": "economics-question-images/econ-pdf-096.png"
     },
     {
       "id": "econ-pdf-097",
@@ -1469,7 +1550,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page34.png"
+      "image": "economics-question-images/econ-pdf-097.png"
     },
     {
       "id": "econ-pdf-098",
@@ -1484,7 +1565,8 @@
         "D": "自由經濟制度容易造成分配不均的問題。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-098.png"
     },
     {
       "id": "econ-pdf-099",
@@ -1499,7 +1581,8 @@
         "D": "人的慾望有限。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-099.png"
     },
     {
       "id": "econ-pdf-100",
@@ -1514,7 +1597,8 @@
         "D": "窮人沒有「慾望無窮，但資源相對有限」之經濟問題。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-100.png"
     },
     {
       "id": "econ-pdf-101",
@@ -1529,7 +1613,8 @@
         "D": "為誰生產(for whom)。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-101.png"
     },
     {
       "id": "econ-pdf-102",
@@ -1544,7 +1629,8 @@
         "D": "資本論(Capital)。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-102.png"
     },
     {
       "id": "econ-pdf-103",
@@ -1559,7 +1645,8 @@
         "D": "為誰生產。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-103.png"
     },
     {
       "id": "econ-pdf-104",
@@ -1574,7 +1661,8 @@
         "D": "佳國公司正在評估要在印尼或越南設立海外分公司。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-104.png"
     },
     {
       "id": "econ-pdf-105",
@@ -1589,7 +1677,8 @@
         "D": "表演之著作權。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-105.png"
     },
     {
       "id": "econ-pdf-106",
@@ -1604,7 +1693,8 @@
         "D": "可透過新市場開發來達到創新。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-106.png"
     },
     {
       "id": "econ-pdf-107",
@@ -1619,7 +1709,8 @@
         "D": "人類發展指數（HDI）涵蓋了健康、教育、民主程度三面向。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-107.png"
     },
     {
       "id": "econ-pdf-108",
@@ -1634,7 +1725,8 @@
         "D": "新古典成長理論又稱為「內生成長理論」。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-108.png"
     },
     {
       "id": "econ-pdf-109",
@@ -1649,7 +1741,8 @@
         "D": "數理法。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-109.png"
     },
     {
       "id": "econ-pdf-110",
@@ -1664,7 +1757,8 @@
         "D": "生態經濟學。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-110.png"
     },
     {
       "id": "econ-pdf-111",
@@ -1679,7 +1773,8 @@
         "D": "亞當斯密為經濟學之父，其於出版「國富論」一書中主張政府應干涉市場。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-111.png"
     },
     {
       "id": "econ-pdf-112",
@@ -1694,7 +1789,8 @@
         "D": "因應疫情可能使景氣衰退，政府研討發放五倍券等振興經濟的措施。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-112.png"
     },
     {
       "id": "econ-pdf-113",
@@ -1709,7 +1805,8 @@
         "D": "探討嚴重特殊傳染性肺炎(COVID-19)疫情對網路遊戲產品銷量的影響， 此為實證經濟學的範疇。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-113.png"
     },
     {
       "id": "econ-pdf-114",
@@ -1724,7 +1821,8 @@
         "D": "3 萬4 千元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-114.png"
     },
     {
       "id": "econ-pdf-115",
@@ -1740,7 +1838,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page37.png"
+      "image": "economics-question-images/econ-pdf-115.png"
     },
     {
       "id": "econ-pdf-116",
@@ -1755,7 +1853,8 @@
         "D": "選擇時所放棄其他用途中，價值最高者就是會計成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-116.png"
     },
     {
       "id": "econ-pdf-117",
@@ -1770,7 +1869,8 @@
         "D": "價值最高者。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-117.png"
     },
     {
       "id": "econ-pdf-118",
@@ -1786,7 +1886,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page37.png"
+      "image": "economics-question-images/econ-pdf-118.png"
     },
     {
       "id": "econ-pdf-119",
@@ -1802,7 +1902,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page37.png"
+      "image": "economics-question-images/econ-pdf-119.png"
     },
     {
       "id": "econ-pdf-120",
@@ -1818,7 +1918,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page38.png"
+      "image": "economics-question-images/econ-pdf-120.png"
     },
     {
       "id": "econ-pdf-121",
@@ -1834,7 +1934,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page38.png"
+      "image": "economics-question-images/econ-pdf-121.png"
     },
     {
       "id": "econ-pdf-122",
@@ -1849,7 +1949,8 @@
         "D": "無法衡量。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-122.png"
     },
     {
       "id": "econ-pdf-123",
@@ -1865,7 +1966,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page38.png"
+      "image": "economics-question-images/econ-pdf-123.png"
     },
     {
       "id": "econ-pdf-124",
@@ -1880,7 +1981,8 @@
         "D": "160 萬元。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-124.png"
     },
     {
       "id": "econ-pdf-125",
@@ -1896,7 +1998,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page38.png"
+      "image": "economics-question-images/econ-pdf-125.png"
     },
     {
       "id": "econ-pdf-126",
@@ -1912,7 +2014,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page39.png"
+      "image": "economics-question-images/econ-pdf-126.png"
     },
     {
       "id": "econ-pdf-127",
@@ -1928,7 +2030,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page39.png"
+      "image": "economics-question-images/econ-pdf-127.png"
     },
     {
       "id": "econ-pdf-128",
@@ -1944,7 +2046,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch1-page39.png"
+      "image": "economics-question-images/econ-pdf-128.png"
     },
     {
       "id": "econ-pdf-129",
@@ -1959,7 +2061,8 @@
         "D": "數量分配。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-129.png"
     },
     {
       "id": "econ-pdf-130",
@@ -1974,7 +2077,8 @@
         "D": "社會福利達到極大。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-130.png"
     },
     {
       "id": "econ-pdf-131",
@@ -1989,7 +2093,8 @@
         "D": "英國。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-131.png"
     },
     {
       "id": "econ-pdf-132",
@@ -2004,7 +2109,8 @@
         "D": "控制經濟制度。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-132.png"
     },
     {
       "id": "econ-pdf-133",
@@ -2019,7 +2125,8 @@
         "D": "景氣復甦"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-133.png"
     },
     {
       "id": "econ-pdf-134",
@@ -2034,7 +2141,8 @@
         "D": "COACH 包降價時，愛佳一定會多買。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-134.png"
     },
     {
       "id": "econ-pdf-135",
@@ -2049,7 +2157,8 @@
         "D": "大雄。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-135.png"
     },
     {
       "id": "econ-pdf-136",
@@ -2064,7 +2173,8 @@
         "D": "U-bike 租借站大量增設。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-136.png"
     },
     {
       "id": "econ-pdf-137",
@@ -2079,7 +2189,8 @@
         "D": "鳳梨果乾的成本可能會因為民眾搶購鳳梨而上升。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-137.png"
     },
     {
       "id": "econ-pdf-138",
@@ -2094,7 +2205,8 @@
         "D": "需求量增加"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-138.png"
     },
     {
       "id": "econ-pdf-139",
@@ -2109,7 +2221,8 @@
         "D": "需求量減少"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-139.png"
     },
     {
       "id": "econ-pdf-140",
@@ -2124,7 +2237,8 @@
         "D": "財貨目前價格。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-140.png"
     },
     {
       "id": "econ-pdf-141",
@@ -2139,7 +2253,8 @@
         "D": "大白菜豐收。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-141.png"
     },
     {
       "id": "econ-pdf-142",
@@ -2155,7 +2270,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page15.png"
+      "image": "economics-question-images/econ-pdf-142.png"
     },
     {
       "id": "econ-pdf-143",
@@ -2170,7 +2285,8 @@
         "D": "競爭需求。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-143.png"
     },
     {
       "id": "econ-pdf-144",
@@ -2185,7 +2301,8 @@
         "D": "洋蔥的替代品－蒜頭的價格下跌。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-144.png"
     },
     {
       "id": "econ-pdf-145",
@@ -2201,7 +2318,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page15.png"
+      "image": "economics-question-images/econ-pdf-145.png"
     },
     {
       "id": "econ-pdf-146",
@@ -2216,7 +2333,8 @@
         "D": "若Px 變動，則會造成X 財需求量的變動。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-146.png"
     },
     {
       "id": "econ-pdf-147",
@@ -2231,7 +2349,8 @@
         "D": "不一定"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-147.png"
     },
     {
       "id": "econ-pdf-148",
@@ -2246,7 +2365,8 @@
         "D": "支出占所得比例愈大者，需求彈性愈小"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-148.png"
     },
     {
       "id": "econ-pdf-149",
@@ -2261,7 +2381,8 @@
         "D": "相同。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-149.png"
     },
     {
       "id": "econ-pdf-150",
@@ -2276,7 +2397,8 @@
         "D": "5。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-150.png"
     },
     {
       "id": "econ-pdf-151",
@@ -2292,7 +2414,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page25.png"
+      "image": "economics-question-images/econ-pdf-151.png"
     },
     {
       "id": "econ-pdf-152",
@@ -2307,7 +2429,8 @@
         "D": "耐用程度較大。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-152.png"
     },
     {
       "id": "econ-pdf-153",
@@ -2322,7 +2445,8 @@
         "D": "成人對六福村主題樂園的需求彈性大於學生的需求彈性。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-153.png"
     },
     {
       "id": "econ-pdf-154",
@@ -2337,7 +2461,8 @@
         "D": "無法判斷"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-154.png"
     },
     {
       "id": "econ-pdf-155",
@@ -2352,7 +2477,8 @@
         "D": "需求量減少11 個。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-155.png"
     },
     {
       "id": "econ-pdf-156",
@@ -2367,7 +2493,8 @@
         "D": "2。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-156.png"
     },
     {
       "id": "econ-pdf-157",
@@ -2382,7 +2509,8 @@
         "D": "頭等艙因需求彈性大於1，須降價。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-157.png"
     },
     {
       "id": "econ-pdf-158",
@@ -2398,7 +2526,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page26.png"
+      "image": "economics-question-images/econ-pdf-158.png"
     },
     {
       "id": "econ-pdf-159",
@@ -2414,7 +2542,7 @@
       },
       "answer": "",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page26.png"
+      "image": "economics-question-images/econ-pdf-159.png"
     },
     {
       "id": "econ-pdf-160",
@@ -2429,7 +2557,8 @@
         "D": "供給量減少"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-160.png"
     },
     {
       "id": "econ-pdf-161",
@@ -2444,7 +2573,8 @@
         "D": "供給量將會減少"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-161.png"
     },
     {
       "id": "econ-pdf-162",
@@ -2459,7 +2589,8 @@
         "D": "汽車製造技術進步"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-162.png"
     },
     {
       "id": "econ-pdf-163",
@@ -2474,7 +2605,8 @@
         "D": "替代財貨價格的變動"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-163.png"
     },
     {
       "id": "econ-pdf-164",
@@ -2489,7 +2621,8 @@
         "D": "精華地段的土地"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-164.png"
     },
     {
       "id": "econ-pdf-165",
@@ -2504,7 +2637,8 @@
         "D": "15 單位。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-165.png"
     },
     {
       "id": "econ-pdf-166",
@@ -2519,7 +2653,8 @@
         "D": "兔毛皮和兔肉。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-166.png"
     },
     {
       "id": "econ-pdf-167",
@@ -2534,7 +2669,8 @@
         "D": "政府加強對美國豬肉的篩檢，將使美國豬肉的成本增加。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-167.png"
     },
     {
       "id": "econ-pdf-168",
@@ -2549,7 +2685,8 @@
         "D": "政府補貼花農轉作稻米。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-168.png"
     },
     {
       "id": "econ-pdf-169",
@@ -2564,7 +2701,8 @@
         "D": "當價格低於320 元時，皮克斯仍會拍電影。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-169.png"
     },
     {
       "id": "econ-pdf-170",
@@ -2580,7 +2718,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page36.png"
+      "image": "economics-question-images/econ-pdf-170.png"
     },
     {
       "id": "econ-pdf-171",
@@ -2595,7 +2733,8 @@
         "D": "愈來愈多民眾投入股市交易，此乃屬於對股票的「需求量變動」。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-171.png"
     },
     {
       "id": "econ-pdf-172",
@@ -2610,7 +2749,8 @@
         "D": "相同。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-172.png"
     },
     {
       "id": "econ-pdf-173",
@@ -2625,7 +2765,8 @@
         "D": "減少5%"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-173.png"
     },
     {
       "id": "econ-pdf-174",
@@ -2640,7 +2781,8 @@
         "D": "農產品＞輕工業產品＞重工業產品"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-174.png"
     },
     {
       "id": "econ-pdf-175",
@@ -2656,7 +2798,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page42.png"
+      "image": "economics-question-images/econ-pdf-175.png"
     },
     {
       "id": "econ-pdf-176",
@@ -2671,7 +2813,8 @@
         "D": "產品保存期限較短者"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-176.png"
     },
     {
       "id": "econ-pdf-177",
@@ -2687,7 +2830,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page42.png"
+      "image": "economics-question-images/econ-pdf-177.png"
     },
     {
       "id": "econ-pdf-178",
@@ -2702,7 +2845,8 @@
         "D": "120 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-178.png"
     },
     {
       "id": "econ-pdf-179",
@@ -2717,7 +2861,8 @@
         "D": "370。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-179.png"
     },
     {
       "id": "econ-pdf-180",
@@ -2732,7 +2877,8 @@
         "D": "缺乏彈性的供給曲線為正斜率且較為陡峭。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-180.png"
     },
     {
       "id": "econ-pdf-181",
@@ -2748,7 +2894,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page43.png"
+      "image": "economics-question-images/econ-pdf-181.png"
     },
     {
       "id": "econ-pdf-182",
@@ -2763,7 +2909,8 @@
         "D": "供給函數為P＝30，可以推測其線上每一點的供給彈性皆為0。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-182.png"
     },
     {
       "id": "econ-pdf-183",
@@ -2778,7 +2925,8 @@
         "D": "無限大"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-183.png"
     },
     {
       "id": "econ-pdf-184",
@@ -2794,7 +2942,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page43.png"
+      "image": "economics-question-images/econ-pdf-184.png"
     },
     {
       "id": "econ-pdf-185",
@@ -2809,7 +2957,8 @@
         "D": "受自然力支配程度大的財貨。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-185.png"
     },
     {
       "id": "econ-pdf-186",
@@ -2824,7 +2973,8 @@
         "D": "212。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-186.png"
     },
     {
       "id": "econ-pdf-187",
@@ -2839,7 +2989,8 @@
         "D": "超額需求，價格將下跌"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-187.png"
     },
     {
       "id": "econ-pdf-188",
@@ -2854,7 +3005,8 @@
         "D": "價格上漲，交易量減少"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-188.png"
     },
     {
       "id": "econ-pdf-189",
@@ -2869,7 +3021,8 @@
         "D": "P 下降，Q 上升。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-189.png"
     },
     {
       "id": "econ-pdf-190",
@@ -2884,7 +3037,8 @@
         "D": "衛生紙的交易量維持不變。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-190.png"
     },
     {
       "id": "econ-pdf-191",
@@ -2899,7 +3053,8 @@
         "D": "均衡交易價格與數量必定同時上升。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-191.png"
     },
     {
       "id": "econ-pdf-192",
@@ -2914,7 +3069,8 @@
         "D": "房價上漲，交易量增加。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-192.png"
     },
     {
       "id": "econ-pdf-193",
@@ -2929,7 +3085,8 @@
         "D": "價格上漲，交易量不變。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-193.png"
     },
     {
       "id": "econ-pdf-194",
@@ -2944,7 +3101,8 @@
         "D": "需求增加＝供給增加。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-194.png"
     },
     {
       "id": "econ-pdf-195",
@@ -2959,7 +3117,8 @@
         "D": "(23，6)。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-195.png"
     },
     {
       "id": "econ-pdf-196",
@@ -2975,7 +3134,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page53.png"
+      "image": "economics-question-images/econ-pdf-196.png"
     },
     {
       "id": "econ-pdf-197",
@@ -2991,7 +3150,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page53.png"
+      "image": "economics-question-images/econ-pdf-197.png"
     },
     {
       "id": "econ-pdf-198",
@@ -3006,7 +3165,8 @@
         "D": "市場已達均衡。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-198.png"
     },
     {
       "id": "econ-pdf-199",
@@ -3021,7 +3181,8 @@
         "D": "限價後供需將相差14 單位。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-199.png"
     },
     {
       "id": "econ-pdf-200",
@@ -3036,7 +3197,8 @@
         "D": "課稅"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-200.png"
     },
     {
       "id": "econ-pdf-201",
@@ -3051,7 +3213,8 @@
         "D": "均衡價格下跌，均衡數量減少"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-201.png"
     },
     {
       "id": "econ-pdf-202",
@@ -3066,7 +3229,8 @@
         "D": "政府對香煙課稅將使其市場需求減少。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-202.png"
     },
     {
       "id": "econ-pdf-203",
@@ -3081,7 +3245,8 @@
         "D": "若廠商一方面日夜趕工生產口罩，民眾也因恐慌而大量囤積口罩，則在沒 有政府管制的情況下，口罩的市場均衡交易量一定增加，均衡價格則增減 不一定。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-203.png"
     },
     {
       "id": "econ-pdf-204",
@@ -3096,7 +3261,8 @@
         "D": "85 元為價格上限，110 元為價格下限。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-204.png"
     },
     {
       "id": "econ-pdf-205",
@@ -3111,7 +3277,8 @@
         "D": "等我存夠了錢，我就要買一台最新款的iPhone。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-205.png"
     },
     {
       "id": "econ-pdf-206",
@@ -3126,7 +3293,8 @@
         "D": "增減不一定。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-206.png"
     },
     {
       "id": "econ-pdf-207",
@@ -3141,7 +3309,8 @@
         "D": "11 單位。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-207.png"
     },
     {
       "id": "econ-pdf-208",
@@ -3157,7 +3326,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page59.png"
+      "image": "economics-question-images/econ-pdf-208.png"
     },
     {
       "id": "econ-pdf-209",
@@ -3172,7 +3341,8 @@
         "D": "價格變動與其需求量變動的相關係數。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-209.png"
     },
     {
       "id": "econ-pdf-210",
@@ -3187,7 +3357,8 @@
         "D": "需求量變動百分比大於價格變動的百分比，降價有利。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-210.png"
     },
     {
       "id": "econ-pdf-211",
@@ -3203,7 +3374,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page59.png"
+      "image": "economics-question-images/econ-pdf-211.png"
     },
     {
       "id": "econ-pdf-212",
@@ -3218,7 +3389,8 @@
         "D": "以上皆有可能。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-212.png"
     },
     {
       "id": "econ-pdf-213",
@@ -3233,7 +3405,8 @@
         "D": "政府釋出房市利多消息，建商紛紛推出新案。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-213.png"
     },
     {
       "id": "econ-pdf-214",
@@ -3248,7 +3421,8 @@
         "D": "45。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-214.png"
     },
     {
       "id": "econ-pdf-215",
@@ -3263,7 +3437,8 @@
         "D": "140 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-215.png"
     },
     {
       "id": "econ-pdf-216",
@@ -3279,7 +3454,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page60.png"
+      "image": "economics-question-images/econ-pdf-216.png"
     },
     {
       "id": "econ-pdf-217",
@@ -3294,7 +3469,8 @@
         "D": "供給彈性大於一的商品適合薄利多銷。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-217.png"
     },
     {
       "id": "econ-pdf-218",
@@ -3309,7 +3485,8 @@
         "D": "超額需求，均衡價格下跌。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-218.png"
     },
     {
       "id": "econ-pdf-219",
@@ -3324,7 +3501,8 @@
         "D": "智慧型手機的交易數量增減不一定。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-219.png"
     },
     {
       "id": "econ-pdf-220",
@@ -3339,7 +3517,8 @@
         "D": "需求減少的幅度小於供給增加的幅度。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-220.png"
     },
     {
       "id": "econ-pdf-221",
@@ -3354,7 +3533,8 @@
         "D": "生產過剩。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-221.png"
     },
     {
       "id": "econ-pdf-222",
@@ -3369,7 +3549,8 @@
         "D": "季芬財的需求曲線和供給曲線一樣都是正斜率。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-222.png"
     },
     {
       "id": "econ-pdf-223",
@@ -3384,7 +3565,8 @@
         "D": "該財貨的需求彈性絕對值必小於1。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-223.png"
     },
     {
       "id": "econ-pdf-224",
@@ -3400,7 +3582,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page61.png"
+      "image": "economics-question-images/econ-pdf-224.png"
     },
     {
       "id": "econ-pdf-225",
@@ -3415,7 +3597,8 @@
         "D": "所得效果就是指所得增減對財貨需求量的影響。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-225.png"
     },
     {
       "id": "econ-pdf-226",
@@ -3430,7 +3613,8 @@
         "D": "每個人願意購買的數量最多不會超過2 個。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-226.png"
     },
     {
       "id": "econ-pdf-227",
@@ -3445,7 +3629,8 @@
         "D": "增加2 萬顆。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-227.png"
     },
     {
       "id": "econ-pdf-228",
@@ -3460,7 +3645,8 @@
         "D": "＋13.3%。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-228.png"
     },
     {
       "id": "econ-pdf-229",
@@ -3475,7 +3661,8 @@
         "D": "Ed＝0.625，所得效果。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-229.png"
     },
     {
       "id": "econ-pdf-230",
@@ -3490,7 +3677,8 @@
         "D": "X、Y 財互為替代品。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-230.png"
     },
     {
       "id": "econ-pdf-231",
@@ -3506,7 +3694,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page63.png"
+      "image": "economics-question-images/econ-pdf-231.png"
     },
     {
       "id": "econ-pdf-232",
@@ -3521,7 +3709,8 @@
         "D": "標準彈性的商品，其總收益和價格無關。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-232.png"
     },
     {
       "id": "econ-pdf-233",
@@ -3536,7 +3725,8 @@
         "D": "某物的供給函數為P－3Q＝500，可推斷該物違反供給法則。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-233.png"
     },
     {
       "id": "econ-pdf-234",
@@ -3552,7 +3742,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page63.png"
+      "image": "economics-question-images/econ-pdf-234.png"
     },
     {
       "id": "econ-pdf-235",
@@ -3567,7 +3757,8 @@
         "D": "165。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-235.png"
     },
     {
       "id": "econ-pdf-236",
@@ -3582,7 +3773,8 @@
         "D": "需求上的替代品價格上漲。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-236.png"
     },
     {
       "id": "econ-pdf-237",
@@ -3597,7 +3789,8 @@
         "D": "價格上漲，交易量減少。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-237.png"
     },
     {
       "id": "econ-pdf-238",
@@ -3613,7 +3806,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page64.png"
+      "image": "economics-question-images/econ-pdf-238.png"
     },
     {
       "id": "econ-pdf-239",
@@ -3628,7 +3821,8 @@
         "D": "引申需求。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-239.png"
     },
     {
       "id": "econ-pdf-240",
@@ -3644,7 +3838,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page65.png"
+      "image": "economics-question-images/econ-pdf-240.png"
     },
     {
       "id": "econ-pdf-241",
@@ -3659,7 +3853,8 @@
         "D": "大型汽車為劣等財。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-241.png"
     },
     {
       "id": "econ-pdf-242",
@@ -3674,7 +3869,8 @@
         "D": "小育對財貨X 的消費符合需求法則。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-242.png"
     },
     {
       "id": "econ-pdf-243",
@@ -3689,7 +3885,8 @@
         "D": "若財貨A 為劣等財，所得增加時，在P＝25 時，Q 高於50。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-243.png"
     },
     {
       "id": "econ-pdf-244",
@@ -3704,7 +3901,8 @@
         "D": "替代效果。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-244.png"
     },
     {
       "id": "econ-pdf-245",
@@ -3719,7 +3917,8 @@
         "D": "消費者的偏好。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-245.png"
     },
     {
       "id": "econ-pdf-246",
@@ -3734,7 +3933,8 @@
         "D": "兒童的教養費用飆漲，民眾生小孩的意願大減。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-246.png"
     },
     {
       "id": "econ-pdf-247",
@@ -3749,7 +3949,8 @@
         "D": "消費者偏好不變。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-247.png"
     },
     {
       "id": "econ-pdf-248",
@@ -3764,7 +3965,8 @@
         "D": "化妝品。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-248.png"
     },
     {
       "id": "econ-pdf-249",
@@ -3779,7 +3981,8 @@
         "D": "替代需求。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-249.png"
     },
     {
       "id": "econ-pdf-250",
@@ -3795,7 +3998,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page66.png"
+      "image": "economics-question-images/econ-pdf-250.png"
     },
     {
       "id": "econ-pdf-251",
@@ -3811,7 +4014,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page66.png"
+      "image": "economics-question-images/econ-pdf-251.png"
     },
     {
       "id": "econ-pdf-252",
@@ -3826,7 +4029,8 @@
         "D": "P＝20－4Q。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-252.png"
     },
     {
       "id": "econ-pdf-253",
@@ -3842,7 +4046,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page67.png"
+      "image": "economics-question-images/econ-pdf-253.png"
     },
     {
       "id": "econ-pdf-254",
@@ -3857,7 +4061,8 @@
         "D": "10。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-254.png"
     },
     {
       "id": "econ-pdf-255",
@@ -3872,7 +4077,8 @@
         "D": "天候財。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-255.png"
     },
     {
       "id": "econ-pdf-256",
@@ -3887,7 +4093,8 @@
         "D": "此咖啡必為正常財。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-256.png"
     },
     {
       "id": "econ-pdf-257",
@@ -3902,7 +4109,8 @@
         "D": "銷售財貨B 之廠商若漲價會使總收益減少。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-257.png"
     },
     {
       "id": "econ-pdf-258",
@@ -3918,7 +4126,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page68.png"
+      "image": "economics-question-images/econ-pdf-258.png"
     },
     {
       "id": "econ-pdf-259",
@@ -3933,7 +4141,8 @@
         "D": "不論Px 如何變動，消費者對財貨X 之支出金額不變， 則財貨X 之需求價格彈性為1。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-259.png"
     },
     {
       "id": "econ-pdf-260",
@@ -3948,7 +4157,8 @@
         "D": "若ES＝0.9 時，廠商漲價可以增加總收益。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-260.png"
     },
     {
       "id": "econ-pdf-261",
@@ -3963,7 +4173,8 @@
         "D": "賣場以7 折優惠價出售豬肉，造成豬肉熱賣。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-261.png"
     },
     {
       "id": "econ-pdf-262",
@@ -3978,7 +4189,8 @@
         "D": "財貨本身價格的變動。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-262.png"
     },
     {
       "id": "econ-pdf-263",
@@ -3994,7 +4206,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page69.png"
+      "image": "economics-question-images/econ-pdf-263.png"
     },
     {
       "id": "econ-pdf-264",
@@ -4009,7 +4221,8 @@
         "D": "Q＝10＋10P。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-264.png"
     },
     {
       "id": "econ-pdf-265",
@@ -4024,7 +4237,8 @@
         "D": "生產成本減少。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-265.png"
     },
     {
       "id": "econ-pdf-266",
@@ -4040,7 +4254,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page69.png"
+      "image": "economics-question-images/econ-pdf-266.png"
     },
     {
       "id": "econ-pdf-267",
@@ -4055,7 +4269,8 @@
         "D": "2.5。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-267.png"
     },
     {
       "id": "econ-pdf-268",
@@ -4071,7 +4286,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page70.png"
+      "image": "economics-question-images/econ-pdf-268.png"
     },
     {
       "id": "econ-pdf-269",
@@ -4087,7 +4302,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page70.png"
+      "image": "economics-question-images/econ-pdf-269.png"
     },
     {
       "id": "econ-pdf-270",
@@ -4103,7 +4318,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page70.png"
+      "image": "economics-question-images/econ-pdf-270.png"
     },
     {
       "id": "econ-pdf-271",
@@ -4118,7 +4333,8 @@
         "D": "價格上升，交易量增加。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-271.png"
     },
     {
       "id": "econ-pdf-272",
@@ -4133,7 +4349,8 @@
         "D": "價格機能可使市場調整至均衡的論點，最早是由凱因斯所提出。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-272.png"
     },
     {
       "id": "econ-pdf-273",
@@ -4148,7 +4365,8 @@
         "D": "均衡價格下跌，均衡數量減少。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-273.png"
     },
     {
       "id": "econ-pdf-274",
@@ -4164,7 +4382,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page71.png"
+      "image": "economics-question-images/econ-pdf-274.png"
     },
     {
       "id": "econ-pdf-275",
@@ -4179,7 +4397,8 @@
         "D": "需求增加，供給減少。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-275.png"
     },
     {
       "id": "econ-pdf-276",
@@ -4194,7 +4413,8 @@
         "D": "需求不變但供給增加。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-276.png"
     },
     {
       "id": "econ-pdf-277",
@@ -4209,7 +4429,8 @@
         "D": "在其他條件不變下，生產技術的進步會使均衡數量（Q）大於7。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-277.png"
     },
     {
       "id": "econ-pdf-278",
@@ -4224,7 +4445,8 @@
         "D": "若供給線是一條通過原點的正斜率直線， 在此線上的點若價格愈高則供給價格彈性愈小。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-278.png"
     },
     {
       "id": "econ-pdf-279",
@@ -4239,7 +4461,8 @@
         "D": "均衡價格必定下跌。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-279.png"
     },
     {
       "id": "econ-pdf-280",
@@ -4255,7 +4478,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page72.png"
+      "image": "economics-question-images/econ-pdf-280.png"
     },
     {
       "id": "econ-pdf-281",
@@ -4271,7 +4494,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page72.png"
+      "image": "economics-question-images/econ-pdf-281.png"
     },
     {
       "id": "econ-pdf-282",
@@ -4287,7 +4510,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch2-page73.png"
+      "image": "economics-question-images/econ-pdf-282.png"
     },
     {
       "id": "econ-pdf-283",
@@ -4302,7 +4525,8 @@
         "D": "保證價格收購。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-283.png"
     },
     {
       "id": "econ-pdf-284",
@@ -4317,7 +4541,8 @@
         "D": "政府宣布汽油價格凍漲，是一種設立價格上限的措施。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-284.png"
     },
     {
       "id": "econ-pdf-285",
@@ -4332,7 +4557,8 @@
         "D": "於戰亂或過度通貨膨脹時，政府較易採價格下限手段管制商品價格。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-285.png"
     },
     {
       "id": "econ-pdf-286",
@@ -4347,7 +4573,8 @@
         "D": "若價格上限為75，此市場有超額需求現象。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-286.png"
     },
     {
       "id": "econ-pdf-287",
@@ -4362,7 +4589,8 @@
         "D": "若政府對價格不干涉時，此市場的均衡交易量為200 單位。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-287.png"
     },
     {
       "id": "econ-pdf-288",
@@ -4377,7 +4605,8 @@
         "D": "均衡時的供給價格彈性為0.5。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-288.png"
     },
     {
       "id": "econ-pdf-289",
@@ -4392,7 +4621,8 @@
         "D": "市場均衡不變。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-289.png"
     },
     {
       "id": "econ-pdf-290",
@@ -4408,7 +4638,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page4.png"
+      "image": "economics-question-images/econ-pdf-290.png"
     },
     {
       "id": "econ-pdf-291",
@@ -4423,7 +4653,8 @@
         "D": "最終消費"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-291.png"
     },
     {
       "id": "econ-pdf-292",
@@ -4438,7 +4669,8 @@
         "D": "不算消費"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-292.png"
     },
     {
       "id": "econ-pdf-293",
@@ -4453,7 +4685,8 @@
         "D": "分配。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-293.png"
     },
     {
       "id": "econ-pdf-294",
@@ -4468,7 +4701,8 @@
         "D": "先有需求才產生慾望。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-294.png"
     },
     {
       "id": "econ-pdf-295",
@@ -4483,7 +4717,8 @@
         "D": "用途較少。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-295.png"
     },
     {
       "id": "econ-pdf-296",
@@ -4498,7 +4733,8 @@
         "D": "價格決定於財貨帶給人們的總滿足感。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-296.png"
     },
     {
       "id": "econ-pdf-297",
@@ -4514,7 +4750,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page9.png"
+      "image": "economics-question-images/econ-pdf-297.png"
     },
     {
       "id": "econ-pdf-298",
@@ -4529,7 +4765,8 @@
         "D": "先遞增後遞減"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-298.png"
     },
     {
       "id": "econ-pdf-299",
@@ -4544,7 +4781,8 @@
         "D": "會下降，但仍為正值"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-299.png"
     },
     {
       "id": "econ-pdf-300",
@@ -4559,7 +4797,8 @@
         "D": "快慢不一定"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-300.png"
     },
     {
       "id": "econ-pdf-301",
@@ -4574,7 +4813,8 @@
         "D": "總效用。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-301.png"
     },
     {
       "id": "econ-pdf-302",
@@ -4590,7 +4830,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page9.png"
+      "image": "economics-question-images/econ-pdf-302.png"
     },
     {
       "id": "econ-pdf-303",
@@ -4605,7 +4845,8 @@
         "D": "遞減且小於零。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-303.png"
     },
     {
       "id": "econ-pdf-304",
@@ -4620,7 +4861,8 @@
         "D": "負效用"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-304.png"
     },
     {
       "id": "econ-pdf-305",
@@ -4635,7 +4877,8 @@
         "D": "16。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-305.png"
     },
     {
       "id": "econ-pdf-306",
@@ -4650,7 +4893,8 @@
         "D": "鑽石帶給人們的邊際效用，常高於水帶給人的邊際效用"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-306.png"
     },
     {
       "id": "econ-pdf-307",
@@ -4665,7 +4909,8 @@
         "D": "水的消費者剩餘較大。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-307.png"
     },
     {
       "id": "econ-pdf-308",
@@ -4681,7 +4926,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page10.png"
+      "image": "economics-question-images/econ-pdf-308.png"
     },
     {
       "id": "econ-pdf-309",
@@ -4696,7 +4941,8 @@
         "D": "鑽石的總效用高，故交換價值較高。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-309.png"
     },
     {
       "id": "econ-pdf-310",
@@ -4711,7 +4957,8 @@
         "D": "使用價值取決於邊際效用的大小。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-310.png"
     },
     {
       "id": "econ-pdf-311",
@@ -4727,7 +4974,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page11.png"
+      "image": "economics-question-images/econ-pdf-311.png"
     },
     {
       "id": "econ-pdf-312",
@@ -4742,7 +4989,8 @@
         "D": "50。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-312.png"
     },
     {
       "id": "econ-pdf-313",
@@ -4757,7 +5005,8 @@
         "D": "資料不足，無法計算。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-313.png"
     },
     {
       "id": "econ-pdf-314",
@@ -4772,7 +5021,8 @@
         "D": "呈不規則變化。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-314.png"
     },
     {
       "id": "econ-pdf-315",
@@ -4787,7 +5037,8 @@
         "D": "10。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-315.png"
     },
     {
       "id": "econ-pdf-316",
@@ -4802,7 +5053,8 @@
         "D": "不要買鑽石。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-316.png"
     },
     {
       "id": "econ-pdf-317",
@@ -4817,7 +5069,8 @@
         "D": "滿足最大。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-317.png"
     },
     {
       "id": "econ-pdf-318",
@@ -4832,7 +5085,8 @@
         "D": "兩種都不選。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-318.png"
     },
     {
       "id": "econ-pdf-319",
@@ -4847,7 +5101,8 @@
         "D": "資料不足，無法判斷。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-319.png"
     },
     {
       "id": "econ-pdf-320",
@@ -4862,7 +5117,8 @@
         "D": "已均衡，不必再調整。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-320.png"
     },
     {
       "id": "econ-pdf-321",
@@ -4877,7 +5133,8 @@
         "D": "總效用。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-321.png"
     },
     {
       "id": "econ-pdf-322",
@@ -4892,7 +5149,8 @@
         "D": "3 個。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-322.png"
     },
     {
       "id": "econ-pdf-323",
@@ -4907,7 +5165,8 @@
         "D": "5 個。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-323.png"
     },
     {
       "id": "econ-pdf-324",
@@ -4922,7 +5181,8 @@
         "D": "12 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-324.png"
     },
     {
       "id": "econ-pdf-325",
@@ -4938,7 +5198,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page20.png"
+      "image": "economics-question-images/econ-pdf-325.png"
     },
     {
       "id": "econ-pdf-326",
@@ -4953,7 +5213,8 @@
         "D": "不用調整，因為已符合邊際效用均衡法則。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-326.png"
     },
     {
       "id": "econ-pdf-327",
@@ -4968,7 +5229,8 @@
         "D": "X＝10，Y＝5。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-327.png"
     },
     {
       "id": "econ-pdf-328",
@@ -4984,7 +5246,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page21.png"
+      "image": "economics-question-images/econ-pdf-328.png"
     },
     {
       "id": "econ-pdf-329",
@@ -4999,7 +5261,8 @@
         "D": "123。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-329.png"
     },
     {
       "id": "econ-pdf-330",
@@ -5014,7 +5277,8 @@
         "D": "130,000 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-330.png"
     },
     {
       "id": "econ-pdf-331",
@@ -5029,7 +5293,8 @@
         "D": "150。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-331.png"
     },
     {
       "id": "econ-pdf-332",
@@ -5045,7 +5310,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page25.png"
+      "image": "economics-question-images/econ-pdf-332.png"
     },
     {
       "id": "econ-pdf-333",
@@ -5061,7 +5326,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page25.png"
+      "image": "economics-question-images/econ-pdf-333.png"
     },
     {
       "id": "econ-pdf-334",
@@ -5076,7 +5341,8 @@
         "D": "消費者剩餘是指消費者的實質收入"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-334.png"
     },
     {
       "id": "econ-pdf-335",
@@ -5091,7 +5357,8 @@
         "D": "為消費者實付金額超過其願付金額的部分。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-335.png"
     },
     {
       "id": "econ-pdf-336",
@@ -5107,7 +5374,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page26.png"
+      "image": "economics-question-images/econ-pdf-336.png"
     },
     {
       "id": "econ-pdf-337",
@@ -5122,7 +5389,8 @@
         "D": "124 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-337.png"
     },
     {
       "id": "econ-pdf-338",
@@ -5137,7 +5405,8 @@
         "D": "124 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-338.png"
     },
     {
       "id": "econ-pdf-339",
@@ -5152,7 +5421,8 @@
         "D": "6 單位。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-339.png"
     },
     {
       "id": "econ-pdf-340",
@@ -5167,7 +5437,8 @@
         "D": "資料不足，無法判斷"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-340.png"
     },
     {
       "id": "econ-pdf-341",
@@ -5182,7 +5453,8 @@
         "D": "教育支出"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-341.png"
     },
     {
       "id": "econ-pdf-342",
@@ -5197,7 +5469,8 @@
         "D": "求知的權利"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-342.png"
     },
     {
       "id": "econ-pdf-343",
@@ -5213,7 +5486,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page29.png"
+      "image": "economics-question-images/econ-pdf-343.png"
     },
     {
       "id": "econ-pdf-344",
@@ -5228,7 +5501,8 @@
         "D": "不定。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-344.png"
     },
     {
       "id": "econ-pdf-345",
@@ -5243,7 +5517,8 @@
         "D": "先上升後下降。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-345.png"
     },
     {
       "id": "econ-pdf-346",
@@ -5258,7 +5533,8 @@
         "D": "再生性、互補性。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-346.png"
     },
     {
       "id": "econ-pdf-347",
@@ -5273,7 +5549,8 @@
         "D": "管理家計。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-347.png"
     },
     {
       "id": "econ-pdf-348",
@@ -5288,7 +5565,8 @@
         "D": "哥哥為了寫論文而買筆電。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-348.png"
     },
     {
       "id": "econ-pdf-349",
@@ -5303,7 +5581,8 @@
         "D": "馬斯洛。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-349.png"
     },
     {
       "id": "econ-pdf-350",
@@ -5319,7 +5598,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page30.png"
+      "image": "economics-question-images/econ-pdf-350.png"
     },
     {
       "id": "econ-pdf-351",
@@ -5334,7 +5613,8 @@
         "D": "21。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-351.png"
     },
     {
       "id": "econ-pdf-352",
@@ -5349,7 +5629,8 @@
         "D": "總效用低，但邊際效用高。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-352.png"
     },
     {
       "id": "econ-pdf-353",
@@ -5364,7 +5645,8 @@
         "D": "上升且為負數。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-353.png"
     },
     {
       "id": "econ-pdf-354",
@@ -5379,7 +5661,8 @@
         "D": "每一種財貨最後一元的邊際效用都相等。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-354.png"
     },
     {
       "id": "econ-pdf-355",
@@ -5395,7 +5678,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page31.png"
+      "image": "economics-question-images/econ-pdf-355.png"
     },
     {
       "id": "econ-pdf-356",
@@ -5410,7 +5693,8 @@
         "D": "兩者無關。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-356.png"
     },
     {
       "id": "econ-pdf-357",
@@ -5425,7 +5709,8 @@
         "D": "恩格爾沒有做這方面的調查。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-357.png"
     },
     {
       "id": "econ-pdf-358",
@@ -5440,7 +5725,8 @@
         "D": "奢侈品。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-358.png"
     },
     {
       "id": "econ-pdf-359",
@@ -5455,7 +5741,8 @@
         "D": "表達意見的權利。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-359.png"
     },
     {
       "id": "econ-pdf-360",
@@ -5470,7 +5757,8 @@
         "D": "使用價值愈高，交換價值愈高。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-360.png"
     },
     {
       "id": "econ-pdf-361",
@@ -5485,7 +5773,8 @@
         "D": "354。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-361.png"
     },
     {
       "id": "econ-pdf-362",
@@ -5501,7 +5790,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page32.png"
+      "image": "economics-question-images/econ-pdf-362.png"
     },
     {
       "id": "econ-pdf-363",
@@ -5516,7 +5805,8 @@
         "D": "一般支出占總所得比例不變。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-363.png"
     },
     {
       "id": "econ-pdf-364",
@@ -5531,7 +5821,8 @@
         "D": "20。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-364.png"
     },
     {
       "id": "econ-pdf-365",
@@ -5546,7 +5837,8 @@
         "D": "吃二顆柳丁的總效用為62。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-365.png"
     },
     {
       "id": "econ-pdf-366",
@@ -5561,7 +5853,8 @@
         "D": "小華對運動飲料的邊際效用遞減。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-366.png"
     },
     {
       "id": "econ-pdf-367",
@@ -5576,7 +5869,8 @@
         "D": "同一個人在不同時間去消費相同商品，一定會產生相同的滿足程度。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-367.png"
     },
     {
       "id": "econ-pdf-368",
@@ -5591,7 +5885,8 @@
         "D": "隨著消費數量的增加，邊際效用會有不斷遞增的現象。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-368.png"
     },
     {
       "id": "econ-pdf-369",
@@ -5606,7 +5901,8 @@
         "D": "QA＝5 的MU 會低於QA＝4 的MU。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-369.png"
     },
     {
       "id": "econ-pdf-370",
@@ -5621,7 +5917,8 @@
         "D": "Q＝70 之邊際效用會小於Q＝75 之邊際效用。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-370.png"
     },
     {
       "id": "econ-pdf-371",
@@ -5636,7 +5933,8 @@
         "D": "15。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-371.png"
     },
     {
       "id": "econ-pdf-372",
@@ -5652,7 +5950,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page34.png"
+      "image": "economics-question-images/econ-pdf-372.png"
     },
     {
       "id": "econ-pdf-373",
@@ -5667,7 +5965,8 @@
         "D": "4。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-373.png"
     },
     {
       "id": "econ-pdf-374",
@@ -5682,7 +5981,8 @@
         "D": "X＝2，Y＝15。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-374.png"
     },
     {
       "id": "econ-pdf-375",
@@ -5697,7 +5997,8 @@
         "D": "追求預算最大。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-375.png"
     },
     {
       "id": "econ-pdf-376",
@@ -5713,7 +6014,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page35.png"
+      "image": "economics-question-images/econ-pdf-376.png"
     },
     {
       "id": "econ-pdf-377",
@@ -5729,7 +6030,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page36.png"
+      "image": "economics-question-images/econ-pdf-377.png"
     },
     {
       "id": "econ-pdf-378",
@@ -5744,7 +6045,8 @@
         "D": "全部預算購買Y 財貨。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-378.png"
     },
     {
       "id": "econ-pdf-379",
@@ -5759,7 +6061,8 @@
         "D": "當PX＝8 而Py＝5，兩財貨的購買量皆不再變動。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-379.png"
     },
     {
       "id": "econ-pdf-380",
@@ -5774,7 +6077,8 @@
         "D": "MU1＝30，MU4＝42。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-380.png"
     },
     {
       "id": "econ-pdf-381",
@@ -5789,7 +6093,8 @@
         "D": "若PX＝3 且MUY＝60 時，則PY＝5。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-381.png"
     },
     {
       "id": "econ-pdf-382",
@@ -5804,7 +6109,8 @@
         "D": "甲、丁。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-382.png"
     },
     {
       "id": "econ-pdf-383",
@@ -5820,7 +6126,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page38.png"
+      "image": "economics-question-images/econ-pdf-383.png"
     },
     {
       "id": "econ-pdf-384",
@@ -5835,7 +6141,8 @@
         "D": "無法用調整購買財貨組合以提高總效用。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-384.png"
     },
     {
       "id": "econ-pdf-385",
@@ -5850,7 +6157,8 @@
         "D": "X＝1、Y＝4。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-385.png"
     },
     {
       "id": "econ-pdf-386",
@@ -5866,7 +6174,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page38.png"
+      "image": "economics-question-images/econ-pdf-386.png"
     },
     {
       "id": "econ-pdf-387",
@@ -5881,7 +6189,8 @@
         "D": "1,250。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-387.png"
     },
     {
       "id": "econ-pdf-388",
@@ -5896,7 +6205,8 @@
         "D": "生產者剩餘。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-388.png"
     },
     {
       "id": "econ-pdf-389",
@@ -5911,7 +6221,8 @@
         "D": "當預期未來價格上漲時，新均衡數量必大於10。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-389.png"
     },
     {
       "id": "econ-pdf-390",
@@ -5926,7 +6237,8 @@
         "D": "400 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-390.png"
     },
     {
       "id": "econ-pdf-391",
@@ -5942,7 +6254,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch3-page40.png"
+      "image": "economics-question-images/econ-pdf-391.png"
     },
     {
       "id": "econ-pdf-392",
@@ -5957,7 +6269,8 @@
         "D": "根據恩格爾法則，此係數愈大，代表所得分配愈不平均。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-392.png"
     },
     {
       "id": "econ-pdf-393",
@@ -5972,7 +6285,8 @@
         "D": "勞務生產"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-393.png"
     },
     {
       "id": "econ-pdf-394",
@@ -5987,7 +6301,8 @@
         "D": "形式效用"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-394.png"
     },
     {
       "id": "econ-pdf-395",
@@ -6002,7 +6317,8 @@
         "D": "擔任義工從事淨灘活動。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-395.png"
     },
     {
       "id": "econ-pdf-396",
@@ -6017,7 +6333,8 @@
         "D": "商業生產"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-396.png"
     },
     {
       "id": "econ-pdf-397",
@@ -6032,7 +6349,8 @@
         "D": "原料"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-397.png"
     },
     {
       "id": "econ-pdf-398",
@@ -6048,7 +6366,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page7.png"
+      "image": "economics-question-images/econ-pdf-398.png"
     },
     {
       "id": "econ-pdf-399",
@@ -6063,7 +6381,8 @@
         "D": "120 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-399.png"
     },
     {
       "id": "econ-pdf-400",
@@ -6079,7 +6398,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page7.png"
+      "image": "economics-question-images/econ-pdf-400.png"
     },
     {
       "id": "econ-pdf-401",
@@ -6094,7 +6413,8 @@
         "D": "130 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-401.png"
     },
     {
       "id": "econ-pdf-402",
@@ -6109,7 +6429,8 @@
         "D": "60。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-402.png"
     },
     {
       "id": "econ-pdf-403",
@@ -6124,7 +6445,8 @@
         "D": "60。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-403.png"
     },
     {
       "id": "econ-pdf-404",
@@ -6139,7 +6461,8 @@
         "D": "非法活動不屬於經濟學上的生產活動。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-404.png"
     },
     {
       "id": "econ-pdf-405",
@@ -6154,7 +6477,8 @@
         "D": "供給彈性愈大，生產者剩餘愈大。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-405.png"
     },
     {
       "id": "econ-pdf-406",
@@ -6169,7 +6493,8 @@
         "D": "1,000 元。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-406.png"
     },
     {
       "id": "econ-pdf-407",
@@ -6184,7 +6509,8 @@
         "D": "凱因斯"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-407.png"
     },
     {
       "id": "econ-pdf-408",
@@ -6199,7 +6525,8 @@
         "D": "至少有一種要素是固定的"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-408.png"
     },
     {
       "id": "econ-pdf-409",
@@ -6214,7 +6541,8 @@
         "D": "它不是生產函數。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-409.png"
     },
     {
       "id": "econ-pdf-410",
@@ -6230,7 +6558,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page10.png"
+      "image": "economics-question-images/econ-pdf-410.png"
     },
     {
       "id": "econ-pdf-411",
@@ -6245,7 +6573,8 @@
         "D": "改變整個生產規模甚至退出市場"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-411.png"
     },
     {
       "id": "econ-pdf-412",
@@ -6260,7 +6589,8 @@
         "D": "停工待料的期間。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-412.png"
     },
     {
       "id": "econ-pdf-413",
@@ -6275,7 +6605,8 @@
         "D": "只要廠商沒有時間調整生產規模，就算長期。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-413.png"
     },
     {
       "id": "econ-pdf-414",
@@ -6290,7 +6621,8 @@
         "D": "若廠商處於短期，則必定是存在固定要素無法變動。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-414.png"
     },
     {
       "id": "econ-pdf-415",
@@ -6305,7 +6637,8 @@
         "D": "生產時間太短，生產效率無法發揮"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-415.png"
     },
     {
       "id": "econ-pdf-416",
@@ -6321,7 +6654,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page16.png"
+      "image": "economics-question-images/econ-pdf-416.png"
     },
     {
       "id": "econ-pdf-417",
@@ -6337,7 +6670,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page16.png"
+      "image": "economics-question-images/econ-pdf-417.png"
     },
     {
       "id": "econ-pdf-418",
@@ -6353,7 +6686,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page16.png"
+      "image": "economics-question-images/econ-pdf-418.png"
     },
     {
       "id": "econ-pdf-419",
@@ -6368,7 +6701,8 @@
         "D": "MP＞AP 時，MP 上升"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-419.png"
     },
     {
       "id": "econ-pdf-420",
@@ -6383,7 +6717,8 @@
         "D": "84。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-420.png"
     },
     {
       "id": "econ-pdf-421",
@@ -6398,7 +6733,8 @@
         "D": "平均產量最終會出現遞增現象"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-421.png"
     },
     {
       "id": "econ-pdf-422",
@@ -6413,7 +6749,8 @@
         "D": "APL＝0"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-422.png"
     },
     {
       "id": "econ-pdf-423",
@@ -6428,7 +6765,8 @@
         "D": "先遞減式增加、後遞減式減少。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-423.png"
     },
     {
       "id": "econ-pdf-424",
@@ -6444,7 +6782,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page17.png"
+      "image": "economics-question-images/econ-pdf-424.png"
     },
     {
       "id": "econ-pdf-425",
@@ -6459,7 +6797,8 @@
         "D": "邊際報酬遞減時，AP 也會遞減。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-425.png"
     },
     {
       "id": "econ-pdf-426",
@@ -6474,7 +6813,8 @@
         "D": "AP 呈現倒U 字型，最終會和橫軸相交。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-426.png"
     },
     {
       "id": "econ-pdf-427",
@@ -6490,7 +6830,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page18.png"
+      "image": "economics-question-images/econ-pdf-427.png"
     },
     {
       "id": "econ-pdf-428",
@@ -6506,7 +6846,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page18.png"
+      "image": "economics-question-images/econ-pdf-428.png"
     },
     {
       "id": "econ-pdf-429",
@@ -6521,7 +6861,8 @@
         "D": "當AP＜MP 時，MP 上升；當AP＞MP 時，MP 下降。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-429.png"
     },
     {
       "id": "econ-pdf-430",
@@ -6536,7 +6877,8 @@
         "D": "81。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-430.png"
     },
     {
       "id": "econ-pdf-431",
@@ -6551,7 +6893,8 @@
         "D": "平均產量上升時，平均產量會大於邊際產量。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-431.png"
     },
     {
       "id": "econ-pdf-432",
@@ -6566,7 +6909,8 @@
         "D": "12。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-432.png"
     },
     {
       "id": "econ-pdf-433",
@@ -6581,7 +6925,8 @@
         "D": "L＝6。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-433.png"
     },
     {
       "id": "econ-pdf-434",
@@ -6596,7 +6941,8 @@
         "D": "12。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-434.png"
     },
     {
       "id": "econ-pdf-435",
@@ -6611,7 +6957,8 @@
         "D": "AP 最高點、MP＝0"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-435.png"
     },
     {
       "id": "econ-pdf-436",
@@ -6626,7 +6973,8 @@
         "D": "先減後增"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-436.png"
     },
     {
       "id": "econ-pdf-437",
@@ -6641,7 +6989,8 @@
         "D": "第二、三階段"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-437.png"
     },
     {
       "id": "econ-pdf-438",
@@ -6656,7 +7005,8 @@
         "D": "MP 先遞增後遞減，AP 持續遞增"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-438.png"
     },
     {
       "id": "econ-pdf-439",
@@ -6671,7 +7021,8 @@
         "D": "變動要素太多，導致產生負報酬"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-439.png"
     },
     {
       "id": "econ-pdf-440",
@@ -6686,7 +7037,8 @@
         "D": "第二、三階段皆有"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-440.png"
     },
     {
       "id": "econ-pdf-441",
@@ -6701,7 +7053,8 @@
         "D": "兩者的三階段範圍皆相同"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-441.png"
     },
     {
       "id": "econ-pdf-442",
@@ -6716,7 +7069,8 @@
         "D": "第一及第三 階段"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-442.png"
     },
     {
       "id": "econ-pdf-443",
@@ -6731,7 +7085,8 @@
         "D": "邊際轉換率遞減法則。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-443.png"
     },
     {
       "id": "econ-pdf-444",
@@ -6746,7 +7101,8 @@
         "D": "第二階段的範圍結束於TP 達到最大時。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-444.png"
     },
     {
       "id": "econ-pdf-445",
@@ -6761,7 +7117,8 @@
         "D": "理性的廠商應選擇在MP 還在遞增的階段生產。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-445.png"
     },
     {
       "id": "econ-pdf-446",
@@ -6776,7 +7133,8 @@
         "D": "戰爭有助於延緩糧食危機的發生。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-446.png"
     },
     {
       "id": "econ-pdf-447",
@@ -6792,7 +7150,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page24.png"
+      "image": "economics-question-images/econ-pdf-447.png"
     },
     {
       "id": "econ-pdf-448",
@@ -6807,7 +7165,8 @@
         "D": "一級產業創造本源效用。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-448.png"
     },
     {
       "id": "econ-pdf-449",
@@ -6822,7 +7181,8 @@
         "D": "國家代表隊參加奧運比賽。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-449.png"
     },
     {
       "id": "econ-pdf-450",
@@ -6837,7 +7197,8 @@
         "D": "123456。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-450.png"
     },
     {
       "id": "econ-pdf-451",
@@ -6852,7 +7213,8 @@
         "D": "長短期的區分是由個體經濟學之父馬歇爾所提出來的。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-451.png"
     },
     {
       "id": "econ-pdf-452",
@@ -6867,7 +7229,8 @@
         "D": "產品成本量 之間的關係。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-452.png"
     },
     {
       "id": "econ-pdf-453",
@@ -6882,7 +7245,8 @@
         "D": "技術進步有助延緩邊際產量遞減的現象。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-453.png"
     },
     {
       "id": "econ-pdf-454",
@@ -6897,7 +7261,8 @@
         "D": "某些要素無法隨產量調整。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-454.png"
     },
     {
       "id": "econ-pdf-455",
@@ -6912,7 +7277,8 @@
         "D": "生產者剩餘為8。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-455.png"
     },
     {
       "id": "econ-pdf-456",
@@ -6928,7 +7294,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page26.png"
+      "image": "economics-question-images/econ-pdf-456.png"
     },
     {
       "id": "econ-pdf-457",
@@ -6943,7 +7309,8 @@
         "D": "200 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-457.png"
     },
     {
       "id": "econ-pdf-458",
@@ -6958,7 +7325,8 @@
         "D": "450 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-458.png"
     },
     {
       "id": "econ-pdf-459",
@@ -6973,7 +7341,8 @@
         "D": "250 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-459.png"
     },
     {
       "id": "econ-pdf-460",
@@ -6988,7 +7357,8 @@
         "D": "100 元。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-460.png"
     },
     {
       "id": "econ-pdf-461",
@@ -7003,7 +7373,8 @@
         "D": "所有生產要素都會發生，包括知識在內。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-461.png"
     },
     {
       "id": "econ-pdf-462",
@@ -7018,7 +7389,8 @@
         "D": "L＝5。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-462.png"
     },
     {
       "id": "econ-pdf-463",
@@ -7033,7 +7405,8 @@
         "D": "丙廠商僱用第4 名工人時，必處於邊際報酬遞增階段。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-463.png"
     },
     {
       "id": "econ-pdf-464",
@@ -7048,7 +7421,8 @@
         "D": "MP＜0 時，TP 遞減，AP 遞減且＞0。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-464.png"
     },
     {
       "id": "econ-pdf-465",
@@ -7064,7 +7438,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page27.png"
+      "image": "economics-question-images/econ-pdf-465.png"
     },
     {
       "id": "econ-pdf-466",
@@ -7080,7 +7454,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page28.png"
+      "image": "economics-question-images/econ-pdf-466.png"
     },
     {
       "id": "econ-pdf-467",
@@ -7095,7 +7469,8 @@
         "D": "需求不變時，供給彈性與生產者剩餘呈反向變動關係。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-467.png"
     },
     {
       "id": "econ-pdf-468",
@@ -7110,7 +7485,8 @@
         "D": "忽略農產品生產技術進步的可能性。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-468.png"
     },
     {
       "id": "econ-pdf-469",
@@ -7125,7 +7501,8 @@
         "D": "企業才能。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-469.png"
     },
     {
       "id": "econ-pdf-470",
@@ -7140,7 +7517,8 @@
         "D": "當價格是70 時，生產者願意供給的數量是10。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-470.png"
     },
     {
       "id": "econ-pdf-471",
@@ -7155,7 +7533,8 @@
         "D": "均衡數量為6。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-471.png"
     },
     {
       "id": "econ-pdf-472",
@@ -7170,7 +7549,8 @@
         "D": "2,400。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-472.png"
     },
     {
       "id": "econ-pdf-473",
@@ -7185,7 +7565,8 @@
         "D": "生產者所要求的最低報酬為450。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-473.png"
     },
     {
       "id": "econ-pdf-474",
@@ -7200,7 +7581,8 @@
         "D": "若供給函數變動為P＝20＋QS，但需求函數不變， 則新均衡價格會上漲，消費者剩餘會減少。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-474.png"
     },
     {
       "id": "econ-pdf-475",
@@ -7215,7 +7597,8 @@
         "D": "等於零。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-475.png"
     },
     {
       "id": "econ-pdf-476",
@@ -7230,7 +7613,8 @@
         "D": "生產要素與產出的關係。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-476.png"
     },
     {
       "id": "econ-pdf-477",
@@ -7245,7 +7629,8 @@
         "D": "長期生產函數為Q＝f (L,K)。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-477.png"
     },
     {
       "id": "econ-pdf-478",
@@ -7260,7 +7645,8 @@
         "D": "邊際產量小於零時，總產量會最大。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-478.png"
     },
     {
       "id": "econ-pdf-479",
@@ -7275,7 +7661,8 @@
         "D": "廠商在長期可以變動所有生產因素，但卻無法改變其生產因素之組合。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-479.png"
     },
     {
       "id": "econ-pdf-480",
@@ -7290,7 +7677,8 @@
         "D": "15。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-480.png"
     },
     {
       "id": "econ-pdf-481",
@@ -7305,7 +7693,8 @@
         "D": "當MP＝AP 時，AP 達到最大值。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-481.png"
     },
     {
       "id": "econ-pdf-482",
@@ -7321,7 +7710,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page31.png"
+      "image": "economics-question-images/econ-pdf-482.png"
     },
     {
       "id": "econ-pdf-483",
@@ -7337,7 +7726,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page32.png"
+      "image": "economics-question-images/econ-pdf-483.png"
     },
     {
       "id": "econ-pdf-484",
@@ -7353,7 +7742,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page32.png"
+      "image": "economics-question-images/econ-pdf-484.png"
     },
     {
       "id": "econ-pdf-485",
@@ -7369,7 +7758,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page32.png"
+      "image": "economics-question-images/econ-pdf-485.png"
     },
     {
       "id": "econ-pdf-486",
@@ -7385,7 +7774,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page33.png"
+      "image": "economics-question-images/econ-pdf-486.png"
     },
     {
       "id": "econ-pdf-487",
@@ -7400,7 +7789,8 @@
         "D": "平均產量小於邊際產量，且平均產量小於零。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-487.png"
     },
     {
       "id": "econ-pdf-488",
@@ -7415,7 +7805,8 @@
         "D": "第二階段的平均產量（AP）均處於下降階段。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-488.png"
     },
     {
       "id": "econ-pdf-489",
@@ -7431,7 +7822,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page33.png"
+      "image": "economics-question-images/econ-pdf-489.png"
     },
     {
       "id": "econ-pdf-490",
@@ -7446,7 +7837,8 @@
         "D": "28。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-490.png"
     },
     {
       "id": "econ-pdf-491",
@@ -7462,7 +7854,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch4-page34.png"
+      "image": "economics-question-images/econ-pdf-491.png"
     },
     {
       "id": "econ-pdf-492",
@@ -7477,7 +7869,8 @@
         "D": "支付成本－非支付成本"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-492.png"
     },
     {
       "id": "econ-pdf-493",
@@ -7492,7 +7885,8 @@
         "D": "經濟利潤＝會計利潤－支付成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-493.png"
     },
     {
       "id": "econ-pdf-494",
@@ -7507,7 +7901,8 @@
         "D": "2,060 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-494.png"
     },
     {
       "id": "econ-pdf-495",
@@ -7523,7 +7918,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page6.png"
+      "image": "economics-question-images/econ-pdf-495.png"
     },
     {
       "id": "econ-pdf-496",
@@ -7538,7 +7933,8 @@
         "D": "外部成本會計算在廠商的生產成本之中"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-496.png"
     },
     {
       "id": "econ-pdf-497",
@@ -7553,7 +7949,8 @@
         "D": "社會成本部分。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-497.png"
     },
     {
       "id": "econ-pdf-498",
@@ -7568,7 +7965,8 @@
         "D": "損益表的本期盈虧。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-498.png"
     },
     {
       "id": "econ-pdf-499",
@@ -7583,7 +7981,8 @@
         "D": "裁縫師的意思是自己只賺到正常利潤。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-499.png"
     },
     {
       "id": "econ-pdf-500",
@@ -7598,7 +7997,8 @@
         "D": "135,000 元。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-500.png"
     },
     {
       "id": "econ-pdf-501",
@@ -7613,7 +8013,8 @@
         "D": "20,000。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-501.png"
     },
     {
       "id": "econ-pdf-502",
@@ -7628,7 +8029,8 @@
         "D": "外部成本。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-502.png"
     },
     {
       "id": "econ-pdf-503",
@@ -7643,7 +8045,8 @@
         "D": "50,000 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-503.png"
     },
     {
       "id": "econ-pdf-504",
@@ -7658,7 +8061,8 @@
         "D": "以上皆非"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-504.png"
     },
     {
       "id": "econ-pdf-505",
@@ -7673,7 +8077,8 @@
         "D": "AVC＋AFC＝AC"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-505.png"
     },
     {
       "id": "econ-pdf-506",
@@ -7689,7 +8094,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page19.png"
+      "image": "economics-question-images/econ-pdf-506.png"
     },
     {
       "id": "econ-pdf-507",
@@ -7704,7 +8109,8 @@
         "D": "AVC＝MC。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-507.png"
     },
     {
       "id": "econ-pdf-508",
@@ -7719,7 +8125,8 @@
         "D": "950。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-508.png"
     },
     {
       "id": "econ-pdf-509",
@@ -7734,7 +8141,8 @@
         "D": "2,050 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-509.png"
     },
     {
       "id": "econ-pdf-510",
@@ -7750,7 +8158,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page19.png"
+      "image": "economics-question-images/econ-pdf-510.png"
     },
     {
       "id": "econ-pdf-511",
@@ -7765,7 +8173,8 @@
         "D": "256。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-511.png"
     },
     {
       "id": "econ-pdf-512",
@@ -7781,7 +8190,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page20.png"
+      "image": "economics-question-images/econ-pdf-512.png"
     },
     {
       "id": "econ-pdf-513",
@@ -7797,7 +8206,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page20.png"
+      "image": "economics-question-images/econ-pdf-513.png"
     },
     {
       "id": "econ-pdf-514",
@@ -7812,7 +8221,8 @@
         "D": "672。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-514.png"
     },
     {
       "id": "econ-pdf-515",
@@ -7827,7 +8237,8 @@
         "D": "平均固定成本為10。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-515.png"
     },
     {
       "id": "econ-pdf-516",
@@ -7842,7 +8253,8 @@
         "D": "10。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-516.png"
     },
     {
       "id": "econ-pdf-517",
@@ -7857,7 +8269,8 @@
         "D": "STC≥LTC"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-517.png"
     },
     {
       "id": "econ-pdf-518",
@@ -7872,7 +8285,8 @@
         "D": "先上升後下降的倒U 字型"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-518.png"
     },
     {
       "id": "econ-pdf-519",
@@ -7888,7 +8302,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page26.png"
+      "image": "economics-question-images/econ-pdf-519.png"
     },
     {
       "id": "econ-pdf-520",
@@ -7904,7 +8318,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page26.png"
+      "image": "economics-question-images/econ-pdf-520.png"
     },
     {
       "id": "econ-pdf-521",
@@ -7920,7 +8334,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page26.png"
+      "image": "economics-question-images/econ-pdf-521.png"
     },
     {
       "id": "econ-pdf-522",
@@ -7935,7 +8349,8 @@
         "D": "LAC 遞減時，與之相切的SAC 處於最低點階段。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-522.png"
     },
     {
       "id": "econ-pdf-523",
@@ -7950,7 +8365,8 @@
         "D": "LMC 在遞增階段穿過LAC 最低點。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-523.png"
     },
     {
       "id": "econ-pdf-524",
@@ -7966,7 +8382,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page27.png"
+      "image": "economics-question-images/econ-pdf-524.png"
     },
     {
       "id": "econ-pdf-525",
@@ -7981,7 +8397,8 @@
         "D": "此時LMC＞LAC。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-525.png"
     },
     {
       "id": "econ-pdf-526",
@@ -7996,7 +8413,8 @@
         "D": "12。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-526.png"
     },
     {
       "id": "econ-pdf-527",
@@ -8011,7 +8429,8 @@
         "D": "整條LAC 曲線下降。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-527.png"
     },
     {
       "id": "econ-pdf-528",
@@ -8026,7 +8445,8 @@
         "D": "長期總成本曲線（LTC）始於原點。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-528.png"
     },
     {
       "id": "econ-pdf-529",
@@ -8041,7 +8461,8 @@
         "D": "內含成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-529.png"
     },
     {
       "id": "econ-pdf-530",
@@ -8056,7 +8477,8 @@
         "D": "內含成本。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-530.png"
     },
     {
       "id": "econ-pdf-531",
@@ -8072,7 +8494,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page28.png"
+      "image": "economics-question-images/econ-pdf-531.png"
     },
     {
       "id": "econ-pdf-532",
@@ -8087,7 +8509,8 @@
         "D": "外部成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-532.png"
     },
     {
       "id": "econ-pdf-533",
@@ -8102,7 +8525,8 @@
         "D": "原料的成本。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-533.png"
     },
     {
       "id": "econ-pdf-534",
@@ -8117,7 +8541,8 @@
         "D": "兩者無必然的關係。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-534.png"
     },
     {
       "id": "econ-pdf-535",
@@ -8132,7 +8557,8 @@
         "D": "與產量呈反比關係。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-535.png"
     },
     {
       "id": "econ-pdf-536",
@@ -8147,7 +8573,8 @@
         "D": "正斜率的曲線。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-536.png"
     },
     {
       "id": "econ-pdf-537",
@@ -8162,7 +8589,8 @@
         "D": "升降不一定。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-537.png"
     },
     {
       "id": "econ-pdf-538",
@@ -8177,7 +8605,8 @@
         "D": "正常利潤＝經濟利潤－會計利潤。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-538.png"
     },
     {
       "id": "econ-pdf-539",
@@ -8192,7 +8621,8 @@
         "D": "會計利潤＝正常利潤時，表示廠商有經濟利潤。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-539.png"
     },
     {
       "id": "econ-pdf-540",
@@ -8207,7 +8637,8 @@
         "D": "平均變動成本下降時，所對應的平均成本一定下降。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-540.png"
     },
     {
       "id": "econ-pdf-541",
@@ -8222,7 +8653,8 @@
         "D": "400 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-541.png"
     },
     {
       "id": "econ-pdf-542",
@@ -8237,7 +8669,8 @@
         "D": "造成總變動成本呈遞增式增加。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-542.png"
     },
     {
       "id": "econ-pdf-543",
@@ -8253,7 +8686,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page30.png"
+      "image": "economics-question-images/econ-pdf-543.png"
     },
     {
       "id": "econ-pdf-544",
@@ -8268,7 +8701,8 @@
         "D": "平均成本為30 元。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-544.png"
     },
     {
       "id": "econ-pdf-545",
@@ -8283,7 +8717,8 @@
         "D": "生產3 單位產品的平均成本為125 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-545.png"
     },
     {
       "id": "econ-pdf-546",
@@ -8298,7 +8733,8 @@
         "D": "平均變動成本會位於遞減階段，且大於50 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-546.png"
     },
     {
       "id": "econ-pdf-547",
@@ -8314,7 +8750,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page31.png"
+      "image": "economics-question-images/econ-pdf-547.png"
     },
     {
       "id": "econ-pdf-548",
@@ -8329,7 +8765,8 @@
         "D": "長期平均成本曲線的最低點必然是與其相切之短期成本曲線的最低點。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-548.png"
     },
     {
       "id": "econ-pdf-549",
@@ -8344,7 +8781,8 @@
         "D": "在長期，廠商的總成本等於總變動成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-549.png"
     },
     {
       "id": "econ-pdf-550",
@@ -8359,7 +8797,8 @@
         "D": "有經濟利潤2 萬元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-550.png"
     },
     {
       "id": "econ-pdf-551",
@@ -8374,7 +8813,8 @@
         "D": "外部成本(externality cost)。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-551.png"
     },
     {
       "id": "econ-pdf-552",
@@ -8389,7 +8829,8 @@
         "D": "外部成本。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-552.png"
     },
     {
       "id": "econ-pdf-553",
@@ -8404,7 +8845,8 @@
         "D": "會計利潤為15,000 元。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-553.png"
     },
     {
       "id": "econ-pdf-554",
@@ -8419,7 +8861,8 @@
         "D": "會計利潤小於零。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-554.png"
     },
     {
       "id": "econ-pdf-555",
@@ -8434,7 +8877,8 @@
         "D": "經濟利潤＞會計利潤＞正常利潤。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-555.png"
     },
     {
       "id": "econ-pdf-556",
@@ -8449,7 +8893,8 @@
         "D": "$1,600,000。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-556.png"
     },
     {
       "id": "econ-pdf-557",
@@ -8464,7 +8909,8 @@
         "D": "先遞減後遞增。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-557.png"
     },
     {
       "id": "econ-pdf-558",
@@ -8480,7 +8926,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page33.png"
+      "image": "economics-question-images/econ-pdf-558.png"
     },
     {
       "id": "econ-pdf-559",
@@ -8496,7 +8942,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page34.png"
+      "image": "economics-question-images/econ-pdf-559.png"
     },
     {
       "id": "econ-pdf-560",
@@ -8512,7 +8958,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page34.png"
+      "image": "economics-question-images/econ-pdf-560.png"
     },
     {
       "id": "econ-pdf-561",
@@ -8528,7 +8974,7 @@
       },
       "answer": "A",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page35.png"
+      "image": "economics-question-images/econ-pdf-561.png"
     },
     {
       "id": "econ-pdf-562",
@@ -8544,7 +8990,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page35.png"
+      "image": "economics-question-images/econ-pdf-562.png"
     },
     {
       "id": "econ-pdf-563",
@@ -8560,7 +9006,7 @@
       },
       "answer": "D",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page36.png"
+      "image": "economics-question-images/econ-pdf-563.png"
     },
     {
       "id": "econ-pdf-564",
@@ -8575,7 +9021,8 @@
         "D": "公共建設不足。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-564.png"
     },
     {
       "id": "econ-pdf-565",
@@ -8590,7 +9037,8 @@
         "D": "邊際報酬遞減。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-565.png"
     },
     {
       "id": "econ-pdf-566",
@@ -8606,7 +9054,7 @@
       },
       "answer": "C",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page36.png"
+      "image": "economics-question-images/econ-pdf-566.png"
     },
     {
       "id": "econ-pdf-567",
@@ -8621,7 +9069,8 @@
         "D": "長期平均成本線水平的部分。"
       },
       "answer": "A",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-567.png"
     },
     {
       "id": "econ-pdf-568",
@@ -8636,7 +9085,8 @@
         "D": "長期平均成本線的最低點，也必定是某短期平均成本線的最低點。"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-568.png"
     },
     {
       "id": "econ-pdf-569",
@@ -8651,7 +9101,8 @@
         "D": "政府為改善財政赤字，對所有廠商加稅。"
       },
       "answer": "B",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-569.png"
     },
     {
       "id": "econ-pdf-570",
@@ -8666,7 +9117,8 @@
         "D": "規模報酬遞減。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-570.png"
     },
     {
       "id": "econ-pdf-571",
@@ -8682,7 +9134,7 @@
       },
       "answer": "B",
       "explanation": "",
-      "image": "economics-assets/pdf-ch5-page37.png"
+      "image": "economics-question-images/econ-pdf-571.png"
     },
     {
       "id": "econ-pdf-572",
@@ -8697,7 +9149,8 @@
         "D": "若此廠商為完全競爭廠商，其長期均衡下之長期邊際成本大於50。【109 統測】 (A) 生產要素價格全面上漲，屬於外部不經濟， 將使廠商的LAC 線整條向上移； (B) 獨占性競爭廠商長期均衡時，LAC 位於遞減處， 但資料不足無法計算LTC 的值； (C) 完全競爭廠商長期均衡位在LAC 最低點，且經濟利潤π＝0， 由右圖可知廠商的長期總成本LTC＝LAC×Q＝2,250， 因此可以推論廠商的總收益TR＝2,250， 會計利潤＝總收益（TR）－會計成本＝100，則會計成本＝2,150； (D) 完全競爭廠商長期均衡位在LAC 最低點，此時LAC＝LMC＝50"
       },
       "answer": "C",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-572.png"
     },
     {
       "id": "econ-pdf-573",
@@ -8712,7 +9165,8 @@
         "D": "廠商內部不利的因素會使LAC 處於上升階段。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-573.png"
     },
     {
       "id": "econ-pdf-574",
@@ -8727,7 +9181,8 @@
         "D": "電動車廠商增加產量。"
       },
       "answer": "D",
-      "explanation": ""
+      "explanation": "",
+      "image": "economics-question-images/econ-pdf-574.png"
     }
   ]
 }
