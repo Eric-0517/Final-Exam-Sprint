@@ -2,97 +2,159 @@
 (function () {
   "use strict";
 
-  var countElement = document.getElementById("online-count");
+  function initOnlineCounter() {
+    var countElement = document.getElementById("online-count");
 
-  if (!countElement || !window.supabase) {
-    return;
-  }
-
-  var SUPABASE_URL = "https://hcegldjvhyrzfahkzmpp.supabase.co";
-  var SUPABASE_KEY = "sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV";
-
-  if (
-    SUPABASE_URL.indexOf("YOUR_") !== -1 ||
-    SUPABASE_KEY.indexOf("YOUR_") !== -1
-  ) {
-    countElement.textContent = "尚未設定";
-    return;
-  }
-
-  var client = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY,
-    {
-      auth: {
-        persistSession: false,
-        autoRefreshToken: false,
-        detectSessionInUrl: false
-      }
-    }
-  );
-
-  var presenceKey;
-
-  if (window.crypto && window.crypto.randomUUID) {
-    presenceKey = window.crypto.randomUUID();
-  } else {
-    presenceKey =
-      Date.now().toString(36) +
-      Math.random().toString(36).slice(2);
-  }
-
-  var channel = client.channel("exam-sprint-online", {
-    config: {
-      presence: {
-        key: presenceKey
-      }
-    }
-  });
-
-  var subscribed = false;
-  var disposed = false;
-
-  function updateCount() {
-    if (!subscribed || disposed) {
+    if (!countElement) {
+      console.error("[在線人數] 找不到 #online-count，請檢查 HTML。");
       return;
     }
 
-    var state = channel.presenceState();
-    var count = Object.keys(state).length;
+    function showError(message) {
+      countElement.textContent = message;
+    }
 
-    countElement.textContent = count + " 人";
-  }
+    if (!window.supabase ||
+        typeof window.supabase.createClient !== "function") {
+      showError("統計程式載入失敗");
+      console.error(
+        "[在線人數] Supabase SDK 未載入，請檢查 CDN 和 script 順序。"
+      );
+      return;
+    }
 
-  channel
-    .on("presence", { event: "sync" }, updateCount)
-    .subscribe(function (status) {
-      if (disposed) {
-        return;
-      }
+    var SUPABASE_URL =
+      "https://hcegldjvhyrzfahkzmpp.supabase.co";
 
-      if (status === "SUBSCRIBED") {
-        subscribed = true;
-        updateCount();
+    var SUPABASE_KEY =
+      "sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV";
 
-        channel.track({
-          online_at: new Date().toISOString()
-        }).catch(function () {
-          countElement.textContent = "連線異常";
-        });
-      } else if (
-        status === "CHANNEL_ERROR" ||
-        status === "TIMED_OUT" ||
-        status === "CLOSED"
-      ) {
-        subscribed = false;
-        countElement.textContent = "暫時無法取得";
+    var client;
+
+    try {
+      client = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY,
+        {
+          auth: {
+            persistSession: false,
+            autoRefreshToken: false,
+            detectSessionInUrl: false
+          },
+          realtime: {
+            params: {
+              log_level: "info"
+            }
+          }
+        }
+      );
+    } catch (error) {
+      showError("初始化失敗");
+      console.error("[在線人數] 初始化失敗：", error);
+      return;
+    }
+
+    var presenceKey =
+      window.crypto && window.crypto.randomUUID
+        ? window.crypto.randomUUID()
+        : Date.now().toString(36) +
+          Math.random().toString(36).slice(2);
+
+    var channel = client.channel("exam-sprint-online", {
+      config: {
+        presence: {
+          key: presenceKey
+        }
       }
     });
 
-  window.addEventListener("pagehide", function () {
-    disposed = true;
-    subscribed = false;
+    var subscribed = false;
+    var disposed = false;
+    var timeoutId;
 
-    client.removeChannel(channel).catch(function () {});
-  });
+    function updateCount() {
+      if (!subscribed || disposed) {
+        return;
+      }
+
+      var state = channel.presenceState();
+      var count = Object.keys(state).length;
+
+      showError(count + " 人");
+      console.log("[在線人數] 目前在線：", count);
+    }
+
+    timeoutId = setTimeout(function () {
+      if (!subscribed && !disposed) {
+        showError("連線逾時");
+        console.error(
+          "[在線人數] 12 秒內未成功連線，請檢查 Console。"
+        );
+      }
+    }, 12000);
+
+    channel
+      .on("presence", { event: "sync" }, updateCount)
+      .subscribe(function (status, err) {
+        console.log("[在線人數] Supabase 狀態：", status);
+
+        if (err) {
+          console.error("[在線人數] 連線錯誤：", err);
+        }
+
+        if (disposed) {
+          return;
+        }
+
+        if (status === "SUBSCRIBED") {
+          subscribed = true;
+          clearTimeout(timeoutId);
+
+          channel.track({
+            online_at: new Date().toISOString()
+          }).then(function (result) {
+            if (result !== "ok") {
+              console.error(
+                "[在線人數] Presence 註冊結果：",
+                result
+              );
+            }
+          }).catch(function (error) {
+            console.error("[在線人數] 註冊失敗：", error);
+            showError("註冊失敗");
+          });
+
+          updateCount();
+        } else if (status === "CHANNEL_ERROR") {
+          subscribed = false;
+          showError("連線錯誤");
+        } else if (status === "TIMED_OUT") {
+          subscribed = false;
+          showError("連線逾時");
+        } else if (status === "CLOSED") {
+          subscribed = false;
+          showError("連線已關閉");
+        }
+      });
+
+    window.addEventListener("pagehide", function () {
+      disposed = true;
+      subscribed = false;
+      clearTimeout(timeoutId);
+
+      client.removeChannel(channel).catch(function (error) {
+        console.warn("[在線人數] 關閉連線時發生錯誤：", error);
+      });
+    }, { once: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener(
+      "DOMContentLoaded",
+      initOnlineCounter,
+      { once: true }
+    );
+  } else {
+    initOnlineCounter();
+  }
 })();
