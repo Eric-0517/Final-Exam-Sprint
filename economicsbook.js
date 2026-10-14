@@ -23,67 +23,56 @@
 
     function shuffle(items) {
         const result = items.slice();
-
         for (let i = result.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [result[i], result[j]] = [result[j], result[i]];
         }
-
         return result;
     }
 
-    function createImage(src, alt, className) {
-        if (typeof src !== "string" || !src.trim()) {
-            return null;
-        }
-
-        const img = document.createElement("img");
-        img.src = new URL(src.trim(), document.baseURI).href;
-        img.alt = alt;
-        img.className = className;
-        img.loading = "eager";
-
-        img.style.display = "block";
-        img.style.width = "auto";
-        img.style.height = "auto";
-        img.style.objectFit = "contain";
-        img.style.maxWidth = "100%";
-        img.style.margin = "8px auto";
-
-        if (
-            className === "option-image" ||
-            className === "review-option-image"
-        ) {
-            img.style.maxWidth = "min(100%, 320px)";
-            img.style.maxHeight = "180px";
-        } else {
-            img.style.maxHeight = "240px";
-        }
-
-        img.onerror = () => {
-            img.remove();
-        };
-
-        return img;
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        })[char]);
     }
+
+   
+function createImage(src, alt, className) {
+    if (typeof src !== "string" || !src.trim()) {
+        return null;
+    }
+
+    const img = document.createElement("img");
+    img.src = new URL(src.trim(), document.baseURI).href;
+    img.alt = alt;
+    img.className = className;
+    img.loading = "eager";
+
+    img.onerror = () => {
+        img.remove();
+    };
+
+    return img;
+}
 
     function renderQuestionContent(container, question, review = false) {
         container.innerHTML = "";
 
         const image = createImage(
             question.image,
-            "題目圖片",
-            review ? "review-question-image" : "question-image"
+            "這題沒圖我懶得改",
+            "reading-image"
         );
 
-        if (image) {
-            container.appendChild(image);
-        }
+        if (image) container.appendChild(image);
 
         const prompt = document.createElement("div");
         prompt.className = review ? "review-question-text" : "";
         prompt.textContent = question.question || "";
-
         container.appendChild(prompt);
     }
 
@@ -103,7 +92,6 @@
             }
 
             const data = await response.json();
-
             const rawQuestions = Array.isArray(data)
                 ? data
                 : data.questions;
@@ -117,7 +105,7 @@
 
                 return {
                     id: question.id || "economics-" + (index + 1),
-                    question: String(question.question || "").trim(),
+                    question: String(question.question || ""),
                     image: question.image || "",
                     options,
                     optionImages: question.optionImages || {},
@@ -134,26 +122,17 @@
                 LETTERS.every(
                     (letter) =>
                         question.options[letter] !== undefined
-                )
+                ) &&
+                LETTERS.includes(question.answer)
             );
 
             if (!questionBank.length) {
-                throw new Error("沒有格式正確的選擇題。");
-            }
-
-            const invalidAnswers = questionBank.filter(
-                (question) => !LETTERS.includes(question.answer)
-            );
-
-            $("bankCount").textContent = questionBank.length;
-
-            if (invalidAnswers.length > 0) {
                 throw new Error(
-                    "有 " + invalidAnswers.length +
-                    " 題答案格式錯誤，請檢查 economicsbook-questions.json。"
+                    "沒有格式正確且具有標準答案的選擇題。"
                 );
             }
 
+            $("bankCount").textContent = questionBank.length;
             startButton.disabled = false;
         } catch (error) {
             $("bankCount").textContent = "載入失敗";
@@ -162,7 +141,7 @@
                 $("loadError").hidden = false;
                 $("loadError").textContent =
                     error.message +
-                    " 請確認 HTML、JS、JSON 與圖片資料夾都已上傳。";
+                    " 請確認 HTML、JS、JSON 與 economics-assets 資料夾都已上傳。";
             }
 
             console.error(error);
@@ -196,7 +175,11 @@
         $("total").textContent = quizQuestions.length;
 
         $("progressBar").style.width =
-            ((currentIndex + 1) / quizQuestions.length * 100) + "%";
+            (
+                (currentIndex + 1) /
+                quizQuestions.length *
+                100
+            ) + "%";
 
         renderQuestionContent($("questionText"), question);
 
@@ -206,14 +189,19 @@
         LETTERS.forEach((letter) => {
             const button = document.createElement("button");
             button.type = "button";
-
             button.className =
                 "option" +
-                (userAnswers[currentIndex] === letter ? " selected" : "");
+                (
+                    userAnswers[currentIndex] === letter
+                        ? " selected"
+                        : ""
+                );
 
             button.setAttribute(
                 "aria-pressed",
-                userAnswers[currentIndex] === letter ? "true" : "false"
+                userAnswers[currentIndex] === letter
+                    ? "true"
+                    : "false"
             );
 
             const key = document.createElement("span");
@@ -224,14 +212,14 @@
             content.className = "option-text";
             content.textContent = question.options[letter] || "";
 
-            button.appendChild(key);
-            button.appendChild(content);
-
             const image = createImage(
                 question.optionImages[letter],
                 letter + " 選項圖片",
                 "option-image"
             );
+
+            button.appendChild(key);
+            button.appendChild(content);
 
             if (image) {
                 const wrapper = document.createElement("span");
@@ -261,37 +249,23 @@
         let correct = 0;
 
         quizQuestions.forEach((question, index) => {
-            const answer = String(question.answer || "")
-                .trim()
-                .toUpperCase();
-
-            if (userAnswers[index] === answer) {
+            if (userAnswers[index] === question.answer) {
                 correct++;
             }
         });
 
         const wrong = total - correct;
 
-        $("score").textContent = (correct * POINTS_PER_QUESTION)
-            .toFixed(1)
-            .replace(/\.0$/, "");
-
-        if ($("scoreLabel")) {
-            $("scoreLabel").textContent = "分（滿分 100 分）";
-        }
-
+        $("score").textContent = correct * POINTS_PER_QUESTION;
         $("correctCount").textContent = correct;
         $("wrongCount").textContent = wrong;
 
         $("accuracy").textContent =
-            (total ? Math.round(correct / total * 100) : 0) + "%";
-
-        if ($("gradingNotice")) {
-            $("gradingNotice").textContent =
-                "已完成自動批改，共 " + total +
-                " 題，每題 " + POINTS_PER_QUESTION +
-                " 分，未作答的題目計為答錯。";
-        }
+            (
+                total
+                    ? Math.round(correct / total * 100)
+                    : 0
+            ) + "%";
 
         $("wrongSummary").textContent = "共 " + wrong + " 題錯題";
 
@@ -300,11 +274,8 @@
 
         quizQuestions.forEach((question, index) => {
             const selected = userAnswers[index];
-            const answer = String(question.answer || "")
-                .trim()
-                .toUpperCase();
 
-            if (selected === answer) return;
+            if (selected === question.answer) return;
 
             const item = document.createElement("article");
             item.className = "wrong-item";
@@ -316,14 +287,20 @@
                 "第 " + (index + 1) +
                 " 題｜你的答案：" +
                 (selected || "未作答") +
-                "｜正確答案：" + answer;
+                "｜正確答案：" +
+                question.answer;
 
             item.appendChild(title);
 
             const questionContent = document.createElement("div");
             questionContent.className = "review-question";
 
-            renderQuestionContent(questionContent, question, true);
+            renderQuestionContent(
+                questionContent,
+                question,
+                true
+            );
+
             item.appendChild(questionContent);
 
             const options = document.createElement("div");
@@ -334,6 +311,7 @@
 
                 const key = document.createElement("strong");
                 key.textContent = letter + ". ";
+
                 p.appendChild(key);
 
                 p.appendChild(
@@ -342,17 +320,17 @@
                     )
                 );
 
-                const image = createImage(
-                    question.optionImages[letter],
-                    letter + " 選項圖片",
-                    "review-option-image"
-                );
+                if (question.optionImages[letter]) {
+                    const image = createImage(
+                        question.optionImages[letter],
+                        letter + " 選項圖片",
+                        "review-option-image"
+                    );
 
-                if (image) {
-                    p.appendChild(image);
+                    if (image) p.appendChild(image);
                 }
 
-                if (letter === answer) {
+                if (letter === question.answer) {
                     const mark = document.createElement("strong");
                     mark.textContent = " ✓ 正確答案";
                     mark.style.color = "#dc2626";
@@ -364,21 +342,20 @@
 
             item.appendChild(options);
 
-            if (question.explanation.trim()) {
-                const explanation = document.createElement("div");
-                explanation.className = "explanation";
-                explanation.textContent = question.explanation;
-                item.appendChild(explanation);
-            }
+            const explanation = document.createElement("div");
+            explanation.className = "explanation";
 
+            explanation.textContent =
+                question.explanation.trim() ||
+                "請重新閱讀題幹與選項。";
+
+            item.appendChild(explanation);
             wrongList.appendChild(item);
         });
 
         if (wrong === 0) {
-            const notice = document.createElement("div");
-            notice.className = "notice";
-            notice.textContent = "全部答對，沒有錯題！";
-            wrongList.appendChild(notice);
+            wrongList.innerHTML =
+                '<div class="notice">全部答對，沒有錯題！</div>';
         }
 
         showScreen("result");
@@ -406,7 +383,9 @@
 
     $("quitBtn").addEventListener("click", () => {
         if (
-            confirm("確定要退出測驗嗎？目前作答進度將會結束。")
+            confirm(
+                "確定要退出測驗嗎？目前作答進度將會結束。"
+            )
         ) {
             showScreen("home");
         }
