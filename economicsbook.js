@@ -64,7 +64,7 @@
 
         const image = createImage(
             question.image,
-            "這題沒圖我懶得改",
+            "這刪不掉我懶得改",
             review ? "review-question-image" : "question-image"
         );
 
