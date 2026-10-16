@@ -152,7 +152,7 @@
             return;
         }
 
-        quizQuestions = shuffle(questionBank).slice(
+        quizQuestions =questionBank.slice(
             0,
             Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
         );
