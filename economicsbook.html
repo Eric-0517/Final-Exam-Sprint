@@ -1,79 +1,77 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>考前衝刺｜經濟學</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .option { display:flex; align-items:flex-start; gap:12px; width:100%; text-align:left; }
-    .option-key { display:inline-flex; flex:0 0 28px; width:28px; min-width:28px; align-items:center; justify-content:center; font-weight:700; }
-    .option-text { display:block; flex:1; min-width:0; line-height:1.7; overflow-wrap:anywhere; white-space:pre-wrap; }
-    .question-image { display:block; max-width:100%; max-height:360px; height:auto; object-fit:contain; margin:16px auto; border-radius:8px; }
-    .option-image { display:block; max-width:min(100%,420px); max-height:240px; object-fit:contain; margin-top:8px; }
-    .review-options p { line-height:1.7; overflow-wrap:anywhere; white-space:pre-wrap; }
-    .review-option-image { display:block; max-width:min(100%,420px); max-height:240px; object-fit:contain; margin:8px 0; }
-    .review-question-image { display:block; max-width:100%; max-height:360px; margin:12px auto; object-fit:contain; }
-    .answer-notice { margin-top:14px; padding:12px 14px; border-radius:10px; background:#fff7ed; color:#9a3412; font-size:13px; line-height:1.7; }
-    .load-error { color:#dc2626; white-space:pre-wrap; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>考前衝刺</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
-    <div class="sub">經濟學題庫<a href="index.html" style="color:inherit">切換題庫</a></div>
-  </header>
-  <main id="app">
-    <section id="home" class="screen active">
-      <div class="hero">
-        <span class="tag">ECONOMICS</span>
-        <h1>考前衝刺</h1>
-        <p>隨機抽題，範圍經濟學超效率總複習1~5章。</p>
+<header class="topbar">
+  <div class="brand">考前衝刺</div>
+  <div class="sub">商業概論題庫</div>
+</header>
+<main id="app">
+  <section id="home" class="screen active">
+    <div class="hero">
+      <span class="tag">INTRODUCTION TO BUSINESS</span>
+      <h1>考前衝刺</h1>
+      <p>範圍商業概論1~3章。</p>
+    </div>
+    <div class="subject-card" data-action="start">
+      <div>
+        <div class="subject-title">商業概論(第1次模擬考)啟芳</div>
+        <div class="subject-meta"><span id="bankCount">40</span> 題題庫 每回 40 題/每題 2.5 分</div>
       </div>
-      <div class="subject-card">
-        <div>
-          <div class="subject-title">經濟學超效率總複習1~5章(段考範圍)</div>
-          <div class="subject-meta"><span id="bankCount">載入中</span> 題題庫　·　每回 40 題　·　每題 2.5 分</div>
-        </div>
-        <button class="primary" id="startBtn" disabled>開始測驗</button>
+      <button class="primary">開始測驗</button>
+    </div>
+    <div class="info-grid">
+      <div><b>40題</b><span>隨機抽題</span></div>
+      <div><b>100分</b><span>滿分</span></div>
+      <div><b>自動批改</b><span>完成後立即看結果</span></div>
+    </div>
+    <div class="notice">題目有誤請聯絡Eric；錯題若有詳解，會在交卷後顯示。</div>
+  </section>
+
+  <section id="quiz" class="screen">
+    <div class="quiz-head">
+      <button class="ghost" data-action="quit">退出</button>
+      <div class="progress-wrap">
+        <div class="progress-text"><span id="qNo">1</span> / 25</div>
+        <div class="progress"><i id="progressBar"></i></div>
       </div>
-      <div class="info-grid">
-        <div><b>40 題</b><span>每回隨機抽題</span></div>
-        <div><b>100 分</b><span>測驗滿分</span></div>
-        <div><b>自動閱卷</b><span>送出自動批改</span></div>
+      <div class="score-mini">每題 2.5 分</div>
+    </div>
+    <article class="question-card">
+      <div class="question-image-wrap"><img id="questionImage" alt="會計題目"></div>
+      <div class="options" id="options"></div>
+    </article>
+    <div class="quiz-actions">
+      <button id="prevBtn" class="secondary">上一題</button>
+      <button id="nextBtn" class="primary">下一題</button>
+    </div>
+  </section>
+
+  <section id="result" class="screen">
+    <div class="result-card">
+      <div class="tag">TEST RESULT</div>
+      <h2>測驗完成</h2>
+      <div class="score" id="score">0</div>
+      <div class="score-label">分</div>
+      <div class="result-stats">
+        <div><b id="correctCount">0</b><span>答對</span></div>
+        <div><b id="wrongCount">0</b><span>答錯</span></div>
+        <div><b id="accuracy">0%</b><span>正確率</span></div>
       </div>
-      <div class="answer-notice">題庫共收錄571題選擇題。</div>
-      <div id="loadError" class="notice load-error" hidden></div>
-    </section>
-    <section id="quiz" class="screen">
-      <div class="quiz-head">
-        <button class="ghost" id="quitBtn">退出</button>
-        <div class="progress-wrap"><div class="progress-text"><span id="qNo">1</span> / <span id="total">40</span></div><div class="progress"><i id="progressBar"></i></div></div>
-        <div class="score-mini">每題 2.5 分</div>
-      </div>
-      <article class="question-card">
-        <div id="questionText" class="question-prompt"></div>
-        <img id="questionImage" class="question-image" alt="這題沒圖我懶得改" hidden>
-        <div class="options" id="options"></div>
-      </article>
-      <div class="quiz-actions"><button id="prevBtn" class="secondary">上一題</button><button id="nextBtn" class="primary">下一題</button></div>
-    </section>
-    <section id="result" class="screen">
-      <div class="result-card">
-        <div class="tag">TEST RESULT</div><h2>測驗完成</h2>
-        <div class="score" id="score">—</div><div class="score-label" id="scoreLabel">分數尚未計算</div>
-        <div class="result-stats">
-          <div><b id="correctCount">0</b><span>答對</span></div>
-          <div><b id="wrongCount">0</b><span>答錯</span></div>
-          <div><b id="accuracy">—</b><span>正確率</span></div>
-        </div>
-      </div>
-      <div id="gradingNotice" class="answer-notice"></div>
-      <div class="wrong-head"><h3>作答檢視</h3><span id="wrongSummary"></span></div>
-      <div id="wrongList" class="wrong-list"></div>
-      <div class="result-actions"><button class="secondary" id="homeBtn">回首頁</button><button class="primary" id="againBtn">再測一次</button></div>
-    </section>
-  </main>
-  <script src="economicsbook.js"></script>
+    </div>
+    <div class="wrong-head"><h3>錯題與詳解</h3><span id="wrongSummary"></span></div>
+    <div id="wrongList" class="wrong-list"></div>
+    <div class="result-actions">
+      <button class="secondary" data-action="home">回首頁</button>
+      <button class="primary" data-action="start">再測一次</button>
+    </div>
+  </section>
+</main>
+<script src="economicsbook.js"></script>
 </body>
 </html>
