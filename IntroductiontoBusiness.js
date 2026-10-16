@@ -1,7 +1,7 @@
 (() => {
     "use strict";
 
-    const BANK_URL = "economicsbook-questions.json";
+    const BANK_URL = "IntroductiontoBusiness.json";
     const QUESTIONS_PER_QUIZ = 40;
     const POINTS_PER_QUESTION = 2.5;
     const LETTERS = ["A", "B", "C", "D"];
@@ -145,7 +145,7 @@
             return;
         }
 
-        quizQuestions = shuffle(questionBank).slice(
+        quizQuestions =questionBank.slice(
             0,
             Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
         );
