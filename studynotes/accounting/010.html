@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3-1 調整｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-table { width: 100%; border-collapse: collapse; margin: 8px 0; text-align: center; }
+  .formula-table td { padding: 6px; border: 1px dashed #cbd5e1; font-family: monospace; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第三章 期末會計程序</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 3-1</span>
+      <h1>3-1 調整</h1>
+      <p>會計基礎、調整意義與功用、應計/預計/估計項目調整、存貨調整及錯誤影響考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、會計基礎（記帳基礎）</h3>
+        <ul class="memo-list">
+          <li>決定交易入帳時點及<span class="mark-text">收益與費損歸屬期間</span>之判斷標準。
+            <div class="ex-box">
+              • <strong>現金基礎（現金收付基礎）</strong>：於<span class="mark-text">收付現金時</span>認列損益，期末不必作調整分錄。<br>
+              • <strong>應計基礎（權責基礎 / 先實後虛法）</strong>：確定<span class="mark-text">應收應付時</span>認列損益，期末須作調整分錄。<br>
+              • <strong>聯合基礎（先虛後實法）</strong>：平時以<span class="mark-text">現金基礎</span>入帳，期末調整為<span class="mark-text">應計基礎應有餘額</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、調整的意義與功用</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：期末結帳前，對各帳戶予以<span class="mark-text">分析、修正</span>，使其帳面金額與實際情況相符。<br>
+              • <strong>功用</strong>：1. 配合報導期間劃分，確定當期收益及費損。 2. 允當表達實際財務狀況及績效。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    
+      <div class="memo-section">
+        <h3>三、應計項目調整</h3>
+        <ul class="memo-list">
+          <li>本期已實現，但尚未收款或付現的各項收益費損。
+            <div class="ex-box">
+              • <strong>應收收入調整</strong>：借：應收OO / 貸：OO收入<br>
+              • <strong>應付費用調整</strong>：借：OO費用 / 貸：應付OO
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、預計項目調整</h3>
+        <ul class="memo-list">
+          <li>期末須將<span class="mark-text">已實現部分</span>列為本期收入或費用，<span class="mark-text">未實現部分</span>為預收收入或預付費用。
+            <div class="ex-box">
+              • <strong>A. 預收收入</strong>：<br>
+               - 應計基礎/記實轉虛：收現借現金貸預收OO；調整借預收OO貸OO收入。<br>
+               - 聯合基礎/記虛轉實：收現借現金貸OO收入；調整借OO收入貸預收OO。<br>
+              • <strong>B. 預付費用</strong>：<br>
+               - 應計基礎/記實轉虛：付現借預付OO貸現金；調整借OO費用貸預付OO。<br>
+               - 聯合基礎/記虛轉實：付現借OO費用貸現金；調整借預付OO貸OO費用。<br>
+              • <strong>C. 用品盤存調整</strong>：<br>
+               - 記實轉虛期末調整數（已耗用）＝ 期初餘額 ＋ 本期購入 － 期末餘額（未耗用）。（調整借文具用品貸用品盤存）<br>
+               - 記虛轉實期末調整數 ＝ 期末餘額（未耗用） － 期初餘額。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>五、估計項目調整</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 預期信用減損損失</strong>：<br>
+               應收帳款 × 損失率 ＝ 備抵損失期末餘額。<br>
+               備抵損失期末餘額 － 備抵損失期初餘額 ＝ 預期信用減損損失。<br>
+               調整分錄：借：預期信用減損損失 / 貸：備抵損失。<br>
+              • <strong>B. 折舊調整</strong>：每年折舊額 ＝ (成本 － 估計殘值) ÷ 估計耐用年限。帳面金額 ＝ 成本 － 累計折舊。調整分錄：借：折舊 / 貸：累計折舊。<br>
+              • <strong>C. 攤銷調整</strong>：每年攤銷額 ＝ (成本 － 估計殘值) ÷ 估計耐用年限。帳面金額 ＝ 成本 － 累計攤銷。調整分錄：借：各項攤提 / 貸：累計攤銷。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>六、存貨調整</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              <span class="mark-text">銷貨成本 ＝ 期初存貨 ＋ 進貨 ＋ 進貨費用 － 進貨退出 － 進貨折讓 － 期末存貨</span><br><br>
+              • <strong>1. 加項科目結算（調整分錄）</strong>：<br>
+               借：銷貨成本<br>
+                 貸：存貨（期初）、進貨、進貨費用<br>
+              • <strong>2. 減項科目結算（調整分錄）</strong>：<br>
+               借：進貨退出、進貨折讓、存貨（期末）<br>
+                 貸：銷貨成本
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>七、調整錯誤之影響</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 錯誤會自動抵銷</strong>：淨利一多一少、兩期相抵，次期末保留盈餘正確（例如：應計項目、預計項目、存貨、備抵損失）。<br>
+              • <strong>B. 錯誤不會自動抵銷</strong>：淨利僅影響本期、不兩期相抵，各期末保留盈餘錯誤（例如：折舊、攤銷）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+   
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="009.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (2-3)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="011.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (3-2)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
