@@ -741,3 +741,36 @@ body.nav-open {
     transition: none;
   }
 }
+
+.question-image-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+#questionImage {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  margin: 8px auto;
+}
+
+.wrong-item img,
+.explanation img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 600px;
+  object-fit: contain;
+  margin: 12px auto;
+  box-sizing: border-box;
+}
