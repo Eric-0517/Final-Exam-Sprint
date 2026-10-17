@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1-5 交易、借貸法則與複式簿記｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 10px 14px; margin-top: 6px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 緒論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 1-5</span>
+      <h1>1-5 交易、借貸法則與複式簿記</h1>
+      <p>交易定義、非交易事項、交易種類、借貸意義、借貸法則與複式簿記原理。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、交易的意義</h3>
+        <ul class="memo-list">
+          <li><strong>A. 交易</strong>：使企業的資產、負債、權益、收益及費損發生增減變動的事項，是<span class="mark-text">有交易才須記帳，不是交易就不須記帳</span>。</li>
+          <li><strong>B. 「非」交易</strong>：例如簽訂透支契約、簽訂進貨合約、訂購商品、宣布新人事案等。</li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、交易的種類</h3>
+        <ul class="memo-list">
+          <li><strong>A. 是否涉及企業以外的經濟個體</strong>：
+            <div class="ex-box">
+              • <strong>對外交易（外部交易）</strong>：交易涉及企業以外個體（例如：進銷貨、支付<span class="mark-text">員工</span>薪資、<span class="mark-text">業主投入或提取</span>、<span class="mark-text">捐贈慈善機構</span>）。<br>
+              • <strong>對內交易（內部交易）</strong>：交易不涉及企業以外個體（例如：<span class="mark-text">災害損失</span>、<span class="mark-text">調整分錄</span>、<span class="mark-text">結帳分錄</span>、<span class="mark-text">更正分錄</span>）。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>B. 交易涉及項目多寡</strong>：
+            <div class="ex-box">
+              • <strong>簡單交易（單項式交易）</strong>：借貸雙方各只有一個會計項目，<span class="mark-text">一借且一貸</span>。<br>
+              • <strong>複雜交易（多項式交易）</strong>：借或貸方有兩個以上會計項目，<span class="mark-text">多借或多貸</span>。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>C. 是否涉及現金的交易</strong>：
+            <div class="ex-box">
+              • <strong>現金交易</strong>：交易完全以現金收付，即分錄之借貸方中<span class="mark-text">有一方只有現金</span>。<br>
+              • <strong>轉帳交易</strong>：交易都沒有涉及現金，即分錄之借貸方中<span class="mark-text">雙方都沒有現金</span>。<br>
+              • <strong>混合交易</strong>：交易部分涉及現金、部分不涉及現金，即分錄之借貸方中<span class="mark-text">有一方同時有現金及非現金項目</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、借貸的意義</h3>
+        <ul class="memo-list">
+          <li>交易事項以<span class="mark-text">「第四級會計項目」</span>為記載的單位。帳戶的左邊稱為<span class="mark-text">「借方」</span>，帳戶的右邊稱為<span class="mark-text">「貸方」</span>。</li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>四、借貸法則</h3>
+        <ul class="memo-list">
+          <li>將每一交易所影響之<span class="mark-text">資產、負債、權益、收益及費損的增減變動，區分應記入借方或貸方之規則</span>，稱為借貸法則。</li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>五、複式簿記</h3>
+        <ul class="memo-list">
+          <li>指交易事項發生時<span class="mark-text">「有借必有貸，借貸金額必相等」</span>，此為會計方程式之<span class="mark-text">借貸平衡原理</span>。應用此一原理，配合借貸法則，可延伸出25種簡單的交易變化。</li>
+        </ul>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="004.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-4)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="006.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (1-6)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
