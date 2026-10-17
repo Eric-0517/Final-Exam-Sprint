@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1-2 會計循環、會計帳簿與財務報表｜會計學重點整理</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 10px 14px; margin-top: 6px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 緒論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="index.html">首頁 <span>›</span></a>
+  <a href="studynotes.html">重點整理 <span>›</span></a>
+  <a href="accounting.html">會計學目錄 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 1-2</span>
+      <h1>1-2 會計循環、會計帳簿與財務報表</h1>
+      <p>會計循環、營業循環、會計處理程序、會計帳簿及四大財務報表核心考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、會計循環</h3>
+        <ul class="memo-list">
+          <li>包含<span class="mark-text">分錄</span>、<span class="mark-text">過帳</span>、<span class="mark-text">試算</span>、<span class="mark-text">調整</span>、<span class="mark-text">結帳</span>、<span class="mark-text">編表</span>等六大會計程序，於每一報導期間循環一次，周而復始。</li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、營業循環</h3>
+        <ul class="memo-list">
+          <li>企業<span class="mark-text">投入現金購買商品，將商品出售產生應收帳款，最後收現</span>，周而復始，不斷循環。（其所需時間稱為<span class="mark-text">營業週期</span>）</li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、一般會計處理程序</h3>
+        <ul class="memo-list">
+          <li><strong>A. 平時會計程序</strong>：
+            <div class="ex-box">
+              • <strong>分錄</strong>：交易發生時，區分借貸雙方之會計項目及金額，按<span class="mark-text">交易</span>發生順序記入帳簿，可了解交易內容。<br>
+              • <strong>過帳</strong>：將日記簿各分錄的會計項目及金額，按原來的借貸方向及金額，分別記至各<span class="mark-text">會計項目</span>所設立的帳戶。<br>
+              • <strong>試算</strong>：<span class="mark-text">將分類帳各帳戶的金額彙總列表</span>，確認是否平衡，<span class="mark-text">以檢查分錄、過帳工作有無錯誤</span>。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>B. 期末會計程序</strong>：
+            <div class="ex-box">
+              • <strong>調整</strong>：<span class="mark-text">期末將各帳戶加以整理、修正</span>，使各帳戶能正確表達實際狀況，並使報表能表達企業經營實況。<br>
+              • <strong>結帳</strong>：報導期間終了，將<span class="mark-text">虛帳戶結清為零</span>轉入本期損益以計算損益；並將<span class="mark-text">實帳戶結轉下期</span>繼續記錄。<br>
+              • <strong>編表</strong>：報導期間終了時，將本期所有交易結果彙總列表，主要財務報表包含：<span class="mark-text">綜合損益表</span>、<span class="mark-text">權益變動表</span>、<span class="mark-text">資產負債表</span>、<span class="mark-text">現金流量表</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、會計帳簿（至少保存10年）</h3>
+        <ul class="memo-list">
+          <li><strong>A. 序時帳簿</strong>（按<span class="mark-text">會計事項</span>發生的時間順序紀錄）：
+            <div class="ex-box">
+              • <strong>普通序時帳簿（一定要設置）</strong>：記錄<span class="mark-text">所有</span>會計事項（例如：日記簿）。<br>
+              • <strong>特種序時帳簿</strong>：專記<span class="mark-text">特種</span>會計事項（例如：現金簿、進貨簿、銷貨簿等）。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>B. 分類帳簿</strong>（按會計事項歸屬的<span class="mark-text">會計項目</span>紀錄）：
+            <div class="ex-box">
+              • <strong>總分類帳簿（一定要設置）</strong>：按<span class="mark-text">第四級會計項目</span>分類設置（例如：銀行存款）。<br>
+              • <strong>明細分類帳簿</strong>：按會計項目<span class="mark-text">明細項目</span>分類設置（例如：銀行存款－華南銀行）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>五、財務報表（至少保存10年）</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>綜合損益表</strong>：依<span class="mark-text">收益及費損</span>帳戶編製，表達某報導<span class="mark-text">期間</span>內的<span class="mark-text">財務績效</span>，為<span class="mark-text">動態</span>報表。<br>
+              • <strong>權益變動表</strong>：表達某報導<span class="mark-text">期間</span>內構成權益增減變化情形，為<span class="mark-text">動態</span>報表。<br>
+              • <strong>資產負債表</strong>：依<span class="mark-text">資產、負債及權益</span>帳戶編製，表達某報導期間<span class="mark-text">結束日</span>的<span class="mark-text">財務狀況</span>，為<span class="mark-text">靜態</span>報表。<br>
+              • <strong>現金流量表</strong>：表達某報導<span class="mark-text">期間</span>內營業、投資與籌資活動對現金流動影響，為<span class="mark-text">動態</span>報表。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="001.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-1)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="003.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (1-3)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
