@@ -3,74 +3,137 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>重點整理</title>
+<title>重點整理｜考前總複習</title>
 <link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="online-counter.js"></script>
 </head>
 <body>
 <header class="topbar">
-    <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
-    <div class="sub">
-        重點整理
-        <a href="index.html" style="color:inherit; margin-left:10px;">返回首頁</a>
-    </div>
+  <div>
+    <div class="brand">重點整理</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 </header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="index.html">首頁 <span>›</span></a>
+  <a href="studynotes.html">重點整理 <span>›</span></a>
+  <a href="downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
 <main id="app">
-  <section class="screen active" style="padding: 20px 0;">
+  <section class="screen active">
     <div class="hero">
       <span class="tag">STUDY NOTES</span>
-      <h1>重點整理</h1>
+      <h1>選擇複習科目</h1>
       <p>考前不知道要看什麼？各科重點幫你整理好了，選擇科目就能開始複習。</p>
     </div>
 
-    <div class="subjects-grid" style="display:grid; gap:15px; max-width:800px; margin:20px auto;">
-      
-     
-      <div class="subject-card" onclick="location.href='studynotes/accounting.html'" style="cursor:pointer;">
-        <div>
-          <div class="subject-title">會計學</div>
-          <div class="subject-meta">會計之基本概念、會計循環、會計帳簿與財務報表...</div>
-        </div>
-        <button class="primary">進入單元</button>
+    <a class="subject-card" href="studynotes/accounting.html" style="text-decoration:none;color:inherit;display:flex">
+      <div>
+        <div class="subject-title">會計學</div>
+        <div class="subject-meta">會計之基本概念、會計循環、會計帳簿與財務報表...</div>
       </div>
+      <span class="primary" style="display:inline-flex;align-items:center">進入單元</span>
+    </a>
 
-     
-      <div class="subject-card" onclick="location.href='studynotes/business.html'" style="cursor:pointer;">
-        <div>
-          <div class="subject-title">商業概論</div>
-          <div class="subject-meta">商業基本概念、企業家精神與創業、商業現代化機能...</div>
-        </div>
-        <button class="primary">進入單元</button>
+    <a class="subject-card" href="studynotes/business.html" style="text-decoration:none;color:inherit;display:flex;margin-top:16px">
+      <div>
+        <div class="subject-title">商業概論</div>
+        <div class="subject-meta">商業基本概念、企業家精神與創業、商業現代化機能...</div>
       </div>
+      <span class="primary" style="display:inline-flex;align-items:center">進入單元</span>
+    </a>
 
-     
-      <div class="subject-card" onclick="location.href='economics.html'" style="cursor:pointer;">
-        <div>
-          <div class="subject-title">經濟學</div>
-          <div class="subject-meta">經濟基本概念、需求與供給、消費行為理論...</div>
-        </div>
-        <button class="primary">進入單元</button>
+    <a class="subject-card merged-subject" href="economics.html" style="text-decoration:none;color:inherit;margin-top:16px;display:flex">
+      <div>
+        <div class="subject-title">經濟學</div>
+        <div class="subject-meta">經濟基本概念、需求與供給、消費行為理論...</div>
       </div>
+      <span class="primary" style="display:inline-flex;align-items:center">進入單元</span>
+    </a>
 
-    
-      <div class="subject-card" onclick="location.href='Introduction.html'" style="cursor:pointer;">
-        <div>
-          <div class="subject-title">數位科技概論</div>
-          <div class="subject-meta">資料與資訊、數位資料的表示方式、資料數位化之原理與方法...</div>
-        </div>
-        <button class="primary">進入單元</button>
+    <a class="subject-card merged-subject" href="Introduction.html" style="text-decoration:none;color:inherit;margin-top:16px;display:flex">
+      <div>
+        <div class="subject-title">數位科技概論</div>
+        <div class="subject-meta">資料與資訊、數位資料的表示方式、資料數位化之原理與方法...</div>
       </div>
+      <span class="primary" style="display:inline-flex;align-items:center">進入單元</span>
+    </a>
 
-     
-      <div class="subject-card" onclick="location.href='application.html'" style="cursor:pointer;">
-        <div>
-          <div class="subject-title">數位科技應用</div>
-          <div class="subject-meta">認識文書處理軟體、格式編輯與排列、圖文排版...</div>
-        </div>
-        <button class="primary">進入單元</button>
+    <a class="subject-card merged-subject" href="application.html" style="text-decoration:none;color:inherit;margin-top:16px;display:flex">
+      <div>
+        <div class="subject-title">數位科技應用</div>
+        <div class="subject-meta">認識文書處理軟體、格式編輯與排列、圖文排版...</div>
       </div>
-
-    </div>
+      <span class="primary" style="display:inline-flex;align-items:center">進入單元</span>
+    </a>
   </section>
 </main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
 </body>
 </html>
