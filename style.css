@@ -263,6 +263,9 @@ button:disabled {
 }
 
 .question-image-wrap {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background: #ffffff;
   border-radius: 12px;
   text-align: center;
@@ -277,9 +280,10 @@ button:disabled {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 240px;
+  max-height: 600px;
   object-fit: contain;
   margin: 8px auto;
+  box-sizing: border-box;
 }
 
 .passage,
