@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一章 商業基本概念（續）｜商業概論重點整理</title>
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .example-tag { display: inline-block; background-color: #cd0505; color: white; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 商業基本概念（續）</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../index.html">首頁 <span>›</span></a>
+  <a href="../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 01</span>
+      <h1>第一章 商業基本概念（續）</h1>
+      <p>涵蓋商業的創新科技應用、現代化角色、社會責任演進與種類、企業倫理及社會企業。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      <!-- 商業的創新科技應用 -->
+      <div class="memo-section">
+        <h3>商業的創新科技應用</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>人工智慧</strong>：以人工編寫程式賦予機器和人類一樣的思考邏輯與行為模式，應用於 <span class="mark-text">自動駕駛</span>、<span class="mark-text">語音助理</span> 與 <span class="mark-text">個人化推薦</span>。<br><span class="example-tag">ex.</span> 特斯拉(Tesla)電動車具備自動駕駛功能，透過AI學習能力偵測速限路標與車輛插隊。</li>
+            <li><strong>物聯網</strong>：在物品上嵌入感測器透過無線網路連結，實現對物品智能化識別、定位、追蹤、監控和管理，即 <span class="mark-text">由物品連結成的訊息交換網路</span>。<br><span class="example-tag">ex.</span> Apple Watch、Galaxy Watch等智慧手錶可偵測健康、回覆訊息與電子支付。</li>
+            <li><strong>無人商店</strong>：運用 <span class="mark-text">AI、人臉辨識與物聯網</span> 等科技的新零售店型，消費者免排隊自動扣款，省下人力成本。<br><span class="example-tag">ex.</span> Amazon開設全球第一間無人商店「Amazon Go」。</li>
+            <li><strong>金融科技</strong>：運用網路與資訊科技創造出 <span class="mark-text">新的金融服務模式</span>。<br><span class="example-tag">ex.</span> 金融業者推出理財機器人透過簡單問題提供投資者理財建議。</li>
+            <li><strong>工業4.0</strong>：以 <span class="mark-text">智慧製造</span> 為主導的第四次工業革命，結合AI、物聯網、大數據，提高生產效率並滿足客製化需求。<br><span class="example-tag">ex.</span> 福斯集團推動所有生產基地工業4.0化，建置5G專網與雲端運算提升效率。</li>
+            <li><strong>共享經濟</strong>：包括個人閒置資源分享的C2C模式（如Uber、Airbnb），及分享企業資源的B2C模式（如U-bike、WeMo）。<br><span class="example-tag">ex.</span> Airbnb是共享住宿網站提供短期出租房屋或房間。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 商業在現代化社會中的角色 -->
+      <div class="memo-section">
+        <h3>商業在現代化社會中的角色</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>個人</strong>：滿足個人慾望、提供就業機會、提高生活水準。</li>
+            <li><strong>社會</strong>：調節商品供需、平衡物價、促進社會繁榮、產銷分工。</li>
+            <li><strong>國家</strong>：透過國際貿易提升國民所得、促使各國交易、增強國力。</li>
+            <li><strong>世界</strong>：促進國際文化交流、提高資源生產效率、推動世界經濟發展。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 社會責任觀念的發展 -->
+      <div class="memo-section">
+        <h3>社會責任觀念的發展</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>商人時期（個人責任時期）</strong>：企業營運目標是 <span class="mark-text">賺取最大利潤</span>。</li>
+            <li><strong>商業時期（管理者責任時期）</strong>：企業營運目標是 <span class="mark-text">賺取最大利潤</span> 及 <span class="mark-text">提升經營管理績效</span>。</li>
+            <li><strong>企業時期（廠商責任時期）</strong>：企業營運目標是 <span class="mark-text">賺取最大利潤</span> 及 <span class="mark-text">參與解決社會問題</span>。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 社會責任的種類 -->
+      <div class="memo-section">
+        <h3>社會責任的種類</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>經濟責任</strong>：企業以 <span class="mark-text">合理價格</span> 將產品或服務賣給消費者以獲取 <span class="mark-text">合理利潤</span>，為企業 <span class="mark-text">最基本的責任</span>。<br><span class="example-tag">ex.</span> 麵包店經營不善無預警倒閉導致員工失業，即未善盡經濟責任。</li>
+            <li><strong>法律責任</strong>：企業進行商業活動必須符合 <span class="mark-text">法律的規範</span>。<br><span class="example-tag">ex.</span> 餐飲業者在食品中添加有毒化學物質違反《食安法》，即未善盡法律責任。</li>
+            <li><strong>倫理責任（道德責任）</strong>：企業行為必須 <span class="mark-text">符合社會大眾的期待</span>，在法律明文規定外秉持道德良知去做正確、公平的事。<br><span class="example-tag">ex.</span> 美國黑人到星巴克借廁所被要求消費或離開，雖未違法但被批評種族歧視，即未善盡倫理責任。</li>
+            <li><strong>慈善責任（自由裁量責任）</strong>：企業考量自身能力與資源後 <span class="mark-text">自願</span> 關懷、回饋社會的行為。<br><span class="example-tag">ex.</span> 花蓮發生大地震災情，各大企業紛紛捐款賑災，即善盡慈善責任。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 企業對社會責任應有的認識 -->
+      <div class="memo-section">
+        <h3>企業對社會責任應有的認識</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li>企業與社會間是共存共榮的關係。</li>
+            <li>企業應勇於承擔社會責任。</li>
+            <li>社會問題可能是企業發展的良機。</li>
+            <li>消費者運動可促使企業進步。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 企業倫理與範圍 -->
+      <div class="memo-section">
+        <h3>企業倫理與範圍</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>企業倫理意義</strong>：企業在經營時所應遵守的行為規範。</li>
+            <li><strong>內部倫理 - 對員工</strong>：建立良好工作環境，滿足員工經濟與心理需求。</li>
+            <li><strong>內部倫理 - 對股東</strong>：積極經營，為股東創造更多權益與利潤。</li>
+            <li><strong>外部倫理 - 對顧客</strong>：不斷研發改善產品，提供良好品質與服務。</li>
+            <li><strong>外部倫理 - 對廠商</strong>：重視信諾，依契約按期交貨。</li>
+            <li><strong>外部倫理 - 對競爭者</strong>：尊重智慧財產權，遵守競爭規範。</li>
+            <li><strong>外部倫理 - 對政府</strong>：遵守政府相關法規，響應與配合政府政策。</li>
+            <li><strong>外部倫理 - 對社會</strong>：重視社會責任與公益，加強環境保護。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 企業在社區的任務與社會企業 -->
+      <div class="memo-section">
+        <h3>社區任務與社會企業</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>企業在社區的任務</strong>：社會參與、教育文化、環境保護。</li>
+            <li><strong>社會企業</strong>：存在的目的是 <span class="mark-text">解決社會及環境問題，同時自負盈虧</span>，100%利潤用於擴大影響力規模，不作為股利發放給股東。<br><span class="example-tag">ex.</span> 鄉村銀行(Grameen Bank)、喜憨兒社會福利基金會等。</li>
+          </ul>
+        </div>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="001.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 </a>
+      <a href="../business.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第二章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
