@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三章 消費行為理論｜經濟學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-box { background-color: #f1f5f9; border: 1px dashed #94a3b8; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-family: monospace; }
+  .note-img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 8px; border: 1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第三章 消費者行為理論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 03</span>
+      <h1>第三章 消費行為理論</h1>
+      <p>涵蓋慾望與消費特性、效用理論、邊際效用均等法則、消費者剩餘、家庭消費定律及消費者保護。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+     
+      <div class="memo-section">
+        <h3>3-1 慾望與消費</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>慾望的意義與特性</strong>：人們對財貨「缺乏的感覺」及「想要獲取的意願」，是一切經濟活動的起點[cite: 2]。</li>
+            <li><strong>消費的意義</strong>：為滿足慾望支付代價取得財貨或勞務的經濟行為，是經濟活動的原動力與最終目的[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image076.jpg" alt="慾望特性" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image077.jpg" alt="消費種類" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image078.jpg" alt="消費財種類" class="note-img">
+          </div>
+        </div>
+      </div>
+
+    
+      <div class="memo-section">
+        <h3>3-2 效用的意義與法則</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>效用的意義</strong>：消費者使用某一財貨時感覺的滿足程度（主觀心理知覺）。理性消費者以<span class="mark-text">總效用最大</span>為目標[cite: 2]。</li>
+            <li><strong>總效用 (TU) 與邊際效用 (MU)</strong>：隨著消費量增加，MU 遞減（邊際效用遞減法則），TU 則先增後減[cite: 2]。</li>
+            <li><strong>價值的矛盾</strong>：水和鑽石的矛盾，透過邊際效用來解釋（水的總效用大但邊際效用小；鑽石總效用小但邊際效用大）[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image079.jpg" alt="效用種類" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image080.jpg" alt="TU與MU關係" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image081.jpg" alt="邊際效用遞減法則" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image082.jpg" alt="價值的概念" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image083.jpg" alt="水和鑽石的矛盾" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image084.jpg" alt="邊際效用學派的解釋" class="note-img">
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>3-3 消費者最大滿足的決策</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>消費者均衡</strong>：在有限預算下，當花費在各種財貨最後一元的邊際效用都相等時（$\frac{MU_X}{P_X} = \frac{MU_Y}{P_Y}$），總效用達到最大[cite: 2]。</li>
+            <li><strong>邊際效用的兩大功能</strong>：可以推算財貨的價格、可以導出需求曲線[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image085.jpg" alt="不考慮價格的邊際效用均等" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image086.jpg" alt="考慮價格的邊際效用均等" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image090.jpg" alt="消費一種財貨" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image091.jpg" alt="消費兩種財貨" class="note-img">
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>3-4 消費者剩餘</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>消費者剩餘</strong>：消費者願意支付的最高總金額與實際支付總金額之間的差額，代表消費者主觀上獲得的心理福利淨收益[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image092.jpg" alt="消費者剩餘" class="note-img">
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>3-5 家庭消費定律</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>恩格爾法則與係數</strong>：糧食支出佔家庭總所得的比例（恩格爾係數）。係數愈大代表生活水準愈低；係數愈小代表生活水準愈高[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image093.jpg" alt="恩格爾法則" class="note-img">
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>3-6 消費者主權及消費者保護運動</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>消費者的基本權利與保護</strong>：探討消費者權益、保護組織及相關法令規範[cite: 2]。</li>
+          </ul>
+          <div>
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image095.jpg" alt="消費者基本權利" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image096.jpg" alt="消保組織" class="note-img">
+            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image097.jpg" alt="消保法令" class="note-img">
+          </div>
+        </div>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (第二章)</a>
+      <a href="../economics.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="004.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第四章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
