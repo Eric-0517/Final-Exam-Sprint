@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3-3 編表｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-box { background-color: #f8fafc; border: 1px dashed #cbd5e1; padding: 10px; margin: 8px 0; border-radius: 6px; text-align: center; font-family: monospace; font-size: 0.95rem; }
+  .memo-img { width: 100%; height: auto; max-width: 100%; border-radius: 6px; margin: 10px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  .note-text { font-size: 0.85rem; color: #64748b; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第三章 期末會計程序</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 3-3</span>
+      <h1>3-3 編表</h1>
+      <p>財務報表意義與種類、財務報導目的、綜合損益表與資產負債表格式、獲利與償債能力分析。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、財務報表的意義與種類</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：表達企業在報導期間結束日的<span class="mark-text">財務狀況</span>及期間的<span class="mark-text">財務績效</span>，提供利害關係人參考，又稱<span class="mark-text">決算表</span>或<span class="mark-text">決算報告</span>。<br>
+              • <strong>種類</strong>：包括四大主要財務報表、附註及附表（如存貨明細表、銷貨成本表等）。<br>
+               - <strong>綜合損益表</strong>：表達收益與費損、特定期間、<span class="mark-text">財務績效</span>，性質屬<span class="mark-text">動態</span>。<br>
+               - <strong>權益變動表</strong>：表達權益、特定期間、權益增減變動，性質屬<span class="mark-text">動態</span>。<br>
+               - <strong>資產負債表</strong>：表達資產、負債、權益、特定<span class="mark-text">時日</span>、<span class="mark-text">財務狀況</span>，性質屬<span class="mark-text">靜態</span>。<br>
+               - <strong>現金流量表</strong>：表達現金、特定期間、營業/投資/籌資現金流動，性質屬<span class="mark-text">動態</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、財務報導的意義與目的</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：內容包含「財務報表」以及「有助於決策之揭露事項及說明」。<br>
+              • <strong>目的</strong>：提供<span class="mark-text">有用的財務資訊</span>給使用者<span class="mark-text">做決策</span>（投資或授信等經濟決策）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、綜合損益表的意義與格式</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：依收益、費損帳戶餘額編製，表達特定期間的財務績效，屬動態報表。<br>
+              • <strong>格式分類</strong>：<br>
+               - <strong>功能別</strong>：依序計算營業毛利 ➔ 營業損益 ➔ 本期損益，區分營業與營業外活動。<br>
+               <a href="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.6.1.png" target="_blank"><img class="memo-img" src="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.6.1.png" alt="功能別綜合損益表範例"></a><br>
+               - <strong>性質別</strong>：將費用按性質分類（如薪資支出、廣告費、利息費用等）。<br>
+               <a href="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.6.2.png" target="_blank"><img class="memo-img" src="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.6.2.png" alt="性質別綜合損益表範例"></a>
+              <div class="note-text">(註) 此範例參照勞動部公告術科人工記帳項規範，採二期式比較報表。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、綜合損益表之「獲利能力」分析</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 銷貨成本率（成本率）</strong>：銷貨成本 ÷ 銷貨淨額（比率愈<span class="mark-text">小</span>獲利愈佳）。<br>
+              • <strong>B. 銷貨毛利率（毛利率）</strong>：銷貨毛利 ÷ 銷貨淨額（比率愈<span class="mark-text">大</span>獲利愈佳）。<br>
+               ※ <span class="mark-text">銷貨成本率 ＋ 銷貨毛利率 ＝ 1</span>。<br>
+              • <strong>C. 營業利益率（營益率）</strong>：營業利益 ÷ 銷貨淨額（比率愈<span class="mark-text">大</span>獲利愈佳）。<br>
+              • <strong>D. 稅前純益率</strong>：稅前純益 ÷ 銷貨淨額（比率愈<span class="mark-text">大</span>獲利愈佳）。<br>
+              • <strong>E. 稅後純益率</strong>：稅後純益 ÷ 銷貨淨額（比率愈<span class="mark-text">大</span>獲利愈佳）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+
+      <div class="memo-section">
+        <h3>五、資產負債表的意義與格式</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：依資產、負債、權益帳戶餘額編製，表達特定時日的財務狀況，屬靜態報表。<br>
+              • <strong>格式與圖解</strong>：<br>
+              <a href="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.9.png" target="_blank"><img class="memo-img" src="http://ds.cfp.com.tw/accounting-memorytree/Ch3/033.9.png" alt="資產負債表範例"></a>
+              <div class="note-text">(註) 獨資企業通常於結帳後將本期損益結轉至業主往來。此範例參考勞動部人工記帳規範採二期式比較報表。</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>六、資產負債表之「償債能力」分析</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 營運資金</strong>：流動資產 － 流動負債（金額愈<span class="mark-text">大</span>償債能力愈佳）。<br>
+              • <strong>B. 流動比率</strong>：流動資產 ÷ 流動負債（比率愈<span class="mark-text">大</span>償債能力愈佳）。<br>
+              • <strong>C. 速動比率（酸性測試比率）</strong>：速動資產 ÷ 流動負債（比率愈<span class="mark-text">大</span>償債能力愈佳）。<br>
+               ※ 速動資產 ＝ 流動資產 － <span class="mark-text">存貨 － 預付款項 － 其他流動資產</span>。<br>
+              • <strong>D. 負債比率</strong>：總負債 ÷ 總資產（比率愈<span class="mark-text">小</span>償債能力愈佳）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="011.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (3-2)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="013.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (4-1)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
