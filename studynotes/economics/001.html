@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一章 經濟基本概念｜經濟學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-box { background-color: #f1f5f9; border: 1px dashed #94a3b8; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-family: monospace; }
+  .system-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
+  .system-table th, .system-table td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
+  .system-table th { background-color: #e2e8f0; color: #1e293b; font-weight: bold; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 經濟基本概念</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 01</span>
+      <h1>第一章 經濟基本概念</h1>
+      <p>涵蓋經濟學基本概念、演進、種類與研究方法、資源配置，以及經濟體系與經濟制度。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>1-1 經濟學的基本概念</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>經濟</strong>：人類一切的謀生活動。</li>
+            <li><strong>經濟行為</strong>：人類以「<span class="mark-text">有償</span>」方式（支付代價＋獲得報酬），取得並利用資源以滿足慾望的行為。</li>
+            <li><strong>經濟原則</strong>：以「<span class="mark-text">最小代價</span>」獲得「<span class="mark-text">最大滿足</span>」。</li>
+            <li><strong>經濟學</strong>：研究如何有效利用數量有限但具多種用途之資源，以滿足人類慾望的「<span class="mark-text">社會科學</span>」與「<span class="mark-text">選擇的科學</span>」。</li>
+            <li><strong>經濟問題產生原因</strong>：1. 慾望無窮  2. 資源稀少性  3. 資源具多種用途。</li>
+            <li><strong>基本經濟問題</strong>：生產什麼、如何生產、何時生產、為誰生產、如何維持經濟穩定、如何促進經濟成長。</li>
+            <li><strong>經濟學成立</strong>：<span class="mark-text">亞當斯密 (Adam Smith)</span> 於 1776 年發表《<span class="mark-text">國富論</span>》，被尊稱為「<span class="mark-text">經濟學之父</span>」。</li>
+            <li>
+              <strong>財貨與勞務</strong>：
+              <br>• 財貨：滿足慾望之<span class="mark-text">有形</span>商品（如電腦、桌椅）。
+              <br>• 勞務：滿足慾望之<span class="mark-text">無形</span>服務（如髮型設計、教師授課）。
+              <br>• 分類：可依取得方式、使用目的及耐用程度區分。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    
+      <div class="memo-section">
+        <h3>1-2 經濟學的演進</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>1776 年以前</strong>：重商主義、重農主義。</li>
+            <li><strong>第一階段：古典學派</strong>：亞當斯密、李嘉圖，強調「一隻看不見的手」與自由放任。</li>
+            <li><strong>第二階段：反古典學派</strong>：馬克思（社會主義）。</li>
+            <li><strong>第三階段：新古典學派（劍橋學派）</strong>：馬歇爾，奠定個體經濟學基礎。</li>
+            <li><strong>第四階段：新經濟學派（凱因斯學派）</strong>：凱因斯，奠定總體經濟學基礎，主張政府干預。</li>
+            <li><strong>第五階段：現代經濟學派</strong>：多元發展。</li>
+          </ul>
+        </div>
+      </div>
+
+    
+      <div class="memo-section">
+        <h3>1-3 經濟學的種類與研究方法</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li>
+              <strong>依研究對象區分</strong>：
+              <br>• <span class="mark-text">個體經濟學</span>：研究個別經濟主體，核心為價格理論。
+              <br>• <span class="mark-text">總體經濟學</span>：研究整體經濟現象，核心為所得理論。
+            </li>
+            <li>
+              <strong>依研究性質區分</strong>：
+              <br>• <span class="mark-text">實證經濟學</span>：客觀分析「是什麼」(What is)。
+              <br>• <span class="mark-text">規範經濟學</span>：主觀分析「應該是什麼」(What ought to be)。
+            </li>
+            <li><strong>研究方法</strong>：歸納法、演繹法、模型建立法。</li>
+          </ul>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>1-4 經濟資源的配置</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>機會成本</strong>：將資源用於某項用途時，所放棄其他用途中<span class="mark-text">價值最高者</span>。</li>
+            <li><strong>生產可能曲線 (P.P.C.)</strong>：在特定技術與資源固定下，所能生產兩種財貨的最大組合軌跡。</li>
+            <li>
+              <strong>邊際轉換率 (MRT)</strong>：多生產一單位 X 財所需放棄 Y 財的數量（即 PPC 切線斜率之絕對值）。
+              <div class="formula-box">
+                MRT<sub>XY</sub> = | ΔY / ΔX | = MC<sub>X</sub> / MC<sub>Y</sub> = PPC 切線斜率絕對值
+              </div>
+            </li>
+            <li>
+              <strong>PPC 特性與變動</strong>：
+              <br>• 負斜率：反映資源稀少性與機會成本。
+              <br>• 凹向原點：反映<span class="mark-text">邊際機會成本遞增法則</span>。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>1-5 經濟體系與經濟制度</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li>
+              <strong>經濟體系的構成要素</strong>：
+              <br>• <strong>兩種市場</strong>：
+                <br>&nbsp;&nbsp;1. <u>產品市場</u>：各種財貨或勞務交易的市場。
+                <br>&nbsp;&nbsp;2. <u>要素市場</u>：各種生產要素交易的市場。
+              <br>• <strong>三個決策單位</strong>：家庭（消費者）、廠商（生產者）、政府。
+            </li>
+            <li><strong>經濟循環圖（經濟活動周流圖）</strong>：呈現家庭、廠商與政府之間透過產品市場與要素市場進行資源、貨幣與所得流動的關聯圖。</li>
+            <li>
+              <strong>經濟制度分類</strong>：
+              <br>• <strong>市場經濟制度（資本主義）</strong>：私有制為主，依賴價格機制（看不見的手）。
+              <br>• <strong>計畫經濟制度（共產/集權）</strong>：公有制為主，依賴政府中央計畫（看得見的手）。
+              <br>• <strong>混合經濟制度</strong>：私有為主、公有為輔，市場價格與政府干預並重（現代多數國家採行）。
+              <br>• <strong>傳統經濟制度</strong>：依循習俗與傳統。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="../economics.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第二章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
