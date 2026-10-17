@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1-6 會計方程式｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-table { width: 100%; border-collapse: collapse; margin: 8px 0; text-align: center; }
+  .formula-table td { padding: 6px; border: 1px dashed #cbd5e1; font-family: monospace; font-size: 1.05rem; }
+  .memo-img { width: 100%; height: auto; max-width: 100%; border-radius: 6px; margin: 10px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 緒論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+ <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 1-6</span>
+      <h1>1-6 會計方程式</h1>
+      <p>開業方程式、基礎方程式、獲利方程式與權益變動方程式核心考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、會計方程式核心架構</h3>
+        <ul class="memo-list" style="list-style: none; padding-left: 0;">
+          
+          <li style="margin-bottom: 16px;">
+            <strong>A. 開業方程式</strong>
+            <div class="ex-box">
+              <table class="formula-table">
+                <tr><td>資產 (A) ＝ 資本 (C)</td></tr>
+              </table>
+            </div>
+          </li>
+
+          <li style="margin-bottom: 16px;">
+            <strong>B. 基礎方程式</strong>
+            <div class="ex-box">
+              <table class="formula-table">
+                <tr><td>資產 (A) ＝ 負債 (L) ＋ 資本/權益 (C)</td></tr>
+                <tr><td><span class="mark-text">初</span>資產 ＝ <span class="mark-text">初</span>負債 ＋ <span class="mark-text">初</span>資本</td></tr>
+                <tr><td><span class="mark-text">末</span>資產 ＝ <span class="mark-text">末</span>負債 ＋ <span class="mark-text">末</span>資本</td></tr>
+                <tr><td><span class="mark-text">Δ</span>資產 ＝ <span class="mark-text">Δ</span>負債 ＋ <span class="mark-text">Δ</span>資本</td></tr>
+              </table>
+            </div>
+          </li>
+
+          <li style="margin-bottom: 16px;">
+            <strong>C. 獲利方程式</strong>
+            <div class="ex-box">
+              <table class="formula-table">
+                <tr><td><span class="mark-text">末</span>資產 ＝ <span class="mark-text">末</span>負債 ＋ （ 期初資本 ＋ <span class="mark-text">本期損益</span> ）</td></tr>
+                <tr><td><span class="mark-text">本期損益</span> ＝ 收益 (R) － 費損 (E)</td></tr>
+              </table>
+              <div style="margin-top: 8px; font-size: 0.95rem;">
+                • <strong>R ＞ E</strong> → 本期損益 ＞ 0 → <span class="mark-text">本期淨利</span><br>
+                • <strong>R ＜ E</strong> → 本期損益 ＜ 0 → <span class="mark-text">本期淨損</span>
+              </div>
+            </div>
+          </li>
+
+          <li style="margin-bottom: 16px;">
+            <strong>D. 權益變動方程式圖解</strong>
+            <div class="ex-box">
+              <a href="http://ds.cfp.com.tw/accounting-memorytree/Ch1/015.1.4.png" target="_blank">
+                <img class="memo-img" src="http://ds.cfp.com.tw/accounting-memorytree/Ch1/015.1.4.png" alt="權益變動方程式圖解">
+              </a>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </article>
+
+  
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="015.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-5)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="../021.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第二章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
