@@ -51,31 +51,6 @@
         return img;
     }
 
-    function renderQuestionContent(container, question, review = false) {
-        if (!container) return;
-        container.innerHTML = "";
-
-       
-        const prompt = document.createElement("div");
-        prompt.className = review ? "review-question-text" : "";
-        prompt.style.fontWeight = "bold";
-        prompt.style.marginBottom = "10px";
-        prompt.style.whiteSpace = "pre-line";
-        prompt.textContent = question.question || "";
-        container.appendChild(prompt);
-
-        
-        const image = createImage(
-            question.image,
-            "題目圖片",
-            review ? "review-question-image" : "question-image"
-        );
-
-        if (image) {
-            container.appendChild(image);
-        }
-    }
-
     async function loadBank() {
         try {
             const response = await fetch(BANK_URL, {
@@ -153,10 +128,8 @@
             $("qNo").textContent = currentIndex + 1;
         }
 
-       
-        const progressTextEl = document.querySelector(".progress-text");
-        if (progressTextEl) {
-            progressTextEl.innerHTML = `<span id="qNo">${currentIndex + 1}</span> / ${quizQuestions.length}`;
+        if ($("total")) {
+            $("total").textContent = quizQuestions.length;
         }
 
         if ($("progressBar")) {
@@ -164,8 +137,26 @@
                 ((currentIndex + 1) / quizQuestions.length * 100) + "%";
         }
 
-        renderQuestionContent($("questionText") || document.querySelector(".question-card"), question);
+        
+        const textEl = $("questionText");
+        if (textEl) {
+            textEl.textContent = question.question;
+            textEl.style.whiteSpace = "pre-line";
+        }
 
+
+        const imgEl = $("questionImage");
+        if (imgEl) {
+            if (question.image && question.image.trim()) {
+                imgEl.src = new URL(question.image.trim(), document.baseURI).href;
+                imgEl.style.display = "block";
+            } else {
+                imgEl.src = "";
+                imgEl.style.display = "none";
+            }
+        }
+
+      
         const optionsBox = $("options");
         if (!optionsBox) return;
         optionsBox.innerHTML = "";
@@ -193,7 +184,7 @@
             button.appendChild(content);
 
             const image = createImage(
-                question.optionImages[letter],
+                question.optionImages && question.optionImages[letter],
                 letter + " 選項圖片",
                 "option-image"
             );
@@ -248,7 +239,6 @@
         if ($("correctCount")) $("correctCount").textContent = correct;
         if ($("wrongCount")) $("wrongCount").textContent = wrong;
         if ($("accuracy")) {
-            $("accuracy.textContent") = (total ? Math.round(correct / total * 100) : 0) + "%";
             $("accuracy").textContent = (total ? Math.round(correct / total * 100) : 0) + "%";
         }
 
@@ -278,11 +268,18 @@
 
                 item.appendChild(title);
 
-                const questionContent = document.createElement("div");
-                questionContent.className = "review-question";
+                
+                const qTextDiv = document.createElement("div");
+                qTextDiv.style.fontWeight = "bold";
+                qTextDiv.style.margin = "8px 0";
+                qTextDiv.style.whiteSpace = "pre-line";
+                qTextDiv.textContent = question.question;
+                item.appendChild(qTextDiv);
 
-                renderQuestionContent(questionContent, question, true);
-                item.appendChild(questionContent);
+                if (question.image && question.image.trim()) {
+                    const qImg = createImage(question.image, "專二題目圖片", "question-image");
+                    if (qImg) item.appendChild(qImg);
+                }
 
                 const options = document.createElement("div");
                 options.className = "review-options";
@@ -299,7 +296,7 @@
                     );
 
                     const image = createImage(
-                        question.optionImages[letter],
+                        question.optionImages && question.optionImages[letter],
                         letter + " 選項圖片",
                         "review-option-image"
                     );
@@ -341,7 +338,6 @@
         showScreen("result");
     }
 
-   
     document.addEventListener("click", (e) => {
         const actionEl = e.target.closest("[data-action]");
         if (!actionEl) return;
