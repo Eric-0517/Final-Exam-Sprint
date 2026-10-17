@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1-3 會計基本假設｜會計學重點整理</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 10px 14px; margin-top: 6px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 緒論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="index.html">首頁 <span>›</span></a>
+  <a href="studynotes.html">重點整理 <span>›</span></a>
+  <a href="accounting.html">會計學目錄 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 1-3</span>
+      <h1>1-3 會計基本假設</h1>
+      <p>繼續經營個體、企業個體、應計基礎、報導期間與貨幣評價假設核心考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+     
+      <div class="memo-section">
+        <h3>一、繼續經營個體／繼續經營假設</h3>
+        <ul class="memo-list">
+          <li>假設企業是持續經營的個體，<span class="mark-text">在可預見的將來不會解散或清算</span>。
+            <div class="ex-box">
+              • <strong>實例說明</strong>：負債可依據到期時間的長短，<span class="mark-text">區分為流動與非流動負債</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、企業個體假設</h3>
+        <ul class="memo-list">
+          <li>會計上視<span class="mark-text">企業為一個獨立的經濟個體</span>，可自行擁有資源、承擔義務。
+            <div class="ex-box">
+              • <strong>實例說明</strong>：業主代替企業支付水電瓦斯費等，或是業主提取企業的資金、商品，企業都必須記帳，增減業主的權益。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、應計基礎 / 權責發生基礎</h3>
+        <ul class="memo-list">
+          <li><span class="mark-text">交易應於發生時（收益確定應收、費損確定應付）認列</span>，而非現金收付時。
+            <div class="ex-box">
+              • <strong>實例說明</strong>：企業應按應計基礎編製財務報表，並認列當期費用與收入，非當期之收入或費損不予以認列。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、報導期間假設</h3>
+        <ul class="memo-list">
+          <li>會計上以人為的方法，將企業持續經營的過程劃分成相等的期間，每一段落稱為<span class="mark-text">「報導期間（會計期間）」</span>，通常為一年、半年或一季。
+            <div class="ex-box">
+              • <strong>實例說明</strong>：實務上多以一年為一個報導期間，稱為財務年度（會計年度）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>五、貨幣評價假設</h3>
+        <ul class="memo-list">
+          <li>1. 會計上<span class="mark-text">以貨幣作為記錄、衡量及報導財務資訊的工具</span>。</li>
+          <li>2. 會計上<span class="mark-text">忽略通貨膨脹</span>的因素，<span class="mark-text">假設幣值穩定</span>。
+            <div class="ex-box">
+              • <strong>實例說明</strong>：員工士氣或管理者能力無法用貨幣衡量，便無法以會計來表達。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+   
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-2)</a>
+      <a href="accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="004.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (1-4)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
