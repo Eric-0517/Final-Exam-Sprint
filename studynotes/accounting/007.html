@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2-1 會計憑證｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第二章 會計憑證與平時會計程序</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 2-1</span>
+      <h1>2-1 會計憑證</h1>
+      <p>原始憑證種類、記帳憑證（傳票）分類、保存年限與複式傳票編製規則。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+     
+      <div class="memo-section">
+        <h3>一、原始憑證</h3>
+        <ul class="memo-list">
+          <li><span class="mark-text">證明會計事項發生與經過</span>，並作為製作記帳憑證的根據。</li>
+          <li style="margin-top: 8px;"><strong>憑證種類與實例</strong>：
+            <div class="ex-box">
+              • <strong>A. 外來憑證</strong>：自企業以外個體取得（例如：<span class="mark-text">付款後取得的發票、收據、進貨發票、支出證明單</span>等）。<br>
+              • <strong>B. 對外憑證</strong>：給予企業以外之個體（例如：<span class="mark-text">收款後開給對方の發票、收據、銷貨發票</span>、開給供應商的<span class="mark-text">訂購單</span>等）。<br>
+              • <strong>C. 內部憑證</strong>：由企業本身自行製存（例如：<span class="mark-text">折舊分攤表、領料單、請購單</span>等）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、記帳憑證－傳票</h3>
+        <ul class="memo-list">
+          <li>亦稱為<span class="mark-text">傳票</span>，作為記帳的根據，<span class="mark-text">並可證明會計事項處理過程中相關人員的責任</span>。</li>
+          <li style="margin-top: 8px;"><strong>傳票體系</strong>：
+            <div class="ex-box">
+              • <strong>A. 複式傳票</strong>：一筆<span class="mark-text">交易（分錄）</span>編一張傳票，能表達<span class="mark-text">交易的全貌</span>，適用行業為一般行業（買賣業、製造業），傳票格式依三分法、四分法而定。<br>
+              • <strong>B. 單式傳票</strong>：一個<span class="mark-text">會計項目</span>編一張傳票，能按會計項目分工、整理，適用行業為銀行業，分為現金收入、現金支出、轉帳收入、轉帳支出傳票四種。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>三、會計憑證之保存</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 裝訂</strong>：會計憑證，<span class="mark-text">應按日或按月裝訂成冊</span>，有原始憑證者，應附於記帳憑證之後。<br>
+              • <strong>B. 副本或存根</strong>：對外憑證至少自留副本或存根一份，應依次編定字號裝訂成冊。<br>
+              • <strong>C. 保存年限</strong>：應於年度決算程序辦理終了後至少保存<span class="mark-text">5年</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、複式傳票的編製與登帳</h3>
+        <ul class="memo-list">
+          <li><strong>A. 複式傳票種類</strong>：
+            <div class="ex-box">
+              • <strong>三分法</strong>：1.現金收入傳票、2.現金支出傳票、3.轉帳傳票（轉帳及混合交易）。<br>
+              • <strong>四分法</strong>：1.現金收入傳票、2.現金支出傳票、3.分錄轉帳傳票（轉帳交易）、4.現金轉帳傳票（混合交易）。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>B. 傳票編號與登帳來源</strong>：
+            <div class="ex-box">
+              • <strong>編號方式</strong>：總號（依交易發生順序不分種類編號）、分號（依傳票種類各自從1號起編號）。<br>
+              • <strong>登帳流向</strong>：複式傳票 ➔ 日記簿 ➔ 分類帳。<br>
+               1. 總分類帳的過帳來自<span class="mark-text">日記簿</span>。<br>
+               2. 明細分類帳的過帳來自<span class="mark-text">傳票</span>。
+            </div>
+          </li>
+          <li style="margin-top: 10px;"><strong>C. 特殊傳票</strong>：
+            <div class="ex-box">
+              • <strong>代傳票</strong>：若原始憑證具備傳票應有要件，則可<span class="mark-text">以原始憑證代替傳票</span>使用。<br>
+              • <strong>套寫傳票</strong>：傳票與其他單據以<span class="mark-text">一次套寫</span>方式製成。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+  
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="006.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-6)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="008.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (2-2)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
