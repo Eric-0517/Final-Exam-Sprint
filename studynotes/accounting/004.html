@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1-4 財務報表要素與會計項目｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 10px 14px; margin-top: 6px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .memo-img { width: 100%; height: auto; max-width: 100%; border-radius: 6px; margin: 10px 0; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+  .note-text { font-size: 0.85rem; color: #64748b; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 緒論</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../accounting.html">會計學目錄 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 1-4</span>
+      <h1>1-4 財務報表要素與會計項目</h1>
+      <p>實虛帳戶、報表要素層級劃分、五大要素定義與會計項目表架構。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+     
+      <div class="memo-section">
+        <h3>一、實帳戶／永久性帳戶</h3>
+        <ul class="memo-list">
+          <li>具有實質的財務或權力存在，據以編製<span class="mark-text">資產負債表</span>，表達<span class="mark-text">財務狀況</span>，<span class="mark-text">期末結轉下期</span>。</li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>二、虛帳戶／暫時性帳戶</h3>
+        <ul class="memo-list">
+          <li>為方便計算當期損益而設置，據以編製<span class="mark-text">綜合損益表</span>，表達<span class="mark-text">財務績效</span>，期末<span class="mark-text">結清為零</span>，轉入<span class="mark-text">本期損益（權益）</span>。</li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、財務報表要素之層級劃分</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 第一級項目</strong>：依類別分為<span class="mark-text">資產</span>、<span class="mark-text">負債</span>、<span class="mark-text">權益</span>、<span class="mark-text">收益</span>及<span class="mark-text">費損</span>，即財務報表五大要素。<br>
+              • <strong>B. 第二級項目</strong>：可再依性質分類，如資產分為<span class="mark-text">「流動資產」</span>及<span class="mark-text">「非流動資產」</span>兩項目。<br>
+              • <strong>C. 第三級項目</strong>：可依報表表達方式再分類，如流動資產分為現金及約當現金、預付款項等，<span class="mark-text">財務報表一般以第三級項目呈現</span>。<br>
+              • <strong>D. 第四級項目</strong>：可再分為若干項目，如現金及約當現金下設有現金、銀行存款等，<span class="mark-text">分錄一般以第四級項目呈現</span>。<br>
+              • <strong>E. 第五級項目</strong>：可依實際需求再分為若干子項目，如銀行存款下可設有銀行存款－華南銀行等子項目。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、財務報表五大要素</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>資產</strong>：因過去事項所產生之<span class="mark-text">資源</span>，由企業控制並預期帶來經濟效益之<span class="mark-text">流入</span>。依<span class="mark-text">流動性</span>（變現所需時間，時間愈短流動性愈高）排列。<br>
+              • <strong>負債</strong>：因過去事項所產生之<span class="mark-text">現時義務</span>，預期清償將導致資源<span class="mark-text">流出</span>。依<span class="mark-text">流動性</span>（到期日遠近，到期日愈近流動性愈高）排列。<br>
+              • <strong>權益</strong>：總資產減總負債的餘額，代表業主對企業資產之<span class="mark-text">剩餘請求權</span>。<br>
+              • <strong>收益</strong>：報導期間之交易造成<span class="mark-text">資產增加或負債減少</span>，最終使得<span class="mark-text">權益增加</span>的總數（<span class="mark-text">不包含</span>業主投資所增加的權益）。<br>
+              • <strong>費損</strong>：報導期間之交易造成<span class="mark-text">資產減少或負債增加</span>，最終使得<span class="mark-text">權益減少</span>的總數（<span class="mark-text">不包含</span>分配給業主所減少的權益）。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>五、會計項目表圖解</h3>
+        <ul class="memo-list" style="list-style: none; padding-left: 0;">
+          <li><strong>1. 資產類</strong><br><img class="memo-img" src="Ch1/014.5.1.png" alt="資產會計項目表"></li>
+          <li style="margin-top: 15px;"><strong>2. 負債類</strong><br><img class="memo-img" src="Ch1/014.5.2.png" alt="負債會計項目表"></li>
+          <li style="margin-top: 15px;"><strong>3. 權益類</strong><br><img class="memo-img" src="Ch1/014.5.3.png" alt="權益會計項目表"></li>
+          <li style="margin-top: 15px;"><strong>4. 收益類</strong><br><img class="memo-img" src="Ch1/014.5.4.png" alt="收益會計項目表"></li>
+          <li style="margin-top: 15px;"><strong>5. 費損類</strong><br><img class="memo-img" src="Ch1/014.5.5.png" alt="費損會計項目表"></li>
+        </ul>
+        <div class="note-text">(註) 本表以會計丙檢人工記帳項檢定公佈之範例 & 證交所公佈之「一般行業會計項目及代碼表」為依據。</div>
+      </div>
+
+    </article>
+
+  
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="003.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (1-3)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="005.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (1-5)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
