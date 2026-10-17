@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3-2 結帳｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .formula-table { width: 100%; border-collapse: collapse; margin: 8px 0; text-align: center; }
+  .formula-table td { padding: 6px; border: 1px dashed #cbd5e1; font-family: monospace; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第三章 期末會計程序</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 3-2</span>
+      <h1>3-2 結帳</h1>
+      <p>結帳意義與功能、虛帳戶結清、營所稅申報與計算、所得稅費用結轉及實帳戶結轉考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、結帳的意義與功能</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>意義</strong>：報導期間終了時，彙總計算所有帳戶資料，以利編製報表，了解本期財務績效及期末狀況。<br>
+              • <strong>功用</strong>：1. 了解本期財務績效。 2. 了解期末財務狀況。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>二、結帳的工作</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 虛帳戶結清</strong>：作<span class="mark-text">「結帳分錄」</span>並過入分類帳，使<span class="mark-text">所有虛帳戶餘額結清為零</span>。<br>
+              • <strong>B. 實帳戶結轉下期</strong>：將資產、負債、權益類實帳戶結轉至下期繼續使用。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>三、虛帳戶結清</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 商品帳戶結帳（結轉銷貨成本與本期損益）</strong>：<br>
+               - 加項科目結算：借：銷貨成本、本期損益 / 貸：存貨(期初)、進貨、進貨費用。<br>
+               - 減項科目結算：借：進貨退出、進貨折讓、存貨(期末) / 貸：銷貨成本、本期損益。<br>
+              • <strong>B. 所有收益及費損帳戶結帳</strong>：<br>
+               - 借餘項目結算：借：<span class="mark-text">本期損益</span> / 貸：各費損項目。<br>
+               - 貸餘項目結算：借：各收益項目 / 貸：<span class="mark-text">本期損益</span>。<br>
+              • <strong>C. 本期損益結帳</strong>：<br>
+               - 本期淨損：借：<span class="mark-text">業主往來、累積盈虧</span> / 貸：本期損益。<br>
+               - 本期淨利：借：本期損益 / 貸：<span class="mark-text">業主往來、累積盈虧</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>四、營利事業所得稅之申報與計算</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 申報差異</strong>：<br>
+               - 獨資／合夥：辦理結算申報，<span class="mark-text">不須繳納營利事業所得稅</span>，所得列為個人綜合所得稅。<br>
+               - 公司：辦理結算申報，<span class="mark-text">須計算及繳納營利事業所得稅</span>。<br>
+              • <strong>B. 稅額計算（P＝課稅所得，T＝營所稅稅額）</strong>：<br>
+               1. P ≦ $120,000：免徵。<br>
+               2. $120,000 ＜ P ≦ $200,000：T ＝ (P － $120,000) × 1／2。<br>
+               3. P ＞ $200,000：T ＝ P × <span class="mark-text">20%</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>五、本期所得稅費用結轉</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              1. 預估所得稅費用：借：<span class="mark-text">本期所得稅費用</span> / 貸：本期所得稅負債。<br>
+              2. 結轉本期損益：借：本期損益 / 貸：<span class="mark-text">本期所得稅費用</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>六、實帳戶結轉</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 差額結轉法（英美式結轉法）</strong>：<span class="mark-text">不作任何分錄</span>，直接在分類帳上結轉。<br>
+              • <strong>B. 分錄結轉法（大陸式結轉法）</strong>：必須於日記簿作成<span class="mark-text">結帳分錄</span>與<span class="mark-text">開帳分錄</span>。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="010.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (3-1)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="012.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (3-3)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
