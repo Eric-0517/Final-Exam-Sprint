@@ -10,7 +10,7 @@
 <header class="topbar">
         <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
         <div class="sub">
-            09商業與管理群專二試題題庫　
+            09商業與管理群專二試題題庫 
             <a href="index.html" style="color:inherit">切換題庫</a>
         </div>
     </header>
@@ -40,13 +40,14 @@
     <div class="quiz-head">
       <button class="ghost" data-action="quit">退出</button>
       <div class="progress-wrap">
-        <div class="progress-text"><span id="qNo">1</span> / 25</div>
+        <div class="progress-text"><span id="qNo">1</span> / <span id="total">50</span></div>
         <div class="progress"><i id="progressBar"></i></div>
       </div>
       <div class="score-mini">每題 2 分</div>
     </div>
     <article class="question-card">
       <div class="question-image-wrap"><img id="questionImage" alt="專二題目"></div>
+      <div id="questionText" style="margin-bottom: 15px; font-weight: bold;"></div>
       <div class="options" id="options"></div>
     </article>
     <div class="quiz-actions">
