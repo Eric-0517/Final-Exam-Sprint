@@ -53,18 +53,25 @@
     function renderQuestionContent(container, question, review = false) {
         container.innerHTML = "";
 
+        // 1. 先顯示題目文字
+        const prompt = document.createElement("div");
+        prompt.className = review ? "review-question-text" : "";
+        prompt.style.fontWeight = "bold";
+        prompt.style.marginBottom = "10px";
+        prompt.style.whiteSpace = "pre-line"; // 保持換行格式
+        prompt.textContent = question.question || "";
+        container.appendChild(prompt);
+
+        // 2. 如果有圖片，則在文字下方加上圖片
         const image = createImage(
             question.image,
             "題目圖片",
             review ? "review-question-image" : "question-image"
         );
 
-        if (image) container.appendChild(image);
-
-        const prompt = document.createElement("div");
-        prompt.className = review ? "review-question-text" : "";
-        prompt.textContent = question.question || "";
-        container.appendChild(prompt);
+        if (image) {
+            container.appendChild(image);
+        }
     }
 
     async function loadBank() {
@@ -136,7 +143,6 @@
             return;
         }
 
-        
         quizQuestions = questionBank.slice(
             0,
             Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
@@ -349,7 +355,6 @@
     $("nextBtn").addEventListener("click", () => {
         if (!quizQuestions.length) return;
 
-        
         if (!userAnswers[currentIndex]) {
             alert("請先選擇答案。");
             return;
