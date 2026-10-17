@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一章 商業基本概念｜商業概論重點整理</title>
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .example-tag { display: inline-block; background-color: #cd0505; color: white; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第一章 商業基本概念</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../index.html">首頁 <span>›</span></a>
+  <a href="../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 01</span>
+      <h1>第一章 商業基本概念</h1>
+      <p>涵蓋商業的意義、成立要件、經營要素、生產種類、起源發展、商業範圍與現代特質。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+     
+      <div class="memo-section">
+        <h3>商業的意義</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>狹義</strong>：以 <span class="mark-text">營利</span> 為目的，<span class="mark-text">直接</span> 買進商品再轉售給他人，而引起商品與貨幣移轉的行業，即 <span class="mark-text">買賣業</span>，亦稱為 <span class="mark-text">固有商業</span>。</li>
+            <li><strong>廣義</strong>：以 <span class="mark-text">營利</span> 為目的，<span class="mark-text">直接或間接</span> 提供商品、金錢或勞務給他人的行業，包括 <span class="mark-text">固有商業</span>（買賣業），及輔助交易完成的 <span class="mark-text">輔助商業</span>（如 <span class="mark-text">金融業及保險業、仲介業、倉儲業</span> 等）。</li>
+          </ul>
+        </div>
+      </div>
+
+    
+      <div class="memo-section">
+        <h3>商業活動的成立要件</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>以營利為目的</strong>：商業活動必須以 <span class="mark-text">營利</span> 為目的。<br><span class="example-tag">ex.</span> 百貨公司舉辦餅乾義賣活動並全數捐助公益，因非以營利為目的，故不屬於商業活動。</li>
+            <li><strong>發生交易行為</strong>：必須有 <span class="mark-text">所有權移轉</span> 或 <span class="mark-text">價值交換</span> 等行為。<br><span class="example-tag">ex.</span> 公益團體接受社會大眾捐款，因未發生交易行為，故不屬於商業活動。</li>
+            <li><strong>出於雙方自願</strong>：必須出於 <span class="mark-text">買賣雙方自願</span>。<br><span class="example-tag">ex.</span> 陌生男子在火車站向民眾強迫推銷愛心商品，因非自願行為，故不屬於商業活動。</li>
+            <li><strong>符合法律規範</strong>：必須符合 <span class="mark-text">法律規範</span>。<br><span class="example-tag">ex.</span> 民眾在網路上販賣演唱會黃牛票，因不合法故不屬於商業活動。</li>
+          </ul>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>商業經營的要素</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>商品</strong>：商人用來獲取利潤的財貨或勞務，即 <span class="mark-text">商業經營的標的物</span>（如便利商店飲料、律師諮詢）。</li>
+            <li><strong>勞動</strong>：出資者與受雇者從事商業活動所付出的心力貢獻（如廚師烹飪技術、理財專員建議）。</li>
+            <li><strong>資本</strong>：用於生產或營業之工具，分為有形資產（廠房、設備）與無形資產（專利權、商標權）。</li>
+            <li><strong>商業信用</strong>：企業被債權人所認定的 <span class="mark-text">償債能力</span>（如金錢借貸、貨物賒欠）。</li>
+            <li><strong>商業組織</strong>：集合上述要素為了有效率達成目標而組成的 <span class="mark-text">營利團體</span>。</li>
+          </ul>
+        </div>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>生產的種類</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>原始生產（原料生產）</strong>：直接利用 <span class="mark-text">自然資源</span>，產生 <span class="mark-text">原始效用</span> 或 <span class="mark-text">本源效用</span>（如漁夫捕魚）。</li>
+            <li><strong>形式生產（工業生產）</strong>：將原料 <span class="mark-text">加工</span> 改變型態，產生 <span class="mark-text">形式效用</span>（如葡萄酒製作）。</li>
+            <li><strong>勞務生產</strong>：<span class="mark-text">提供勞務</span> 滿足需求，產生 <span class="mark-text">勞務效用</span>（如醫生看診、歌手唱歌）。</li>
+            <li><strong>商業生產（效用生產）</strong>：包含 <span class="mark-text">所有權效用</span>（所有權移轉）、<span class="mark-text">時間效用</span>（變更使用時間）、<span class="mark-text">地方效用</span>（轉換空間）。</li>
+          </ul>
+        </div>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>商業的起源與發展</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>商業起源</strong>：人類技能差異、資源分布不同、生產技術進步、慾望無窮、商人謀利動機、交通運輸便利。</li>
+            <li><strong>交易方式演進</strong>：物物交換時期（無貨幣與共同標準） ➔ 貨幣交易時期 ➔ 信用交易時期（具延遲支付特性）。</li>
+            <li><strong>產銷經營觀點</strong>：家庭生產時期 ➔ 手工業生產時期 ➔ 茅舍生產時期 ➔ 工廠生產時期（複式簿記） ➔ 現代化經營時期。</li>
+          </ul>
+        </div>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>商業的範圍</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>行業標準分類</strong>：批發業（批售業務）、零售業（專業及綜合零售業）。</li>
+            <li><strong>組織型態分類</strong>：獨資（無限責任）、合夥（連帶無限責任）、有限合夥（普通合夥人無限責任、有限合夥人有限責任）、公司（有限公司/無限公司/兩合公司/股份有限公司/閉鎖性股份有限公司）。</li>
+            <li><strong>資本來源分類</strong>：公營企業（政府資本超過 50%）、民營企業。</li>
+            <li><strong>經營區域分類</strong>：國內貿易、國際貿易、過境貿易（透過第三國轉運）。</li>
+          </ul>
+        </div>
+      </div>
+
+   
+      <div class="memo-section">
+        <h3>商業的現代特質</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>分工專業化</strong>：各司其職以提高效率。</li>
+            <li><strong>生產標準化</strong>：明確標準以達 <span class="mark-text">大量生產</span> 與 <span class="mark-text">降低成本</span>。</li>
+            <li><strong>管理人性化</strong>：培養歸屬感與滿足需求。</li>
+            <li><strong>商品客製化</strong>：少量多樣 <span class="mark-text">量身訂作</span>。</li>
+            <li><strong>資本大眾化</strong>：發行股票募集資金，形成 <span class="mark-text">所有權與經營權分離</span>。</li>
+            <li><strong>經營多角化</strong>：基於 <span class="mark-text">風險分散</span> 開發不同商品或副業。</li>
+            <li><strong>業際整合化</strong>：<span class="mark-text">不同類型企業</span> 跨界 <span class="mark-text">合作</span>。</li>
+            <li><strong>經營國際化</strong>：拓展國際市場與多國投資。</li>
+          </ul>
+        </div>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="../business.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="02.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第二章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
