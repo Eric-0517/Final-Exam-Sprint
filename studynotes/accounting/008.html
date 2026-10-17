@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2-2 分錄與過帳｜會計學重點整理</title>
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第二章 會計憑證與平時會計程序</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 2-2</span>
+      <h1>2-2 分錄與過帳</h1>
+      <p>分錄定義、日記簿功能與記帳程序、過帳原理、分類帳格式與種類核心考點。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      
+      <div class="memo-section">
+        <h3>一、分錄</h3>
+        <ul class="memo-list">
+          <li>交易發生後，分析交易，決定會計項目及金額，並以借貸法則區分借貸，<span class="mark-text">依交易發生的順序</span>記入日記簿之處理程序。</li>
+        </ul>
+      </div>
+
+     
+      <div class="memo-section">
+        <h3>二、日記簿</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 意義</strong>：以<span class="mark-text">交易（會計事項）</span>為主體、按交易發生的順序記錄的帳簿。<br>
+              • <strong>B. 別稱</strong>：序時帳簿、分錄簿、原始記錄簿。<br>
+              • <strong>C. 功用</strong>：<span class="mark-text">瞭解交易全貌、作為過帳依據</span>、易於發現錯誤、便於事後追查。<br>
+              • <strong>D. 記帳程序</strong>：日期 ➔ 傳票編號（分號）➔ 會計項目 ➔ 摘要 ➔ 金額 ➔ <span class="mark-text">類頁</span>。<br>
+               - 分錄完成後：日記簿頁次會回填在「傳票的日頁欄」。<br>
+               - 過帳完成後：日記簿頁次會轉填在「分類帳的日頁欄」。<br>
+              • <strong>E. 種類</strong>：普通日記簿（一定要設置）、特種日記簿。<br>
+              • <strong>F. 相關規範</strong>：<br>
+               1. 會計事項應按發生次序逐日登帳，最遲不得超過<span class="mark-text">二個月</span>。<br>
+               2. <span class="mark-text">所有分錄均應記入日記簿</span>，包括平時分錄、調整分錄、結帳分錄等。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>三、過帳</h3>
+        <ul class="memo-list">
+          <li><span class="mark-text">將日記簿中所有分錄</span>的會計項目及金額，依原借貸方向，<span class="mark-text">轉記到分類帳相關帳戶予以分類彙總</span>的處理程序。</li>
+        </ul>
+      </div>
+
+      
+      <div class="memo-section">
+        <h3>四、分類帳</h3>
+        <ul class="memo-list">
+          <li>
+            <div class="ex-box">
+              • <strong>A. 意義</strong>：以<span class="mark-text">會計項目</span>為主體而記錄的帳簿。<br>
+              • <strong>B. 別稱</strong>：終結記錄簿。<br>
+              • <strong>C. 功用</strong>：瞭解個別會計項目的增減變動情形及餘額、作為編表依據。<br>
+              • <strong>D. 記帳程序</strong>：帳戶 ➔ 日期（交易發生日）➔ 摘要 ➔ 借方貸方金額 ➔ <span class="mark-text">日頁</span>。<br>
+               - 過帳完成後：分類帳頁次會回填在「日記簿的類頁欄」。<br>
+              • <strong>E. 格式</strong>：<br>
+               - 標準式帳戶：兩欄式，<span class="mark-text">Ｔ字帳為標準式分類帳之簡化</span>。<br>
+               - 餘額式帳戶：三欄式，商業會計法規定採用，實務常用。<br>
+              • <strong>F. 種類</strong>：總分類帳簿（一定要設置）、明細分類帳簿。
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </article>
+
+    
+    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="007.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (2-1)</a>
+      <a href="../accounting.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="009.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (2-3)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
