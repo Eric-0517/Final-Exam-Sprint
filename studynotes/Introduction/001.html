@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>數位科技概論｜重點整理</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">DIGITAL TECHNOLOGY</span>
+      <h1>第一章 數位科技概念</h1>
+      <p>1-1 資料與資訊</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１資料的定義</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:normal;">（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+          
+            <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">資料 (Data)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              未經整理的訊息，包括數字、文字、圖形、聲音、影片等。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 身高、體重
+            </div>
+            <div style="margin-top: 10px;"><img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: auto;" src="Ch1/011.1.1.png"></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">資訊 (Information)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              <span style="color: #6366f1; font-weight: bold;">資料</span>經整理所得到有意義的結果。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> BMI計算公式
+            </div>
+            <div style="margin-top: 10px;"><img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: auto;" src="Ch1/011.1.2.png"></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">資料處理 (Data Processing)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              將<span style="color: #6366f1; font-weight: bold;">資料</span>轉換成<span style="color: #6366f1; font-weight: bold;">資訊</span>的過程。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> BMI
+            </div>
+            <div style="margin-top: 10px;"><img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: auto;" src="Ch1/011.1.3.png"></div>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 8px; line-height: 1.5; padding: 8px; background: #f8fafc; border-radius: 6px;">
+            <strong style="color: #6366f1;">(註)</strong> GIGO (Garbage In Garbage Out)：在資訊界是個常用的術語，這是指當輸入的資料不正確時，處理運算後輸出的資訊也是錯誤而無效的。
+          </div>
+
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２資料處理的方式</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:normal;">（近五年出２題）</span>
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">批次處理 <span style="font-size: 0.8rem; color: #6366f1;">(註1)</span></div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              將資料累積至一定量或期限，再一次處理。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 電腦閱卷系統、水電費計算
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">即時處理 <span style="font-size: 0.8rem; color: #6366f1;">(註1)</span></div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              收到資料時，立即回應處理。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 安全監控系統、ATM提款機
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">線上處理／連線處理</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              處理過程中保持連線狀態。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 公車動態查詢
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">集中處理 <span style="font-size: 0.8rem; color: #6366f1;">(註2)</span></div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              ①將資料統一集中於中央電腦處理。<br>
+              ②用於系統流量穩定的系統。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 線上測驗系統
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">分散處理 <span style="font-size: 0.8rem; color: #6366f1;">(註2)</span></div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              ①資料由分散各地的電腦處理。<br>
+              ②用於會有瞬間大流量的系統。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 火車訂票系統、圖書館藏查詢
+              <hr style="border: 0; border-top: 1px solid #cbd5e1; margin: 8px 0;">
+              <span style="font-size: 0.85rem; color: #64748b;">(註) 瞬間大流量的系統如搶票平台。</span>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">交談式處理</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              一步步引導使用者完成作業。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 餐廳訂位系統、超商機台領卷
+            </div>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 8px; line-height: 1.5; padding: 8px; background: #f8fafc; border-radius: 6px;">
+            <div><strong style="color: #6366f1;">(註1)</strong> 屬於批次處理的，就不會是即時處理，反之亦然。</div>
+            <div style="margin-top: 4px;"><strong style="color: #6366f1;">(註2)</strong> 屬於集中處理的，就不會是分散處理，反之亦然。</div>
+          </div>
+
+          
+          <div style="margin-top: 15px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 12px; overflow-x: auto;">
+            <div style="font-weight: 600; color: #6366f1; margin-bottom: 10px; text-align: center; font-size: 0.95rem;">▼ 常見的資料處理方式實例比較表</div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+              <thead>
+                <tr style="background: #f1f5f9; text-align: center;">
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">實 例</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">批次處理</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">即時處理</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">線上處理</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">集中處理</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">分散處理</th>
+                  <th style="border: 1px solid #cbd5e1; padding: 8px;">交談式處理</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">電腦閱卷系統、水電費計算</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">安全監控系統、公車動態查詢</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">ATM提款機、超商機台領卷</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">線上測驗系統</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">火車訂票系統</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                </tr>
+                <tr style="text-align: center;">
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; text-align: left;">餐廳訂位系統、圖書館藏查詢</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px;"></td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                  <td style="border: 1px solid #cbd5e1; padding: 6px; color: #10b981; font-weight: bold;">✓</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px;">
+      <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 20px; border-radius: 8px;">回目錄</a>
+      <a href="002.html" class="primary" style="text-decoration: none; padding: 10px 20px; border-radius: 8px;">下一頁(1-2)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
