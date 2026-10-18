@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二章 系統平台</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">SYSTEM PLATFORM</span>
+      <h1>第二章 系統平台</h1>
+      <p>2-4 系統平台的未來發展趨勢（近五年出１題）（今年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１雲端運算 (Cloud Computing)（近五年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              不須透過本端電腦執行，而是透過網際網路連接遠端伺服器，取得資源或服務。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="雲端運算示意圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>軟體即服務 (Software as a Service, SaaS)：</strong><u>● 服務對象：一般使用者</u><br>透過瀏覽器或App直接使用線上軟體，<span style="color: #cd0505; font-weight: bold;">不需下載</span>，即可進行軟體服務（ex. Google文件、Microsoft 365）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>平台即服務 (Platform as a Service, PaaS)：</strong><u>● 服務對象：軟體開發者</u><br>透過平台工具直接在<span style="color: #cd0505; font-weight: bold;">遠端</span>，進行開發與測試（ex. GAE Google App Engine、Microsoft Azure）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>基礎架構即服務 (Infrastructure as a Service, IaaS)：</strong><u>● 服務對象：企業</u><br>以<span style="color: #cd0505; font-weight: bold;">租賃</span>的方式提供網路主機、雲端運算、傳輸頻寬、儲存空間等<span style="color: #cd0505; font-weight: bold;">基礎架構</span>（ex. AWS Amazon Web Service、Google Cloud）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２量子電腦 (Quantum computer)（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="量子電腦示意圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>量子位元／Q位元 (Quantum bit, Qubit)：</strong>量子電腦的基本運算單位，可同時存在<span style="color: #cd0505; font-weight: bold;">多種狀態</span>。（註：傳統電腦位元同一時間只能是0或1，量子電腦能同時存在0和1，N個位元可同時存在 $2^N$ 種狀態。）
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>量子電腦 (Quantum Computer)：</strong>①以量子狀態進行運算的電腦。②量子必須達到<span style="color: #cd0505; font-weight: bold;">量子疊加</span>和<span style="color: #cd0505; font-weight: bold;">量子糾纏</span>的狀態，才能利用量子位元運算。<br>
+                ● <strong>量子疊加 (Quantum Superposition)：</strong>即同時處於多種物理狀態。<br>
+                ● <strong>量子糾纏 (Quantum Entanglement)：</strong>即兩個粒子在交互作用後成為整體，即使分開也會展現相同特性。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３區塊鏈與比特幣（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">區塊鏈 (BlockChain)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              ①<span style="color: #cd0505; font-weight: bold;">去中心化</span>的<span style="color: #cd0505; font-weight: bold;">分散式</span>電子記帳資料庫。②藉由<span style="color: #cd0505; font-weight: bold;">密碼學</span>串接並保護內容的交易紀錄（即區塊）串鏈。③具有公開透明及<span style="color: #cd0505; font-weight: bold;">不可竄改</span>的特性。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="區塊鏈示意圖">
+            <div style="font-size: 0.90rem; line-height: 1.6; margin-top: 8px;">
+              ● <strong>缺點：</strong>交易速度慢（因交易紀錄須逐筆追溯）、安全性可能不足（理論上掌握50%以上的運算能力即可竄改紀錄）。<br>
+              ● <strong>中心化與去中心化：</strong><br>
+              - <strong>中心化：</strong>由單一機構監管所有用戶數據（ex. Facebook、Twitter）。<br>
+              - <strong>去中心化：</strong>任何個體可共同參與、創造及維護，無單一中央管理機構（ex. 區塊鏈、加密貨幣）。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">比特幣 (Bitcoin, BTC)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              ①去中心化的虛擬貨幣，亦是採用點對點 (P2P) 網路技術的加密貨幣。②透過線上交易或<span style="color: #cd0505; font-weight: bold;">挖礦</span>獲得，並將交易紀錄儲存於公開帳本（即區塊鏈）。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="比特幣示意圖">
+            <div style="font-size: 0.90rem; line-height: 1.6; margin-top: 8px;">
+              ● <strong>優點：</strong>價值<span style="color: #cd0505; font-weight: bold;">不容易被單一機構控制</span>。<br>
+              ● <strong>缺點：</strong>無管理單位，交易紀錄不容許修改，若款項被盜用將<span style="color: #cd0505; font-weight: bold;">無法追回</span>。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">區塊鏈與比特幣的相關概念</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>智能合約 (Smart Contracts)：</strong>①在區塊鏈中，當所屬物件滿足預設條件時，系統直接自動執行程式碼函式。②交易允許在沒第三方的情況下進行，可追蹤但不可逆轉。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>首次公開代幣發售 (Initial Offering Coin, ICO)：</strong>①透過區塊鏈技術將使用權限和加密貨幣技術合而為一，向大眾募集資金的融資方式。②團隊募集虛擬貨幣而非資金，並提供投資人未來相關服務而非股權。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>去中心化自治組織 (DAO)：</strong>①由智能合約自動執行內部規則或決策的組織。②所有決策公開透明，成員只要握有代幣即可參與決策。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>去中心化應用程式 (DApp)：</strong>①建構在區塊鏈上的應用程式，透過代幣來經營與維護（ex. Steemit社交平台、Etheremon遊戲平台）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>去中心化金融 (DeFi)：</strong>①建構在區塊鏈上，透過智能合約進行的金融服務系統。②交易雙方以點對點、不受中心監管的方式進行金融活動。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>非同質化代幣 (NFT)：</strong>①在區塊鏈中，代表擁有獨特物品（如數位藝術品、音樂歌曲、房地產產權等）所有權的代幣。②受到區塊鏈保護，具有不可竄改及獨一無二的特色。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>遊戲化金融 (Game Finance, GameFi)：</strong>①將遊戲道具或角色以NFT模式發行。②其<span style="color: #cd0505; font-weight: bold;">所有權</span>皆能轉移給其他玩家，甚至沒在玩遊戲的人，常被作為投資來操作。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+         <a href="007.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(2-3)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="009.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(3-1)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
