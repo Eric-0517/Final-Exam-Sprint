@@ -262,31 +262,6 @@ button:disabled {
   margin-bottom: 20px;
 }
 
-.question-image-wrap {
-  display: inline-block;
-  max-width: 100%;
-  background: #333333;
-  border-radius: 12px;
-  text-align: center;
-  margin: 0 auto 16px auto;
-  padding: 8px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-.question-image-wrap img,
-.question-image,
-.review-question-image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 600px;
-  object-fit: contain;
-  margin: 0 auto;
-  box-sizing: border-box;
-}
-
 .passage,
 .review-passage {
   white-space: pre-wrap;
@@ -352,17 +327,6 @@ button:disabled {
 .option-text {
   min-width: 0;
   overflow-wrap: anywhere;
-}
-
-.option-image,
-.review-option-image {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: min(100%, 320px);
-  max-height: 180px;
-  object-fit: contain;
-  margin: 8px 0;
 }
 
 .quiz-actions,
@@ -743,18 +707,14 @@ body.nav-open {
   }
 }
 
+/* 統一全站所有圖片：自動依大小帶有 #333333 深灰色背景、圓角與置中 */
+img,
+.img1,
+.question-image,
+.review-question-image,
+.option-image,
+.review-option-image,
 #questionImage {
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 600px;
-  object-fit: contain;
-  margin: 0 auto;
-}
-
-.wrong-item img,
-.explanation img {
   display: inline-block;
   width: auto;
   height: auto;
@@ -765,5 +725,15 @@ body.nav-open {
   padding: 8px;
   border-radius: 12px;
   margin: 12px auto;
+  box-sizing: border-box;
+}
+
+.question-image-wrap {
+  display: block;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
   box-sizing: border-box;
 }
