@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三章 軟體與App</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">SOFTWARE & APP</span>
+      <h1>第三章 軟體與App</h1>
+      <p>3-1 認識電腦軟體（近五年出１題）（今年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１電腦軟體（近五年出１題）（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">定義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              由一系列<span style="color: #cd0505; font-weight: bold;">程式指令</span>集合組成，用來驅使電腦工作。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="電腦軟體示意圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">軟體的類型（依使用目的分類）</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>系統軟體 (System Software)：</strong><span style="color: #cd0505; font-weight: bold;">管理與控制</span>電腦資源的軟體。<br>
+                ● 作業系統（ex. Windows、Linux、Chrome OS）<br>
+                ● 工具／公用程式（ex. 系統還原、磁碟工具、裝置管理員）<br>
+                ● <span style="color: #cd0505; font-weight: bold;">開發作業系統</span>的語言編譯程式（ex. C語言、組譯器、編譯器、直譯器、整合開發環境）
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>應用軟體 (Application Software)：</strong>針對特殊需求而設計的軟體。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">開發應用程式</span>的語言編譯程式（ex. Visual Basic、JavaScript、PHP）<br>
+                ● 套裝軟體（ex. Office辦公室軟體、Chrome瀏覽器、Photoshop影像處理軟體）<br>
+                ● 自行開發軟體（ex. 公司會計系統、高中校務系統）
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">使用授權</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">類型</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">放棄著作權</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">免費使用</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">可散佈或販售</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">開放原始碼</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">公用軟體</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">自由軟體</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">部分</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">免費軟體</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">共享軟體</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">私有軟體</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">△</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                </tr>
+              </table>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">
+              (註) 私有軟體不見得必為商業軟體，是否付費仍取決於所有者決定。<br>
+              ● <strong>常見商業軟體授權模式：</strong>零售版 (Retail)、隨機版／OEM版、大量授權版 (Volume Licensing)。購買合法軟體時，所購買的為「軟體使用權」，而非軟體本身。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/023.3.3.4.0.png" alt="授權架構圖">
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２工具程式（近五年出１題）（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">定義與常見類型</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              能協助使用者分析、管理、診斷電腦使用情形的系統程式，作業系統會內建許多工具程式（ex. Windows控制台、Mac系統偏好設定）。
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>系統還原：</strong>當系統出問題時，可還原到先前狀態（ex. 內建程式、SyncBack、Ghost）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>驅動程式：</strong>硬體之間或軟、硬體間的溝通介面（ex. 觸控板、印表機驅動程式）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>磁碟工具：</strong>包含磁碟管理（格式化、分割）、磁碟清理、磁碟重組／重組並最佳化磁碟機。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>檔案備份與壓縮軟體：</strong>壓縮（縮減檔案大小、包裹多個檔案）與解壓縮。廠商推出之壓縮軟體屬應用軟體（ex. WinRAR、7-Zip）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>防毒軟體：</strong>保護系統免遭病毒或惡意程式侵害。廠商推出之防毒軟體屬應用軟體（ex. 卡巴斯基、諾頓、PC-cillin）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３軟體開發工具 (Software Development Tool)（近五年出３題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">程式語言與編寫工具</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>低階程式語言：</strong><br>
+                ● <span style="color: #cd0505; font-weight: bold;">機器語言 (Machine language)：</span>由0與1組成，不須翻譯直接執行，難以閱讀。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">組合語言 (Assembly language)：</span>由英文和符號組成，須翻譯後執行，應用於硬體驅動程式、作業系統。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>高階程式語言：</strong>人類較容易閱讀，須翻譯後電腦才可執行。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>編譯工具：</strong><br>
+                ● <strong>組譯器：</strong>將組合語言翻譯成機器語言。<br>
+                ● <strong>編譯器 (Compiler)：</strong>將原始程式碼翻譯成目的碼（執行效率佳，但除錯較慢）。<br>
+                ● <strong>直譯器 (Interpreter)：</strong>逐行翻譯原始程式碼（可立即糾正錯誤，但效率較差）。<br>
+                ● <strong>除錯器 (Debugger)：</strong>協助測試、找出運行錯誤。<br>
+                ● <strong>整合開發環境 (IDE)：</strong>匯集上述工具的應用軟體（ex. Android Studio、Xcode、Visual Studio）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+   
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>４套裝軟體（近五年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">辦公室軟體與檔案傳輸、多媒體軟體</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              包含文書處理（Word / Writer）、簡報（PowerPoint / Impress）、試算表（Excel / Calc）、資料庫管理（Access / Base）。提供自由軟體（LibreOffice）、免費軟體（Google文件）及私有軟體（Microsoft Office、Apple iWork）。
+            </div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              同時涵蓋檔案傳輸軟體（網頁瀏覽器、電子郵件、即時通訊、FTP軟體如FileZilla）及多媒體軟體（影像處理Photoshop、向量繪圖Illustrator、影音播放VLC、影音剪輯威力導演等）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>５行動裝置軟體 (App)（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">定義與未來發展趨勢</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              專為智慧型手機或平板設計的軟體，需從應用程式商店取得（Android用Google Play商店，iOS用App Store）。
+            </div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>未來發展趨勢：</strong><br>
+              ● <strong>結合物聯網 (IoT) 應用：</strong>透過網路連結控制家電（ex. 智慧門鈴、Gogoro感應解鎖）。<br>
+              ● <strong>實現虛擬實境 (VR) 效果：</strong>將電腦模擬影像呈現於行動裝置中。<br>
+              ● <strong>實現擴增實境 (AR) 效果：</strong>結合真實世界與虛擬影像（ex. IKEA Place）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="008.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(2-4)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="010.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(3-2)</a>
+      </div>
+
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
