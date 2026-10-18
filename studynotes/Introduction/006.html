@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二章 系統平台</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">INTRODUCTION</span>
+      <h1>第二章 系統平台</h1>
+      <p>2-2 作業系統的概念與內部運作（今年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１作業系統 (Operating System, OS)（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">組成</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.1.1.png" alt="作業系統組成圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>作業環境 (Shell)：</strong>提供使用者<span style="color: #cd0505; font-weight: bold;">操作介面 (User Interface)</span>（ex. 文字介面 CLI、圖形化使用者介面 GUI）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>核心 (Kernel)：</strong>負責軟體、硬體的管理（ex. 行程管理、記憶體管理、檔案管理、控制輸入／輸出 (I/O) 行程等）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">基本功能</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>提供使用者操作介面：</strong>幫助使用者使用電腦系統的資源，處理各項事務。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>行程管理 (Process Management)：</strong>①管理<span style="color: #cd0505; font-weight: bold;">行程／程序 (Process)</span>的CPU與記憶體資源分配和調度。②使得電腦擁有<span style="color: #cd0505; font-weight: bold;">多工 (Multitask)</span>的能力。（註：多工是指作業系統能在同一個時間內執行一個以上的程式。）
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>記憶體管理 (Memory Management)：</strong>①提供獨立的記憶區塊，給每一個程式。②保護程式的記憶區塊，確保不受其它程式的侵犯或攻擊。③提供一個機制，讓合作的程式可以共享記憶區塊。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.1.2.3.png" alt="記憶體管理示意圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>檔案管理 (File Management)：</strong>①提供統一的邏輯觀點，來描述不同硬體設備中的資料。②使用特定的邏輯架構（如樹狀架構），管理檔案的存取。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>控制輸入／輸出行程：</strong>當程式執行輸入／輸出行程時，安排相關的硬體資源提供服務。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>提供網路服務與安全管理：</strong>①協助電腦建立網路連線，並處理各項網路工作。②可進行使用者身分認證及規範其權限等。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>監視系統防止錯誤：</strong>監控電腦運作（ex. 偵測到錯誤，提示警告訊息，並進行適當修正以維持運作）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２行程管理的運作（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">行程的概念</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.1.png" alt="行程概念圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>行程／程序 (Process)：</strong>①需執行程式碼片段。②作業系統進行資源分配和調度的基本單位。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>執行緒 (Thread)：</strong>①作業系統能進行運算排程的<span style="color: #cd0505; font-weight: bold;">最小執行單位</span>。②每個行程中可能含有一個或多個執行緒。③每條執行緒共用該行程中的全部系統資源。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">行程的狀態 (State)</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.2.png" alt="行程狀態圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>新生／新建 (New)：</strong>新行程產生中。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>就緒 (Ready)：</strong>排班，等待作業系統指派CPU來執行。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>執行 (Running)：</strong>正在執行。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>等待 (Waiting)：</strong>等待某事件發生（ex. 等待使用者輸入資料）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>結束 (Terminated)：</strong>完成執行。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">行程處理方式</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>循序處理 (Serial Computing)：</strong>將需解決的問題分成多個步驟指令，<span style="color: #cd0505; font-weight: bold;">依順序</span>交給同個核心執行，過程中<span style="color: #cd0505; font-weight: bold;">不切割程式</span>，即使有多核心，一程式也僅用一核心。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.1.png" alt="循序處理圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>並行處理 (Concurrent Computing)：</strong>在CPU僅有單核心時，讓作業系統能在各個行程間切換，<span style="color: #cd0505; font-weight: bold;">輪流執行</span>每個行程，若有多核心CPU時，自由調配由單或多核心處理所有行程。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="並行處理圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>平行處理 (Parallel Computing)：</strong>將需解決的問題分成多個步驟指令，依各自需求交給<span style="color: #cd0505; font-weight: bold;">不同核心同時執行</span>，過程中需某些協調機制避免發生錯誤。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.3.png" alt="平行處理圖"><br>
+                ● <strong>資料平行 (Data parallelism)：</strong>將資料切割後，分給各個處理單元處理（ex. 影片轉換格式的過程）。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.3.1.png" alt="資料平行圖"><br>
+                ● <strong>任務平行 (Task parallelism)：</strong>透過平行演算法將問題切割，分割後的問題便能夠獨立分給不同核心處理，最後再將問題組合（ex. 遊戲運行過程）。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.3.2.png" alt="任務平行圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>不同行程處理方式的CPU核心比較表：</strong>
+                <div style="overflow-x: auto; margin-top: 8px;">
+                  <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                    <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">CPU核心</th>
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">循序處理</th>
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">並行處理</th>
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">平行處理</th>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">單核心</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;"></td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">多核心</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３常見的作業系統（近五年出２題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">作業系統的類型</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>單人單工：</strong>①同時間內，只允許一個使用者執行一個程式。②欲執行多程式，需等待當前程式執行完成（ex. MS-DOS、CP/M）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>單人多工：</strong>①同時間內，只允許一個使用者操作。②透過在各個程式間切換，輪流執行各個程式（ex. Windows XP/7/10、Mac OSX、Chroms OS、iOS、Android）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>多人多工：</strong>①同時間內，允許多個使用者執行一或多個程式。②依規定（如優先權）分配程式執行時間。③常作為網路作業系統（包含伺服器與用戶端）（ex. Windows Server系列、UNIX、Linux）。<br>
+                <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+                  (註) 多人作業系統必為多工。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">常見的作業系統特色</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">作業系統</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">基礎架構</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">適用裝置</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">開放原始碼</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">UNIX</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC、Server</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">MS-DOS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">MacOS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">UNIX</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Linux</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">UNIX</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC、Server</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Windows</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">MS-DOS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">iOS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Mac OS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">手機、平板</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">-</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Android</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Linux</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">手機、平板</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Chrome OS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Linux</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">✓</td>
+                </tr>
+              </table>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>UNIX：</strong>①早期大型電腦、伺服器的作業系統。②實現<span style="color: #cd0505; font-weight: bold;">多人多工</span>。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>MS-DOS：</strong>①早期個人電腦的作業系統。②只有<span style="color: #cd0505; font-weight: bold;">文字介面</span>，採<span style="color: #cd0505; font-weight: bold;">單人單工</span>。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>MacOS：</strong>①Apple電腦的作業系統。②<span style="color: #cd0505; font-weight: bold;">圖形化使用者介面 (GUI)</span>的始祖。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>Linux：</strong>①現在伺服器普遍使用的作業系統。②屬於<span style="color: #cd0505; font-weight: bold;">自由軟體</span>，免費且可任意修改。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>Windows：</strong>現在個人電腦普遍使用的作業系統。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>iOS：</strong>Apple行動裝置的作業系統。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>Android：</strong>行動裝置普遍使用的作業系統。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>Chrome OS：</strong>以Chrome作為介面的雲端作業系統。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="005.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(2-1)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="007.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(2-3)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
