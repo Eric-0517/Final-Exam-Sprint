@@ -3,26 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>第四章 生產理論｜經濟學重點整理</title>
-<link rel="stylesheet" href="../../style.css">
+<title>第四章 生產理論</title>
+<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../online-counter.js"></script>
-<style>
-  .memo-section { margin-bottom: 24px; }
-  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
-  .memo-list li { margin-bottom: 8px; }
-  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
-  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
-  .formula-box { background-color: #f1f5f9; border: 1px dashed #94a3b8; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-family: monospace; }
-  .note-img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 8px; border: 1px solid #e2e8f0; }
-</style>
+<script src="../online-counter.js"></script>
 </head>
 <body>
-
 <header class="topbar">
   <div>
-    <div class="brand">第四章 生產理論</div>
+    <div class="brand">經濟學 目錄</div>
   </div>
 
   <button class="nav-toggle" id="navToggle"
@@ -45,110 +34,196 @@
 
 <main id="app">
   <section class="screen active" style="padding: 20px 0;">
-    <div class="hero" style="padding: 24px 16px;">
-      <span class="tag">CHAPTER 04</span>
+    <div class="hero">
+      <span class="tag">ECONOMICS</span>
       <h1>第四章 生產理論</h1>
       <p>涵蓋生產的意義與方法、生產要素、生產者剩餘、生產函數、短期產量分析及報酬三階段。</p>
     </div>
 
-    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
       
-      
-      <div class="memo-section">
-        <h3>4-1 生產的一般認識</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>生產的意義</strong>：生產者結合各種生產要素，用以創造或增加財貨效用的過程。</li>
-            <li><strong>生產方法</strong>：分為直接生產（直接運用勞動力）與間接生產／迂迴生產（先製造生產財再生產消費財）。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image098.jpg" alt="生產種類與效用" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image099.jpg" alt="生產要素" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-1 生產的一般認識</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產的意義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              是指生產者結合各種生產要素，用以創造或增加財貨效用的過程；如演員表演、老師授課、醫生看診等，均屬於生產的範圍。
+            </div>
           </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產的方法</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>直接生產：</strong>是指未使用工具或只用簡單工具，直接運用<span style="color: #cd0505; font-weight: bold;">勞動力</span>來生產消費財的生產方式（ex.徒手插秧種稻）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>間接生產（迂迴生產）：</strong>是指<span style="color: #cd0505; font-weight: bold;">先製造生產財</span>（如機器設備等），再利用這些生產財來生產消費財（ex.先製造插秧機，再用機器來從事插秧工作）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產的種類與創增的效用</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image098.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產要素</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image099.jpg">
+          </div>
+
         </div>
       </div>
 
-      
-      <div class="memo-section">
-        <h3>4-2 生產者剩餘</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>生產者剩餘</strong>：實際售價總額與生產者願意接受的最低售價總額之間的差額。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image100.jpg" alt="生產者剩餘" class="note-img">
-          </div>
-        </div>
-      </div>
-
-    
-      <div class="memo-section">
-        <h3>4-3 生產函數</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>生產函數概念</strong>：在一定技術水準下，生產要素投入量與最大產出量之間的關係。</li>
-            <li><strong>短期與長期</strong>：短期指部分要素固定（如廠房設備），長期指所有要素均可變動。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image101.jpg" alt="生產函數" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image102.jpg" alt="短期與長期" class="note-img">
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-2 生產者剩餘</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image100.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;">
+              <a href="http://ds.cfp.com.tw/u/EBFILM04021" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM040212" target="_blank" style="margin-right: 8px; color: #6366f1;">動手練習</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM04022" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明2</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM04023" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明3</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM04024" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明4</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM040242" target="_blank" style="color: #6366f1;">動手練習</a>
+            </div>
           </div>
         </div>
       </div>
 
      
-      <div class="memo-section">
-        <h3>4-4 短期產量分析</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>產量指標</strong>：總產量 (TP)、平均產量 (AP)、邊際產量 (MP)。</li>
-            <li><strong>邊際報酬遞減法則</strong>：在技術不變及其他要素固定下，連續增加某一可變要素的投入，當投入超過一定程度後，所帶來的邊際產量會遞減。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image103.jpg" alt="總產量TP" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image104.jpg" alt="平均產量AP" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image105.jpg" alt="邊際產量MP" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image106.jpg" alt="產量曲線對應" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image107.jpg" alt="TP與MP關係" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image111.jpg" alt="報酬三階段" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image112.jpg" alt="邊際報酬遞減法則" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-3 生產函數</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產函數的概念</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image101.jpg">
           </div>
-        </div>
-      </div>
 
-      
-      <div class="memo-section">
-        <h3>4-5 生產三階段</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>生產三階段</strong>：理性廠商會選擇在第二階段（AP遞減且MP大於零或遞減但大於零的階段）進行生產。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image113.jpg" alt="生產三階段" class="note-img">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">短期與長期的概念</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image102.jpg">
           </div>
         </div>
       </div>
 
      
-      <div class="memo-section">
-        <h3>4-6 補充概念</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>相關法規與主題</strong>：延伸探討相關生產與市場運作機制。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image114.jpg" alt="補充概念" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-4 短期產量分析</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">短期產量的種類</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>總產量 (TP)：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image103.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>平均產量 (AP)：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image104.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>邊際產量 (MP)：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image105.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;">
+                  <a href="http://ds.cfp.com.tw/u/EBFILM04041" target="_blank" style="color: #6366f1;">範例說明1</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">各種產量曲線間的關係</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>TP線上特殊點與MP、AP的對應點：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image106.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;">
+                  <a href="http://ds.cfp.com.tw/u/EBFILM04042" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明2</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM04043" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明3</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM04044" target="_blank" style="color: #6366f1;">範例說明4</a>
+                </div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>TP與MP的關係：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image107.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>MP與AP的關係：</strong><br>
+                (1) MP＞AP ⇔ AP遞增，MP先遞增後遞減。<br>
+                (2) MP＝AP ⇔ AP最大，MP遞減。<br>
+                (3) MP＜AP ⇔ AP遞減，MP遞減。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">報酬三階段（MP的三階段）</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image111.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">邊際報酬遞減法則</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image112.jpg">
           </div>
         </div>
       </div>
 
-    </article>
+    
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-5 生產三階段</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image113.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;">
+              <a href="http://ds.cfp.com.tw/u/EBFILM04051" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM040512" target="_blank" style="color: #6366f1;">動手練習</a>
+            </div>
+          </div>
+        </div>
+      </div>
 
     
-    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
-      <a href="003.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (第三章)</a>
-      <a href="../economics.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
-      <a href="005.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第五章)</a>
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>4-6 消費者主權及消費者保護運動</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image114.jpg">
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  
+    <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+      <a href="003.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一章</a>
+      <a href="../economics.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+      <a href="005.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一章</a>
     </div>
 
   </section>
