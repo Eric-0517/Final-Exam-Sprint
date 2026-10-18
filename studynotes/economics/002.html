@@ -3,26 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>第二章 需求與供給｜經濟學重點整理</title>
-<link rel="stylesheet" href="../../style.css">
+<title>第二章 需求與供給</title>
+<link rel="stylesheet" href="../style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../online-counter.js"></script>
-<style>
-  .memo-section { margin-bottom: 24px; }
-  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
-  .memo-list li { margin-bottom: 8px; }
-  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
-  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
-  .formula-box { background-color: #f1f5f9; border: 1px dashed #94a3b8; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-family: monospace; }
-  .note-img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 8px; border: 1px solid #e2e8f0; }
-</style>
+<script src="../online-counter.js"></script>
 </head>
 <body>
-
 <header class="topbar">
   <div>
-    <div class="brand">第二章 需求與供給</div>
+    <div class="brand">經濟學 目錄</div>
   </div>
 
   <button class="nav-toggle" id="navToggle"
@@ -45,105 +34,439 @@
 
 <main id="app">
   <section class="screen active" style="padding: 20px 0;">
-    <div class="hero" style="padding: 24px 16px;">
-      <span class="tag">CHAPTER 02</span>
+    <div class="hero">
+      <span class="tag">ECONOMICS</span>
       <h1>第二章 需求與供給</h1>
-      <p>涵蓋需求與供給法則、價格彈性、市場均衡、政府價格管制及從量課稅與補貼分析。</p>
+      <p>涵蓋需求與供給法則、價格彈性、市場均衡、政府價格管制及從亮課稅與補貼分析</p>
     </div>
 
-    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
-      
-     
-      <div class="memo-section">
-        <h3>2-1 需求與需求法則</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>需求的意義</strong>：其他條件不變下，一定期間內，消費者對某財貨在各種可能價格下<span class="mark-text">願意且有能力</span>購買的數量。</li>
-            <li><strong>需求法則</strong>：其他條件不變下，價格與需求量呈<span class="mark-text">反向變動</span>即P↓→Qd↑或P↑→Qd↓，需求曲線為<span class="mark-text">負斜率</span>。</li>
-            <li><strong>例外</strong>：炫耀財、季芬財。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image025.jpg" alt="需求曲線" class="note-img">
-          </div>
-        </div>
-      </div>
-
-     
-      <div class="memo-section">
-        <h3>2-2 需求的價格彈性</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>意義</strong>：價格變動百分比所引起的數量變動百分比。</li>
-            <li><strong>與總收益（TR）的關係</strong>：具彈性時 P 與 TR 反向；單一彈性時 TR 最大；無彈性時 P 與 TR 同向。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image039.jpg" alt="需求的價格彈性" class="note-img">
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="memo-section">
-        <h3>2-3 供給與供給法則</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>供給的意義</strong>：其他條件不變下，生產者對某財貨願意且有能力供應的數量。</li>
-            <li><strong>供給法則</strong>：價格與供給量呈<span class="mark-text">同向變動</span>，供給曲線為<span class="mark-text">正斜率</span>。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image049.jpg" alt="供給曲線" class="note-img">
-          </div>
-        </div>
-      </div>
-
-  
-      <div class="memo-section">
-        <h3>2-4 供給的價格彈性</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>意義</strong>：價格變動百分比所引起的供給量變動百分比。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image060.jpg" alt="供給的價格彈性" class="note-img">
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="memo-section">
-        <h3>2-5 市場均衡與價格機能</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>均衡條件</strong>：$P_d = P_s$ 且 $Q_d = Q_s$，市場無超額供給或超額需求。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image066.jpg" alt="市場均衡" class="note-img">
-          </div>
-        </div>
-      </div>
-
-     
-      <div class="memo-section">
-        <h3>2-6 政府對市場價格的控制</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>最高限價</strong>：訂在均衡價格以下，容易導致<span class="mark-text">短缺</span>。</li>
-            <li><strong>最低限價</strong>：訂在均衡價格以上，容易導致<span class="mark-text">過剩</span>。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image073.jpg" alt="價格管制" class="note-img">
-          </div>
-        </div>
-      </div>
-
-    </article>
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
 
     
-    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
-      <a href="001.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁 (第一章)</a>
-      <a href="../economics.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
-      <a href="003.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第三章)</a>
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-1 需求與需求法則</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求的意義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              是指在其他條件不變的情況下，於一定期間之內，在<span style="color: #cd0505; font-weight: bold;">各種可能的價格下</span>，消費者對某財貨<span style="color: #cd0505; font-weight: bold;">願意</span>且<span style="color: #cd0505; font-weight: bold;">有能力</span>購買的數量。<br>
+              「其他條件不變」是指：(1)所得不變；(2)消費者偏好不變；(3)相關財貨價格不變；(4)預期未來價格及所得不變；(5)市場消費人數不變。
+            </div>
+          </div>
+
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求的表示方式</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求表：</strong>是以表格呈現各種價格下，消費者對某項財貨所願意且有能力購買的數量。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求曲線：</strong><br>
+                <div style="margin-top: 8px;"><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: auto;" src="images/image025.jpg"></div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求函數：</strong><br>
+                ● 一般函數型：Q<sub style="font-size: 10px;">d</sub>＝f（P<sub style="font-size: 10px;">本身</sub>｜其他因素）→簡式為<span style="color: #cd0505; font-weight: bold;">Q<sub style="font-size: 10px;">d</sub>＝f (P)</span>。<br>
+                ● 直線型：Q<sub style="font-size: 10px;">d</sub>＝a－bP（a , b＞0；－b為需求曲線<span style="color: #cd0505; font-weight: bold;">斜率的倒數</span>，負數表示<span style="color: #cd0505; font-weight: bold;">負斜率</span>）<br>
+                <div style="margin-top: 6px; font-size: 0.85rem;">
+                  <a href="http://ds.cfp.com.tw/u/EBFILM02011" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM02012" target="_blank" style="color: #6366f1;">範例說明2</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求的種類</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「需求條件」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image026.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「財貨用途」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image027.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「財貨關係」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image028.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「消費人數」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image029.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;">
+                  <a href="http://ds.cfp.com.tw/u/EBFILM02013" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明3</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM020132" target="_blank" style="margin-right: 8px; color: #6366f1;">動手練習</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM02014" target="_blank" style="color: #6366f1;">範例說明4</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+         
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求法則</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>意義：</strong>在其他條件不變的情況下，財貨的價格與需求量呈<span style="color: #cd0505; font-weight: bold;">反向變動</span>的關係。即P↓→Q<sub style="font-size: 10px;">d</sub>↑或P↑→Q<sub style="font-size: 10px;">d</sub>↓。故一般而言，需求曲線為「<span style="color: #cd0505; font-weight: bold;">負斜率</span>」。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>成立原因：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image030.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>例外：</strong><br>
+                ● 炫耀財：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image031.jpg">
+                ● 季芬財：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image032.jpg">
+              </div>
+            </div>
+          </div>
+
+        
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求量變動與需求變動</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求量與需求的意義：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image033.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求量與需求的變動比較：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image034.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求變動的原因：</strong><br>
+                ● 所得：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image035.jpg">
+                ● 消費者偏好：偏好↑→增加購買→需求<span style="color: #cd0505;">↑</span>→D線<span style="color: #cd0505;">右移</span>；偏好↓→減少購買→需求<span style="color: #cd0505;">↓</span>→D線<span style="color: #cd0505;">左移</span>。<br>
+                ● 相關財貨的價格：<br>
+                 - 需求上的替代品：<br>
+                 <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image036.jpg">
+                 - 需求上的互補品：<br>
+                 <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image037.jpg">
+                 <div style="margin-top: 4px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02015" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明5</a><a href="http://ds.cfp.com.tw/u/EBFILM020152" target="_blank" style="color: #6366f1;">動手練習</a></div>
+                ● 消費者對未來的預期：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image038.jpg">
+                ● 市場消費人數：消費人數↑→需求<span style="color: #cd0505;">↑</span>→D線<span style="color: #cd0505;">右移</span>；消費人數↓→需求<span style="color: #cd0505;">↓</span>→D線<span style="color: #cd0505;">左移</span>。<br>
+                ● 特殊因素：氣候（暖冬使電暖器需求↓→D線左移）、災害（狂牛病使美國牛肉需求↓→D線左移）、特殊節日（春節使白蘿蔔需求↑→D線右移）。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-2 需求的價格彈性</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求的價格彈性（需求彈性）</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image039.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02021" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a><a href="http://ds.cfp.com.tw/u/EBFILM02022" target="_blank" style="color: #6366f1;">範例說明2</a></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求價格彈性的衡量方法</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>點彈性：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image040.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02023" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明3</a><a href="http://ds.cfp.com.tw/u/EBFILM020232" target="_blank" style="margin-right: 8px; color: #6366f1;">動手練習</a><a href="http://ds.cfp.com.tw/u/EBFILM02024" target="_blank" style="color: #6366f1;">範例說明4</a></div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>弧彈性：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image041.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02025" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明5</a><a href="http://ds.cfp.com.tw/u/EBFILM02026" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明6</a><a href="http://ds.cfp.com.tw/u/EBFILM02027" target="_blank" style="color: #6366f1;">範例說明7</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">直線型需求函數的點彈性分析</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>點彈性公式轉換：</strong>直線型需求函數Q<sub style="font-size: 10px;">d</sub>＝a－bP（－b為斜率倒數）。<br>
+                公式：<img src="images/image042.jpg" style="vertical-align: middle; max-width: 150px; height: auto;" alt=""/> <img src="images/image043.jpg" style="vertical-align: middle; max-width: 150px; height: auto;" alt=""/>
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02029" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明9</a><a href="http://ds.cfp.com.tw/u/EBFILM020292" target="_blank" style="color: #6366f1;">動手練習</a></div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>測量特定點的需求彈性：</strong><br>
+                公式：<img src="images/image044.jpg" style="vertical-align: middle; max-width: 150px; height: auto;" alt=""/>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>圖形上的點彈性分析（利用斜邊公式推導）：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image045.jpg">
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求彈性的類型及其與總收益的關係</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image046.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">需求彈性、價格與總收益的關係</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image047.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">決定需求彈性大小的因素</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image048.jpg">
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-3 供給與供給法則</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給的意義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              是指在其他條件不變的情況下，於一定期間之內，在<span style="color: #cd0505; font-weight: bold;">各種可能的價格</span>下，生產者對某財貨<span style="color: #cd0505; font-weight: bold;">願意</span>且<span style="color: #cd0505; font-weight: bold;">有能力</span>供應的數量。簡言之，供給是「<span style="color: #cd0505; font-weight: bold;">價格</span>」與「<span style="color: #cd0505; font-weight: bold;">供給量</span>」之間的關係。<br>
+              「其他條件不變」是指：(1)生產要素價格不變、(2)生產技術不變、(3)生產者人數不變、(4)預期未來價格不變、(5)相關財貨的價格不變、(6)政府的租稅與補貼政策不變。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給的表示方式</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給表：</strong>是以表格呈現各種價格下，生產者對產品所願意且有能力供給的數量。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給曲線：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image049.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給函數：</strong><br>
+                ● 一般函數型：Q<sub style="font-size: 10px;">S</sub>＝f（P<sub style="font-size: 10px;">本身</sub>｜其他因素）→簡式為<span style="color: #cd0505; font-weight: bold;">Q<sub style="font-size: 10px;">S</sub>＝f (P)</span>。<br>
+                ● 直線型：Q<sub style="font-size: 10px;">S</sub>＝a＋bP（a , b＞0）<br>
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02031" target="_blank" style="color: #6366f1;">範例說明1</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給的種類</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「供給量能否變動」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image050.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「生產規模是否有足夠時間調整」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image051.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「是否有連帶附屬產品」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image052.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「廠商人數」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image053.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02032" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明2</a><a href="http://ds.cfp.com.tw/u/EBFILM02033" target="_blank" style="color: #6366f1;">範例說明3</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給法則</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>意義：</strong>在其他條件不變的情況下，財貨的價格與供給量呈<span style="color: #cd0505; font-weight: bold;">同向變動</span>的關係。即P↓→Q<sub style="font-size: 10px;">S</sub>↓或P↑→Q<sub style="font-size: 10px;">S</sub>↑。故一般而言，供給曲線為「<span style="color: #cd0505; font-weight: bold;">正斜率</span>」。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>成立原因：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image054.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>例外：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image055.jpg">
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給量變動與供給變動</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給量與供給的意義：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image056.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給量與供給的變動比較：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image057.jpg">
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給變動的原因</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              ● 生產要素價格：要素價格↑→成本↑，利潤↓→供給<span style="color: #cd0505;">↓</span>→S線<span style="color: #cd0505;">左移</span>；要素價格↓→成本↓，利潤↑→供給<span style="color: #cd0505;">↑</span>→S線<span style="color: #cd0505;">右移</span>。<br>
+              ● 生產技術：技術↑→生產力↑→供給<span style="color: #cd0505;">↑</span>→S線<span style="color: #cd0505;">右移</span>；技術↓→生產力↓→供給<span style="color: #cd0505;">↓</span>→S線<span style="color: #cd0505;">左移</span>。<br>
+              ● 生產者人數：人數↑→供給<span style="color: #cd0505;">↑</span>→S線<span style="color: #cd0505;">右移</span>；人數↓→供給<span style="color: #cd0505;">↓</span>→S線<span style="color: #cd0505;">左移</span>。<br>
+              ● 預期財貨未來價格：預期未來價↑→囤積居奇，現在供給<span style="color: #cd0505;">↓</span>→S線<span style="color: #cd0505;">左移</span>；預期未來價↓→盡快出清，現在供給<span style="color: #cd0505;">↑</span>→S線<span style="color: #cd0505;">右移</span>。<br>
+              ● 相關財貨的價格：<br>
+               - 生產上的替代品：<br>
+               <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image058.jpg">
+               - 生產上的互補品：<br>
+               <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image059.jpg">
+              ● 政府的租稅與補貼政策：租稅↑（補貼↓）→成本↑→供給<span style="color: #cd0505;">↓</span>→S線<span style="color: #cd0505;">左移</span>；租稅↓（補貼↑）→成本↓→供給<span style="color: #cd0505;">↑</span>→S線<span style="color: #cd0505;">右移</span>。<br>
+              ● 特殊因素：氣候（寒流使石斑魚大量暴斃→供給↓→S線左移）、災害（禽流感撲殺雞隻→雞肉供給↓→S線左移）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-4 供給的價格彈性</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給的價格彈性（供給彈性）</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image060.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02041" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a><a href="http://ds.cfp.com.tw/u/EBFILM02042" target="_blank" style="color: #6366f1;">範例說明2</a></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給價格彈性的衡量方法</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>點彈性：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image061.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02043" target="_blank" style="color: #6366f1;">範例說明3</a></div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>弧彈性：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image062.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02044" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明4</a><a href="http://ds.cfp.com.tw/u/EBFILM02045" target="_blank" style="color: #6366f1;">範例說明5</a></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供給彈性的類型</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image063.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">決定供給彈性大小的因素</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image064.jpg">
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-5 市場均衡與價格機能</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">市場均衡的意義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              當需求曲線與供給曲線相交時，買賣雙方對交易價格與數量不會再改變，此狀態即為市場均衡。市場的<span style="color: #cd0505; font-weight: bold;">均衡條件</span>為：<span style="color: #cd0505; font-weight: bold;">P<sub style="font-size: 10px;">d</sub>＝P<sub style="font-size: 10px;">S</sub></span>、<span style="color: #cd0505; font-weight: bold;">Q<sub style="font-size: 10px;">d</sub>＝Q<sub style="font-size: 10px;">S</sub></span>。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">理論基礎</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image065.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">均衡價格的決定</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image066.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02051" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a><a href="http://ds.cfp.com.tw/u/EBFILM02052" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明2</a><a href="http://ds.cfp.com.tw/u/EBFILM020522" target="_blank" style="color: #6366f1;">動手練習</a></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">供需變動對市場均衡的影響</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給不變，需求變動：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image067.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>需求不變，供給變動：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image068.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02053" target="_blank" style="color: #6366f1;">範例說明3</a></div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給增加，需求增加：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image069.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給減少，需求減少：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image070.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給增加，需求減少：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image071.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>供給減少，需求增加：</strong><br><img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image072.jpg">
+                <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02054" target="_blank" style="color: #6366f1;">範例說明4</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>2-6 政府對市場價格的控制</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">價格管制</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image073.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;"><a href="http://ds.cfp.com.tw/u/EBFILM02061" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a><a href="http://ds.cfp.com.tw/u/EBFILM020612" target="_blank" style="color: #6366f1;">動手練習</a></div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">從量（定額）課稅與補貼</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image074.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">政府管制價格對市場造成的影響</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image075.jpg">
+          </div>
+        </div>
+      </div>
+
+
     </div>
+
+    
+    <div style="max-width: 500px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 10px; padding: 0 16px; flex-wrap: wrap;">
+      <a href="001.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一章</a>
+      <a href="../economics.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+      <a href="003.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一章</a>
+    </div>
+
+  
 
   </section>
 </main>
