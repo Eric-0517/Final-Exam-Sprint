@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一章 數位科技概念</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../index.html">首頁 <span>›</span></a>
+  <a href="../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">INTRODUCTION</span>
+      <h1>第一章 數位科技概念</h1>
+      <p>1-3 資料數位化之原理與方法（近五年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１數位化</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">定義</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>類比資料：</strong>呈現<span style="color: #cd0505; font-weight: bold;">連續</span>變化的真實資料（ex. 聲波、光波）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>數位資料：</strong><br>
+                ① 從類比資料中，截取接近的<span style="color: #cd0505; font-weight: bold;">離散</span>數據來呈現資料。<br>
+                ② 易儲存、傳送，且<span style="color: #cd0505; font-weight: bold;">抗干擾</span>能力佳。<br>
+                ③ 可將資料加密、壓縮、錯誤檢查（ex. 音訊檔、影像檔）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>數位化：</strong>將<span style="color: #cd0505; font-weight: bold;">類比資料</span>轉換成<span style="color: #cd0505; font-weight: bold;">數位資料</span>的過程（ex. 類比數位轉換器）。<br>
+                <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+                  (註) 類比數位轉換器(Analog-to-Digital Converter, ADC, A/D)可將類比資料轉換成電腦可處理的數位格式。反之，數位類比轉換器(Digital-to-Analog Converter, DAC, D/A)則是將數位資料還原成類比資料。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">數位化過程</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image001.jpg" alt="數位化過程圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟１ 取樣 (Sampling)：</strong>將連續的類比訊號以分散的週期切割後，取得每個節點的振幅值。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟２ 量化 (Quantization)：</strong>將分散週期切割的振幅值，各自對應到接近的分散數值。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟３ 編碼 (Encoding)：</strong>將量化的數值，轉換成電腦能表示的訊號。
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２聲音數位化（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">聲音的三要素</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>音量 (Volume)：</strong>單位：分貝 (dB)。聲音的大小，即聲波的振幅。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>音調 (Pitch)：</strong>單位：赫茲 (Hz)。聲音的高低，即聲波的頻率。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>音色 (Tone)：</strong>聲音的特色，即聲波的波形，如鋼琴和小提琴彈奏的聲音，各具不同特色。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">聲音數位化的過程與範例</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟１ 取樣 (Sampling)：</strong>將音波切割成類比波形訊號。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">取樣頻率</span>：每秒對聲音的取樣次數，單位為赫茲 (Hz)（人類聽力範圍大約介於20 Hz∼20 KHz之間），取樣率越高，則音質越好。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟２ 量化 (Quantization)：</strong>將訊號對照各切割點位置標示成數字。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">取樣位元／取樣解析度</span>：記錄每個取樣所使用的位元 (bit)，取樣位元越多，則誤差越小、音質越好。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟３ 編碼 (Encoding)：</strong>將數字資訊轉換為電腦能解讀的訊息記錄。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>範例：頻寬計算</strong><br>
+                <span style="color: #EF88BE; font-weight: bold;">Ｑ：</span>小雷想替素人歌手的試唱以雙聲道進行錄音，已知取樣頻率44,100 Hz，每個取樣以16 bits表示，取樣時間10秒，試問音訊檔案大小為何？<br>
+                <div style="margin-top: 6px; padding: 8px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                  <strong>答案：</strong><br>
+                  音訊檔案大小＝取樣頻率×位元數×聲道數×時間長度<br>
+                  44,100×16×2×10＝14,112,000 bits＝1,764,000 Bytes＝1.68 MB
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">音訊檔案的格式</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>未經壓縮（無失真）：</strong><br>
+                ● <strong>WAV：</strong>Windows的原始音訊格式，檔案大。<br>
+                ● <strong>CDA：</strong>常用於音樂CD。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>破壞性壓縮（失真）：</strong><br>
+                ● <strong>MP3：</strong>①藉由刪去人難以辨識的部分，大幅縮減檔案大小。②常用於網路音樂。<br>
+                ● <strong>WMA：</strong>微軟開發，支援串流。<br>
+                ● <strong>AAC：</strong>比MP3更高的壓縮率，檔案更小，且音質更好。<br>
+                ● <strong>OGG：</strong>類似MP3的音訊格式，屬於開放式格式。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>非破壞性壓縮（無失真）：</strong><br>
+                ● <strong>APE：</strong>檔案的大小為WAV的二分之一，並能維持良好的音質，壓縮比約為1：3。<br>
+                ● <strong>FLAC：</strong>檔案較APE大，但兼容性更好，且編碼速度快。<br>
+                ● <strong>ALAC：</strong>蘋果公司的音訊格式，可壓縮40%至60%。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>電子合成樂：</strong><br>
+                ● <strong>MIDI：</strong>記錄類似樂譜的資料（如音符、調號），檔案小。<br>
+                <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+                  (註) 音訊檔案大小：WAV＞MP3＞AAC＞MIDI；音質比較：WAV＞AAC＞MP3。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３影像數位化（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影像的類型</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>點陣圖 (Bitmap)：</strong>①由像素 (Pixel)構成。②放大呈現鋸齒狀模糊（<span style="color: #cd0505; font-weight: bold;">失真</span>）。ex. 照片、繪畫。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>向量圖 (Vector)：</strong>①記錄類似數學方程式的資料（如圓心座標、半徑長度等）。②放大呈現依然清晰（<span style="color: #cd0505; font-weight: bold;">不失真</span>）。ex. 美工插圖、工程圖。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影像數位化的過程與色彩對照表</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image002.jpg" alt="影像數位化過程圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟１ 取樣 (Sampling)：</strong>將影像以方格切割。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">解析度</span>：單位為ppi（每英吋中的像素）、dpi（每英吋中的點數），解析度越高（即方格越密），影像品質越好。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟２ 量化 (Quantization)：</strong>將每格影像方格依顏色標示。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">色彩深度</span>：記錄每個像素的顏色所使用的位元 (bit)，位元越多，顏色還原度越高。<br>
+                <div style="margin-top: 8px; overflow-x: auto;">
+                  <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                    <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">色彩類型</th>
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">位元數</th>
+                      <th style="padding: 6px; border: 1px solid #e2e8f0;">能表現的色彩數</th>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">黑白</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">1位元</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">2<sup>1</sup>=2色</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">灰階</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">8位元</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">2<sup>8</sup>=256色</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">256色</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">8位元</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">2<sup>8</sup>=256色</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">高彩</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">16位元</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">2<sup>16</sup>=65536色</td>
+                    </tr>
+                    <tr>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">全彩</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">24位元</td>
+                      <td style="padding: 6px; border: 1px solid #e2e8f0;">2<sup>24</sup>=1677萬色</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟３ 編碼 (Encoding)：</strong>將每格方格轉換為以0與1位元符號標示的二進位訊息記錄。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>範例：影像檔案大小與尺寸計算</strong><br>
+                <span style="color: #EF88BE; font-weight: bold;">Ｑ：</span>一張4×6英吋數位影像，解析度72 ppi，以256色儲存，其檔案大小為多少？<br>
+                <div style="margin-top: 4px; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                  <strong>答案：</strong>影像檔案大小＝總像素×位元數<br>
+                  (4×72)×(6×72)×log<sub>2</sub>256 ＝ (4×72)×(6×72)×8 bits ＝ 124,416 Bytes ＝ 121.5 KB
+                </div>
+                <span style="color: #EF88BE; font-weight: bold;">Ｑ：</span>一張24位元的全彩影像，尺寸為800×600，請問儲存這張影像需要多少記憶空間？<br>
+                <div style="margin-top: 4px; margin-bottom: 8px; padding: 6px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                  <strong>答案：</strong>800×600×24 bits ＝ 800×600×3 Bytes ＝ 1,440,000 Bytes ＝ 1.37 MB
+                </div>
+                <span style="color: #EF88BE; font-weight: bold;">Ｑ：</span>一張800×600的點陣圖，若以200像素/英吋列印時，長寬各是多少英吋？<br>
+                <div style="margin-top: 4px; padding: 6px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                  <strong>答案：</strong>長：800÷200＝4英吋，寬：600÷200＝3英吋
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影像檔案的格式</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>點陣圖 (Bitmap)：</strong><br>
+                ● <strong>未經壓縮（無失真）：</strong>BMP（Windows原始格式，檔案大）、IFF/TIFF（常用於<span style="color: #cd0505; font-weight: bold;">掃描</span>、<span style="color: #cd0505; font-weight: bold;">排版印刷</span>，檔案大）。<br>
+                ● <strong>破壞性壓縮（失真）：</strong>JPG/JPEG（1992年發布，支援<span style="color: #cd0505; font-weight: bold;">全彩</span>、<span style="color: #cd0505; font-weight: bold;">高效率壓縮比</span>）、HEIF/HEIC（最新格式，常用於<span style="color: #cd0505; font-weight: bold;">儲存連拍照片</span>）。<br>
+                ● <strong>非破壞性壓縮（無失真）：</strong>PNG（支援<span style="color: #cd0505; font-weight: bold;">全彩</span>、<span style="color: #cd0505; font-weight: bold;">透明</span>背景）、GIF（只有<span style="color: #cd0505; font-weight: bold;">256色</span>，支援<span style="color: #cd0505; font-weight: bold;">動畫</span>、<span style="color: #cd0505; font-weight: bold;">透明</span>背景）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>向量圖 (Vector)：</strong><br>
+                ● <strong>CDR：</strong>CorelDRAW軟體原始檔。<br>
+                ● <strong>AI：</strong>Adobe Illustrator軟體原始檔。<br>
+                ● <strong>DWG：</strong>AutoCAD軟體原始檔。<br>
+                ● <strong>EPS：</strong>常用於<span style="color: #cd0505; font-weight: bold;">排版印刷</span>，檔案大。<br>
+                <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+                  (註) CDR、AI、DWG、EPS雖然為向量圖檔，但也可加入點陣圖。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>４影音數位化（近五年出２題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影音的概念</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              影音是由一張張的圖像所組成，需透過壓縮（編碼）來縮小容量，並且在觀看時解壓縮（解碼）。<br>
+              <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image003.jpg" alt="影音概念圖">
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影音數位化的過程與範例</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟１ 取樣 (Sampling)：</strong>將影音擷取成單張影像，再將每張影像以方格切割，擷取影像間不同的部份。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">取樣頻率</span>：每秒擷取影像的次數，單位為fps（每秒框數）、Hz（赫茲），取樣頻率越高，影音品質越好。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">取樣密度</span>：影像分割成固定<span style="color: #cd0505; font-weight: bold;">像素 (pixel)</span>，取樣密度越高，影像品質越好。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟２ 量化 (Quantization)：</strong>將影像間不同部份的每格影像方格依顏色標示。<br>
+                ● <span style="color: #cd0505; font-weight: bold;">位元深度</span>：記錄每個像素的顏色所使用的位元 (bit)，位元越多，顏色還原度越高。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>步驟３ 編碼 (Encoding)：</strong>透過編解碼器 (Video Codec)將影音壓縮成影音格式。<br>
+                <strong>常見的編解碼器：</strong><br>
+                ● <strong>H.263：</strong>最初用於視訊會議和視訊電話。<br>
+                ● <strong>MPEG-4：</strong>用於音訊和視訊的壓縮編碼標準（ex. WMV9、Quick Time、DivX、Xvid）。<br>
+                ● <strong>H.264/AVC（進階視訊編碼）：</strong>廣泛用於各類網路和系統應用上，包括視訊、廣播及DVD儲存。<br>
+                ● <strong>H.265/HEVC（高效率視訊編碼）：</strong>新一代視訊編碼標準，有良好壓縮率，並支援8K解析度的影音。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>範例：影音檔案大小計算</strong><br>
+                <span style="color: #EF88BE; font-weight: bold;">Ｑ：</span>有一支256色的800×600影音，影格速率10 fps，長度10秒，請問其檔案大小約為多少？<br>
+                <div style="margin-top: 4px; padding: 6px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                  <strong>答案：</strong><br>
+                  影格速率指的是每秒播放的畫面數，單位為fps<br>
+                  影音檔案大小＝畫面總像素×位元數×影格速率×時間長度<br>
+                  (800×600)×(log<sub>2</sub>256)×10×10 bits ＝ (800×600)×8×10×10 bits ＝ (800×600)×10×10 Bytes ＝ 48×10<sup>6</sup> Bytes ≈ 48 MB
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">影音檔案的格式</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+              影音檔案是一種容器，它可能包含用編解碼器產生的檔案、多聲道的音效檔案、圖片、影音資訊或字幕等。
+            </div>
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">影音檔案</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">副檔名</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">編解碼器</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">音效編碼</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">AVI</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">.avi</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">所有</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">所有</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">FLV</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">.flv、.f4v、.f4p</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">H.264</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">AAC、MP3</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">WMV</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">.wmv、.asf</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Windows Media Video</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">WMA</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">MOV</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">.mov、.qt</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">所有</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">所有</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">MP4</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">.mp4、.m4p</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">H.264、MPEG-4、HEVC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">AAC、MP3</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="002.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(1-2)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="004.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(1-4)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
