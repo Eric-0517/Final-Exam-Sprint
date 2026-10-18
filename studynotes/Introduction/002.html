@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>數位科技概論｜重點整理</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">DIGITAL TECHNOLOGY</span>
+      <h1>第一章 數位科技概念</h1>
+      <p>1-2 數位資料的表示方式</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１數字系統</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:normal;">（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">定義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              由N種符號組成的數字系統便稱為<span style="color: #6366f1; font-weight: bold;">N進位</span>，並以(數值)<sub>N</sub>表示（唯獨十進位可省略基底）。<br>
+              N為該數字系統的<span style="color: #6366f1; font-weight: bold;">基底(base)</span>，基底的位數次方則為<span style="color: #6366f1; font-weight: bold;">權值</span>，而各個位數的數字分別乘以對應的權值後加總，即可求得該數於十進位制的數值。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">ex.</span> 數值＝⋯＋□×N<sup>3</sup>＋□×N<sup>2</sup>＋□×N<sup>1</sup>＋□×N<sup>0</sup>＋□×N<sup>-1</sup>＋□×N<sup>-2</sup>＋□×N<sup>-3</sup>＋□×N<sup>-4</sup>＋⋯
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">常見的數字系統</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              以不同數字系統計表示，就像以不同顆數將同一批蘋果裝籃，雖然籃子數量、籃子內的蘋果數不同，但蘋果總數不會改變。
+            </div>
+            <div style="margin-top: 10px;"><img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: auto;" src="Ch1/012.1.2.png"></div>
+            
+            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 8px;">
+              <div style="padding: 8px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>二進位：</strong>由0、1組成，基底為2。<br>
+                <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 2px;">ex.</span> (1001.01)<sub>2</sub> ＝ 1×2<sup>3</sup>＋0×2<sup>2</sup>＋0×2<sup>1</sup>＋1×2<sup>0</sup>＋0×2<sup>−1</sup>＋1×2<sup>−2</sup> ＝ 9.25<sub>10</sub><br>
+                <span style="font-size: 0.85rem; color: #64748b; margin-top: 4px; display: block;">(註) 使用「n位元」最多表示「2<sup>n</sup>種」符號。</span>
+              </div>
+              <div style="padding: 8px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>八進位：</strong>由0～7組成，基底為8。<br>
+                <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 2px;">ex.</span> (217.4)<sub>8</sub> ＝ 2×8<sup>2</sup>＋1×8<sup>1</sup>＋7×8<sup>0</sup>＋4×8<sup>−1</sup> ＝ 143.5<sub>10</sub>
+              </div>
+              <div style="padding: 8px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>十進位：</strong>由0～9組成，基底為10。<br>
+                <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 2px;">ex.</span> (231.5)<sub>10</sub> ＝ 2×10<sup>2</sup>＋3×10<sup>1</sup>＋1×10<sup>0</sup>＋5×10<sup>−1</sup> ＝ 231.5<sub>10</sub>
+              </div>
+              <div style="padding: 8px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>十六進位：</strong>由0～9、A～F組成，基底為16。<br>
+                <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 2px;">ex.</span> (2F.8)<sub>16</sub> ＝ 2×16<sup>1</sup>＋F×16<sup>0</sup>＋8×16<sup>−1</sup> ＝ 47.5<sub>10</sub>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">常見的數字系統間轉換</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              <strong>1. 十進位轉N進位（含小數點）</strong><br>
+              ● 整數部分：連<span style="color: #6366f1; font-weight: bold;">除</span>以N直到商等於0為止，再由<span style="color: #6366f1; font-weight: bold;">下往上取餘數</span>。<br>
+              ● 小數部分：連<span style="color: #6366f1; font-weight: bold;">乘</span>以N直到小數部分為0為止，再由<span style="color: #6366f1; font-weight: bold;">上往下取基的整數部分</span>。<br>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">範例</span> 計算162.53125<sub>10</sub>＝( )<sub>16</sub><br>
+              整數部分⇒ 由下而上取餘數得：<br>
+              <img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="Ch1/012.1.3.1.1.png">
+              小數部分⇒ 由上而下取基的整數部分得：<br>
+              <img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="Ch1/012.1.3.1.2.png">
+              綜合以上兩部分，得 162.53125<sub>10</sub>＝(<span style="color: #EF88BE;">A2.88</span>)<sub>16</sub>
+            </div>
+
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-top: 15px;">
+              <strong>2. 二進位轉八進位</strong><br>
+              將整數部分<span style="color: #6366f1; font-weight: bold;">由右至左每三個看成一組</span>，小數部分由左至右每三個看成一組，最後一組若不夠三個則補0。<br>
+              <div style="margin: 8px 0; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center;">
+                  <tr style="background: #f1f5f9;">
+                    <th style="border: 1px solid #cbd5e1; padding: 6px;">二進位</th>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">000</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">001</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">010</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">011</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">100</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">101</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">110</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">111</td>
+                  </tr>
+                  <tr>
+                    <th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">八進位</th>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">0</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">1</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">2</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">3</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">4</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">5</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">6</td>
+                    <td style="border: 1px solid #cbd5e1; padding: 6px;">7</td>
+                  </tr>
+                </table>
+              </div>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">範例</span> 計算 1110100110.1101001<sub>2</sub>＝( )<sub>8</sub><br>
+              <img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="Ch1/012.1.3.2.png">
+              因此得 (<span style="color: #EF88BE;">1646.644</span>)<sub>8</sub>
+            </div>
+
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-top: 15px;">
+              <strong>3. 二進位轉十六進位</strong><br>
+              將整數部分<span style="color: #6366f1; font-weight: bold;">由右至左每四個看成一組</span>，小數部分由左至右每四個看成一組，最後一組若不夠四個則補0。<br>
+              <div style="margin: 8px 0; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center;">
+                  <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 4px;">二進位</th><td>0000</td><td>0001</td><td>0010</td><td>0011</td><td>0100</td><td>0101</td><td>0110</td><td>0111</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 4px; background: #f1f5f9;">十六進位</th><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                  <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 4px;">二進位</th><td>1000</td><td>1001</td><td>1010</td><td>1011</td><td>1100</td><td>1101</td><td>1110</td><td>1111</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 4px; background: #f1f5f9;">十六進位</th><td>8</td><td>9</td><td>A</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F</td></tr>
+                </table>
+              </div>
+              <span style="background-color: #cd0505; color: #fff; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; display: inline-block; margin-top: 4px;">範例</span> 計算 1110100110.1101001<sub>2</sub>＝( )<sub>16</sub><br>
+              <img style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="Ch1/012.1.3.3.png">
+              因此得 (<span style="color: #EF88BE;">3A6.D2</span>)<sub>16</sub>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２常見的資料單位</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:normal;">（近五年出０題）</span>
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">資料量</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              資料儲存的容量，二進位的資料以<span style="color: #6366f1; font-weight: bold;">位元(bit,b)</span>為基本儲存單位。
+            </div>
+            <div style="margin-top: 8px; overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center;">
+                <thead>
+                  <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 6px;">單 位</th><th style="border: 1px solid #cbd5e1; padding: 6px;">換 算</th><th style="border: 1px solid #cbd5e1; padding: 6px;">實 例</th></tr>
+                </thead>
+                <tbody>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">位元組<br>(Byte,B)</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Byte＝8 bits</td><td style="border: 1px solid #cbd5e1; padding: 6px;">一個英文字 (1 Byte)</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">KB</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 KB＝2<sup>10</sup> Bytes ≈ 10<sup>3</sup> Bytes</td><td style="border: 1px solid #cbd5e1; padding: 6px;">800 KB的照片檔</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">MB</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 MB＝2<sup>20</sup> Bytes ≈ 10<sup>6</sup> Bytes</td><td style="border: 1px solid #cbd5e1; padding: 6px;">5 MB的音樂檔</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">GB</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 GB＝2<sup>30</sup> Bytes ≈ 10<sup>9</sup> Bytes</td><td style="border: 1px solid #cbd5e1; padding: 6px;">8 GB的隨身碟</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">TB</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 TB＝2<sup>40</sup> Bytes ≈ 10<sup>12</sup> Bytes</td><td style="border: 1px solid #cbd5e1; padding: 6px;">1 TB的硬碟</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">PB</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 PB＝2<sup>50</sup> Bytes ≈ 10<sup>15</sup> Bytes</td><td style="border: 1px solid #cbd5e1; padding: 6px;">1 PB的雲端硬碟</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">(註) KB、MB、GB、TB、PB之間為等比，公比為2<sup>10</sup>；換算10的倍數次方時，公比為10<sup>3</sup>。</div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">時間</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">資料傳輸耗費的時間。</div>
+            <div style="margin-top: 8px; overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center;">
+                <thead><tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 6px;">單 位</th><th style="border: 1px solid #cbd5e1; padding: 6px;">換 算</th></tr></thead>
+                <tbody>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">毫秒(ms)</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1毫秒(ms)＝10<sup>-3</sup>秒(s)</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">微秒(μs)</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1微秒(μs)＝10<sup>-6</sup>秒(s)</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">奈秒(ns)</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1奈秒(ns)＝10<sup>-9</sup>秒(s)</td></tr>
+                  <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">披秒(ps)</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1披秒(ps)＝10<sup>-12</sup>秒(s)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">(註) ms、μs、ns、ps之間為等比，公比為10<sup>3</sup>。</div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">頻寬 (Bandwidth)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              資料傳輸的速度，即在固定時間內所能傳送的資料量。以<span style="color: #6366f1; font-weight: bold;">每秒傳輸位元數(bits per second,bps)</span>為最小頻寬單位。
+            </div>
+            <div style="margin-top: 8px; display: flex; flex-direction: column; md-flex-direction: row; gap: 10px; align-items: center;">
+              <div style="flex: 1; width: 100%; overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; font-size: 0.85rem; text-align: center;">
+                  <thead><tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 6px;">單 位</th><th style="border: 1px solid #cbd5e1; padding: 6px;">換 算</th></tr></thead>
+                  <tbody>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Bps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Bps＝8 bps</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Kbps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Kbps＝10<sup>3</sup> bps</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Mbps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Mbps＝10<sup>6</sup> bps</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Gbps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Gbps＝10<sup>9</sup> bps</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Tbps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Tbps＝10<sup>12</sup> bps</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 6px; background: #f1f5f9;">Pbps</th><td style="border: 1px solid #cbd5e1; padding: 6px;">1 Pbps＝10<sup>15</sup> bps</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div style="width: 150px; flex-shrink: 0;"><img style="max-width: 100%; height: auto; display: block; margin: auto;" src="Ch1/012.2.3.png"></div>
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">(註) Kbps、Mbps、Gbps、Tbps、Pbps之間為等比，公比為10<sup>3</sup>。</div>
+
+            <div style="margin-top: 15px; padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong>範例 1：</strong><span style="color: #EF88BE;">Ｑ：</span>200 MB的資料若以40 Mbps的速度傳輸，則大約要花多久時間才會傳輸完成？<br>
+              (A)10秒 (B)40秒 (C)1秒 (D)8秒<br>
+              <div style="margin-top: 6px; padding: 8px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                200 MB＝200×8 Mbits＝1600 Mbits<br>
+                1600 Mbits÷40 Mbps＝40秒<br>
+                <div style="text-align: right; color: #EF88BE; font-weight: bold;">答案為(B)</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 10px; padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <strong>範例 2：</strong><span style="color: #EF88BE;">Ｑ：</span>小賴看到一個寬頻服務的廣告標示「60M光纖上網」，這表示理論上每秒可下載的資料量為？<br>
+              (A)7.5 MB (B)0.6 GB (C)60 MB (D)6 KB<br>
+              <div style="margin-top: 6px; padding: 8px; background: #f8fafc; border-radius: 4px; font-size: 0.9rem;">
+                60 Mbps＝60÷8 MB/s＝7.5 MB/s<br>
+                <div style="text-align: right; color: #EF88BE; font-weight: bold;">答案為(A)</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３文字編碼</span>
+          <span style="font-size:0.85rem; color:#64748b; font-weight:normal;">（今年出１題）</span>
+        </h3>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 15px;">
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">定義</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              在電腦系統中，將一系列的位元排列方式，分別對應至字母、數字或符號，作為讓不同的電腦或軟體間，<span style="color: #6366f1; font-weight: bold;">溝通或交換資料</span>的依據。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px;">常見的文字編碼</div>
+            
+            <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>美國資訊交換標準碼 (ASCII)</strong><br>
+                <u>● 位元數：8 bits</u><br>
+                包含英文大小寫字母、數字、常用符號。<br>
+                <div style="margin-top: 8px; overflow-x: auto;">
+                  <table style="width: 100%; border-collapse: collapse; font-size: 0.8rem; text-align: center;">
+                    <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 4px;">數字</th><td>0</td><td>1</td><td>2</td><td>……</td><td>7</td><td>8</td><td>9</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 4px; background: #f1f5f9;">ASCII碼</th><td>48</td><td>49</td><td>50</td><td>……</td><td>55</td><td>56</td><td>57</td></tr>
+                    <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 4px;">數字</th><td>A</td><td>B</td><td>C</td><td>……</td><td>X</td><td>Y</td><td>Z</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 4px; background: #f1f5f9;">ASCII碼</th><td>65</td><td>66</td><td>67</td><td>……</td><td>88</td><td>89</td><td>90</td></tr>
+                    <tr style="background: #f1f5f9;"><th style="border: 1px solid #cbd5e1; padding: 4px;">數字</th><td>a</td><td>b</td><td>c</td><td>……</td><td>x</td><td>y</td><td>z</td></tr>
+                    <tr><th style="border: 1px solid #cbd5e1; padding: 4px; background: #f1f5f9;">ASCII碼</th><td>97</td><td>98</td><td>99</td><td>……</td><td>120</td><td>121</td><td>122</td></tr>
+                  </table>
+                </div>
+              </div>
+
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>大五碼 (BIG-5)</strong><br>
+                <u>● 位元數：16 bits</u><br>
+                包含繁體中文字、注音符號、標點符號。<br>
+                <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px; line-height: 1.5;">
+                  (註) 中文碼分為──<br>
+                   ①外碼：根據不同輸入法輸入中文的字碼。（<span style="background-color: #cd0505; color: #fff; padding: 0 4px; border-radius: 3px;">ex.</span> 倉頡碼、注音碼）<br>
+                   ②內碼：電腦內部用來表示中文的字碼。（<span style="background-color: #cd0505; color: #fff; padding: 0 4px; border-radius: 3px;">ex.</span> Big-5（繁體中文）、GB（簡體中文））<br>
+                   ③交換碼：傳送資料時，用來轉換不同內碼的字碼。（<span style="background-color: #cd0505; color: #fff; padding: 0 4px; border-radius: 3px;">ex.</span> 中文標準交換碼(CNS)）
+                </div>
+              </div>
+
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>萬國碼 (Unicode)</strong><br>
+                <u>● 位元數：8～48 bits</u><br>
+                收錄全世界各大語系的字符。<br>
+                <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px; line-height: 1.5;">
+                  (註) 在Unicode中，網頁常用的「UTF-8」使用1∼6 Bytes可變長度編碼，大部分常用字符在3 Bytes內均可表示；資料庫常用的「UTF-16」則使用4 Bytes固定長度編碼。
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    
+    <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px;">
+      <a href="001.html" class="primary" style="text-decoration: none; padding: 10px 20px; border-radius: 8px;">下一頁(1-1)</a>
+      <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 20px; border-radius: 8px;">回目錄</a>
+      <a href="003.html" class="primary" style="text-decoration: none; padding: 10px 20px; border-radius: 8px;">下一頁(1-3)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
