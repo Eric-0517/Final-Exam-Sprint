@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第一章 數位科技概念</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">INTRODUCTION</span>
+      <h1>第一章 數位科技概念</h1>
+      <p>1-4 數位科技的新潮流（近五年出２題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１生活中的數位科技（近五年出２題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">虛擬影像技術</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>虛擬實境 (Virtual Reality, VR)：</strong>透過頭戴式<span style="color: #cd0505; font-weight: bold;">裝置</span>，可觀看及體驗極具真實感的<span style="color: #cd0505; font-weight: bold;">虛擬世界</span>（電腦模擬畫面）。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.1.1.png" alt="VR示意圖"><br>
+                <span>ex.</span> 飛行員訓練、線上美術館
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>擴增實境 (Augmented Reality, AR)：</strong>透過智慧型裝置，將虛擬數位資訊<span style="color: #cd0505; font-weight: bold;">疊加</span>在現實世界中（呈現於螢幕上）。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.1.2.png" alt="AR示意圖"><br>
+                <span>ex.</span> 觀光景點導覽、遊戲娛樂
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>混合實境 (Mixed Reality, MR)：</strong>透過頭戴式<span style="color: #cd0505; font-weight: bold;">裝置</span>，可觀看<span style="color: #cd0505; font-weight: bold;">合併</span>了虛擬及現實世界（虛擬的3D影像），並可同時在<span style="color: #cd0505; font-weight: bold;">兩個環境</span>中和物件進行互動。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.1.3.png" alt="MR示意圖"><br>
+                <span>ex.</span> 醫療智能眼鏡
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">遠距教學</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                利用線上學習 (E-Learning)可打破時間與空間限制進行學習（ex. 疫情期間「停課不停學」）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>同步遠距教學：</strong>透過視訊、電子白板等設備，進行即時教學互動（ex. Adobe Connect直播教室、TronClass暢課）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>非同步遠距教學：</strong>播放預錄的數位電子教材，進行非即時學習（ex. Hahow好學校、PressPlay）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">數位條碼技術</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>一維條碼 (Barcode)：</strong><br>
+                ① 呈現長條形，由黑白相間、粗細不一、同長度的線條組成，依編碼規則排列。<br>
+                ② 最多儲存28個英文、數字，不可儲存中文。<br>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
+                  <span>ex. 商品條碼、書本ISBN碼</span>
+                  <img src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.3.10.png" style="max-width: 100px; height: auto;" alt="一維條碼">
+                </div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>行動條碼 (Quick Response Code, QR Code)：</strong><br>
+                ① 屬於二維條碼，呈現正方形，由角落「回」字圖案幫助掃描對準。<br>
+                ② 可儲存超過3000個英文、數字，以及中文、網址等資訊。<br>
+                ③ 手機相機即可掃描，<span style="color: #cd0505; font-weight: bold;">容錯性</span>、<span style="color: #cd0505; font-weight: bold;">抗損性較高</span>。<br>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
+                  <span>ex. 廣告宣傳、數位票券、農產品產銷履歷標籤、防疫實聯制掃碼</span>
+                  <img src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.3.20.png" style="max-width: 60px; height: auto;" alt="QR Code">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">行動定位技術</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>全球定位系統 (GPS)：</strong><br>
+                ① 利用衛星及地面的接收器定位，來標示使用者的地理位置（<span style="color: #cd0505; font-weight: bold;">不受移動、天候、Wi-Fi影響</span>）。<br>
+                ② 由GPS衛星持續送出識別碼與時間，再由GPS手機或導航端接收多個衛星的訊號，計算得到使用者的位置。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.1.4.1.png" alt="GPS示意圖"><br>
+                <span>ex.</span> 行車導航、公車即時動態
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>輔助全球衛星定位系統 (AGPS)：</strong>利用手機基地台的訊號作為輔助，修正GPS在室內定位效果不佳的誤差，進行GPS定位。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>地理資訊系統 (GIS)：</strong>搜尋及分析地理區位特性的資訊系統（ex. 公共衛生、犯罪地圖）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>適地性服務 (LBS)：</strong>透過網路取得行動裝置（手機或平板等）的位置，以提供周遭地區各種資訊，協助使用者進行相關服務（ex. Facebook的「尋找附近的好友」功能）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２商業上的數位科技（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">行動付款技術</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              透過<span style="color: #cd0505; font-weight: bold;">非接觸式</span>技術，以感應扣款。
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>無線射頻識別系統 (RFID)：</strong><br>
+                ① 透過無線電訊號識別目標，並讀寫相關數據的技術。<br>
+                ② 可識別<span style="color: #cd0505; font-weight: bold;">移動中</span>的物件，也可同時識別<span style="color: #cd0505; font-weight: bold;">多個</span>物件。<br>
+                ③ 大多應用於車輛國道付費、物流追蹤、倉儲管理（ex. eTag）。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.2.1.1.png" alt="RFID示意圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>近場通訊 (NFC)：</strong><br>
+                ① 基於RFID演變，允許電子設備間<span style="color: #cd0505; font-weight: bold;">點對點</span>傳輸資料。<br>
+                ② 感應<span style="color: #cd0505; font-weight: bold;">距離短</span>，資料不易外洩，兼具安全性與便利性。<br>
+                ③ 常應用於手機資料傳遞、行動支付、電子錢包等。<br>
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 6px;">
+                  <span>ex. 悠遊卡、門禁卡、商品管理與結帳</span>
+                  <img src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.2.1.2.png" style="max-width: 60px; height: auto;" alt="NFC">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">商業應用相關名詞</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>門市銷售點系統 (POS)：</strong>藉由讀取商品上的一維條碼，迅速獲知商品資訊，有助於有效地掌握銷售狀況與貨品盤點（ex. 便利店、超市賣場）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>智慧卡 (Smart Card)：</strong>卡片中內嵌IC晶片或RFID標籤，提供記憶及運算功能（ex. IC健保卡、提款卡）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>網路ATM：</strong>結合「晶片金融卡」和「晶片讀卡機」，在網際網路上使用提領現金以外的各項金融服務（ex. 轉帳、繳公共費用）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第三方支付 (Third-Party Payment)：</strong><br>
+                ① 在電子交易的買賣雙方間，建立一個中立的支付平台，為雙方提供款項代收代付服務。<br>
+                ② 可降低網路詐騙的機率。<br>
+                <span>ex.</span> PayPal、奇摩輕鬆付、支付寶<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.2.2.4.png" alt="第三方支付示意圖">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>3C商品：</strong>分別代表電腦 (Computer)、通訊 (Communication)與消費性電子產品 (Consumer Electronics)（ex. 筆記型、平板電腦、智慧型手機、數位相機、隨身聽）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>4C商品：</strong>代表3C以及數位內容 (Digital Content)（第4C也有一說為汽車電子 Automotive electronics，如車輛使用的電子系統、引擎管理系統等）（ex. 電腦動畫、電子書）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">辦公應用相關技術</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>人力銀行：</strong>透過電腦資料庫的協助，使求職者與廠商能快速找到所需的工作或人才的求職徵才網站（ex. 104人力銀行、yes123人力銀行）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>視訊會議 (Video Conference)：</strong>讓身處不同地方的人，透過視訊軟體進行會議。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.2.3.4.png" alt="視訊會議示意圖"><br>
+                <span>ex.</span> Google Meet
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>數位協作：</strong>透過數位工具，提供檔案分享、協同編輯、進度管理、版本控制的功能，來提升討論與溝通的效率。<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.2.3.3.png" alt="數位協作示意圖"><br>
+                <span>ex.</span> Google文件、Google試算表
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>家庭辦公 (Small Office Home Office, SOHO)：</strong>個人及家庭辦公室，即在家工作的專業人士（ex. 作家、網拍賣家、程式設計師）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">3A自動化技術</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>辦公室自動化 (Office Automation, OA)：</strong>藉由電腦設備及通訊技術，來提高辦公效率。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>家庭自動化 (Home Automation, HA)：</strong>透過網路控制家中設備、監控系統，取得即時資訊。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>工廠自動化 (Factory Automation, FA)：</strong>以自動化機器從事生產，常應用於<span style="color: #cd0505; font-weight: bold;">電腦輔助技術</span>。<br>
+                <strong>常見的電腦輔助技術：</strong><br>
+                ● <strong>電腦輔助設計 (CAD)：</strong>利用電腦軟體在電腦上設計、規劃產品的藍圖。<br>
+                ● <strong>電腦輔助製造 (CAM)：</strong>利用電腦控制產品的製造過程，讓製造過程更有效率。<br>
+                ● <strong>電腦輔助工程 (CAE)：</strong>利用電腦進行產品模擬分析、驗證和改善設計等工作。<br>
+                ● <strong>電腦整合工程 (CIM)：</strong>利用電腦控制產品的設計、測試、製造等一連串作業。<br>
+                ● <strong>電腦輔助教學 (CAI)：</strong>利用電腦進行教學實踐的過程（ex. 遠距教學、遊戲化學習、實驗模擬、即測即評線上測驗）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３數位科技的未來發展趨勢（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch1/014.3.1.png" alt="未來發展趨勢圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>巨量資料／大數據 (Big Data)：</strong>無法透過傳統方式處理，大量且複雜的資料數據。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>人工智慧 (Artificial Intelligence, AI)：</strong>以程式或機器來模擬人腦的辨識及思考等運作。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>類神經網路 (Artificial Neural Network)：</strong>模仿生物神經網路的結構與功能，作為計算模型進行演算。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>機器學習 (Machine Learning, ML)：</strong>①透過<span style="color: #cd0505; font-weight: bold;">巨量資料</span>來學習，並改善整體效能。②為實現人工智慧的途徑。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>深度學習 (Deep Learning, DL)：</strong>①透過<span style="color: #cd0505; font-weight: bold;">類神經網路</span>，對<span style="color: #cd0505; font-weight: bold;">巨量資料</span>進行演算。②機器學習的一種。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <span>ex.</span> 下棋程式、聊天機器人、醫療診斷專家系統
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="003.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(1-3)</a>
+        <a href="index.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="005.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(1-5)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
