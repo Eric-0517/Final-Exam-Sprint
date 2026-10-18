@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三章 商業現代化機能｜商業概論重點整理</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+<style>
+  .memo-section { margin-bottom: 24px; }
+  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
+  .memo-list li { margin-bottom: 8px; }
+  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
+  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
+  .example-tag { display: inline-block; background-color: #cd0505; color: white; padding: 0 5px; border-radius: 4px; font-size: 0.85rem; margin-right: 4px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div>
+    <div class="brand">第三章 商業現代化機能</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero" style="padding: 24px 16px;">
+      <span class="tag">CHAPTER 03</span>
+      <h1>第三章 商業現代化機能</h1>
+      <p>涵蓋商業現代化目標與發展策略、消費者保護規範、以及商流、物流、金流、資訊流與服務流五大機能。</p>
+    </div>
+
+    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+      
+      <div class="memo-section">
+        <h3>商業現代化的目標與發展策略</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>現代化目標</strong>：降低流通成本、改善商業環境、維護公平合理商業秩序、促進經濟建設與城鄉均衡發展、創造良好消費環境。</li>
+            <li><strong>發展策略與執行計畫</strong>：擴大經營空間與改善環境（工商綜合區、商圈更新、傳統市場改善）、提升商業技術水準、提升服務品質、健全營運主體、強化商業團體經濟功能、落實消費者權益保護。</li>
+            <li><strong>消費者保護規範</strong>：
+              <br>• <strong>相關法令與機構</strong>：訂定 <span class="mark-text">消費者保護法</span>、<span class="mark-text">公平交易法</span>；設立消保處、公平會及民間消基會。
+              <br>• <strong>商品標示法</strong>：須標示 <span class="mark-text">商品名稱</span>、<span class="mark-text">內容</span>、<span class="mark-text">廠商名稱</span>、<span class="mark-text">產地</span>、<span class="mark-text">有效日期</span>等，內容不得造假。
+              <br>• <strong>定型化契約</strong>：由 <span class="mark-text">業者預先擬訂</span> 的契約條款，消費者僅能選擇同意與否，無法修改。
+              <br>• <strong>特種交易行為</strong>：通訊交易或訪問交易之消費者，可在 <span class="mark-text">收到商品後七天內無條件退貨</span>，無須負擔任何費用。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="memo-section">
+        <h3>商業現代化機能：商流與物流</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>商流</strong>：指商品所有權的移轉過程。
+              <br>• <strong>開放型商流</strong>：透過 <span class="mark-text">許多批發商與零售商</span>，通路廣且長，適用 <span class="mark-text">價格低</span>、<span class="mark-text">購買頻率高</span> 商品（如礦泉水、衛生紙）。
+              <br>• <strong>選擇型商流</strong>：選擇 <span class="mark-text">特定中間商</span>，通路窄且短，適用 <span class="mark-text">價格高</span>、<span class="mark-text">需專業解說</span>、<span class="mark-text">重視售後服務與品牌</span> 商品（如汽車、珠寶）。
+            </li>
+            <li><strong>物流</strong>：指實體物品的流通過程，分為 <span class="mark-text">消費品物流</span> 與 <span class="mark-text">工業品物流</span>，機能包含運輸配送、加工包裝、裝卸搬運、倉儲保管、資訊提供。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="memo-section">
+        <h3>金流機能與交易工具</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>金流意義</strong>：因交易活動而產生的 <span class="mark-text">資金流通</span>。</li>
+            <li><strong>現代金流工具</strong>：
+              <br>• <strong>金融卡（提款卡）</strong>：開立帳戶存入款項後，透過ATM提領現金或轉帳。
+              <br>• <strong>信用卡</strong>：在特定 <span class="mark-text">信用額度</span> 內刷卡，具 <span class="mark-text">先消費後付款</span> 特性，未繳清金額須支付 <span class="mark-text">循環利息</span>。
+              <br>• <strong>簽帳卡</strong>：具先消費後付款特性，但無預先設定額度，每月須 <span class="mark-text">全額繳清</span>。
+              <br>• <strong>預付卡（儲值卡）</strong>：<span class="mark-text">先付款後消費</span> 的交易工具。
+            </li>
+            <li><strong>選擇考量因素</strong>：安全性、便利性、時效性、公開性。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="memo-section">
+        <h3>資訊流與常見運用工具</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>資訊流意義</strong>：製造商、批發商、零售商到消費者之間的 <span class="mark-text">資訊情報</span> 流通。</li>
+            <li><strong>常見運用工具</strong>：
+              <br>• <strong>條碼</strong>：一維條碼（標準碼 <span class="mark-text">13碼</span> 含國家、廠商、商品代碼及檢核碼；縮短碼 <span class="mark-text">8碼</span> 省略廠商代碼）、二維條碼（儲存量大、安全性高）。
+              <br>• <strong>POS系統</strong>：結帳開立發票並提供銷售、進銷存數據供管理者 <span class="mark-text">作為決策參考</span>。
+              <br>• <strong>RFID</strong>：非接觸式自動辨識，具 <span class="mark-text">資料可更新</span>、<span class="mark-text">可重複使用</span> 特性。
+              <br>• <strong>NFC</strong>：<span class="mark-text">短距離</span> 高頻無線通訊，耗電低且保密性高。
+              <br>• <strong>EDI</strong>：將商業文件以 <span class="mark-text">標準化</span> 格式在不同企業電腦系統間交換。
+              <br>• <strong>EOS</strong>：<span class="mark-text">取代傳統下單接單</span> 的 <span class="mark-text">自動化訂貨系統</span>。
+              <br>• <strong>大數據</strong>：巨大資料庫，具來源多元、更新快等特性，用以掌握消費者特性。
+              <br>• <strong>區塊鏈</strong>：<span class="mark-text">去中心化</span> 分散式資料庫，具高安全性、公開透明與不可竄改性。
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="memo-section">
+        <h3>服務流特性</h3>
+        <div class="ex-box">
+          <ul class="memo-list" style="padding-left: 15px;">
+            <li><strong>無形性</strong>：屬於無形活動，無法在購買前藉由感官評估（如剪髮前不知髮型模樣）。</li>
+            <li><strong>不可分割性</strong>：生產時服務者與被服務者須同時在場，不涉及所有權移轉。</li>
+            <li><strong>異質性</strong>：隨服務提供者、時間與地點不同而有效果差異。</li>
+            <li><strong>不可儲存性</strong>：產能缺乏彈性，無法預先生產及存貨控制。</li>
+          </ul>
+        </div>
+      </div>
+
+    </article>
+
+    <div style="max-width: 450px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
+      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">上一頁(第二章)</a>
+      <a href="../business.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
+      <a href="004.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁(第四章)</a>
+    </div>
+
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
