@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二章 系統平台</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">SYSTEM PLATFORM</span>
+      <h1>第二章 系統平台</h1>
+      <p>2-3 系統平台的運作原理（近五年出４題）（今年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１電腦硬體的基本架構（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              電腦硬體是系統平台的最底層，透過<span style="color: #cd0505; font-weight: bold;">匯流排 (Bus)</span>作為硬體五大單元的溝通橋樑。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="電腦硬體架構圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">硬體的五大單元</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">硬體單元</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">合 稱</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">控制單元 (CU)</th>
+                  <td rowspan="2" style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">中央處理單元 (CPU)</span></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">算術／邏輯單元 (ALU)</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">輸入單元 (IU)</th>
+                  <td rowspan="2" style="padding: 6px; border: 1px solid #e2e8f0;">周邊設備</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">輸出單元 (OU)</th>
+                </tr>
+              </table>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>控制單元 (Control Unit, CU)：</strong>①負責將指令<span style="color: #cd0505; font-weight: bold;">解碼 (Decoding)</span>。②指揮協調各單元的運作順序與資料傳遞。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>算術／邏輯單元 (Arithmetic/Logic Unit, ALU)：</strong>負責計算、邏輯判斷等運算工作。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>記憶單元 (Memory Unit, MU)：</strong>①存放程式、指令和資料。②可依功能分為<span style="color: #cd0505; font-weight: bold;">主記憶體、輔助記憶體</span>。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>輸入單元 (Input Unit, IU)：</strong>輸入資料後，傳送至記憶單元儲存，或提供CPU處理（ex. 鍵盤、滑鼠、掃描器等）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>輸出單元 (Output Unit, OU)：</strong>將電腦處理過的資料輸出或顯示（ex. 螢幕、印表機等）。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">匯流排 (Bus)</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="匯流排示意圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>控制匯流排 (Control Bus)：</strong><u>● 傳輸方向：單向</u><br>負責傳送<span style="color: #cd0505; font-weight: bold;">系統時脈</span>與<span style="color: #cd0505; font-weight: bold;">控制訊號</span>至記憶單元，以調整整個系統運作。（註：控制訊號可控制讀、寫、重置等動作。）
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>位址匯流排 (Address Bus)：</strong><u>● 傳輸方向：單向</u><br>①負責傳送資料在<span style="color: #cd0505; font-weight: bold;">主記憶體中的位址</span>至記憶單元。②排線數越多，可存取的記憶體位址範圍越廣，可存取的主記憶體容量越大，n條排線即可存取 2^n Bytes。<br>
+                <strong>範例：</strong>假設我們有一部電腦，其位址匯流排有29條位址線，在能正確存取記憶體的前提下，此部電腦至多可以有多少MB的記憶體？<br>
+                <strong>答案：</strong>229＝29×220 Bytes＝512 MB
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>資料匯流排 (Data Bus)：</strong><u>● 傳輸方向：雙向</u><br>①負責<span style="color: #cd0505; font-weight: bold;">各單元間</span>的資料傳送。②排線數為CPU一次處理的資料量（ex. <span style="color: #cd0505; font-weight: bold;">32位元電腦</span>代表有<span style="color: #cd0505; font-weight: bold;">32條</span>資料匯流排線）。
+              </div>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+              (註) 硬體皆包含控制匯流排、位址匯流排、資料匯流排這三種匯流排。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２電腦硬體的外觀（近五年出２題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">主機的連接埠 (Port)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              電腦機殼連接各類周邊設備的介面。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="主機外觀與連接埠示意圖">
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">連接埠</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">常見的周邊設備</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">PS/2埠</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">鍵盤（紫色）、滑鼠（綠色）</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">DP埠 / HDMI埠</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">螢幕、投影機（數位）</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">D-Sub埠 (VGA)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">螢幕、投影機（類比）</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">USB 3.2埠 / USB 3.0埠</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">滑鼠、印表機、掃描器、外接硬碟、光碟機、隨身碟</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">RJ-45網路線插孔</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">ADSL數據機</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">音效插孔</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">音源輸入／輸出（藍／綠色）、麥克風插孔（粉色）</td>
+                </tr>
+              </table>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+              (註) 電腦也可透過Wi-Fi、藍芽連接螢幕、投影機、滑鼠、印表機、掃描機等。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">常見的USB與Thunderbolt連接埠</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              皆支援<span style="color: #cd0505; font-weight: bold;">熱插拔 (Hot Swap)</span>與<span style="color: #cd0505; font-weight: bold;">隨插即用 (PnP)</span>。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="USB傳輸速度比較">
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">
+              (註1) 熱插拔是指在電腦使用的情況下，可直接安裝、拔除設備；隨插即用是指能自動偵測與使用設備。<br>
+              (註2) USB Type-C和Thunderbolt目前最高供電量為100W，未來可達240W。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">主機板 (Motherboard, MB)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              主機內連接各種元件的電路板。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="主機板元件圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>PCI-E 3.0插槽：</strong>①可安裝各種音效卡、顯示卡、電視卡、網路卡等擴充卡。②取代早期PCI插槽及AGP顯示卡插槽。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>晶片組：</strong>早期包含南北橋晶片，現今北橋晶片已整合至CPU中，僅剩南橋晶片。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>M.2插槽：</strong>連接固態硬碟 (SSD)，也屬於PCI-E插槽的一種。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>電池：</strong>關閉電源後，仍能提供CMOS保存資料（如：日期、時間）所需電力。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>基本輸入／輸出系統 (BIOS)：</strong>①負責硬體的開機辨識測試 (POST)和初始化工作，並提供作業系統運行時的韌體功能。②目前已改用快閃記憶體晶片儲存資料。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>CPU插槽 / DRAM插槽 / SATA插槽 / ATX電源線插槽：</strong>分別用於安裝微處理器、記憶體模組、新一代介面硬碟及連接電源供應器。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>３中央處理單元 (CPU)／微處理器／處理器（近五年出４題）（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              內含<span style="color: #cd0505; font-weight: bold;">控制單元</span>及<span style="color: #cd0505; font-weight: bold;">算術／邏輯單元</span>，並包含一小部分記憶體，是電腦系統的運算核心。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="CPU架構圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">CPU內的記憶體</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">類型</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">傳輸速度</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">容量</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">暫存器 (Register)</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">最快</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">最小</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">快取記憶體 (Cache Memory)</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">僅次於暫存器 (L1 > L2 > L3)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">僅大於暫存器 (L3 > L2 > L1)</td>
+                </tr>
+              </table>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>暫存器分類：</strong><br>
+                ● <strong>程式計數器 (PC)：</strong>存放下一個要執行指令的記憶體位址。<br>
+                ● <strong>指令暫存器 (IR)：</strong>存放CPU正在執行的指令。<br>
+                ● <strong>位址暫存器 (MAR)：</strong>存放要存取資料的記憶體位址。<br>
+                ● <strong>通用暫存器 (GPR)：</strong>可存放資料或位址。<br>
+                ● <strong>累加暫存器 (ACC)：</strong>暫存ALU計算產生的中間結果。<br>
+                ● <strong>旗標暫存器 (FR)：</strong>記錄CPU執行運算的狀態。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">CPU指令與指令集</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="指令集運作週期">
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">類型</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">數目</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">耗電量</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">適用裝置</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">複雜指令集 (CISC)</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">數千</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">高</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">個人電腦</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">精簡指令集 (RISC)</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">數百</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">低</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">行動裝置</td>
+                </tr>
+              </table>
+            </div>
+            <div style="margin-top: 8px; font-size: 0.95rem; line-height: 1.6;">
+              <strong>指令集運作週期：</strong>擷取 (Fetch) ➡️ 解碼 (Decode) ➡️ 執行 (Execute) ➡️ 儲存 (Store)。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>４記憶單元（近五年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              用來存放資料與程式的地方，主要分為<span style="color: #cd0505; font-weight: bold;">主記憶體</span>與<span style="color: #cd0505; font-weight: bold;">輔助記憶體</span>兩大類。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="記憶體架構圖">
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>隨機存取記憶體 (RAM)：</strong>①資料可讀取、寫入。②斷電後資料會消失，屬於<span style="color: #cd0505; font-weight: bold;">揮發性記憶體 (Volatile Memory)</span>。包含靜態 (SRAM)與動態 (DRAM)。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>唯讀記憶體 (ROM)：</strong>①資料可讀取，但無法任意寫入。②斷電後資料仍會保存，屬於<span style="color: #cd0505; font-weight: bold;">非揮發性記憶體 (Non-Volatile Memory)</span>。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">硬式磁碟機 (HDD) 與 固態硬碟 (SSD) 比較</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">項目</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">硬式磁碟機 (HDD)</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">固態硬碟 (SSD)</th>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">組成</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">磁盤、馬達和讀寫頭等機械裝置</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">快閃記憶體</span>搭配<span style="color: #cd0505; font-weight: bold;">高速匯流排</span></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">特色</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較耗能，轉速越高效能越好</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">省電、耐震、重量輕、安靜</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">讀寫次數</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較多</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">較少</span></td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">存取速度</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較慢</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較快</td>
+                </tr>
+                <tr>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">單位價格</th>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較便宜</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">較貴</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>５輸入與輸出單元／周邊設備（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              需透過驅動程式 (driver) 與作業系統溝通。
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>輸入裝置：</strong>將外部資料讀進電腦（ex. 鍵盤、滑鼠、觸控板、麥克風、掃描器、讀卡機）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>輸出裝置：</strong>將電腦內部資料寫出（ex. 螢幕、喇叭、印表機、3D列印機）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="006.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(2-2)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="008.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(2-4)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
