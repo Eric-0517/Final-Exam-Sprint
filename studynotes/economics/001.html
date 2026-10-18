@@ -3,29 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>第一章 經濟基本概念｜經濟學重點整理</title>
-<link rel="stylesheet" href="../../style.css">
+<title>第一章 經濟基本概念</title>
+<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="../../online-counter.js"></script>
-<style>
-  .memo-section { margin-bottom: 24px; }
-  .memo-section h3 { color: #6366f1; margin-bottom: 10px; font-size: 1.1rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
-  .memo-list { list-style-type: disc; padding-left: 20px; line-height: 1.8; color: #334155; }
-  .memo-list li { margin-bottom: 8px; }
-  .mark-text { color: #dc2626; font-weight: bold; background-color: #fee2e2; padding: 2px 4px; border-radius: 4px; }
-  .ex-box { background-color: #f8fafc; border-left: 4px solid #6366f1; padding: 12px 16px; margin-top: 8px; border-radius: 0 6px 6px 0; font-size: 0.95rem; }
-  .formula-box { background-color: #f1f5f9; border: 1px dashed #94a3b8; padding: 10px 14px; border-radius: 6px; margin: 8px 0; font-family: monospace; }
-  .system-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9rem; }
-  .system-table th, .system-table td { border: 1px solid #cbd5e1; padding: 8px 10px; text-align: left; }
-  .system-table th { background-color: #e2e8f0; color: #1e293b; font-weight: bold; }
-  .note-img { max-width: 100%; height: auto; border-radius: 6px; margin-top: 8px; border: 1px solid #e2e8f0; }
-</style>
+<script src="../online-counter.js"></script>
 </head>
 <body>
-
 <header class="topbar">
   <div>
-    <div class="brand">第一章 經濟基本概念</div>
+    <div class="brand">經濟學 目錄</div>
   </div>
 
   <button class="nav-toggle" id="navToggle"
@@ -48,151 +34,271 @@
 
 <main id="app">
   <section class="screen active" style="padding: 20px 0;">
-    <div class="hero" style="padding: 24px 16px;">
-      <span class="tag">CHAPTER 01</span>
+    <div class="hero">
+      <span class="tag">ECONOMICS</span>
       <h1>第一章 經濟基本概念</h1>
       <p>涵蓋經濟學基本概念、演進、種類與研究方法、資源配置，以及經濟體系與經濟制度。</p>
     </div>
 
-    <article class="question-card" style="max-width: 800px; margin: 20px auto; padding: 24px;">
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
       
-      
-      <div class="memo-section">
-        <h3>1-1 經濟學的基本概念</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>經濟</strong>：人類一切的謀生活動。</li>
-            <li><strong>經濟行為</strong>：人類以「<span class="mark-text">有償</span>」方式（支付代價＋獲得報酬），取得並利用資源以滿足慾望的行為。</li>
-            <li><strong>經濟原則</strong>：以「<span class="mark-text">最小代價</span>」獲得「<span class="mark-text">最大滿足</span>」。</li>
-            <li><strong>經濟學</strong>：研究如何有效利用數量有限但具多種用途之資源，以滿足人類慾望的「<span class="mark-text">社會科學</span>」與「<span class="mark-text">選擇的科學</span>」。</li>
-            <li><strong>經濟問題產生原因</strong>：1. 慾望無窮  2. 資源稀少性  3. 資源具多種用途。</li>
-            <li><strong>基本經濟問題</strong>：生產什麼、如何生產、何時生產、為誰生產、如何維持經濟穩定、如何促進經濟成長。</li>
-            <li><strong>經濟學成立</strong>：<span class="mark-text">亞當斯密 (Adam Smith)</span> 於 1776 年發表《<span class="mark-text">國富論</span>》，被尊稱為「<span class="mark-text">經濟學之父</span>」。</li>
-            <li>
-              <strong>財貨與勞務</strong>：
-              <br>• 財貨：滿足慾望之<span class="mark-text">有形</span>商品（如電腦、桌椅）。
-              <br>• 勞務：滿足慾望之<span class="mark-text">無形</span>服務（如髮型設計、教師授課）。
-              <br>• 分類：可依取得方式、使用目的及耐用程度區分。
-            </li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image001.jpg" alt="財貨分類" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image002.jpg" alt="使用目的分類" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image003.jpg" alt="耐用程度分類" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>1-1 經濟學的基本概念</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+         
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟概述</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>經濟：</strong>是指人類一切的謀生活動。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>經濟行為：</strong>是指人類以「<span style="color: #cd0505; font-weight: bold;">有償</span>」方式（<span style="color: #cd0505; font-weight: bold;">支付代價＋獲得報酬</span>），取得並利用各種資源，來滿足慾望的一切行為。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>經濟原則：</strong>是指以「<span style="color: #cd0505; font-weight: bold;">最小的代價</span>」獲得「<span style="color: #cd0505; font-weight: bold;">最大的滿足</span>」。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>經濟學：</strong>是指在研究如何有效利用數量有限但具多種用途的資源，用以生產財貨或勞務，使人類慾望獲得最大滿足的「<span style="color: #cd0505; font-weight: bold;">社會科學</span>」，也是一門「<span style="color: #cd0505; font-weight: bold;">選擇的科學</span>」。
+              </div>
+            </div>
           </div>
+
+        
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟問題產生的原因</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              1. 慾望無窮。<br>
+              2. 資源的稀少性。<br>
+              3. 資源具有多種用途。
+            </div>
+          </div>
+
+         
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">基本的經濟問題</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              1. 生產什麼。<br>
+              2. 如何生產。<br>
+              3. 何時生產。<br>
+              4. 為誰生產。<br>
+              5. 如何維持經濟穩定。<br>
+              6. 如何促進經濟成長。
+            </div>
+          </div>
+
+         
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟學的成立</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              <span style="color: #cd0505; font-weight: bold;">亞當斯密</span>(Adam Smith)於1776年所發表的《<span style="color: #cd0505; font-weight: bold;">國富論</span>》，是第一本針對經濟問題提供完整思考架構的著作，亞當斯密也被尊稱為「<span style="color: #cd0505; font-weight: bold;">經濟學之父</span>」。
+            </div>
+          </div>
+
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">財貨與勞務的概念</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>意義：</strong><br>
+                ● 財貨：是指能滿足人類慾望的<span style="color: #cd0505; font-weight: bold;">有形</span>商品。（ex.電腦、桌椅等）<br>
+                ● 勞務：是指能滿足人類慾望的<span style="color: #cd0505; font-weight: bold;">無形</span>商品。（ex.髮型設計、老師授課等）
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>分類：</strong><br>
+                ● 依「取得方式」區分：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image001.jpg"><br>
+                ● 依「使用目的」區分：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image002.jpg"><br>
+                ● 依「耐用程度」區分：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image003.jpg">
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
 
       
-      <div class="memo-section">
-        <h3>1-2 經濟學的演進</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>1776 年以前</strong>：重商主義、重農主義。</li>
-            <li><strong>第一階段：古典學派</strong>：亞當斯密、李嘉圖，強調「一隻看不見的手」與自由放任。</li>
-            <li><strong>第二階段：反古典學派</strong>：馬克思（社會主義）。</li>
-            <li><strong>第三階段：新古典學派（劍橋學派）</strong>：馬歇爾，奠定個體經濟學基礎。</li>
-            <li><strong>第四階段：新經濟學派（凱因斯學派）</strong>：凱因斯，奠定總體經濟學基礎，主張政府干預。</li>
-            <li><strong>第五階段：現代經濟學派</strong>：多元發展。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image004.jpg" alt="1776年以前經濟思想" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image005.jpg" alt="古典學派" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image006.jpg" alt="反古典學派" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image007.jpg" alt="新古典學派" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image008.jpg" alt="凱因斯學派" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image009.jpg" alt="現代經濟學派" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>1-2 經濟學的演進</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">1776年以前的經濟思想</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image004.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">1776年以後的經濟思想</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第一階段：古典學派</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image005.jpg?v=0.1">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第二階段：反古典學派</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image006.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第三階段：新古典學派（劍橋學派）</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image007.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第四階段：新經濟學派（凱因斯學派、需求面經濟學派）</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image008.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>第五階段：現代經濟學派</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image009.jpg">
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
      
-      <div class="memo-section">
-        <h3>1-3 經濟學的種類與研究方法</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li>
-              <strong>依研究對象區分</strong>：
-              <br>• <span class="mark-text">個體經濟學</span>：研究個別經濟主體，核心為價格理論。
-              <br>• <span class="mark-text">總體經濟學</span>：研究整體經濟現象，核心為所得理論。
-            </li>
-            <li>
-              <strong>依研究性質區分</strong>：
-              <br>• <span class="mark-text">實證經濟學</span>：客觀分析「是什麼」(What is)。
-              <br>• <span class="mark-text">規範經濟學</span>：主觀分析「應該是什麼」(What ought to be)。
-            </li>
-            <li><strong>研究方法</strong>：歸納法、演繹法、模型建立法。</li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image010.jpg" alt="經濟學種類" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image011.jpg" alt="研究性質區分" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image012.jpg" alt="研究方法" class="note-img">
-          </div>
-        </div>
-      </div>
-
-      
-      <div class="memo-section">
-        <h3>1-4 經濟資源的配置</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li><strong>機會成本</strong>：將資源用於某項用途時，所放棄其他用途中<span class="mark-text">價值最高者</span>。</li>
-            <li><strong>生產可能曲線 (P.P.C.)</strong>：在特定技術與資源固定下，所能生產兩種財貨的最大組合軌跡。</li>
-            <li>
-              <strong>邊際轉換率 (MRT)</strong>：多生產一單位 X 財所需放棄 Y 財的數量（即 PPC 切線斜率之絕對值）。
-              <div class="formula-box">
-                MRT<sub>XY</sub> = | ΔY / ΔX | = MC<sub>X</sub> / MC<sub>Y</sub> = PPC 切線斜率絕對值
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>1-3 經濟學的種類與研究方法</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟學的種類</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「研究對象」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image010.jpg">
               </div>
-            </li>
-            <li>
-              <strong>PPC 特性與變動</strong>：
-              <br>• 負斜率：反映資源稀少性與機會成本。
-              <br>• 凹向原點：反映<span class="mark-text">邊際機會成本遞增法則</span>。
-            </li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image013.jpg" alt="機會成本" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image014.jpg" alt="生產可能曲線基本概念" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image015.jpg" alt="生產可能曲線圖形分析" class="note-img">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>依「研究性質」區分：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image011.jpg">
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟學的研究方法</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image012.jpg">
           </div>
         </div>
       </div>
 
       
-      <div class="memo-section">
-        <h3>1-5 經濟體系與經濟制度</h3>
-        <div class="ex-box">
-          <ul class="memo-list" style="padding-left: 15px;">
-            <li>
-              <strong>經濟體系的構成要素</strong>：
-              <br>• <strong>兩種市場</strong>：
-                <br>&nbsp;&nbsp;1. <u>產品市場</u>：各種財貨或勞務交易的市場。
-                <br>&nbsp;&nbsp;2. <u>要素市場</u>：各種生產要素交易的市場。
-              <br>• <strong>三個決策單位</strong>：家庭（消費者）、廠商（生產者）、政府。
-            </li>
-            <li><strong>經濟循環圖（經濟活動周流圖）</strong>：呈現家庭、廠商與政府之間透過產品市場與要素市場進行資源、貨幣與所得流動的關聯圖。</li>
-            <li>
-              <strong>經濟制度分類</strong>：
-              <br>• <strong>市場經濟制度（資本主義）</strong>：私有制為主，依賴價格機制（看不見的手）。
-              <br>• <strong>計畫經濟制度（共產/集權）</strong>：公有制為主，依賴政府中央計畫（看得見的手）。
-              <br>• <strong>混合經濟制度</strong>：私有為主、公有為輔，市場價格與政府干預並重（現代多數國家採行）。
-              <br>• <strong>傳統經濟制度</strong>：依循習俗與傳統。
-            </li>
-          </ul>
-          <div>
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image022.jpg" alt="三個決策單位" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image023.jpg" alt="經濟循環圖" class="note-img">
-            <img src="http://ds.cfp.com.tw/economics-memorytree/economicsA/images/image024.jpg" alt="經濟制度" class="note-img">
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>1-4 經濟資源的配置</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">機會成本</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image013.jpg">
+            <div style="margin-top: 6px; font-size: 0.85rem;">
+              <a href="http://ds.cfp.com.tw/u/EBFILM01041" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明1</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM01042" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明2</a>
+              <a href="http://ds.cfp.com.tw/u/EBFILM01043" target="_blank" style="color: #6366f1;">範例說明3</a>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">生產可能曲線</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>基本概念：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image014.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>圖形分析：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image015.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>邊際轉換率：</strong><br>
+                是指每增加一單位的X財所必須減少生產Y財的數量，即多生產一單位X財的機會成本。也就是P.P.C切線斜率的絕對值。<br>
+                公式：MRT<sub style="font-size: 10px;">XY</sub>＝<img src="images/image004.png" style="vertical-align: middle; max-width: 150px; height: auto;" alt=""/>＝<img src="images/image006.png" style="vertical-align: middle; max-width: 50px; height: auto;" alt=""/>＝P.P.C切線斜率的絕對值<br>
+                <div style="margin-top: 6px; font-size: 0.85rem;">
+                  <a href="http://ds.cfp.com.tw/u/EBFILM01044" target="_blank" style="margin-right: 8px; color: #6366f1;">範例說明4</a>
+                  <a href="http://ds.cfp.com.tw/u/EBFILM01045" target="_blank" style="color: #6366f1;">範例說明5</a>
+                </div>
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>特性：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image018.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>應用：</strong><br>
+                ● 反映「資源與技術是否達到充分利用」：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image019.jpg"><br>
+                ● 反映「經濟成長或衰退」：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image020.jpg"><br>
+                ● 反映「技術水準的變動」：<br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image021.jpg">
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>應用上的限制：</strong><br>
+                P.P.C可反應最大生產量組合在「數量上」的增減，但<span style="color: #cd0505; font-weight: bold;">無法反應「產品品質」的變化</span>。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">效率</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              是指以<span style="color: #cd0505; font-weight: bold;">投入較少的資源</span>，達到<span style="color: #cd0505; font-weight: bold;">較多的產出</span>。
+            </div>
           </div>
         </div>
       </div>
 
-    </article>
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>1-5 經濟體系與經濟制度</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟體系的構成要素</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>兩種市場：</strong><br>
+                ● 產品市場：是指各種財貨或勞務交易的市場。<br>
+                ● 要素市場：是指各種生產要素交易的市場。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>三個決策單位：</strong><br>
+                <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image022.jpg">
+              </div>
+            </div>
+          </div>
 
-    
-    <div style="max-width: 400px; margin: 20px auto; display: flex; justify-content: space-between; gap: 10px; padding: 0 16px;">
-      <a href="../economics.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">回目錄</a>
-      <a href="002.html" class="primary" style="text-decoration: none; flex: 1; text-align: center; padding: 10px;">下一頁 (第二章)</a>
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟循環圖（經濟活動周流圖）</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image023.jpg">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">經濟制度</div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="images/image024.jpg">
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+   
+    <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+      <a href="../economics.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+      <a href="002.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(第二章)</a>
     </div>
 
   </section>
