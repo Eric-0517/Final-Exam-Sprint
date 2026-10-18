@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第二章 系統平台</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">SYSTEM PLATFORM</span>
+      <h1>第二章 系統平台</h1>
+      <p>2-1 系統平台與電腦發展（近五年出０題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１系統平台 (Computing Platform)（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">概念</div>
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+              系統平台是指<span style="color: #cd0505; font-weight: bold;">提供軟體執行的環境</span>，依據技術的成熟度不同，在不同時代，發展階段不同，對系統平台的認知也會有所差異。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">發展階段</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>最早期的電腦：</strong>①電腦僅含固定用途的程式。②欲改變電腦功能，就須改變線路、結構或重新設計一台電腦。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>出現內儲程式：</strong>①內儲程式將<span style="color: #cd0505; font-weight: bold;">運算化作指令，儲存於記憶體</span>，讀取指令即可執行程式。②解決不易改變電腦用途的問題，架構較有彈性，功能也可隨時改變。③開始以「軟體」稱呼能指揮電腦的程式。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>出現作業系統平台：</strong>①作業系統平台是指提供<span style="color: #cd0505; font-weight: bold;">基本的介面，讓使用者操作軟體運行</span>的環境。②負責<span style="color: #cd0505; font-weight: bold;">管理硬體資源、調配軟體運作</span>，簡化使用者的工作。③開始以「作業系統」統稱後續發展的各種作業系統平台。④企業或個人使用的應用軟體開始蓬勃發展，但在不同平台無法通用。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>出現軟體平台：</strong>業者將平台觀念用於軟體，開發讓使用者可跨作業系統的應用軟體。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>出現行動裝置平台：</strong>隨著行動裝置的普及，應用程式的發展不再侷限於電腦，以iOS和Android兩大作業系統為主，各自以應用程式商店安裝應用程式。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>出現雲端運算平台：</strong>①隨著網際網路的進步，資料運算不再侷限於使用者端的硬體，使用者透過平台，即可將資料傳至<span style="color: #cd0505; font-weight: bold;">遠端電腦運算</span>，再接收回傳資訊。②降低使用者端的硬體需求，同時解決跨平台的問題。
+              </div>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">電腦系統的架構</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              電腦系統的運作環境包含使用者、應用軟體、作業系統及硬體設備，而在使用者和應用軟體與硬體之間，以<span style="color: #cd0505; font-weight: bold;">作業系統為溝通橋樑</span>，而系統平台則主要聚焦於作業系統與硬體間的運作。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/021.1.3.png" alt="電腦系統架構圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">電腦系統的組成</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>硬體 (Hardware)：</strong>指看得到、摸得到的實體設備（ex. 電腦主機、滑鼠、螢幕、鍵盤等）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>韌體 (Firmware)：</strong>①嵌入在硬體裝置中，像軟體般可被電腦執行的程式。②同時兼具硬體和軟體的特性。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>軟體 (Software)：</strong>一系列電腦指令與資料的集合，用來控制硬體，並驅使電腦工作。<br>
+                ● <strong>系統軟體：</strong>電腦運作的核心，管理與控制所有電腦資源，讓使用者或應用軟體能夠輕易地與電腦溝通，並進行作業（ex. 作業系統）。<br>
+                ● <strong>應用軟體：</strong>因應多數人的需要而發展出來的軟體（ex. 文書處理軟體、影像處理軟體、遊戲軟體）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２電腦硬體的發展歷程（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">重要事蹟</div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">年份</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">人物／單位</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">事蹟</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1642年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">巴斯卡</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明加法器</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1822年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;" rowspan="2"><span style="color: #cd0505; font-weight: bold;">巴貝奇<br><span style="font-size: 0.8rem;">（電腦之父）</span></span></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明差分機</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1837年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明分析機</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1890年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">何樂利</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明打孔卡片處理機</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1939年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">阿塔那索夫</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明第一部數位式電腦 ABC</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1946年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">范紐曼</span></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">提出「<span style="color: #cd0505; font-weight: bold;">內儲程式</span>」概念</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1949年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">劍橋大學</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明第一部內儲程式電腦 EDSAC</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1971年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">Intel公司</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">發明第一個微型處理器（即後來的CPU）</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">發展演進</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              依使用的<span style="color: #cd0505; font-weight: bold;">電子元件</span>劃分。
+            </div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">世代</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">第一代</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">第二代</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">第三代</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">第四代</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">年份</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1945~1954年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1954~1964年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1964~1970年</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1970年~現代</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">主要電子元件</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">真空管</span></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">電晶體</span></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">積體電路</span></td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;"><span style="color: #cd0505; font-weight: bold;">超大型積體電路</span></td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">電腦體積</td>
+                  <td colspan="4" style="padding: 6px; border: 1px solid #e2e8f0;">大 ←→ 小</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">執行速度</td>
+                  <td colspan="4" style="padding: 6px; border: 1px solid #e2e8f0;">慢 ←→ 快</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">記憶體容量</td>
+                  <td colspan="4" style="padding: 6px; border: 1px solid #e2e8f0;">少 ←→ 多</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">價格</td>
+                  <td colspan="4" style="padding: 6px; border: 1px solid #e2e8f0;">高 ←→ 低</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">代表電腦</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">ENIAC、EDSAS</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">TRADIC</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">System/360</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">AppleⅡ、現代電腦</td>
+                </tr>
+              </table>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+              (註) 人工智慧(AI)常被稱為第五代電腦，目前仍在發展當中。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">積體電路 (Integrated Circuit, IC)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              將所有電晶體、電阻、二極體等電子元件組成的電路，整合於晶片(chip)上。
+            </div>
+            <div style="overflow-x: auto; margin-top: 8px;">
+              <table style="width: 100%; border-collapse: collapse; text-align: center; font-size: 0.9rem;">
+                <tr style="background: #f1f5f9; border-bottom: 1px solid #cbd5e1;">
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">類型</th>
+                  <th style="padding: 6px; border: 1px solid #e2e8f0;">晶片上電子元件數</th>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">小型積體電路 (SSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">100以下</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">中型積體電路 (MSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">101～1,000</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">大型積體電路 (LSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1,001～10,000</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">超大型積體電路 (VLSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">10,001～100,000</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">特大型積體電路 (ULSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">100,001～1,000,000</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">超特大型積體電路 (GSI)</td>
+                  <td style="padding: 6px; border: 1px solid #e2e8f0;">1,000,001以上</td>
+                </tr>
+              </table>
+            </div>
+            <div style="margin-top: 6px; font-size: 0.85rem; color: #64748b;">
+              (註) 現代的CPU都有數十億以上的電晶體（ex. 蘋果A16晶片含160億個電晶體）。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">電腦類型</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>超級電腦 (Supercomputer)：</strong><span style="color: #cd0505; font-weight: bold;">計算速度最快</span>，但價格較昂貴（ex. 國家級單位，如軍事、氣象預測的電腦）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>大型電腦 (Mainframe)：</strong>①同時<span style="color: #cd0505; font-weight: bold;">支援上百使用者</span>使用。②計算速度快、容量大（ex. 大型企業、銀行金融交易、政府、大專院校的電腦）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>伺服器 (Server)：</strong>①透過網路提供多位使用者資料或服務。②有較穩定的傳輸速度、較大的存儲空間（ex. 企業伺服器、網站伺服器）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>工作站 (Workstation)：</strong>強調<span style="color: #cd0505; font-weight: bold;">數學</span>和<span style="color: #cd0505; font-weight: bold;">圖形</span>的運算能力，並針對特殊用加強功能（ex. 3D繪圖設計、電腦輔助繪圖、生物科技統計工作站）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>微電腦 (Microcomputer)：</strong>針對單一使用者設計，因此又稱個人電腦(Personal Computer, PC)（ex. 桌上型／筆記型電腦、平板電腦、智慧型手機）。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>嵌入式電腦 (Embedded Computer)：</strong>①隱藏在各種設備中的<span style="color: #cd0505; font-weight: bold;">微型電腦晶片</span>。②針對特殊目的設計，只能執行<span style="color: #cd0505; font-weight: bold;">特定功能</span>（ex. 資訊家電 Information Appliance, IA、行車導航）。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="004.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(1-4)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="006.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(2-2)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
