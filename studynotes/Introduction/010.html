@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>第三章 軟體與App</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../online-counter.js"></script>
+</head>
+<body>
+<header class="topbar">
+  <div>
+    <div class="brand">數位科技概論 目錄</div>
+  </div>
+
+  <button class="nav-toggle" id="navToggle"
+    type="button" aria-label="開啟導覽選單"
+    aria-expanded="false" aria-controls="sideNav">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+
+<nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+  <div class="side-nav-title">網站導覽</div>
+  <a href="../../index.html">首頁 <span>›</span></a>
+  <a href="../../studynotes.html">重點整理 <span>›</span></a>
+  <a href="../../downloads.html">檔案下載 <span>›</span></a>
+</nav>
+
+<main id="app">
+  <section class="screen active" style="padding: 20px 0;">
+    <div class="hero">
+      <span class="tag">IP & COPYRIGHT</span>
+      <h1>第三章 軟體與App</h1>
+      <p>3-2 智慧財產權與著作權（今年出１題）</p>
+    </div>
+
+    <div style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+
+      
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>１智慧財產權與著作權（近五年出０題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">智慧財產權 (Intellectual Property Right, IPR)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              包括專利權、商標權、著作權及營業秘密等。<br>
+              ● <strong>範圍：</strong>音樂、畫作、著作、軟體、影音、發明專利、商標等無形的財產。<br>
+              ● <strong>特性：</strong>有排他性（排除他人使用權利）、屬地主義（僅在獲得註冊國家有效）、時間性（保障使用權利期限）。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/022.2.3.2.png" alt="智慧財產權示意圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">著作權</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              包括著作人格權、著作財產權。
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>著作人格權：</strong>保護著作人的名譽、聲望及其人格利益，不可以讓與或繼承，著作人於著作發表時有具名、使用別名或不具名的權利。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>著作財產權：</strong>包括重製權、公開口述、播送、上映、演出、傳輸、展示權、改作權、編輯權、散布權及出租權，可全部或部分轉讓給他人。
+              </div>
+            </div>
+            <div style="font-size: 0.90rem; line-height: 1.6; margin-top: 10px;">
+              ● <strong>不受保護範圍：</strong>憲法、法律、公文、符號、公式、時曆、依法令舉行考試之試題，以及超過著作權存續年限（著作人<span style="color: #cd0505; font-weight: bold;">死後50年</span>）之著作。<br>
+              ● <strong>取得方式：</strong><span style="color: #cd0505; font-weight: bold;">完成著作時</span>，即享有著作權，不須額外註冊或登記。
+            </div>
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">常見的著作權概念</div>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>侵權行為：</strong>①使用他人著作須取得<span style="color: #cd0505; font-weight: bold;">合法授權</span>。②是否侵權與是否<span style="color: #cd0505; font-weight: bold;">營利</span>無直接關係。③即使註明出處、作者，未取得授權也屬侵權。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>重製權與暫時性重製：</strong>印刷、複印、拷貝等屬重製；瀏覽網頁的「暫時性重製」則屬例外，為合理使用範圍。
+              </div>
+              <div style="padding: 10px; background: #fff; border-radius: 6px; border: 1px solid #e2e8f0;">
+                <strong>改作權、公開傳輸權與公開演出權：</strong>翻譯、編曲等屬改作；透過網路提供或傳達屬公開傳輸；現場表演屬公開演出。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+     
+      <div class="question-card" style="padding: 20px;">
+        <h3 style="color: #6366f1; margin-bottom: 12px; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center;">
+          <span>２常見的授權方式（今年出１題）</span>
+        </h3>
+        
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-top: 15px;">
+          
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">創用CC授權條款 (Creative Commons)</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              屬於版權宣告方式、公眾授權條款，由以下四種要素組成：<br>
+              ● <strong>姓名標示 (BY)：</strong>須按照著作人指定方式表彰其姓名。<br>
+              ● <strong>非商業性 (NC)：</strong>不得以營利目的利用著作。<br>
+              ● <strong>禁止改作 (ND)：</strong>僅能重製，不得變更、變形或修改。<br>
+              ● <strong>相同方式分享 (SA)：</strong>若修改著作，須以相同授權條款散布。
+            </div>
+            <div style="font-size: 0.85rem; color: #64748b; margin-top: 6px;">
+              (註) 只要使用創用CC授權條款就必須包含「姓名標示」，且「禁止改作」與「相同方式分享」不能同時存在，共組成六種授權條款。
+            </div>
+            <img class="img1" style="max-width: 100%; height: auto; border-radius: 6px; display: block; margin: 8px auto;" src="http://ds.cfp.com.tw/CA-memorytree/introduction/Ch2/023.3.3.4.0.png" alt="創用CC授權架構圖">
+          </div>
+
+          <div style="padding: 12px 16px; background: rgba(99, 102, 241, 0.03); border-radius: 8px; border-left: 4px solid #6366f1;">
+            <div style="font-weight: 600; margin-bottom: 6px; color: #6366f1;">公眾領域與國際標準檔案格式</div>
+            <div style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 8px;">
+              ● <strong>公眾領域標章 (PDM)：</strong>代表著作已不受著作權限制，無償提供大眾使用（如圖書館收藏品）。<br>
+              ● <strong>公眾領域貢獻宣告 (CC0)：</strong>著作權人宣告放棄著作權，可商用、可修改、不必標示原作者。<br>
+              ● <strong>封閉格式：</strong>規格不公開，版權受專利保護（ex. .doc、.ppt、.xls、.rar）。<br>
+              ● <strong>開放格式：</strong>規格公開，版權開放，流通性與保存性較佳（ex. .docx、.odt、.pdf、.mp3、.png、.svg、.zip）。
+            </div>
+          </div>
+        </div>
+      </div>
+
+      
+      <div style="max-width: 450px; margin: 30px auto 0 auto; display: flex; justify-content: center; gap: 15px; padding: 0 16px; flex-wrap: wrap;">
+        <a href="009.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">上一頁(3-1)</a>
+        <a href="../Introduction.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">回目錄</a>
+        <a href="011.html" class="primary" style="text-decoration: none; padding: 10px 16px; border-radius: 8px;">下一頁(4-1)</a>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+(() => {
+  const toggle = document.getElementById('navToggle');
+  const nav = document.getElementById('sideNav');
+  const overlay = document.getElementById('navOverlay');
+
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    toggle.classList.add('active');
+    nav.classList.add('open');
+    overlay.classList.add('show');
+    document.body.classList.add('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', '關閉導覽選單');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.inert = false;
+  }
+
+  function closeNav() {
+    toggle.classList.remove('active');
+    nav.classList.remove('open');
+    overlay.classList.remove('show');
+    document.body.classList.remove('nav-open');
+
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', '開啟導覽選單');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.inert = true;
+  }
+
+  toggle.addEventListener('click', () => {
+    if (nav.classList.contains('open')) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener('click', closeNav);
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      closeNav();
+    }
+  });
+
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeNav);
+  });
+})();
+</script>
+</body>
+</html>
