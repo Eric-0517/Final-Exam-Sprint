@@ -1088,3 +1088,8 @@ body.nav-open {
     gap: 8px;
   }
 }
+
+.side-nav-links a[hidden],
+#profileNavLink[hidden] {
+  display: none !important;
+}
