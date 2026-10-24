@@ -71,17 +71,38 @@
       <img id="authAvatar" class="profile-avatar" alt="使用者頭像" hidden>
       <div><h1 id="authName">使用者</h1><div id="authEmail" class="muted"></div></div>
     </div>
-    <div id="signedOut">
-      <h1>登入個人帳號</h1>
-      <p class="muted">登入後可同步個人成績、錯題、收藏與未完成測驗。</p>
+    
+<section class="profile-head">
+  <div id="profileUser" class="profile-user" hidden>
+    <img id="profileAvatar" class="profile-avatar"
+      alt="使用者頭像" hidden>
+    <div>
+      <h1 id="profileName">使用者</h1>
+      <div id="profileEmail" class="muted"></div>
     </div>
-    <div class="profile-actions">
-      <button class="primary" id="googleLoginBtn" type="button">使用 Google 登入</button>
-      <button class="secondary" id="logoutBtn" type="button" hidden>登出</button>
-      <a class="secondary" href="index.html" style="text-decoration:none">返回首頁</a>
-    </div>
-    <p id="profileMessage" class="muted" aria-live="polite"></p>
-  </section>
+  </div>
+
+  <div id="signedOut">
+    <h1>登入個人帳號</h1>
+    <p class="muted">
+      登入後可同步個人成績、錯題、收藏與未完成測驗。
+    </p>
+  </div>
+
+  <div class="profile-actions">
+    <button class="primary" id="profileGoogleLoginBtn" type="button">
+      使用 Google 登入
+    </button>
+    <button class="secondary" id="profileLogoutBtn" type="button" hidden>
+      登出
+    </button>
+    <a class="secondary" href="index.html" style="text-decoration:none">
+      返回首頁
+    </a>
+  </div>
+
+  <p id="profileMessage" class="muted" aria-live="polite"></p>
+</section>
 
   <section class="profile-section">
     <h2>歷次成績</h2>
