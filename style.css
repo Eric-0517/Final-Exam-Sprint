@@ -1093,3 +1093,24 @@ body.nav-open {
 #profileNavLink[hidden] {
   display: none !important;
 }
+
+.site-footer {
+  padding: 24px 16px;
+  text-align: center;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.site-footer a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.site-footer p {
+  margin: 8px 0 0;
+}
