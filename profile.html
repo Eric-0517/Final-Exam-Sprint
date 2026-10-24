@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>考前衝刺｜個人中心</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.side-nav-links a[hidden],
+#profileNavLink[hidden] {
+  display: none !important;
+}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/supabase-client.js"></script>
 <script src="js/auth.js" defer></script>
@@ -65,140 +71,310 @@
     </div>
   </div>
 </nav>
+
 <main class="profile-wrap">
+
   <section class="profile-head">
-    <div id="authUser" class="profile-user" hidden>
-      <img id="authAvatar" class="profile-avatar" alt="使用者頭像" hidden>
-      <div><h1 id="authName">使用者</h1><div id="authEmail" class="muted"></div></div>
+    <div id="profileUser" class="profile-user" hidden>
+      <img id="profileAvatar" class="profile-avatar"
+        alt="使用者頭像" hidden>
+      <div>
+        <h1 id="profileName">使用者</h1>
+        <div id="profileEmail" class="muted"></div>
+      </div>
     </div>
-    
-<section class="profile-head">
-  <div id="profileUser" class="profile-user" hidden>
-    <img id="profileAvatar" class="profile-avatar"
-      alt="使用者頭像" hidden>
-    <div>
-      <h1 id="profileName">使用者</h1>
-      <div id="profileEmail" class="muted"></div>
+
+    <div id="signedOut">
+      <h1>登入個人帳號</h1>
+      <p class="muted">
+        登入後可同步個人成績、錯題、收藏與未完成測驗。
+      </p>
     </div>
-  </div>
 
-  <div id="signedOut">
-    <h1>登入個人帳號</h1>
-    <p class="muted">
-      登入後可同步個人成績、錯題、收藏與未完成測驗。
-    </p>
-  </div>
+    <div class="profile-actions">
+      <button class="primary" id="profileGoogleLoginBtn" type="button">
+        使用 Google 登入
+      </button>
+      <button class="secondary" id="profileLogoutBtn" type="button" hidden>
+        登出
+      </button>
+      <a class="secondary" href="index.html" style="text-decoration:none">
+        返回首頁
+      </a>
+    </div>
 
-  <div class="profile-actions">
-    <button class="primary" id="profileGoogleLoginBtn" type="button">
-      使用 Google 登入
-    </button>
-    <button class="secondary" id="profileLogoutBtn" type="button" hidden>
-      登出
-    </button>
-    <a class="secondary" href="index.html" style="text-decoration:none">
-      返回首頁
-    </a>
-  </div>
-
-  <p id="profileMessage" class="muted" aria-live="polite"></p>
-</section>
+    <p id="profileMessage" class="muted" aria-live="polite"></p>
+  </section>
 
   <section class="profile-section">
     <h2>歷次成績</h2>
     <div id="attempts"><div class="empty">載入中…</div></div>
   </section>
+
   <section class="profile-section">
     <h2>雲端錯題本</h2>
     <div id="wrongQuestions"><div class="empty">載入中…</div></div>
   </section>
+
   <section class="profile-section">
     <h2>我的收藏</h2>
     <div id="bookmarks"><div class="empty">載入中…</div></div>
   </section>
+
   <section class="profile-section">
     <h2>未完成測驗</h2>
     <div id="sessions"><div class="empty">載入中…</div></div>
   </section>
+
 </main>
+
 <script>
 (() => {
-  const $ = id => document.getElementById(id);
-  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
-  const msg = text => $("profileMessage").textContent = text;
+  "use strict";
 
-  async function loadProfile() {
-    const { data: { session } } = await window.sb.auth.getSession();
-    $("signedOut").hidden = Boolean(session);
-    if (!session) {
-      ["attempts","wrongQuestions","bookmarks","sessions"].forEach(id => {
-        $(id).innerHTML = '<div class="empty">請先使用 Google 登入。</div>';
-      });
-      return;
+  const toggle = document.getElementById("navToggle");
+  const nav = document.getElementById("sideNav");
+  const overlay = document.getElementById("navOverlay");
+
+  if (toggle && nav && overlay) {
+    function openNav() {
+      toggle.classList.add("active");
+      nav.classList.add("open");
+      overlay.classList.add("show");
+      document.body.classList.add("nav-open");
+
+      toggle.setAttribute("aria-expanded", "true");
+      toggle.setAttribute("aria-label", "關閉導覽選單");
+      nav.setAttribute("aria-hidden", "false");
+      nav.inert = false;
     }
 
+    function closeNav() {
+      toggle.classList.remove("active");
+      nav.classList.remove("open");
+      overlay.classList.remove("show");
+      document.body.classList.remove("nav-open");
+
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "開啟導覽選單");
+      nav.setAttribute("aria-hidden", "true");
+      nav.inert = true;
+    }
+
+    toggle.addEventListener("click", () => {
+      if (nav.classList.contains("open")) {
+        closeNav();
+      } else {
+        openNav();
+      }
+    });
+
+    overlay.addEventListener("click", closeNav);
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeNav();
+    });
+
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", closeNav);
+    });
+  }
+})();
+</script>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+
+  const msg = text => {
+    const element = $("profileMessage");
+    if (element) element.textContent = text;
+  };
+
+  async function loadProfile() {
+    if (!window.sb) return;
+
     try {
+      const {
+        data: { session },
+        error: sessionError
+      } = await window.sb.auth.getSession();
+
+      if (sessionError) throw sessionError;
+
+      const loggedIn = Boolean(session);
+
+      $("signedOut").hidden = loggedIn;
+
+      if (!loggedIn) {
+        ["attempts", "wrongQuestions", "bookmarks", "sessions"].forEach(id => {
+          $(id).innerHTML =
+            '<div class="empty">請先使用 Google 登入。</div>';
+        });
+        return;
+      }
+
+      if (!window.StudyData) {
+        throw new Error("StudyData 尚未載入。");
+      }
+
       const [attempts, wrong, bookmarks] = await Promise.all([
-        StudyData.getAttempts(), StudyData.getWrongQuestions(), StudyData.getBookmarks()
+        StudyData.getAttempts(),
+        StudyData.getWrongQuestions(),
+        StudyData.getBookmarks()
       ]);
 
       $("attempts").innerHTML = attempts.length ? `
-        <table class="profile-table"><thead><tr><th>日期</th><th>科目</th><th>分數</th><th>正確率</th></tr></thead><tbody>
-        ${attempts.map(a => `<tr><td>${esc(new Date(a.created_at).toLocaleString("zh-TW"))}</td><td>${esc(a.subject)}</td><td>${esc(a.score)}</td><td>${a.total_questions ? Math.round(a.correct_count/a.total_questions*100) : 0}%</td></tr>`).join("")}
-        </tbody></table>` : '<div class="empty">目前還沒有成績紀錄。</div>';
+        <table class="profile-table">
+          <thead>
+            <tr>
+              <th>日期</th>
+              <th>科目</th>
+              <th>分數</th>
+              <th>正確率</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${attempts.map(a => `
+              <tr>
+                <td>${esc(new Date(a.created_at).toLocaleString("zh-TW"))}</td>
+                <td>${esc(a.subject)}</td>
+                <td>${esc(a.score)}</td>
+                <td>${a.total_questions
+                  ? Math.round(a.correct_count / a.total_questions * 100)
+                  : 0}%</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      ` : '<div class="empty">目前還沒有成績紀錄。</div>';
 
-      $("wrongQuestions").innerHTML = wrong.length ? wrong.map(w => {
-        const q = w.question_snapshot || {};
-        const title = q.question || q.questionText || ("題目 ID：" + w.question_id);
-        return `<div class="profile-item"><div class="profile-item-title">${esc(w.subject)}｜${esc(title)}</div>
-          <div class="muted">最近答案：${esc(w.last_answer || "未作答")}；累計答錯：${w.wrong_count} 次；${w.is_mastered ? "已熟悉" : "尚未熟悉"}</div>
-          <button class="small-btn" data-mastered="${esc(w.id)}">${w.is_mastered ? "取消已熟悉" : "標記已熟悉"}</button></div>`;
-      }).join("") : '<div class="empty">目前沒有錯題紀錄。</div>';
+      $("wrongQuestions").innerHTML = wrong.length
+        ? wrong.map(w => {
+            const q = w.question_snapshot || {};
+            const title = q.question || q.questionText ||
+              ("題目 ID：" + w.question_id);
 
-      $("bookmarks").innerHTML = bookmarks.length ? bookmarks.map(b =>
-        `<div class="profile-item"><div class="profile-item-title">${esc(b.subject)}｜題目 ${esc(b.question_id)}</div><div class="muted">收藏時間：${esc(new Date(b.created_at).toLocaleString("zh-TW"))}</div></div>`
-      ).join("") : '<div class="empty">目前沒有收藏題目。</div>';
+            return `
+              <div class="profile-item">
+                <div class="profile-item-title">
+                  ${esc(w.subject)}｜${esc(title)}
+                </div>
+                <div class="muted">
+                  最近答案：${esc(w.last_answer || "未作答")}；
+                  累計答錯：${esc(w.wrong_count)} 次；
+                  ${w.is_mastered ? "已熟悉" : "尚未熟悉"}
+                </div>
+                <button class="small-btn" data-mastered="${esc(w.id)}">
+                  ${w.is_mastered ? "取消已熟悉" : "標記已熟悉"}
+                </button>
+              </div>
+            `;
+          }).join("")
+        : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-      const { data: sessions, error } = await window.sb.from("quiz_sessions")
-        .select("*").order("updated_at", { ascending: false });
+      $("bookmarks").innerHTML = bookmarks.length
+        ? bookmarks.map(b => `
+            <div class="profile-item">
+              <div class="profile-item-title">
+                ${esc(b.subject)}｜題目 ${esc(b.question_id)}
+              </div>
+              <div class="muted">
+                收藏時間：${esc(new Date(b.created_at).toLocaleString("zh-TW"))}
+              </div>
+            </div>
+          `).join("")
+        : '<div class="empty">目前沒有收藏題目。</div>';
+
+      const {
+        data: sessions,
+        error
+      } = await window.sb.from("quiz_sessions")
+        .select("*")
+        .order("updated_at", { ascending: false });
+
       if (error) throw error;
-      $("sessions").innerHTML = sessions.length ? sessions.map(s =>
-        `<div class="profile-item"><div class="profile-item-title">${esc(s.quiz_name)}（${esc(s.subject)}）</div>
-        <div class="muted">已作答 ${Object.keys(s.answers || {}).length} 題；目前題號 ${Number(s.current_index || 0)+1}；更新於 ${esc(new Date(s.updated_at).toLocaleString("zh-TW"))}</div>
-        <a class="small-btn" style="display:inline-block;text-decoration:none" href="${esc(s.subject)}.html">前往科目</a></div>`
-      ).join("") : '<div class="empty">目前沒有未完成測驗。</div>';
+
+      $("sessions").innerHTML = sessions.length
+        ? sessions.map(s => `
+            <div class="profile-item">
+              <div class="profile-item-title">
+                ${esc(s.quiz_name)}（${esc(s.subject)}）
+              </div>
+              <div class="muted">
+                已作答 ${Object.keys(s.answers || {}).length} 題；
+                目前題號 ${Number(s.current_index || 0) + 1}；
+                更新於 ${esc(new Date(s.updated_at).toLocaleString("zh-TW"))}
+              </div>
+              <a class="small-btn"
+                style="display:inline-block;text-decoration:none"
+                href="${esc(s.subject)}.html">前往科目</a>
+            </div>
+          `).join("")
+        : '<div class="empty">目前沒有未完成測驗。</div>';
+
       msg("");
     } catch (error) {
-      console.error(error);
-      msg("載入資料失敗，請確認 Supabase 資料表與 RLS 設定。");
+      console.error("載入個人中心資料失敗：", error);
+      msg("載入資料失敗，請確認登入狀態、Supabase 資料表與 RLS 設定。");
     }
   }
 
   document.addEventListener("click", async event => {
-    const button = event.target.closest("[data-mastered]");
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+
+    const button = target.closest("[data-mastered]");
     if (!button) return;
+
     try {
       const id = button.dataset.mastered;
+
       const { data, error } = await window.sb.from("wrong_questions")
-        .select("is_mastered").eq("id", id).single();
+        .select("is_mastered")
+        .eq("id", id)
+        .single();
+
       if (error) throw error;
+
       await StudyData.setMastered(id, !data.is_mastered);
       await loadProfile();
     } catch (error) {
-      console.error(error);
+      console.error("更新錯題狀態失敗：", error);
       msg("更新錯題狀態失敗。");
     }
   });
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (window.sb) {
-      window.sb.auth.onAuthStateChange(() => setTimeout(loadProfile, 0));
-      loadProfile();
+  async function initProfile() {
+    if (!window.sb) {
+      msg("Supabase 尚未載入，請稍後重新整理。");
+      return;
     }
-  });
+
+    await loadProfile();
+
+    window.sb.auth.onAuthStateChange(() => {
+      setTimeout(loadProfile, 0);
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProfile, { once: true });
+  } else {
+    initProfile();
+  }
 })();
 </script>
+
 </body>
 </html>
