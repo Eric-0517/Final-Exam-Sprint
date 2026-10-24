@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>考前衝刺｜個人中心</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.profile-wrap{max-width:1040px;margin:0 auto;padding:32px 20px 60px}
+.profile-head,.profile-section{background:#fff;border:1px solid var(--line,#e5e7eb);border-radius:18px;padding:22px;margin-bottom:18px}
+.profile-user{display:flex;align-items:center;gap:14px}
+.profile-avatar{width:54px;height:54px;border-radius:50%;object-fit:cover;background:#eef2f7}
+.profile-user h1{font-size:24px;margin:0 0 5px}.muted{color:var(--muted,#6b7280);font-size:14px}
+.profile-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.profile-table{width:100%;border-collapse:collapse;font-size:14px}
+.profile-table th,.profile-table td{padding:12px 10px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}
+.profile-table th{color:#6b7280;font-weight:700}
+.profile-section h2{font-size:20px;margin:0 0 14px}
+.profile-item{padding:14px 0;border-bottom:1px solid #e5e7eb}
+.profile-item:last-child{border-bottom:0}
+.profile-item-title{font-weight:700;margin-bottom:5px}
+.small-btn{padding:7px 10px;border-radius:8px;background:#eef2f7;color:#1f2937;margin-top:8px}
+.empty{color:#6b7280;padding:12px 0}
+@media(max-width:600px){.profile-wrap{padding:20px 12px}.profile-head,.profile-section{padding:16px}.profile-table{font-size:12px}.profile-table th,.profile-table td{padding:9px 5px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js" defer></script>
+<script src="js/study-data.js" defer></script>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
+  <div class="sub">個人中心</div>
+</header>
+<main class="profile-wrap">
+  <section class="profile-head">
+    <div id="authUser" class="profile-user" hidden>
+      <img id="authAvatar" class="profile-avatar" alt="使用者頭像" hidden>
+      <div><h1 id="authName">使用者</h1><div id="authEmail" class="muted"></div></div>
+    </div>
+    <div id="signedOut">
+      <h1>登入個人帳號</h1>
+      <p class="muted">登入後可同步個人成績、錯題、收藏與未完成測驗。</p>
+    </div>
+    <div class="profile-actions">
+      <button class="primary" id="googleLoginBtn" type="button">使用 Google 登入</button>
+      <button class="secondary" id="logoutBtn" type="button" hidden>登出</button>
+      <a class="secondary" href="index.html" style="text-decoration:none">返回首頁</a>
+    </div>
+    <p id="profileMessage" class="muted" aria-live="polite"></p>
+  </section>
+
+  <section class="profile-section">
+    <h2>歷次成績</h2>
+    <div id="attempts"><div class="empty">載入中…</div></div>
+  </section>
+  <section class="profile-section">
+    <h2>雲端錯題本</h2>
+    <div id="wrongQuestions"><div class="empty">載入中…</div></div>
+  </section>
+  <section class="profile-section">
+    <h2>我的收藏</h2>
+    <div id="bookmarks"><div class="empty">載入中…</div></div>
+  </section>
+  <section class="profile-section">
+    <h2>未完成測驗</h2>
+    <div id="sessions"><div class="empty">載入中…</div></div>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+  const msg = text => $("profileMessage").textContent = text;
+
+  async function loadProfile() {
+    const { data: { session } } = await window.sb.auth.getSession();
+    $("signedOut").hidden = Boolean(session);
+    if (!session) {
+      ["attempts","wrongQuestions","bookmarks","sessions"].forEach(id => {
+        $(id).innerHTML = '<div class="empty">請先使用 Google 登入。</div>';
+      });
+      return;
+    }
+
+    try {
+      const [attempts, wrong, bookmarks] = await Promise.all([
+        StudyData.getAttempts(), StudyData.getWrongQuestions(), StudyData.getBookmarks()
+      ]);
+
+      $("attempts").innerHTML = attempts.length ? `
+        <table class="profile-table"><thead><tr><th>日期</th><th>科目</th><th>分數</th><th>正確率</th></tr></thead><tbody>
+        ${attempts.map(a => `<tr><td>${esc(new Date(a.created_at).toLocaleString("zh-TW"))}</td><td>${esc(a.subject)}</td><td>${esc(a.score)}</td><td>${a.total_questions ? Math.round(a.correct_count/a.total_questions*100) : 0}%</td></tr>`).join("")}
+        </tbody></table>` : '<div class="empty">目前還沒有成績紀錄。</div>';
+
+      $("wrongQuestions").innerHTML = wrong.length ? wrong.map(w => {
+        const q = w.question_snapshot || {};
+        const title = q.question || q.questionText || ("題目 ID：" + w.question_id);
+        return `<div class="profile-item"><div class="profile-item-title">${esc(w.subject)}｜${esc(title)}</div>
+          <div class="muted">最近答案：${esc(w.last_answer || "未作答")}；累計答錯：${w.wrong_count} 次；${w.is_mastered ? "已熟悉" : "尚未熟悉"}</div>
+          <button class="small-btn" data-mastered="${esc(w.id)}">${w.is_mastered ? "取消已熟悉" : "標記已熟悉"}</button></div>`;
+      }).join("") : '<div class="empty">目前沒有錯題紀錄。</div>';
+
+      $("bookmarks").innerHTML = bookmarks.length ? bookmarks.map(b =>
+        `<div class="profile-item"><div class="profile-item-title">${esc(b.subject)}｜題目 ${esc(b.question_id)}</div><div class="muted">收藏時間：${esc(new Date(b.created_at).toLocaleString("zh-TW"))}</div></div>`
+      ).join("") : '<div class="empty">目前沒有收藏題目。</div>';
+
+      const { data: sessions, error } = await window.sb.from("quiz_sessions")
+        .select("*").order("updated_at", { ascending: false });
+      if (error) throw error;
+      $("sessions").innerHTML = sessions.length ? sessions.map(s =>
+        `<div class="profile-item"><div class="profile-item-title">${esc(s.quiz_name)}（${esc(s.subject)}）</div>
+        <div class="muted">已作答 ${Object.keys(s.answers || {}).length} 題；目前題號 ${Number(s.current_index || 0)+1}；更新於 ${esc(new Date(s.updated_at).toLocaleString("zh-TW"))}</div>
+        <a class="small-btn" style="display:inline-block;text-decoration:none" href="${esc(s.subject)}.html">前往科目</a></div>`
+      ).join("") : '<div class="empty">目前沒有未完成測驗。</div>';
+      msg("");
+    } catch (error) {
+      console.error(error);
+      msg("載入資料失敗，請確認 Supabase 資料表與 RLS 設定。");
+    }
+  }
+
+  document.addEventListener("click", async event => {
+    const button = event.target.closest("[data-mastered]");
+    if (!button) return;
+    try {
+      const id = button.dataset.mastered;
+      const { data, error } = await window.sb.from("wrong_questions")
+        .select("is_mastered").eq("id", id).single();
+      if (error) throw error;
+      await StudyData.setMastered(id, !data.is_mastered);
+      await loadProfile();
+    } catch (error) {
+      console.error(error);
+      msg("更新錯題狀態失敗。");
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    if (window.sb) {
+      window.sb.auth.onAuthStateChange(() => setTimeout(loadProfile, 0));
+      loadProfile();
+    }
+  });
+})();
+</script>
+</body>
+</html>
