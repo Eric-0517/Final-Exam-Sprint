@@ -46,6 +46,12 @@
     if (logoutBtn) logoutBtn.hidden = !user;
     if (userBox) userBox.hidden = !user;
 
+    const profileLink = document.getElementById("profileNavLink");
+
+if (profileLink) {
+  profileLink.hidden = !user;
+}
+
     if (user) {
       const metadata = user.user_metadata || {};
       const displayName = metadata.full_name || metadata.name || user.email || "已登入使用者";
