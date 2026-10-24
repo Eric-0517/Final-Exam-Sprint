@@ -31,6 +31,31 @@
   <a href="studynotes.html">重點整理 <span>›</span></a>
   <a href="https://score-1.exchuan.com.tw/#" target="_blank">成績查詢 <span>›</span></a>
   <a href="downloads.html">檔案下載 <span>›</span></a>
+   <a href="profile.html" id="profileNavLink" hidden>個人中心 <span>›</span></a>
+  </div>
+
+  <div class="nav-account">
+    <div class="nav-account-title">個人帳號</div>
+
+    <div id="authUser" hidden>
+      <img id="authAvatar" alt="Google 頭像" hidden width="48" height="48">
+      <div id="authName"></div>
+      <div id="authEmail"></div>
+
+      <button id="logoutBtn" type="button">
+        登出 Google 帳號
+      </button>
+    </div>
+
+    <button class="google-login-btn" id="googleLoginBtn" type="button">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+      <span>使用 Google 登入</span>
+    </button>
+
+    <div class="nav-account-hint" id="authHint">
+      登入後同步個人成績、錯題與收藏題型
+    </div>
+  </div>
 </nav>
 
 <main id="app">
