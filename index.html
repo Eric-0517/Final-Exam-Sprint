@@ -151,6 +151,36 @@
     link.addEventListener('click', closeNav);
   });
 })();
+
+  
+const googleLoginBtn = document.getElementById('googleLoginBtn');
+
+if (googleLoginBtn) {
+  googleLoginBtn.addEventListener('click', async () => {
+    if (!window.supabase) {
+      alert('Supabase 尚未載入，請稍後再試。');
+      return;
+    }
+
+    const client = window.supabase.createClient(
+      'https://hcegldjvhyrzfahkzmpp.supabase.co',
+      'sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV'
+    );
+
+    const { error } = await client.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin +
+          '/Final-Exam-Sprint/'
+      }
+    });
+
+    if (error) {
+      alert('Google 登入失敗：' + error.message);
+    }
+  });
+}
+
 </script>
 </body>
 </html>
