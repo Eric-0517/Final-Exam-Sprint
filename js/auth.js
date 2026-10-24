@@ -1,12 +1,19 @@
-
 (() => {
   "use strict";
 
   const get = id => document.getElementById(id);
   let signingIn = false;
+  let signingOut = false;
 
   function getClient() {
     return window.sb && window.sb.auth ? window.sb : null;
+  }
+
+  function setVisible(element, visible) {
+    if (!element) return;
+
+    element.hidden = !visible;
+    element.style.display = visible ? "" : "none";
   }
 
   function renderUser(user) {
@@ -29,18 +36,22 @@
     const navLogout = get("logoutBtn");
     const profileLink = get("profileNavLink");
 
-    if (navUser) navUser.hidden = !loggedIn;
-    if (navLogin) navLogin.hidden = loggedIn;
-    if (navLogout) navLogout.hidden = !loggedIn;
-    if (profileLink) profileLink.hidden = !loggedIn;
+    setVisible(navUser, loggedIn);
+    setVisible(navLogin, !loggedIn);
+    setVisible(navLogout, loggedIn);
+    setVisible(profileLink, loggedIn);
 
-    if (navName) navName.textContent = displayName;
-    if (navEmail) navEmail.textContent = user?.email || "";
+    if (navName) navName.textContent = loggedIn ? displayName : "";
+    if (navEmail) navEmail.textContent = loggedIn ? user.email || "" : "";
 
     if (navAvatar) {
-      navAvatar.hidden = !loggedIn || !avatarUrl;
-      if (avatarUrl) navAvatar.src = avatarUrl;
-      else navAvatar.removeAttribute("src");
+      setVisible(navAvatar, loggedIn && Boolean(avatarUrl));
+
+      if (loggedIn && avatarUrl) {
+        navAvatar.src = avatarUrl;
+      } else {
+        navAvatar.removeAttribute("src");
+      }
     }
 
     // 個人中心頁面帳號
@@ -52,26 +63,38 @@
     const profileLogout = get("profileLogoutBtn");
     const signedOut = get("signedOut");
 
-    if (profileUser) profileUser.hidden = !loggedIn;
-    if (profileLogin) profileLogin.hidden = loggedIn;
-    if (profileLogout) profileLogout.hidden = !loggedIn;
-    if (signedOut) signedOut.hidden = loggedIn;
+    setVisible(profileUser, loggedIn);
+    setVisible(profileLogin, !loggedIn);
+    setVisible(profileLogout, loggedIn);
+    setVisible(signedOut, !loggedIn);
 
-    if (profileName) profileName.textContent = displayName;
-    if (profileEmail) profileEmail.textContent = user?.email || "";
-
-    if (profileAvatar) {
-      profileAvatar.hidden = !loggedIn || !avatarUrl;
-      if (avatarUrl) profileAvatar.src = avatarUrl;
-      else profileAvatar.removeAttribute("src");
+    if (profileName) {
+      profileName.textContent = loggedIn ? displayName : "";
     }
 
-    const hint = document.querySelector(".nav-account-hint");
-    if (hint) {
+    if (profileEmail) {
+      profileEmail.textContent = loggedIn ? user.email || "" : "";
+    }
+
+    if (profileAvatar) {
+      setVisible(profileAvatar, loggedIn && Boolean(avatarUrl));
+
+      if (loggedIn && avatarUrl) {
+        profileAvatar.src = avatarUrl;
+      } else {
+        profileAvatar.removeAttribute("src");
+      }
+    }
+
+    const hints = document.querySelectorAll(
+      ".nav-account-hint, #authHint"
+    );
+
+    hints.forEach(hint => {
       hint.textContent = loggedIn
         ? "已登入：" + (user.email || displayName)
         : "登入後同步個人成績、錯題與收藏題型";
-    }
+    });
   }
 
   async function signInWithGoogle() {
@@ -82,12 +105,22 @@
       return;
     }
 
-    if (signingIn) return;
+    if (signingIn || signingOut) return;
     signingIn = true;
+
+    const buttons = [
+      get("googleLoginBtn"),
+      get("profileGoogleLoginBtn")
+    ].filter(Boolean);
+
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
 
     try {
       const redirectTo =
-        window.location.origin + window.location.pathname +
+        window.location.origin +
+        window.location.pathname +
         window.location.search;
 
       const { error } = await client.auth.signInWithOAuth({
@@ -101,6 +134,10 @@
       alert("Google 登入失敗：" + error.message);
     } finally {
       signingIn = false;
+
+      buttons.forEach(button => {
+        button.disabled = false;
+      });
     }
   }
 
@@ -112,18 +149,35 @@
       return;
     }
 
+    if (signingIn || signingOut) return;
+    signingOut = true;
+
+    const buttons = [
+      get("logoutBtn"),
+      get("profileLogoutBtn")
+    ].filter(Boolean);
+
+    buttons.forEach(button => {
+      button.disabled = true;
+    });
+
     try {
       const { error } = await client.auth.signOut();
+
       if (error) throw error;
 
       renderUser(null);
 
       if (window.location.pathname.endsWith("/profile.html")) {
         const message = get("profileMessage");
-        if (message) message.textContent = "已登出帳號。";
+
+        if (message) {
+          message.textContent = "已登出帳號。";
+        }
 
         ["attempts", "wrongQuestions", "bookmarks", "sessions"].forEach(id => {
           const element = get(id);
+
           if (element) {
             element.innerHTML =
               '<div class="empty">請先使用 Google 登入。</div>';
@@ -133,6 +187,12 @@
     } catch (error) {
       console.error("登出失敗：", error);
       alert("登出失敗：" + error.message);
+    } finally {
+      signingOut = false;
+
+      buttons.forEach(button => {
+        button.disabled = false;
+      });
     }
   }
 
@@ -140,7 +200,9 @@
     const client = getClient();
 
     if (!client) {
-      console.error("找不到 window.sb，請確認 Supabase Script 載入順序。");
+      console.error(
+        "找不到 window.sb，請確認 Supabase SDK 與 js/supabase-client.js 的載入順序。"
+      );
       return;
     }
 
@@ -149,7 +211,11 @@
       "profileGoogleLoginBtn"
     ].forEach(id => {
       const button = get(id);
-      if (button) button.addEventListener("click", signInWithGoogle);
+
+      if (button && button.dataset.authBound !== "true") {
+        button.dataset.authBound = "true";
+        button.addEventListener("click", signInWithGoogle);
+      }
     });
 
     [
@@ -157,21 +223,28 @@
       "profileLogoutBtn"
     ].forEach(id => {
       const button = get(id);
-      if (button) button.addEventListener("click", signOut);
+
+      if (button && button.dataset.authBound !== "true") {
+        button.dataset.authBound = "true";
+        button.addEventListener("click", signOut);
+      }
     });
 
-    client.auth.onAuthStateChange((_event, session) => {
-      renderUser(session?.user || null);
-    });
-
-    const { data, error } = await client.auth.getSession();
+    const {
+      data: { session },
+      error
+    } = await client.auth.getSession();
 
     if (error) {
       console.error("讀取登入狀態失敗：", error);
       return;
     }
 
-    renderUser(data.session?.user || null);
+    renderUser(session?.user || null);
+
+    client.auth.onAuthStateChange((_event, sessionNow) => {
+      renderUser(sessionNow?.user || null);
+    });
   }
 
   window.AuthUI = {
@@ -181,7 +254,7 @@
   };
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initAuth);
+    document.addEventListener("DOMContentLoaded", initAuth, { once: true });
   } else {
     initAuth();
   }
