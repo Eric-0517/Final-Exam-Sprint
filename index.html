@@ -153,33 +153,94 @@
 })();
 
   
-const googleLoginBtn = document.getElementById('googleLoginBtn');
 
-if (googleLoginBtn) {
-  googleLoginBtn.addEventListener('click', async () => {
-    if (!window.supabase) {
-      alert('Supabase 尚未載入，請稍後再試。');
+const googleLoginBtn = document.getElementById('googleLoginBtn');
+const googleLoginText = googleLoginBtn?.querySelector('span');
+const accountHint = document.querySelector('.nav-account-hint');
+
+let currentSession = null;
+let isSigningIn = false;
+
+const supabaseClient = window.supabase.createClient(
+  'https://hcegldjvhyrzfahkzmpp.supabase.co',
+  'sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV',
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
+);
+
+function updateLoginUI(session) {
+  currentSession = session;
+  const user = session?.user;
+
+  if (user) {
+    googleLoginBtn.classList.add('logged-in');
+    googleLoginText.textContent = '登出 Google 帳號';
+
+    if (accountHint) {
+      accountHint.textContent =
+        '已登入：' + (user.email || user.user_metadata?.full_name || 'Google 使用者');
+    }
+  } else {
+    googleLoginBtn.classList.remove('logged-in');
+    googleLoginText.textContent = '使用 Google 登入';
+
+    if (accountHint) {
+      accountHint.textContent = '登入後同步個人成績、錯題與收藏題型';
+    }
+  }
+
+  googleLoginBtn.disabled = isSigningIn;
+}
+
+googleLoginBtn?.addEventListener('click', async () => {
+  if (isSigningIn) return;
+
+  isSigningIn = true;
+  googleLoginBtn.disabled = true;
+
+  try {
+    if (currentSession?.user) {
+      const { error } = await supabaseClient.auth.signOut();
+
+      if (error) throw error;
+
+      updateLoginUI(null);
       return;
     }
 
-    const client = window.supabase.createClient(
-      'https://hcegldjvhyrzfahkzmpp.supabase.co',
-      'sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV'
-    );
-
-    const { error } = await client.auth.signInWithOAuth({
+    const { error } = await supabaseClient.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo: window.location.origin +
-          '/Final-Exam-Sprint/'
+        redirectTo: window.location.origin + '/Final-Exam-Sprint/'
       }
     });
 
-    if (error) {
-      alert('Google 登入失敗：' + error.message);
-    }
-  });
-}
+    if (error) throw error;
+  } catch (error) {
+    alert('登入操作失敗：' + error.message);
+  } finally {
+    isSigningIn = false;
+    googleLoginBtn.disabled = false;
+  }
+});
+
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  updateLoginUI(session);
+});
+
+supabaseClient.auth.getSession().then(({ data, error }) => {
+  if (error) {
+    console.error('讀取登入狀態失敗：', error.message);
+    return;
+  }
+
+  updateLoginUI(data.session);
+});
 
 </script>
 </body>
