@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>考前衝刺｜考前總複習</title>
 <link rel="stylesheet" href="style.css">
+<style>
+.side-nav-links a[hidden],
+#profileNavLink[hidden] {
+  display: none !important;
+}
+</style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="online-counter.js"></script>
 <script src="js/supabase-client.js"></script>
@@ -27,7 +33,6 @@
 
 <div class="nav-overlay" id="navOverlay"></div>
 
-
 <nav class="side-nav" id="sideNav" aria-hidden="true" inert>
   <div class="side-nav-title">網站導覽</div>
 
@@ -39,29 +44,28 @@
     <a href="profile.html" id="profileNavLink" hidden>個人中心 <span>›</span></a>
   </div>
 
-  
-<div class="nav-account">
-  <div class="nav-account-title">個人帳號</div>
+  <div class="nav-account">
+    <div class="nav-account-title">個人帳號</div>
 
-  <div id="authUser" hidden>
-    <img id="authAvatar" alt="Google 頭像" hidden width="48" height="48">
-    <div id="authName"></div>
-    <div id="authEmail"></div>
+    <div id="authUser" hidden>
+      <img id="authAvatar" alt="Google 頭像" hidden width="48" height="48">
+      <div id="authName"></div>
+      <div id="authEmail"></div>
 
-    <button id="logoutBtn" type="button">
-      登出 Google 帳號
+      <button id="logoutBtn" type="button">
+        登出 Google 帳號
+      </button>
+    </div>
+
+    <button class="google-login-btn" id="googleLoginBtn" type="button">
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
+      <span>使用 Google 登入</span>
     </button>
-  </div>
 
-  <button class="google-login-btn" id="googleLoginBtn" type="button">
-    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="">
-    <span>使用 Google 登入</span>
-  </button>
-
-  <div class="nav-account-hint" id="authHint">
-    登入後同步個人成績、錯題與收藏題型
+    <div class="nav-account-hint" id="authHint">
+      登入後同步個人成績、錯題與收藏題型
+    </div>
   </div>
-</div>
 </nav>
 
 <main id="app">
@@ -71,13 +75,15 @@
       <h1>選擇練習科目</h1>
       <p>請選擇要練習的題庫，進入對應的測驗頁面。</p>
     </div>
-<a class="subject-card" href="major1.html" style="text-decoration:none;color:inherit;display:flex">
+
+    <a class="subject-card" href="major1.html" style="text-decoration:none;color:inherit;display:flex">
       <div>
         <div class="subject-title">09商業與管理群專一(114-1歷屆模擬試題)</div>
         <div class="subject-meta">每回50題/每題 2 分、滿分 100 分</div>
       </div>
       <span class="primary" style="display:inline-flex;align-items:center">進入題庫</span>
     </a>
+
     <a class="subject-card" href="major2.html" style="text-decoration:none;color:inherit;display:flex">
       <div>
         <div class="subject-title">09商業與管理群專二(114-1歷屆模擬試題)</div>
@@ -85,6 +91,7 @@
       </div>
       <span class="primary" style="display:inline-flex;align-items:center">進入題庫</span>
     </a>
+
     <a class="subject-card merged-subject" href="economics.html" style="text-decoration:none;color:inherit;margin-top:16px;display:flex">
       <div>
         <div class="subject-title">經濟學(第1次模擬考)啟芳</div>
@@ -167,97 +174,6 @@
     link.addEventListener('click', closeNav);
   });
 })();
-
-  
-
-const googleLoginBtn = document.getElementById('googleLoginBtn');
-const googleLoginText = googleLoginBtn?.querySelector('span');
-const accountHint = document.querySelector('.nav-account-hint');
-
-let currentSession = null;
-let isSigningIn = false;
-
-const supabaseClient = window.supabase.createClient(
-  'https://hcegldjvhyrzfahkzmpp.supabase.co',
-  'sb_publishable_nWbqisDG6KgmTDG7g6O5Sg_PF3c_bAV',
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  }
-);
-
-function updateLoginUI(session) {
-  currentSession = session;
-  const user = session?.user;
-
-  if (user) {
-    googleLoginBtn.classList.add('logged-in');
-    googleLoginText.textContent = '登出 Google 帳號';
-
-    if (accountHint) {
-      accountHint.textContent =
-        '已登入：' + (user.email || user.user_metadata?.full_name || 'Google 使用者');
-    }
-  } else {
-    googleLoginBtn.classList.remove('logged-in');
-    googleLoginText.textContent = '使用 Google 登入';
-
-    if (accountHint) {
-      accountHint.textContent = '登入後同步個人成績、錯題與收藏題型';
-    }
-  }
-
-  googleLoginBtn.disabled = isSigningIn;
-}
-
-googleLoginBtn?.addEventListener('click', async () => {
-  if (isSigningIn) return;
-
-  isSigningIn = true;
-  googleLoginBtn.disabled = true;
-
-  try {
-    if (currentSession?.user) {
-      const { error } = await supabaseClient.auth.signOut();
-
-      if (error) throw error;
-
-      updateLoginUI(null);
-      return;
-    }
-
-    const { error } = await supabaseClient.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin + '/Final-Exam-Sprint/'
-      }
-    });
-
-    if (error) throw error;
-  } catch (error) {
-    alert('登入操作失敗：' + error.message);
-  } finally {
-    isSigningIn = false;
-    googleLoginBtn.disabled = false;
-  }
-});
-
-supabaseClient.auth.onAuthStateChange((event, session) => {
-  updateLoginUI(session);
-});
-
-supabaseClient.auth.getSession().then(({ data, error }) => {
-  if (error) {
-    console.error('讀取登入狀態失敗：', error.message);
-    return;
-  }
-
-  updateLoginUI(data.session);
-});
-
 </script>
 </body>
 </html>
