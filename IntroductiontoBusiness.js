@@ -10,6 +10,8 @@
     const SESSION_SUBJECT = "IntroductiontoBusiness";
     const QUIZ_NAME = "商業概論(第1次模擬考)啟芳";
 
+    const SWAL_COLOR = "#2563eb";
+
     const $ = (id) => document.getElementById(id);
     const screens = ["home", "quiz", "result"];
 
@@ -21,10 +23,85 @@
     let savingSession = Promise.resolve();
     let finishingQuiz = false;
 
+    function swalBase() {
+        return {
+            confirmButtonColor: SWAL_COLOR,
+            cancelButtonColor: "#64748b",
+            reverseButtons: true,
+            customClass: {
+                popup: "study-swal-popup"
+            }
+        };
+    }
+
+    function showSuccess(title, text) {
+        return Swal.fire({
+            ...swalBase(),
+            icon: "success",
+            title,
+            text,
+            confirmButtonText: "確定",
+            allowOutsideClick: false,
+            allowEscapeKey: false
+        });
+    }
+
+    function showError(title, text) {
+        return Swal.fire({
+            ...swalBase(),
+            icon: "error",
+            title,
+            text,
+            confirmButtonText: "確定"
+        });
+    }
+
+    function showWarning(title, text) {
+        return Swal.fire({
+            ...swalBase(),
+            icon: "warning",
+            title,
+            text,
+            confirmButtonText: "確定"
+        });
+    }
+
+    function showInfo(title, text) {
+        return Swal.fire({
+            ...swalBase(),
+            icon: "info",
+            title,
+            text,
+            confirmButtonText: "確定"
+        });
+    }
+
+    async function confirmAction({
+        title,
+        text,
+        confirmText = "確定",
+        cancelText = "取消",
+        icon = "question"
+    }) {
+        const result = await Swal.fire({
+            ...swalBase(),
+            icon,
+            title,
+            text,
+            showCancelButton: true,
+            confirmButtonText: confirmText,
+            cancelButtonText: cancelText,
+            focusCancel: true
+        });
+
+        return result.isConfirmed;
+    }
+
     function showScreen(id) {
         screens.forEach((screenId) => {
             $(screenId).classList.toggle("active", screenId === id);
         });
+
         window.scrollTo(0, 0);
     }
 
@@ -185,6 +262,12 @@
             );
 
             console.error("商業概論題庫載入失敗：", error);
+
+            await showError(
+                "題庫載入失敗",
+                error.message +
+                " 請確認題庫 JSON 與相關檔案已正確上傳。"
+            );
         }
     }
 
@@ -221,7 +304,7 @@
                     current_index: currentIndex
                 });
 
-                if (result && result.saved === false) {
+                if (result?.saved === false || result?.error) {
                     console.warn("商業概論測驗進度尚未同步：", result);
                 }
             })
@@ -240,13 +323,21 @@
             typeof studyData.deleteSession !== "function" ||
             !(await isSignedIn())
         ) {
-            return;
+            return false;
         }
 
         try {
-            await studyData.deleteSession(SESSION_SUBJECT);
+            const result = await studyData.deleteSession(SESSION_SUBJECT);
+
+            if (result?.saved === false || result?.success === false || result?.error) {
+                console.error("刪除商業概論測驗進度失敗：", result);
+                return false;
+            }
+
+            return true;
         } catch (error) {
             console.error("刪除商業概論測驗進度失敗：", error);
+            return false;
         }
     }
 
@@ -304,19 +395,19 @@
             const savedAnswers = session.answers || {};
 
             const hasAnswers = savedQuestions.some((question) =>
-                savedAnswers[question.id] === "A" ||
-                savedAnswers[question.id] === "B" ||
-                savedAnswers[question.id] === "C" ||
-                savedAnswers[question.id] === "D"
+                LETTERS.includes(savedAnswers[question.id])
             );
 
-            if (
-                !confirm(
-                    "偵測到尚未完成的測驗進度" +
-                    (hasAnswers ? "\n是否恢復上次的作答進度？" :
-                        "\n是否恢復上次的測驗？")
-                )
-            ) {
+            const shouldRestore = await confirmAction({
+                title: "要繼續上次的測驗嗎？",
+                text: hasAnswers
+                    ? "偵測到尚未完成的測驗進度，是否恢復上次的測驗？"
+                    : "已找到尚未完成的測驗紀錄，是否恢復上次的作答進度？",
+                confirmText: "繼續測驗",
+                cancelText: "重新開始"
+            });
+
+            if (!shouldRestore) {
                 await deleteSavedSession();
                 return false;
             }
@@ -337,6 +428,7 @@
             );
 
             quizStartedAt = Date.now();
+            finishingQuiz = false;
 
             $("total").textContent = quizQuestions.length;
             showScreen("quiz");
@@ -345,13 +437,22 @@
             return true;
         } catch (error) {
             console.error("恢復測驗失敗：", error);
+
+            await showError(
+                "恢復測驗失敗",
+                "無法讀取上次的測驗進度，請稍後再試。"
+            );
+
             return false;
         }
     }
 
     async function startQuiz() {
         if (!questionBank.length) {
-            alert("目前沒有可作答的題目。");
+            await showWarning(
+                "目前沒有可作答的題目",
+                "請確認題庫是否已正確載入。"
+            );
             return;
         }
 
@@ -548,16 +649,48 @@
         }
     }
 
+    function isSaveSuccessful(result) {
+        if (!result || typeof result !== "object") {
+            return false;
+        }
+
+        if (result.saved === true || result.success === true) {
+            return true;
+        }
+
+        if (result.saved === false || result.success === false) {
+            return false;
+        }
+
+        if (Object.prototype.hasOwnProperty.call(result, "error")) {
+            return !result.error;
+        }
+
+        return false;
+    }
+
     async function saveCompletedQuiz(correct, wrong) {
         const studyData = getStudyData();
 
         if (!studyData) {
             console.warn("StudyData 未載入，無法同步雲端資料。");
+
+            await showWarning(
+                "雲端功能尚未準備完成",
+                "本次測驗結果已顯示，但雲端成績與錯題尚未確認儲存。"
+            );
+
             return;
         }
 
         if (!(await isSignedIn())) {
             console.info("目前未登入，測驗結果僅顯示在本頁。");
+
+            await showInfo(
+                "測驗完成！",
+                "本次成績已完成計算。登入後即可同步成績與錯題。"
+            );
+
             return;
         }
 
@@ -580,20 +713,24 @@
         };
 
         const errors = [];
+        let attemptSaved = false;
+        let wrongQuestionsSaved = false;
 
         if (typeof studyData.saveAttempt === "function") {
             try {
                 const result = await studyData.saveAttempt(attempt);
+                attemptSaved = isSaveSuccessful(result);
 
-                if (result && result.saved === false) {
-                    errors.push("成績未成功儲存");
+                if (!attemptSaved) {
+                    errors.push("成績儲存結果未獲確認");
+                    console.error("成績儲存結果：", result);
                 }
             } catch (error) {
                 errors.push("成績儲存失敗");
                 console.error("儲存商業概論成績失敗：", error);
             }
         } else {
-            errors.push("找不到 saveAttempt 函式");
+            errors.push("找不到成績儲存功能");
         }
 
         if (typeof studyData.saveWrongQuestions === "function") {
@@ -604,34 +741,77 @@
                     answerMap
                 );
 
-                if (result && result.saved === false) {
-                    errors.push("錯題未成功儲存");
+                wrongQuestionsSaved = isSaveSuccessful(result);
+
+                if (!wrongQuestionsSaved) {
+                    errors.push("錯題儲存結果未獲確認");
+                    console.error("錯題儲存結果：", result);
                 }
             } catch (error) {
                 errors.push("錯題儲存失敗");
                 console.error("儲存商業概論錯題失敗：", error);
             }
         } else {
-            errors.push("找不到 saveWrongQuestions 函式");
+            errors.push("找不到錯題儲存功能");
         }
 
-        if (errors.length === 0) {
-            await deleteSavedSession();
-        }
+        if (attemptSaved && wrongQuestionsSaved) {
+            const sessionDeleted = await deleteSavedSession();
 
-        if (errors.length > 0) {
-            console.error("商業概論雲端儲存結果：", errors);
+            if (!sessionDeleted) {
+                console.warn(
+                    "成績與錯題已確認儲存，但測驗進度未確認刪除。"
+                );
+            }
 
-            alert(
-                "本次測驗已完成，但部分雲端資料可能未成功儲存。\n" +
-                errors.join("、") +
-                "。分數仍會顯示，請檢查 Supabase 設定及主控台錯誤。"
+            await showSuccess(
+                "測驗成績已儲存！",
+                "成績與錯題已成功同步至雲端。" +
+                (sessionDeleted
+                    ? ""
+                    : " 目前尚未確認舊的測驗進度已清除。")
             );
+
+            return;
         }
+
+        console.error("商業概論雲端儲存結果：", errors);
+
+        await showError(
+            "雲端同步未完成",
+            "本次測驗分數仍會顯示，但成績或錯題尚未確認成功儲存。原因：" +
+            errors.join("、") +
+            "。請檢查網路連線、Supabase 設定及主控台錯誤。"
+        );
     }
 
     async function finishQuiz() {
         if (finishingQuiz || !quizQuestions.length) return;
+
+        const unanswered = userAnswers.filter((answer) => !answer).length;
+
+        if (unanswered > 0) {
+            const shouldSubmit = await confirmAction({
+                title: "還有題目未作答",
+                text:
+                    "目前還有 " + unanswered +
+                    " 題未作答，未作答的題目將計為答錯。確定要現在交卷嗎？",
+                confirmText: "確定交卷",
+                cancelText: "繼續作答",
+                icon: "warning"
+            });
+
+            if (!shouldSubmit) return;
+        } else {
+            const shouldSubmit = await confirmAction({
+                title: "確定要交卷？",
+                text: "交卷後將顯示本次測驗成績與錯題解析。",
+                confirmText: "確定交卷",
+                cancelText: "繼續作答"
+            });
+
+            if (!shouldSubmit) return;
+        }
 
         finishingQuiz = true;
         $("nextBtn").disabled = true;
@@ -652,6 +832,13 @@
 
             await savingSession;
             await saveCompletedQuiz(correct, wrong);
+        } catch (error) {
+            console.error("完成商業概論測驗失敗：", error);
+
+            await showError(
+                "發生錯誤",
+                "測驗結果處理時發生問題，請稍後再試。"
+            );
         } finally {
             $("nextBtn").disabled = false;
             finishingQuiz = false;
@@ -681,24 +868,44 @@
     });
 
     $("quitBtn").addEventListener("click", async () => {
-        if (
-            confirm(
-                "確定要退出測驗嗎？\n" +
-                "已登入的帳號會保留目前作答進度，下次可選擇恢復。"
-            )
-        ) {
-            await queueSaveSession();
+        const shouldQuit = await confirmAction({
+            title: "確定要離開測驗？",
+            text: "已登入的帳號會嘗試保留目前作答進度，下次可選擇恢復。",
+            confirmText: "確定離開",
+            cancelText: "繼續作答"
+        });
+
+        if (!shouldQuit) return;
+
+        await queueSaveSession();
+        showScreen("home");
+    });
+
+    $("homeBtn").addEventListener("click", async () => {
+        const shouldReturn = await confirmAction({
+            title: "確定要回首頁？",
+            text: "本次測驗結果仍會保留在目前頁面，離開後將無法直接查看。",
+            confirmText: "回首頁",
+            cancelText: "取消"
+        });
+
+        if (shouldReturn) {
             showScreen("home");
         }
     });
 
-    $("homeBtn").addEventListener("click", () => {
-        showScreen("home");
-    });
-
     $("againBtn").addEventListener("click", async () => {
+        const shouldRestart = await confirmAction({
+            title: "確定要重新測驗？",
+            text: "將重新隨機抽題，開始新的測驗。",
+            confirmText: "重新測驗",
+            cancelText: "取消"
+        });
+
+        if (!shouldRestart) return;
+
         await deleteSavedSession();
-        startQuiz();
+        await startQuiz();
     });
 
     loadBank();
