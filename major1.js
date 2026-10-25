@@ -298,7 +298,7 @@
             }
 
             const shouldRestore = await confirmAction({
-                title: "發現尚未完成的測驗",
+                title: "偵測到尚未完成的測驗進度",
                 text:
                     QUIZ_NAME +
                     "\n已儲存 " +
