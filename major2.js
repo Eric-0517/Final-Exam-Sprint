@@ -20,6 +20,7 @@
     let quizStartedAt = null;
     let savingSession = false;
     let sessionSaveTimer = null;
+    let quizSubmitted = false;
 
     function getStudyData() {
         return window.StudyData ||
@@ -28,14 +29,11 @@
 
     async function getCurrentUser() {
         try {
-            if (!window.sb || !window.sb.auth) return null;
+            if (!window.sb?.auth) return null;
 
             const { data, error } = await window.sb.auth.getSession();
 
-            if (error) {
-                console.error("取得登入狀態失敗：", error);
-                return null;
-            }
+            if (error) throw error;
 
             return data?.session?.user || null;
         } catch (error) {
@@ -156,28 +154,45 @@
     }
 
     async function saveSession() {
-        if (!quizQuestions.length || savingSession) return;
-
-        const studyData = getStudyData();
-        if (!studyData || typeof studyData.saveSession !== "function") {
-            return;
+        if (
+            !quizQuestions.length ||
+            quizSubmitted ||
+            savingSession ||
+            !$("quiz")?.classList.contains("active")
+        ) {
+            return false;
         }
 
-        const user = await getCurrentUser();
-        if (!user) return;
+        const studyData = getStudyData();
+
+        if (!studyData || typeof studyData.saveSession !== "function") {
+            console.error("StudyData.saveSession 尚未載入。");
+            return false;
+        }
 
         savingSession = true;
 
         try {
-            await studyData.saveSession({
+            const user = await getCurrentUser();
+            if (!user) return false;
+
+            const result = await studyData.saveSession({
                 subject: SESSION_SUBJECT,
                 quiz_name: QUIZ_NAME,
                 question_ids: quizQuestions.map((question) => question.id),
                 answers: getAnswerMap(),
                 current_index: currentIndex
             });
+
+            if (result?.saved === false) {
+                console.error("雲端未保存測驗進度：", result);
+                return false;
+            }
+
+            return true;
         } catch (error) {
             console.error("保存測驗進度失敗：", error);
+            return false;
         } finally {
             savingSession = false;
         }
@@ -189,8 +204,31 @@
         }
 
         sessionSaveTimer = setTimeout(() => {
+            sessionSaveTimer = null;
             saveSession();
         }, 350);
+    }
+
+    async function deleteCurrentSession() {
+        const studyData = getStudyData();
+
+        if (!studyData || typeof studyData.deleteSession !== "function") {
+            throw new Error("StudyData.deleteSession 尚未載入。");
+        }
+
+        const result = await studyData.deleteSession(SESSION_SUBJECT);
+
+        if (result === false || result?.deleted === false) {
+            throw new Error("雲端未完成測驗紀錄未能確認刪除。");
+        }
+
+        const remaining = await studyData.getSession(SESSION_SUBJECT);
+
+        if (remaining) {
+            throw new Error("刪除後仍查到未完成測驗紀錄。");
+        }
+
+        return true;
     }
 
     async function restoreSession() {
@@ -204,8 +242,7 @@
         if (!user) return false;
 
         try {
-            const result = await studyData.getSession(SESSION_SUBJECT);
-            const session = result?.data || result?.session || result;
+            const session = await studyData.getSession(SESSION_SUBJECT);
 
             if (
                 !session ||
@@ -239,7 +276,6 @@
 
             userAnswers = quizQuestions.map((question) => {
                 const value = savedAnswers[question.id];
-
                 return LETTERS.includes(value) ? value : null;
             });
 
@@ -250,6 +286,7 @@
                 : 0;
 
             quizStartedAt = Date.now();
+            quizSubmitted = false;
 
             showScreen("quiz");
             renderQuestion();
@@ -267,6 +304,11 @@
             return;
         }
 
+        if (sessionSaveTimer) {
+            clearTimeout(sessionSaveTimer);
+            sessionSaveTimer = null;
+        }
+
         quizQuestions = questionBank.slice(
             0,
             Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
@@ -275,6 +317,7 @@
         userAnswers = new Array(quizQuestions.length).fill(null);
         currentIndex = 0;
         quizStartedAt = Date.now();
+        quizSubmitted = false;
 
         showScreen("quiz");
         renderQuestion();
@@ -285,13 +328,8 @@
         const question = quizQuestions[currentIndex];
         if (!question) return;
 
-        if ($("qNo")) {
-            $("qNo").textContent = currentIndex + 1;
-        }
-
-        if ($("total")) {
-            $("total").textContent = quizQuestions.length;
-        }
+        if ($("qNo")) $("qNo").textContent = currentIndex + 1;
+        if ($("total")) $("total").textContent = quizQuestions.length;
 
         if ($("progressBar")) {
             $("progressBar").style.width =
@@ -387,9 +425,15 @@
 
     async function saveCompletedQuiz(correct, total, wrongQuestions) {
         const studyData = getStudyData();
-        if (!studyData) return;
+
+        if (!studyData) {
+            console.error("StudyData 尚未載入。");
+            alert("測驗已完成，但雲端同步模組尚未載入。");
+            return;
+        }
 
         const user = await getCurrentUser();
+
         if (!user) {
             alert("測驗已完成。登入後才能將成績與錯題同步至雲端。");
             return;
@@ -400,42 +444,77 @@
             ? Math.max(0, Math.round((Date.now() - quizStartedAt) / 1000))
             : 0;
 
+        let attemptSaved = false;
+        let wrongSaved = false;
+        let sessionDeleted = false;
+
         try {
-            if (typeof studyData.saveAttempt === "function") {
-                await studyData.saveAttempt({
-                    subject: SUBJECT,
-                    quiz_name: QUIZ_NAME,
-                    total_questions: total,
-                    correct_count: correct,
-                    score,
-                    answers: getAnswerMap(),
-                    duration_seconds: durationSeconds
-                });
-            }
+            const result = await studyData.saveAttempt({
+                subject: SUBJECT,
+                quiz_name: QUIZ_NAME,
+                total_questions: total,
+                correct_count: correct,
+                score,
+                answers: getAnswerMap(),
+                duration_seconds: durationSeconds
+            });
 
-            if (
-                typeof studyData.saveWrongQuestions === "function" &&
-                wrongQuestions.length
-            ) {
-                await studyData.saveWrongQuestions(
-                    SUBJECT,
-                    wrongQuestions,
-                    getAnswerMap()
-                );
-            }
+            attemptSaved = result?.saved === true;
 
-            if (typeof studyData.deleteSession === "function") {
-                await studyData.deleteSession(SESSION_SUBJECT);
+            if (!attemptSaved) {
+                throw new Error("測驗成績未成功儲存。");
             }
         } catch (error) {
-            console.error("同步測驗資料失敗：", error);
+            console.error("儲存測驗成績失敗：", error);
+        }
+
+        try {
+            const result = await studyData.saveWrongQuestions(
+                SUBJECT,
+                wrongQuestions,
+                getAnswerMap()
+            );
+
+            wrongSaved = result?.saved === true;
+
+            if (!wrongSaved) {
+                throw new Error("錯題資料未成功儲存。");
+            }
+        } catch (error) {
+            console.error("儲存錯題失敗：", error);
+        }
+
+        try {
+            await deleteCurrentSession();
+            sessionDeleted = true;
+        } catch (error) {
+            console.error("刪除未完成測驗紀錄失敗：", error);
+        }
+
+        if (!sessionDeleted) {
             alert(
-                "測驗已完成，但雲端同步可能未成功。請確認網路與登入狀態，之後再查看成績。"
+                "測驗已交卷，但未完成紀錄尚未確認刪除。請檢查 Console 錯誤訊息。"
+            );
+            return;
+        }
+
+        if (!attemptSaved || !wrongSaved) {
+            alert(
+                "未完成紀錄已刪除，但成績或錯題可能未完整同步，請檢查 Console 錯誤訊息。"
             );
         }
     }
 
-    function finishQuiz() {
+    async function finishQuiz() {
+        if (quizSubmitted || !quizQuestions.length) return;
+
+        quizSubmitted = true;
+
+        if (sessionSaveTimer) {
+            clearTimeout(sessionSaveTimer);
+            sessionSaveTimer = null;
+        }
+
         const total = quizQuestions.length;
         let correct = 0;
         const wrongQuestions = [];
@@ -522,8 +601,8 @@
 
                     const key = document.createElement("strong");
                     key.textContent = letter + ". ";
-
                     p.appendChild(key);
+
                     p.appendChild(
                         document.createTextNode(
                             question.options[letter] || ""
@@ -571,7 +650,7 @@
 
         showScreen("result");
 
-        saveCompletedQuiz(correct, total, wrongQuestions);
+        await saveCompletedQuiz(correct, total, wrongQuestions);
     }
 
     document.addEventListener("click", (e) => {
@@ -585,7 +664,11 @@
         } else if (action === "home") {
             showScreen("home");
         } else if (action === "quit") {
-            if (confirm("確定要退出測驗嗎？目前作答進度會保留，之後可繼續。")) {
+            if (
+                confirm(
+                    "確定要退出測驗嗎？目前作答進度會保留，之後可繼續。"
+                )
+            ) {
                 scheduleSessionSave();
                 showScreen("home");
             }
@@ -603,8 +686,8 @@
     }
 
     if ($("nextBtn")) {
-        $("nextBtn").addEventListener("click", () => {
-            if (!quizQuestions.length) return;
+        $("nextBtn").addEventListener("click", async () => {
+            if (!quizQuestions.length || quizSubmitted) return;
 
             if (!userAnswers[currentIndex]) {
                 alert("請先選擇答案。");
@@ -616,18 +699,17 @@
                 renderQuestion();
                 scheduleSessionSave();
             } else {
-                if (sessionSaveTimer) {
-                    clearTimeout(sessionSaveTimer);
-                    sessionSaveTimer = null;
-                }
-
-                finishQuiz();
+                await finishQuiz();
             }
         });
     }
 
     window.addEventListener("beforeunload", () => {
-        if (quizQuestions.length && $("quiz")?.classList.contains("active")) {
+        if (
+            !quizSubmitted &&
+            quizQuestions.length &&
+            $("quiz")?.classList.contains("active")
+        ) {
             saveSession();
         }
     });
