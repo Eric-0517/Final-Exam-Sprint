@@ -18,7 +18,7 @@
     let userAnswers = [];
     let currentIndex = 0;
     let quizStartedAt = null;
-    let savingSession = false;
+    let sessionSavePromise = null;
     let sessionSaveTimer = null;
     let quizSubmitted = false;
 
@@ -153,52 +153,63 @@
         return answerMap;
     }
 
-    async function saveSession() {
+    function saveSession() {
         if (
             !quizQuestions.length ||
             quizSubmitted ||
-            savingSession ||
             !$("quiz")?.classList.contains("active")
         ) {
-            return false;
+            return Promise.resolve(false);
         }
+
+        if (sessionSavePromise) return sessionSavePromise;
 
         const studyData = getStudyData();
 
         if (!studyData || typeof studyData.saveSession !== "function") {
             console.error("StudyData.saveSession 尚未載入。");
-            return false;
+            return Promise.resolve(false);
         }
 
-        savingSession = true;
+        const savePromise = (async () => {
+            try {
+                const user = await getCurrentUser();
+                if (!user || quizSubmitted) return false;
 
-        try {
-            const user = await getCurrentUser();
-            if (!user) return false;
+                const result = await studyData.saveSession({
+                    subject: SESSION_SUBJECT,
+                    quiz_name: QUIZ_NAME,
+                    question_ids: quizQuestions.map((question) => question.id),
+                    answers: getAnswerMap(),
+                    current_index: currentIndex
+                });
 
-            const result = await studyData.saveSession({
-                subject: SESSION_SUBJECT,
-                quiz_name: QUIZ_NAME,
-                question_ids: quizQuestions.map((question) => question.id),
-                answers: getAnswerMap(),
-                current_index: currentIndex
-            });
+                if (result?.saved === false) {
+                    console.error("雲端未保存測驗進度：", result);
+                    return false;
+                }
 
-            if (result?.saved === false) {
-                console.error("雲端未保存測驗進度：", result);
+                return true;
+            } catch (error) {
+                console.error("保存測驗進度失敗：", error);
                 return false;
             }
+        })();
 
-            return true;
-        } catch (error) {
-            console.error("保存測驗進度失敗：", error);
-            return false;
-        } finally {
-            savingSession = false;
-        }
+        sessionSavePromise = savePromise;
+
+        savePromise.finally(() => {
+            if (sessionSavePromise === savePromise) {
+                sessionSavePromise = null;
+            }
+        });
+
+        return savePromise;
     }
 
     function scheduleSessionSave() {
+        if (quizSubmitted) return;
+
         if (sessionSaveTimer) {
             clearTimeout(sessionSaveTimer);
         }
@@ -209,11 +220,24 @@
         }, 350);
     }
 
+    async function waitForSessionSave() {
+        while (sessionSavePromise) {
+            const pendingSave = sessionSavePromise;
+            await pendingSave;
+        }
+    }
+
     async function deleteCurrentSession() {
+        await waitForSessionSave();
+
         const studyData = getStudyData();
 
-        if (!studyData || typeof studyData.deleteSession !== "function") {
-            throw new Error("StudyData.deleteSession 尚未載入。");
+        if (
+            !studyData ||
+            typeof studyData.deleteSession !== "function" ||
+            typeof studyData.getSession !== "function"
+        ) {
+            throw new Error("StudyData 的刪除或查詢功能尚未載入。");
         }
 
         const result = await studyData.deleteSession(SESSION_SUBJECT);
@@ -225,7 +249,9 @@
         const remaining = await studyData.getSession(SESSION_SUBJECT);
 
         if (remaining) {
-            throw new Error("刪除後仍查到未完成測驗紀錄。");
+            throw new Error(
+                "刪除後仍查到未完成測驗紀錄，請檢查 Supabase RLS 刪除權限。"
+            );
         }
 
         return true;
@@ -403,6 +429,8 @@
             }
 
             button.addEventListener("click", () => {
+                if (quizSubmitted) return;
+
                 userAnswers[currentIndex] = letter;
                 renderQuestion();
                 scheduleSessionSave();
@@ -493,7 +521,7 @@
 
         if (!sessionDeleted) {
             alert(
-                "測驗已交卷，但未完成紀錄尚未確認刪除。請檢查 Console 錯誤訊息。"
+                "測驗已交卷，但未完成紀錄尚未確認刪除。請開啟瀏覽器 Console 查看錯誤訊息。"
             );
             return;
         }
@@ -514,6 +542,8 @@
             clearTimeout(sessionSaveTimer);
             sessionSaveTimer = null;
         }
+
+        await waitForSessionSave();
 
         const total = quizQuestions.length;
         let correct = 0;
@@ -677,6 +707,8 @@
 
     if ($("prevBtn")) {
         $("prevBtn").addEventListener("click", () => {
+            if (quizSubmitted) return;
+
             if (currentIndex > 0) {
                 currentIndex--;
                 renderQuestion();
