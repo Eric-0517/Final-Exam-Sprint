@@ -191,7 +191,7 @@
 
         if (!user) {
             throw new Error(
-                "目前未登入，無法確認未完成測驗紀錄是否刪除。"
+                "目前未登入，無法紀錄測驗進度。"
             );
         }
 
@@ -905,10 +905,10 @@
         if ($("prevBtn")) $("prevBtn").disabled = true;
 
         try {
-            // 等待所有已排隊的進度儲存完成
+            
             await sessionSaveQueue;
 
-            // 阻止任何新的未完成測驗進度儲存
+            
             quizSubmitted = true;
 
             let correct = 0;
@@ -1058,14 +1058,14 @@
 
             showScreen("result");
 
-            // 儲存成績與錯題，然後清除未完成測驗紀錄
+            
             await saveCompletedQuiz(correct, total);
         } catch (error) {
             console.error("交卷處理失敗：", error);
 
             await showAlert({
                 title: "交卷處理發生錯誤",
-                text: "測驗結果處理時發生問題，請查看瀏覽器主控台。",
+                text: "測驗結果處理時發生問題。",
                 icon: "error"
             });
         } finally {
