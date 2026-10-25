@@ -3,17 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>考前衝刺</title>
+<meta name="description" content="考前衝刺｜商業概論">
+<title>考前衝刺｜商業概論</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="topbar">
-        <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
-        <div class="sub">
-            商業概論題庫 
-            <a href="index.html" style="color:inherit">切換題庫</a>
-        </div>
-    </header>
+<header class="topbar">
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">考前衝刺</a>
+  <div class="sub">
+    商業概論題庫
+    <a href="index.html" style="color:inherit">切換題庫</a>
+  </div>
+</header>
+
 <main id="app">
   <section id="home" class="screen active">
     <div class="hero">
@@ -21,19 +23,25 @@
       <h1>考前衝刺</h1>
       <p>範圍商業概論1~3章。</p>
     </div>
+
     <div class="subject-card">
       <div>
         <div class="subject-title">商業概論(第1次模擬考)啟芳</div>
-        <div class="subject-meta"><span id="bankCount">40</span> 題題庫 每回 40 題/每題 2.5 分</div>
+        <div class="subject-meta">
+          <span id="bankCount">40</span> 題題庫 每回 40 題／每題 2.5 分
+        </div>
       </div>
       <button id="startBtn" class="primary">開始測驗</button>
     </div>
-    <div id="loadError" style="color: red; margin-top: 10px;" hidden></div>
+
+    <div id="loadError" style="color:red;margin-top:10px;" hidden></div>
+
     <div class="info-grid">
       <div><b>40題</b><span>隨機抽題</span></div>
       <div><b>100分</b><span>滿分</span></div>
       <div><b>自動批改</b><span>完成後立即看結果</span></div>
     </div>
+
     <div class="notice">按左上方「考前衝刺」可返回科目首頁。</div>
   </section>
 
@@ -41,15 +49,19 @@
     <div class="quiz-head">
       <button id="quitBtn" class="ghost">退出</button>
       <div class="progress-wrap">
-        <div class="progress-text"><span id="qNo">1</span> / <span id="total">40</span></div>
+        <div class="progress-text">
+          <span id="qNo">1</span> / <span id="total">40</span>
+        </div>
         <div class="progress"><i id="progressBar"></i></div>
       </div>
       <div class="score-mini">每題 2.5 分</div>
     </div>
+
     <article class="question-card">
-      <div id="questionText" style="margin-bottom: 15px; font-weight: bold;"></div>
+      <div id="questionText" style="margin-bottom:15px;font-weight:bold;"></div>
       <div class="options" id="options"></div>
     </article>
+
     <div class="quiz-actions">
       <button id="prevBtn" class="secondary">上一題</button>
       <button id="nextBtn" class="primary">下一題</button>
@@ -68,14 +80,25 @@
         <div><b id="accuracy">0%</b><span>正確率</span></div>
       </div>
     </div>
-    <div class="wrong-head"><h3>錯題與詳解</h3><span id="wrongSummary"></span></div>
+
+    <div class="wrong-head">
+      <h3>錯題與詳解</h3>
+      <span id="wrongSummary"></span>
+    </div>
+
     <div id="wrongList" class="wrong-list"></div>
+
     <div class="result-actions">
       <button id="homeBtn" class="secondary">回首頁</button>
       <button id="againBtn" class="primary">再測一次</button>
     </div>
   </section>
 </main>
-<script src="IntroductiontoBusiness.js" defer></script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/study-data.js"></script>
+<script src="IntroductiontoBusiness.js"></script>
 </body>
 </html>
