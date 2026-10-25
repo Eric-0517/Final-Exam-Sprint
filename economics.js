@@ -1,4 +1,3 @@
-
 (() => {
     "use strict";
 
@@ -21,12 +20,34 @@
     let startedAt = 0;
     let savingSession = Promise.resolve();
     let submitting = false;
+    let finishingQuiz = false;
 
     function showScreen(id) {
         screens.forEach(screenId => {
             $(screenId).classList.toggle("active", screenId === id);
         });
         window.scrollTo(0, 0);
+    }
+
+    function showAlert(options) {
+        if (window.Swal) {
+            return Swal.fire({
+                confirmButtonColor: "#3156d3",
+                ...options
+            });
+        }
+
+        if (options.showCancelButton) {
+            return Promise.resolve({
+                isConfirmed: window.confirm(options.text || options.title || "")
+            });
+        }
+
+        window.alert(
+            [options.title, options.text].filter(Boolean).join("\n\n")
+        );
+
+        return Promise.resolve({ isConfirmed: true });
     }
 
     function escapeHTML(value) {
@@ -90,7 +111,13 @@
     }
 
     async function saveCurrentSession() {
-        if (!isSignedIn() || !quizQuestions.length) return;
+        if (
+            !isSignedIn() ||
+            !quizQuestions.length ||
+            finishingQuiz
+        ) {
+            return;
+        }
 
         const payload = {
             subject: SESSION_SUBJECT,
@@ -103,6 +130,8 @@
         savingSession = savingSession
             .catch(() => {})
             .then(async () => {
+                if (finishingQuiz) return;
+
                 const result = await window.StudyData.saveSession(payload);
 
                 if (!result.saved && result.reason !== "not_signed_in") {
@@ -119,12 +148,17 @@
     }
 
     async function deleteSavedSession() {
-        if (!isSignedIn()) return;
+        if (!isSignedIn()) return false;
 
         try {
-            await window.StudyData.deleteSession(SESSION_SUBJECT);
+            const result = await window.StudyData.deleteSession(
+                SESSION_SUBJECT
+            );
+
+            return result === true;
         } catch (error) {
             console.error("清除已完成測驗進度失敗：", error);
+            return false;
         }
     }
 
@@ -185,6 +219,13 @@
 
             $("bankCount").textContent = questionBank.length;
             startButton.disabled = false;
+
+            if (questionBank.length < QUESTIONS_PER_QUIZ) {
+                console.warn(
+                    "題庫只有 " + questionBank.length +
+                    " 題，將依實際題數開始測驗。"
+                );
+            }
         } catch (error) {
             $("bankCount").textContent = "載入失敗";
 
@@ -196,11 +237,18 @@
             }
 
             console.error(error);
+
+            await showAlert({
+                icon: "error",
+                title: "題庫載入失敗",
+                text: error.message
+            });
         }
     }
 
     function initializeQuiz(questions, answers = {}, index = 0) {
         quizQuestions = questions;
+
         userAnswers = quizQuestions.map(question => {
             const answer = answers[question.id];
             return LETTERS.includes(answer) ? answer : null;
@@ -213,6 +261,7 @@
 
         startedAt = Date.now();
         submitting = false;
+        finishingQuiz = false;
 
         $("total").textContent = quizQuestions.length;
         showScreen("quiz");
@@ -221,7 +270,11 @@
 
     async function startQuiz() {
         if (!questionBank.length) {
-            alert("目前沒有可作答的題目。");
+            await showAlert({
+                icon: "warning",
+                title: "目前沒有可作答的題目",
+                text: "請確認題庫已成功載入。"
+            });
             return;
         }
 
@@ -244,28 +297,46 @@
         if (
             savedSession &&
             Array.isArray(savedSession.question_ids) &&
-            savedSession.question_ids.length &&
-            confirm("偵測到尚未完成的測驗進度，是否繼續上次的測驗？")
+            savedSession.question_ids.length
         ) {
-            const bankMap = new Map(
-                questionBank.map(question => [question.id, question])
-            );
+            const choice = await showAlert({
+                icon: "question",
+                title: "發現未完成的測驗",
+                text: "是否繼續上次的測驗進度？",
+                showCancelButton: true,
+                confirmButtonText: "繼續測驗",
+                cancelButtonText: "重新開始",
+                reverseButtons: true
+            });
 
-            const restoredQuestions = savedSession.question_ids
-                .map(id => bankMap.get(String(id)))
-                .filter(Boolean);
-
-            if (restoredQuestions.length === savedSession.question_ids.length) {
-                initializeQuiz(
-                    restoredQuestions,
-                    savedSession.answers || {},
-                    Number(savedSession.current_index || 0)
+            if (choice.isConfirmed) {
+                const bankMap = new Map(
+                    questionBank.map(question => [question.id, question])
                 );
 
-                return;
-            }
+                const restoredQuestions = savedSession.question_ids
+                    .map(id => bankMap.get(String(id)))
+                    .filter(Boolean);
 
-            alert("原本的題庫內容已變更，無法完整恢復。將開始新的測驗。");
+                if (
+                    restoredQuestions.length ===
+                    savedSession.question_ids.length
+                ) {
+                    initializeQuiz(
+                        restoredQuestions,
+                        savedSession.answers || {},
+                        Number(savedSession.current_index || 0)
+                    );
+
+                    return;
+                }
+
+                await showAlert({
+                    icon: "warning",
+                    title: "無法恢復測驗",
+                    text: "原本的題庫內容已變更，將開始新的測驗。"
+                });
+            }
         }
 
         initializeQuiz(
@@ -325,6 +396,8 @@
             }
 
             button.addEventListener("click", () => {
+                if (submitting || finishingQuiz) return;
+
                 userAnswers[currentIndex] = letter;
                 renderQuestion();
                 void saveCurrentSession();
@@ -342,7 +415,9 @@
     }
 
     async function finishQuiz() {
-        if (submitting) return;
+        if (submitting || finishingQuiz) return;
+
+        finishingQuiz = true;
         submitting = true;
 
         const total = quizQuestions.length;
@@ -442,60 +517,115 @@
 
         showScreen("result");
 
-        if (isSignedIn()) {
-            const answersForStorage = Object.fromEntries(
-                quizQuestions.map((question, index) => [
-                    question.id,
-                    userAnswers[index]
-                ])
-            );
+        let savedSuccessfully = false;
+        let sessionDeleted = false;
 
-            const record = {
-                subject: SUBJECT,
-                quiz_name: QUIZ_NAME,
-                total_questions: total,
-                correct_count: correct,
-                score,
-                answers: answersForStorage,
-                duration_seconds: Math.max(
-                    0,
-                    Math.floor((Date.now() - startedAt) / 1000)
-                )
-            };
+        try {
+            await savingSession;
 
-            try {
+            if (isSignedIn()) {
                 const user = await window.StudyData.currentUser();
 
                 if (user) {
-                    const result = await window.StudyData.saveAttempt(record);
-
-                    if (result.saved) {
-                        console.info("測驗成績已儲存。");
-                    }
-
-                    await window.StudyData.saveWrongQuestions(
-                        SUBJECT,
-                        quizQuestions,
-                        answerMap
+                    const answersForStorage = Object.fromEntries(
+                        quizQuestions.map((question, index) => [
+                            question.id,
+                            userAnswers[index]
+                        ])
                     );
 
-                    await deleteSavedSession();
-                }
-            } catch (error) {
-                console.error("雲端測驗資料儲存失敗：", error);
-                alert(
-                    "本次測驗已完成，但雲端資料儲存失敗。分數仍會顯示，請檢查網路及 Supabase 設定。"
-                );
-            }
-        }
+                    const record = {
+                        subject: SUBJECT,
+                        quiz_name: QUIZ_NAME,
+                        total_questions: total,
+                        correct_count: correct,
+                        score,
+                        answers: answersForStorage,
+                        duration_seconds: Math.max(
+                            0,
+                            Math.floor((Date.now() - startedAt) / 1000)
+                        )
+                    };
 
-        submitting = false;
+                    const attemptResult =
+                        await window.StudyData.saveAttempt(record);
+
+                    const wrongResult =
+                        await window.StudyData.saveWrongQuestions(
+                            SUBJECT,
+                            quizQuestions,
+                            answerMap
+                        );
+
+                    savedSuccessfully = Boolean(
+                        attemptResult &&
+                        attemptResult.saved &&
+                        wrongResult &&
+                        wrongResult.saved
+                    );
+
+                    sessionDeleted = await deleteSavedSession();
+                }
+            }
+
+            submitting = false;
+
+            if (savedSuccessfully) {
+                await showAlert({
+                    icon: "success",
+                    title: "測驗完成！",
+                    html:
+                        "本次得分：<strong>" + escapeHTML(score) +
+                        " 分</strong><br>" +
+                        "答對 " + correct + " 題，答錯 " + wrong + " 題。" +
+                        "<br><br>" +
+                        (sessionDeleted
+                            ? "成績、錯題已儲存，未完成測驗進度已清除。"
+                            : "成績與錯題已儲存，但未完成測驗進度未能確認清除。"),
+                    confirmButtonText: "查看錯題與詳解"
+                });
+            } else if (isSignedIn()) {
+                await showAlert({
+                    icon: "warning",
+                    title: "測驗已完成",
+                    html:
+                        "本次得分：<strong>" + escapeHTML(score) +
+                        " 分</strong><br>" +
+                        "答對 " + correct + " 題，答錯 " + wrong + " 題。" +
+                        "<br><br>雲端成績或錯題儲存未完全成功，請檢查網路及 Supabase 設定。",
+                    confirmButtonText: "查看錯題與詳解"
+                });
+            } else {
+                await showAlert({
+                    icon: "success",
+                    title: "測驗完成！",
+                    html:
+                        "本次得分：<strong>" + escapeHTML(score) +
+                        " 分</strong><br>" +
+                        "答對 " + correct + " 題，答錯 " + wrong + " 題。" +
+                        "<br><br>登入後才能將成績與錯題同步至雲端。",
+                    confirmButtonText: "查看錯題與詳解"
+                });
+            }
+        } catch (error) {
+            console.error("雲端測驗資料儲存失敗：", error);
+            submitting = false;
+
+            await showAlert({
+                icon: "error",
+                title: "雲端儲存失敗",
+                html:
+                    "本次測驗已完成，分數仍會顯示。<br>" +
+                    "請檢查網路及 Supabase 設定後再確認雲端資料。",
+                confirmButtonText: "查看錯題與詳解"
+            });
+        }
     }
 
     $("startBtn").addEventListener("click", startQuiz);
 
     $("prevBtn").addEventListener("click", () => {
-        if (currentIndex > 0) {
+        if (currentIndex > 0 && !submitting && !finishingQuiz) {
             currentIndex--;
             renderQuestion();
             void saveCurrentSession();
@@ -503,7 +633,7 @@
     });
 
     $("nextBtn").addEventListener("click", () => {
-        if (!quizQuestions.length || submitting) return;
+        if (!quizQuestions.length || submitting || finishingQuiz) return;
 
         if (currentIndex < quizQuestions.length - 1) {
             currentIndex++;
@@ -515,9 +645,19 @@
     });
 
     $("quitBtn").addEventListener("click", async () => {
-        if (submitting) return;
+        if (submitting || finishingQuiz) return;
 
-        if (confirm("確定要退出測驗嗎？登入狀態下會保留目前進度。")) {
+        const choice = await showAlert({
+            icon: "question",
+            title: "確定要退出測驗嗎？",
+            text: "登入狀態下會保留目前進度。",
+            showCancelButton: true,
+            confirmButtonText: "退出測驗",
+            cancelButtonText: "繼續作答",
+            reverseButtons: true
+        });
+
+        if (choice.isConfirmed) {
             await saveCurrentSession();
             showScreen("home");
         }
