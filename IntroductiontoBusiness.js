@@ -100,6 +100,7 @@
     function showScreen(id) {
         screens.forEach((screenId) => {
             const screen = $(screenId);
+
             if (screen) {
                 screen.classList.toggle("active", screenId === id);
             }
@@ -142,9 +143,12 @@
     }
 
     function createImage(src, alt, className) {
-        if (typeof src !== "string" || !src.trim()) return null;
+        if (typeof src !== "string" || !src.trim()) {
+            return null;
+        }
 
         const img = document.createElement("img");
+
         img.src = new URL(src.trim(), document.baseURI).href;
         img.alt = alt;
         img.className = className;
@@ -180,11 +184,14 @@
             review ? "review-question-image" : "question-image"
         );
 
-        if (image) container.appendChild(image);
+        if (image) {
+            container.appendChild(image);
+        }
 
         const prompt = document.createElement("div");
         prompt.className = review ? "review-question-text" : "";
         prompt.textContent = question.question || "";
+
         container.appendChild(prompt);
     }
 
@@ -209,7 +216,9 @@
 
         try {
             if (typeof Swal === "undefined") {
-                throw new Error("SweetAlert2 尚未載入，請檢查 HTML 的 script 引用。");
+                throw new Error(
+                    "SweetAlert2 尚未載入，請檢查 HTML 的 script 引用。"
+                );
             }
 
             const response = await fetch(BANK_URL, {
@@ -223,6 +232,7 @@
             }
 
             const data = await response.json();
+
             const rawQuestions = Array.isArray(data)
                 ? data
                 : data.questions;
@@ -231,31 +241,37 @@
                 throw new Error("題庫格式錯誤，找不到題目陣列。");
             }
 
-            questionBank = rawQuestions.map((question, index) => {
-                const options = question.options || {};
+            questionBank = rawQuestions
+                .map((question, index) => {
+                    const options = question.options || {};
 
-                return {
-                    ...question,
-                    id: String(question.id || "business-" + (index + 1)),
-                    question: String(question.question || "").trim(),
-                    image: question.image || "",
-                    options,
-                    optionImages: question.optionImages || {},
-                    answer: String(question.answer || "")
-                        .trim()
-                        .toUpperCase(),
-                    explanation:
-                        typeof question.explanation === "string"
-                            ? question.explanation
-                            : ""
-                };
-            }).filter((question) =>
-                question.question &&
-                LETTERS.every((letter) =>
-                    question.options[letter] !== undefined
-                ) &&
-                LETTERS.includes(question.answer)
-            );
+                    return {
+                        ...question,
+                        id: String(
+                            question.id || "business-" + (index + 1)
+                        ),
+                        question: String(
+                            question.question || ""
+                        ).trim(),
+                        image: question.image || "",
+                        options,
+                        optionImages: question.optionImages || {},
+                        answer: String(
+                            question.answer || ""
+                        ).trim().toUpperCase(),
+                        explanation:
+                            typeof question.explanation === "string"
+                                ? question.explanation
+                                : ""
+                    };
+                })
+                .filter((question) =>
+                    question.question &&
+                    LETTERS.every((letter) =>
+                        question.options[letter] !== undefined
+                    ) &&
+                    LETTERS.includes(question.answer)
+                );
 
             if (!questionBank.length) {
                 throw new Error("沒有格式正確的選擇題。");
@@ -280,10 +296,7 @@
 
             console.error("商業概論題庫載入失敗：", error);
 
-            await showError(
-                "題庫載入失敗",
-                message
-            );
+            await showError("題庫載入失敗", message);
         }
     }
 
@@ -297,10 +310,19 @@
         return answers;
     }
 
+   
     function queueSaveSession() {
+        if (finishingQuiz) {
+            return savingSession;
+        }
+
         savingSession = savingSession
             .catch(() => {})
             .then(async () => {
+                if (finishingQuiz) {
+                    return;
+                }
+
                 const studyData = getStudyData();
 
                 if (
@@ -312,20 +334,33 @@
                     return;
                 }
 
+             
+                if (finishingQuiz) {
+                    return;
+                }
+
                 const result = await studyData.saveSession({
                     subject: SESSION_SUBJECT,
                     quiz_name: QUIZ_NAME,
-                    question_ids: quizQuestions.map((question) => question.id),
+                    question_ids: quizQuestions.map(
+                        (question) => question.id
+                    ),
                     answers: getAnswerMap(),
                     current_index: currentIndex
                 });
 
                 if (result?.saved !== true) {
-                    console.warn("商業概論測驗進度尚未確認同步：", result);
+                    console.warn(
+                        "商業概論測驗進度尚未確認同步：",
+                        result
+                    );
                 }
             })
             .catch((error) => {
-                console.error("儲存商業概論測驗進度失敗：", error);
+                console.error(
+                    "儲存商業概論測驗進度失敗：",
+                    error
+                );
             });
 
         return savingSession;
@@ -343,16 +378,26 @@
         }
 
         try {
-            const result = await studyData.deleteSession(SESSION_SUBJECT);
+            const result = await studyData.deleteSession(
+                SESSION_SUBJECT
+            );
 
             if (result !== true) {
-                console.error("刪除商業概論測驗進度未獲確認：", result);
+                console.error(
+                    "刪除商業概論測驗進度未獲確認：",
+                    result
+                );
+
                 return false;
             }
 
             return true;
         } catch (error) {
-            console.error("刪除商業概論測驗進度失敗：", error);
+            console.error(
+                "刪除商業概論測驗進度失敗：",
+                error
+            );
+
             return false;
         }
     }
@@ -385,7 +430,10 @@
         try {
             await savingSession;
 
-            const result = await studyData.getSession(SESSION_SUBJECT);
+            const result = await studyData.getSession(
+                SESSION_SUBJECT
+            );
+
             const session = normalizeSession(result);
 
             if (
@@ -397,7 +445,9 @@
             }
 
             const savedQuestions = session.question_ids.map((id) =>
-                questionBank.find((question) => question.id === String(id))
+                questionBank.find(
+                    (question) => question.id === String(id)
+                )
             );
 
             if (
@@ -429,8 +479,10 @@
             }
 
             quizQuestions = savedQuestions;
+
             userAnswers = quizQuestions.map((question) => {
                 const answer = savedAnswers[question.id];
+
                 return LETTERS.includes(answer) ? answer : null;
             });
 
@@ -446,6 +498,7 @@
             finishingQuiz = false;
 
             $("total").textContent = quizQuestions.length;
+
             showScreen("quiz");
             renderQuestion();
 
@@ -468,6 +521,11 @@
                 "目前沒有可作答的題目",
                 "請確認題庫是否已正確載入。"
             );
+
+            return;
+        }
+
+        if (finishingQuiz) {
             return;
         }
 
@@ -489,18 +547,24 @@
 
         showScreen("quiz");
         renderQuestion();
+
         queueSaveSession();
     }
 
     function renderQuestion() {
         const question = quizQuestions[currentIndex];
+
         if (!question) return;
 
         $("qNo").textContent = currentIndex + 1;
         $("total").textContent = quizQuestions.length;
 
         $("progressBar").style.width =
-            ((currentIndex + 1) / quizQuestions.length * 100) + "%";
+            (
+                (currentIndex + 1) /
+                quizQuestions.length *
+                100
+            ) + "%";
 
         renderQuestionContent($("questionText"), question);
 
@@ -509,13 +573,21 @@
 
         LETTERS.forEach((letter) => {
             const button = document.createElement("button");
+
             button.type = "button";
-            button.className = "option" +
-                (userAnswers[currentIndex] === letter ? " selected" : "");
+            button.className =
+                "option" +
+                (
+                    userAnswers[currentIndex] === letter
+                        ? " selected"
+                        : ""
+                );
 
             button.setAttribute(
                 "aria-pressed",
-                userAnswers[currentIndex] === letter ? "true" : "false"
+                userAnswers[currentIndex] === letter
+                    ? "true"
+                    : "false"
             );
 
             const key = document.createElement("span");
@@ -543,7 +615,10 @@
             }
 
             button.addEventListener("click", () => {
+                if (finishingQuiz) return;
+
                 userAnswers[currentIndex] = letter;
+
                 renderQuestion();
                 queueSaveSession();
             });
@@ -551,7 +626,10 @@
             optionsBox.appendChild(button);
         });
 
-        $("prevBtn").disabled = currentIndex === 0;
+        $("prevBtn").disabled =
+            currentIndex === 0 || finishingQuiz;
+
+        $("nextBtn").disabled = finishingQuiz;
 
         $("nextBtn").textContent =
             currentIndex === quizQuestions.length - 1
@@ -562,9 +640,9 @@
     function renderResults(correct, wrong) {
         const total = quizQuestions.length;
 
-        $("score").textContent = (correct * POINTS_PER_QUESTION)
-            .toFixed(1)
-            .replace(/\.0$/, "");
+        $("score").textContent = (
+            correct * POINTS_PER_QUESTION
+        ).toFixed(1).replace(/\.0$/, "");
 
         if ($("scoreLabel")) {
             $("scoreLabel").textContent = "分（滿分 100 分）";
@@ -572,6 +650,7 @@
 
         $("correctCount").textContent = correct;
         $("wrongCount").textContent = wrong;
+
         $("accuracy").textContent =
             (total ? Math.round(correct / total * 100) : 0) + "%";
 
@@ -598,6 +677,7 @@
 
             const title = document.createElement("div");
             title.className = "wrong-question";
+
             title.textContent =
                 "第 " + (index + 1) +
                 " 題｜你的答案：" + (selected || "未作答") +
@@ -607,7 +687,13 @@
 
             const questionContent = document.createElement("div");
             questionContent.className = "review-question";
-            renderQuestionContent(questionContent, question, true);
+
+            renderQuestionContent(
+                questionContent,
+                question,
+                true
+            );
+
             item.appendChild(questionContent);
 
             const options = document.createElement("div");
@@ -615,12 +701,16 @@
 
             LETTERS.forEach((letter) => {
                 const p = document.createElement("p");
+
                 const key = document.createElement("strong");
                 key.textContent = letter + ". ";
 
                 p.appendChild(key);
+
                 p.appendChild(
-                    document.createTextNode(question.options[letter] || "")
+                    document.createTextNode(
+                        question.options[letter] || ""
+                    )
                 );
 
                 const image = createImage(
@@ -629,12 +719,16 @@
                     "review-option-image"
                 );
 
-                if (image) p.appendChild(image);
+                if (image) {
+                    p.appendChild(image);
+                }
 
                 if (letter === answer) {
                     const mark = document.createElement("strong");
+
                     mark.textContent = " ✓ 正確答案";
                     mark.style.color = "#dc2626";
+
                     p.appendChild(mark);
                 }
 
@@ -645,8 +739,10 @@
 
             if (question.explanation.trim()) {
                 const explanation = document.createElement("div");
+
                 explanation.className = "explanation";
                 explanation.textContent = question.explanation;
+
                 item.appendChild(explanation);
             }
 
@@ -655,8 +751,10 @@
 
         if (wrong === 0) {
             const notice = document.createElement("div");
+
             notice.className = "notice";
             notice.textContent = "全部答對，沒有錯題！";
+
             wrongList.appendChild(notice);
         }
     }
@@ -669,16 +767,23 @@
         );
     }
 
-    async function saveCompletedQuiz(correct, wrong) {
+    async function saveCompletedQuiz(
+        correct,
+        wrong,
+        sessionDeleted = false
+    ) {
         const studyData = getStudyData();
 
         if (!studyData) {
-            console.warn("StudyData 未載入，無法同步雲端資料。");
+            console.warn(
+                "StudyData 未載入，無法同步雲端資料。"
+            );
 
             await showWarning(
                 "雲端功能尚未準備完成",
                 "本次測驗結果已顯示，但雲端成績與錯題尚未確認儲存。"
             );
+
             return;
         }
 
@@ -687,13 +792,20 @@
                 "測驗完成！",
                 "本次成績已完成計算。登入後即可同步成績與錯題。"
             );
+
             return;
         }
 
         const total = quizQuestions.length;
         const score = correct * POINTS_PER_QUESTION;
+
         const durationSeconds = quizStartedAt
-            ? Math.max(0, Math.round((Date.now() - quizStartedAt) / 1000))
+            ? Math.max(
+                0,
+                Math.round(
+                    (Date.now() - quizStartedAt) / 1000
+                )
+            )
             : 0;
 
         const answerMap = getAnswerMap();
@@ -709,12 +821,14 @@
         };
 
         const errors = [];
+
         let attemptSaved = false;
         let wrongQuestionsSaved = false;
 
         if (typeof studyData.saveAttempt === "function") {
             try {
                 const result = await studyData.saveAttempt(attempt);
+
                 attemptSaved = isSaveSuccessful(result);
 
                 if (!attemptSaved) {
@@ -723,17 +837,24 @@
                             ? "尚未登入，成績未儲存"
                             : "成績儲存結果未獲確認"
                     );
+
                     console.error("成績儲存結果：", result);
                 }
             } catch (error) {
                 errors.push("成績儲存失敗");
-                console.error("儲存商業概論成績失敗：", error);
+
+                console.error(
+                    "儲存商業概論成績失敗：",
+                    error
+                );
             }
         } else {
             errors.push("找不到成績儲存功能");
         }
 
-        if (typeof studyData.saveWrongQuestions === "function") {
+        if (
+            typeof studyData.saveWrongQuestions === "function"
+        ) {
             try {
                 const result = await studyData.saveWrongQuestions(
                     SUBJECT,
@@ -749,36 +870,39 @@
                             ? "尚未登入，錯題未儲存"
                             : "錯題儲存結果未獲確認"
                     );
+
                     console.error("錯題儲存結果：", result);
                 }
             } catch (error) {
                 errors.push("錯題儲存失敗");
-                console.error("儲存商業概論錯題失敗：", error);
+
+                console.error(
+                    "儲存商業概論錯題失敗：",
+                    error
+                );
             }
         } else {
             errors.push("找不到錯題儲存功能");
         }
 
         if (attemptSaved && wrongQuestionsSaved) {
-            const sessionDeleted = await deleteSavedSession();
-
-            if (!sessionDeleted) {
-                console.warn(
-                    "成績與錯題已確認儲存，但測驗進度未確認刪除。"
-                );
-            }
-
             await showSuccess(
                 "測驗成績已儲存！",
                 "成績與錯題已成功同步至雲端。" +
-                (sessionDeleted
-                    ? ""
-                    : " 目前尚未確認舊的測驗進度已清除。")
+                (
+                    sessionDeleted
+                        ? " 未完成測驗紀錄已清除。"
+                        : " 未完成測驗紀錄尚未確認清除，請重新整理個人中心確認。"
+                )
             );
+
             return;
         }
 
-        console.error("商業概論雲端儲存結果：", errors);
+        console.error(
+            "商業概論雲端儲存結果：",
+            errors
+        );
 
         await showError(
             "雲端同步未完成",
@@ -789,12 +913,18 @@
     }
 
     async function finishQuiz() {
-        if (finishingQuiz || !quizQuestions.length) return;
+        if (finishingQuiz || !quizQuestions.length) {
+            return;
+        }
 
-        const unanswered = userAnswers.filter((answer) => !answer).length;
+        const unanswered = userAnswers.filter(
+            (answer) => !answer
+        ).length;
 
         const shouldSubmit = await confirmAction({
-            title: unanswered > 0 ? "還有題目未作答" : "確定要交卷？",
+            title: unanswered > 0
+                ? "還有題目未作答"
+                : "確定要交卷？",
             text: unanswered > 0
                 ? "目前還有 " + unanswered +
                   " 題未作答，未作答的題目將計為答錯。確定要現在交卷嗎？"
@@ -804,7 +934,9 @@
             icon: unanswered > 0 ? "warning" : "question"
         });
 
-        if (!shouldSubmit) return;
+        if (!shouldSubmit || finishingQuiz) {
+            return;
+        }
 
         finishingQuiz = true;
         $("nextBtn").disabled = true;
@@ -823,36 +955,68 @@
             renderResults(correct, wrong);
             showScreen("result");
 
+           
             await savingSession;
-            await saveCompletedQuiz(correct, wrong);
+
+           
+            let sessionDeleted = false;
+
+            if (await isSignedIn()) {
+                sessionDeleted = await deleteSavedSession();
+
+                if (!sessionDeleted) {
+                    console.warn(
+                        "未完成測驗紀錄尚未確認刪除。"
+                    );
+                }
+            }
+
+            
+            await saveCompletedQuiz(
+                correct,
+                wrong,
+                sessionDeleted
+            );
         } catch (error) {
-            console.error("完成商業概論測驗失敗：", error);
+            console.error(
+                "完成商業概論測驗失敗：",
+                error
+            );
 
             await showError(
                 "發生錯誤",
                 "測驗結果處理時發生問題，請稍後再試。"
             );
         } finally {
-            $("nextBtn").disabled = false;
             finishingQuiz = false;
+
+            if ($("nextBtn")) {
+                $("nextBtn").disabled = false;
+            }
         }
     }
 
     $("startBtn").addEventListener("click", startQuiz);
 
     $("prevBtn").addEventListener("click", () => {
+        if (finishingQuiz) return;
+
         if (currentIndex > 0) {
             currentIndex--;
+
             renderQuestion();
             queueSaveSession();
         }
     });
 
     $("nextBtn").addEventListener("click", () => {
-        if (!quizQuestions.length || finishingQuiz) return;
+        if (!quizQuestions.length || finishingQuiz) {
+            return;
+        }
 
         if (currentIndex < quizQuestions.length - 1) {
             currentIndex++;
+
             renderQuestion();
             queueSaveSession();
         } else {
@@ -861,6 +1025,8 @@
     });
 
     $("quitBtn").addEventListener("click", async () => {
+        if (finishingQuiz) return;
+
         const shouldQuit = await confirmAction({
             title: "確定要離開測驗？",
             text: "已登入的帳號會嘗試保留目前作答進度，下次可選擇恢復。",
@@ -868,13 +1034,17 @@
             cancelText: "繼續作答"
         });
 
-        if (!shouldQuit) return;
+        if (!shouldQuit || finishingQuiz) {
+            return;
+        }
 
         await queueSaveSession();
         showScreen("home");
     });
 
     $("homeBtn").addEventListener("click", async () => {
+        if (finishingQuiz) return;
+
         const shouldReturn = await confirmAction({
             title: "確定要回首頁？",
             text: "本次測驗結果仍會保留在目前頁面，離開後將無法直接查看。",
@@ -888,6 +1058,8 @@
     });
 
     $("againBtn").addEventListener("click", async () => {
+        if (finishingQuiz) return;
+
         const shouldRestart = await confirmAction({
             title: "確定要重新測驗？",
             text: "將重新隨機抽題，開始新的測驗。",
@@ -895,9 +1067,14 @@
             cancelText: "取消"
         });
 
-        if (!shouldRestart) return;
+        if (!shouldRestart) {
+            return;
+        }
 
+       
+        await savingSession;
         await deleteSavedSession();
+
         await startQuiz();
     });
 
