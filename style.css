@@ -1114,3 +1114,28 @@ body.nav-open {
 .site-footer p {
   margin: 8px 0 0;
 }
+
+.study-swal-popup {
+    border-radius: 20px !important;
+    padding: 28px !important;
+    font-family: inherit;
+}
+
+.study-swal-popup .swal2-title {
+    color: #1e293b;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.study-swal-popup .swal2-html-container {
+    color: #64748b;
+    font-size: 0.95rem;
+    line-height: 1.7;
+}
+
+.study-swal-popup .swal2-confirm,
+.study-swal-popup .swal2-cancel {
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-weight: 600;
+}
