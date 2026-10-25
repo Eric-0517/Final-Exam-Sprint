@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -7,8 +8,6 @@
   <title>考前衝刺｜檔案下載</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="downloads.css">
-  <script src="js/supabase-client.js"></script>
-<script src="js/auth.js"></script>
 </head>
 <body class="downloads-page">
 
@@ -37,10 +36,9 @@
   <div class="side-nav-title">網站導覽</div>
   <a href="index.html">首頁 <span>›</span></a>
   <a href="studynotes.html">重點整理 <span>›</span></a>
-  <a href="https://score-1.exchuan.com.tw/#" target="_blank">成績查詢 <span>›</span></a>
+  <a href="https://score-1.exchuan.com.tw/#" target="_blank" rel="noopener noreferrer">成績查詢 <span>›</span></a>
   <a href="downloads.html" aria-current="page">檔案下載 <span>›</span></a>
-   <a href="profile.html" id="profileNavLink" hidden>個人中心 <span>›</span></a>
-  </div>
+  <a href="profile.html" id="profileNavLink" hidden>個人中心 <span>›</span></a>
 
   <div class="nav-account">
     <div class="nav-account-title">個人帳號</div>
@@ -108,6 +106,13 @@
 
   </section>
 </main>
+
+<footer class="site-footer">
+  <a href="privacy.html">隱私權政策</a>
+  <span>｜</span>
+  <a href="terms.html">服務條款</a>
+  <p>聯絡方式(Gmail)：dev@eric0517.dpdns.org</p>
+</footer>
 
 <script>
 (() => {
@@ -194,6 +199,7 @@
     if (typeof bytes !== "number") return "檔案";
 
     if (bytes < 1024) return `${bytes} B`;
+
     if (bytes < 1024 * 1024) {
       return `${(bytes / 1024).toFixed(1)} KB`;
     }
@@ -238,10 +244,12 @@
       );
 
       const button = createElement("a", "download-button", "下載檔案");
+
       button.href = file.download_url || RAW_BASE + file.path
         .split("/")
         .map(encodeURIComponent)
         .join("/");
+
       button.setAttribute("download", file.name);
       button.rel = "noopener";
 
@@ -308,7 +316,6 @@
         a.name.localeCompare(b.name, "zh-Hant")
       );
 
-      searchInput.disabled = false;
       renderFiles();
 
       if (files.length === 0) {
@@ -319,7 +326,7 @@
     } catch (error) {
       files = [];
       status.textContent = error.message || "讀取檔案時發生錯誤。";
-      empty.textContent = "無法取得檔案清單，請不要用種花電信網路，很爛。";
+      empty.textContent = "無法取得檔案清單，請稍後再試。";
       empty.classList.add("show");
     } finally {
       refreshButton.disabled = false;
@@ -333,11 +340,10 @@
   loadFiles();
 })();
 </script>
-<footer class="site-footer">
-  <a href="privacy.html">隱私權政策</a>
-  <span>｜</span>
-  <a href="terms.html">服務條款</a>
-  <p>聯絡方式(Gmail)：dev@eric0517.dpdns.org</p>
-</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+
 </body>
 </html>
