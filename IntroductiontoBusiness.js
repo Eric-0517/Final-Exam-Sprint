@@ -312,7 +312,7 @@
 
             if (
                 !confirm(
-                    "找到尚未完成的商業概論測驗。" +
+                    "偵測到尚未完成的測驗進度" +
                     (hasAnswers ? "\n是否恢復上次的作答進度？" :
                         "\n是否恢復上次的測驗？")
                 )
@@ -344,7 +344,7 @@
 
             return true;
         } catch (error) {
-            console.error("恢復商業概論測驗失敗：", error);
+            console.error("恢復測驗失敗：", error);
             return false;
         }
     }
