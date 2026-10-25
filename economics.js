@@ -245,7 +245,7 @@
             savedSession &&
             Array.isArray(savedSession.question_ids) &&
             savedSession.question_ids.length &&
-            confirm("發現尚未完成的經濟學測驗，要恢復上次進度嗎？")
+            confirm("偵測到尚未完成的測驗進度，是否繼續上次的測驗？")
         ) {
             const bankMap = new Map(
                 questionBank.map(question => [question.id, question])
