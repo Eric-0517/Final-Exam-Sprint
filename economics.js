@@ -1,3 +1,4 @@
+
 (() => {
     "use strict";
 
@@ -6,32 +7,30 @@
     const POINTS_PER_QUESTION = 2.5;
     const LETTERS = ["A", "B", "C", "D"];
 
-    const $ = (id) => document.getElementById(id);
+    const SUBJECT = "經濟學";
+    const SESSION_SUBJECT = "economics";
+    const QUIZ_NAME = "經濟學(第1次模擬考)啟芳";
+
+    const $ = id => document.getElementById(id);
     const screens = ["home", "quiz", "result"];
 
     let questionBank = [];
     let quizQuestions = [];
     let userAnswers = [];
     let currentIndex = 0;
+    let startedAt = 0;
+    let savingSession = Promise.resolve();
+    let submitting = false;
 
     function showScreen(id) {
-        screens.forEach((screenId) => {
+        screens.forEach(screenId => {
             $(screenId).classList.toggle("active", screenId === id);
         });
         window.scrollTo(0, 0);
     }
 
-    function shuffle(items) {
-        const result = items.slice();
-        for (let i = result.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [result[i], result[j]] = [result[j], result[i]];
-        }
-        return result;
-    }
-
     function escapeHTML(value) {
-        return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        return String(value ?? "").replace(/[&<>"']/g, char => ({
             "&": "&amp;",
             "<": "&lt;",
             ">": "&gt;",
@@ -74,6 +73,61 @@
         container.appendChild(prompt);
     }
 
+    function getAnswerMap() {
+        const answers = {};
+
+        quizQuestions.forEach((question, index) => {
+            if (userAnswers[index] !== null) {
+                answers[question.id] = userAnswers[index];
+            }
+        });
+
+        return answers;
+    }
+
+    function isSignedIn() {
+        return Boolean(window.sb && window.StudyData);
+    }
+
+    async function saveCurrentSession() {
+        if (!isSignedIn() || !quizQuestions.length) return;
+
+        const payload = {
+            subject: SESSION_SUBJECT,
+            quiz_name: QUIZ_NAME,
+            question_ids: quizQuestions.map(question => question.id),
+            answers: getAnswerMap(),
+            current_index: currentIndex
+        };
+
+        savingSession = savingSession
+            .catch(() => {})
+            .then(async () => {
+                const result = await window.StudyData.saveSession(payload);
+
+                if (!result.saved && result.reason !== "not_signed_in") {
+                    throw new Error("測驗進度儲存失敗。");
+                }
+
+                return result;
+            })
+            .catch(error => {
+                console.error("儲存測驗進度失敗：", error);
+            });
+
+        return savingSession;
+    }
+
+    async function deleteSavedSession() {
+        if (!isSignedIn()) return;
+
+        try {
+            await window.StudyData.deleteSession(SESSION_SUBJECT);
+        } catch (error) {
+            console.error("清除已完成測驗進度失敗：", error);
+        }
+    }
+
     async function loadBank() {
         const startButton = $("startBtn");
         startButton.disabled = true;
@@ -102,7 +156,7 @@
                 const options = question.options || {};
 
                 return {
-                    id: question.id || "economics-" + (index + 1),
+                    id: String(question.id || "economics-" + (index + 1)),
                     question: String(question.question || ""),
                     image: question.image || "",
                     options,
@@ -115,11 +169,10 @@
                             ? question.explanation
                             : ""
                 };
-            }).filter((question) =>
+            }).filter(question =>
                 question.question &&
-                LETTERS.every(
-                    (letter) =>
-                        question.options[letter] !== undefined
+                LETTERS.every(letter =>
+                    question.options[letter] !== undefined
                 ) &&
                 LETTERS.includes(question.answer)
             );
@@ -146,24 +199,83 @@
         }
     }
 
-    function startQuiz() {
+    function initializeQuiz(questions, answers = {}, index = 0) {
+        quizQuestions = questions;
+        userAnswers = quizQuestions.map(question => {
+            const answer = answers[question.id];
+            return LETTERS.includes(answer) ? answer : null;
+        });
+
+        currentIndex = Math.max(
+            0,
+            Math.min(index, quizQuestions.length - 1)
+        );
+
+        startedAt = Date.now();
+        submitting = false;
+
+        $("total").textContent = quizQuestions.length;
+        showScreen("quiz");
+        renderQuestion();
+    }
+
+    async function startQuiz() {
         if (!questionBank.length) {
             alert("目前沒有可作答的題目。");
             return;
         }
 
-        quizQuestions =questionBank.slice(
-            0,
-            Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
+        let savedSession = null;
+
+        if (isSignedIn()) {
+            try {
+                const user = await window.StudyData.currentUser();
+
+                if (user) {
+                    savedSession = await window.StudyData.getSession(
+                        SESSION_SUBJECT
+                    );
+                }
+            } catch (error) {
+                console.error("讀取未完成測驗失敗：", error);
+            }
+        }
+
+        if (
+            savedSession &&
+            Array.isArray(savedSession.question_ids) &&
+            savedSession.question_ids.length &&
+            confirm("發現尚未完成的經濟學測驗，要恢復上次進度嗎？")
+        ) {
+            const bankMap = new Map(
+                questionBank.map(question => [question.id, question])
+            );
+
+            const restoredQuestions = savedSession.question_ids
+                .map(id => bankMap.get(String(id)))
+                .filter(Boolean);
+
+            if (restoredQuestions.length === savedSession.question_ids.length) {
+                initializeQuiz(
+                    restoredQuestions,
+                    savedSession.answers || {},
+                    Number(savedSession.current_index || 0)
+                );
+
+                return;
+            }
+
+            alert("原本的題庫內容已變更，無法完整恢復。將開始新的測驗。");
+        }
+
+        initializeQuiz(
+            questionBank.slice(
+                0,
+                Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
+            )
         );
 
-        userAnswers = new Array(quizQuestions.length).fill(null);
-        currentIndex = 0;
-
-        $("total").textContent = quizQuestions.length;
-
-        showScreen("quiz");
-        renderQuestion();
+        await saveCurrentSession();
     }
 
     function renderQuestion() {
@@ -173,34 +285,20 @@
         $("total").textContent = quizQuestions.length;
 
         $("progressBar").style.width =
-            (
-                (currentIndex + 1) /
-                quizQuestions.length *
-                100
-            ) + "%";
+            ((currentIndex + 1) / quizQuestions.length * 100) + "%";
 
         renderQuestionContent($("questionText"), question);
 
         const optionsBox = $("options");
         optionsBox.innerHTML = "";
 
-        LETTERS.forEach((letter) => {
+        LETTERS.forEach(letter => {
+            const selected = userAnswers[currentIndex] === letter;
             const button = document.createElement("button");
-            button.type = "button";
-            button.className =
-                "option" +
-                (
-                    userAnswers[currentIndex] === letter
-                        ? " selected"
-                        : ""
-                );
 
-            button.setAttribute(
-                "aria-pressed",
-                userAnswers[currentIndex] === letter
-                    ? "true"
-                    : "false"
-            );
+            button.type = "button";
+            button.className = "option" + (selected ? " selected" : "");
+            button.setAttribute("aria-pressed", selected ? "true" : "false");
 
             const key = document.createElement("span");
             key.className = "option-key";
@@ -210,14 +308,14 @@
             content.className = "option-text";
             content.textContent = question.options[letter] || "";
 
+            button.appendChild(key);
+            button.appendChild(content);
+
             const image = createImage(
                 question.optionImages[letter],
                 letter + " 選項圖片",
                 "option-image"
             );
-
-            button.appendChild(key);
-            button.appendChild(content);
 
             if (image) {
                 const wrapper = document.createElement("span");
@@ -229,6 +327,7 @@
             button.addEventListener("click", () => {
                 userAnswers[currentIndex] = letter;
                 renderQuestion();
+                void saveCurrentSession();
             });
 
             optionsBox.appendChild(button);
@@ -242,28 +341,27 @@
                 : "下一題";
     }
 
-    function finishQuiz() {
+    async function finishQuiz() {
+        if (submitting) return;
+        submitting = true;
+
         const total = quizQuestions.length;
         let correct = 0;
 
         quizQuestions.forEach((question, index) => {
-            if (userAnswers[index] === question.answer) {
-                correct++;
-            }
+            if (userAnswers[index] === question.answer) correct++;
         });
 
         const wrong = total - correct;
+        const score = correct * POINTS_PER_QUESTION;
+        const answerMap = getAnswerMap();
 
-        $("score").textContent = correct * POINTS_PER_QUESTION;
+        $("score").textContent = score;
         $("correctCount").textContent = correct;
         $("wrongCount").textContent = wrong;
 
         $("accuracy").textContent =
-            (
-                total
-                    ? Math.round(correct / total * 100)
-                    : 0
-            ) + "%";
+            (total ? Math.round(correct / total * 100) : 0) + "%";
 
         $("wrongSummary").textContent = "共 " + wrong + " 題錯題";
 
@@ -280,42 +378,30 @@
 
             const title = document.createElement("div");
             title.className = "wrong-question";
-
             title.textContent =
                 "第 " + (index + 1) +
-                " 題｜你的答案：" +
-                (selected || "未作答") +
-                "｜正確答案：" +
-                question.answer;
+                " 題｜你的答案：" + (selected || "未作答") +
+                "｜正確答案：" + question.answer;
 
             item.appendChild(title);
 
             const questionContent = document.createElement("div");
             questionContent.className = "review-question";
 
-            renderQuestionContent(
-                questionContent,
-                question,
-                true
-            );
-
+            renderQuestionContent(questionContent, question, true);
             item.appendChild(questionContent);
 
             const options = document.createElement("div");
             options.className = "review-options";
 
-            LETTERS.forEach((letter) => {
+            LETTERS.forEach(letter => {
                 const p = document.createElement("p");
-
                 const key = document.createElement("strong");
+
                 key.textContent = letter + ". ";
-
                 p.appendChild(key);
-
                 p.appendChild(
-                    document.createTextNode(
-                        question.options[letter] || ""
-                    )
+                    document.createTextNode(question.options[letter] || "")
                 );
 
                 if (question.optionImages[letter]) {
@@ -342,10 +428,8 @@
 
             const explanation = document.createElement("div");
             explanation.className = "explanation";
-
             explanation.textContent =
-                question.explanation.trim() ||
-                "請重新閱讀題幹與選項。";
+                question.explanation.trim() || "請重新閱讀題幹與選項。";
 
             item.appendChild(explanation);
             wrongList.appendChild(item);
@@ -357,6 +441,55 @@
         }
 
         showScreen("result");
+
+        if (isSignedIn()) {
+            const answersForStorage = Object.fromEntries(
+                quizQuestions.map((question, index) => [
+                    question.id,
+                    userAnswers[index]
+                ])
+            );
+
+            const record = {
+                subject: SUBJECT,
+                quiz_name: QUIZ_NAME,
+                total_questions: total,
+                correct_count: correct,
+                score,
+                answers: answersForStorage,
+                duration_seconds: Math.max(
+                    0,
+                    Math.floor((Date.now() - startedAt) / 1000)
+                )
+            };
+
+            try {
+                const user = await window.StudyData.currentUser();
+
+                if (user) {
+                    const result = await window.StudyData.saveAttempt(record);
+
+                    if (result.saved) {
+                        console.info("測驗成績已儲存。");
+                    }
+
+                    await window.StudyData.saveWrongQuestions(
+                        SUBJECT,
+                        quizQuestions,
+                        answerMap
+                    );
+
+                    await deleteSavedSession();
+                }
+            } catch (error) {
+                console.error("雲端測驗資料儲存失敗：", error);
+                alert(
+                    "本次測驗已完成，但雲端資料儲存失敗。分數仍會顯示，請檢查網路及 Supabase 設定。"
+                );
+            }
+        }
+
+        submitting = false;
     }
 
     $("startBtn").addEventListener("click", startQuiz);
@@ -365,26 +498,27 @@
         if (currentIndex > 0) {
             currentIndex--;
             renderQuestion();
+            void saveCurrentSession();
         }
     });
 
     $("nextBtn").addEventListener("click", () => {
-        if (!quizQuestions.length) return;
+        if (!quizQuestions.length || submitting) return;
 
         if (currentIndex < quizQuestions.length - 1) {
             currentIndex++;
             renderQuestion();
+            void saveCurrentSession();
         } else {
-            finishQuiz();
+            void finishQuiz();
         }
     });
 
-    $("quitBtn").addEventListener("click", () => {
-        if (
-            confirm(
-                "確定要退出測驗嗎？目前作答進度將會結束。"
-            )
-        ) {
+    $("quitBtn").addEventListener("click", async () => {
+        if (submitting) return;
+
+        if (confirm("確定要退出測驗嗎？登入狀態下會保留目前進度。")) {
+            await saveCurrentSession();
             showScreen("home");
         }
     });
