@@ -292,7 +292,7 @@
             if (!restoredQuestions.length) return false;
 
             const shouldRestore = confirm(
-                "偵測到尚未完成的專二測驗進度，是否繼續上次的測驗？"
+                "偵測到尚未完成的測驗進度，是否繼續上次的測驗？"
             );
 
             if (!shouldRestore) return false;
@@ -526,7 +526,9 @@
             return;
         }
 
-        if (!attemptSaved || !wrongSaved) {
+        if (attemptSaved && wrongSaved && sessionDeleted) {
+            alert("測驗成績已儲存！");
+        } else if (!attemptSaved || !wrongSaved) {
             alert(
                 "未完成紀錄已刪除，但成績或錯題可能未完整同步，請檢查 Console 錯誤訊息。"
             );
