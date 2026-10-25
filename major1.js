@@ -6,6 +6,10 @@
     const POINTS_PER_QUESTION = 2;
     const LETTERS = ["A", "B", "C", "D"];
 
+    const SUBJECT = "09商業與管理群專一";
+    const SESSION_SUBJECT = "major1";
+    const QUIZ_NAME = "09商業與管理群專一(114-1歷屆模擬試題)";
+
     const $ = (id) => document.getElementById(id);
     const screens = ["home", "quiz", "result"];
 
@@ -13,6 +17,9 @@
     let quizQuestions = [];
     let userAnswers = [];
     let currentIndex = 0;
+    let sessionSaveQueue = Promise.resolve();
+    let quizStartedAt = null;
+    let restoringSession = false;
 
     function showScreen(id) {
         screens.forEach((screenId) => {
@@ -20,6 +27,159 @@
             if (el) el.classList.toggle("active", screenId === id);
         });
         window.scrollTo(0, 0);
+    }
+
+    function getStudyData() {
+        return window.StudyData ||
+            (typeof StudyData !== "undefined" ? StudyData : null);
+    }
+
+    async function getCurrentUser() {
+        try {
+            if (!window.sb?.auth) return null;
+            const { data, error } = await window.sb.auth.getSession();
+            if (error) throw error;
+            return data?.session?.user || null;
+        } catch (error) {
+            console.error("讀取登入狀態失敗：", error);
+            return null;
+        }
+    }
+
+    function makeAnswerMap() {
+        const answers = {};
+        quizQuestions.forEach((question, index) => {
+            if (userAnswers[index]) {
+                answers[question.id] = userAnswers[index];
+            }
+        });
+        return answers;
+    }
+
+    function makeQuestionIds() {
+        return quizQuestions.map((question) => question.id);
+    }
+
+    function saveSession() {
+        if (restoringSession || !quizQuestions.length) {
+            return Promise.resolve();
+        }
+
+        sessionSaveQueue = sessionSaveQueue.then(async () => {
+            const user = await getCurrentUser();
+            const studyData = getStudyData();
+
+            if (!user || !studyData?.saveSession) return;
+
+            const result = await studyData.saveSession({
+                subject: SESSION_SUBJECT,
+                quiz_name: QUIZ_NAME,
+                question_ids: makeQuestionIds(),
+                answers: makeAnswerMap(),
+                current_index: currentIndex
+            });
+
+            if (result?.error || result?.saved === false) {
+                console.error("未完成測驗儲存失敗：", result.error || result);
+            }
+        }).catch((error) => {
+            console.error("未完成測驗儲存失敗：", error);
+        });
+
+        return sessionSaveQueue;
+    }
+
+    async function deleteSession() {
+        const user = await getCurrentUser();
+        const studyData = getStudyData();
+
+        if (!user || !studyData?.deleteSession) return;
+
+        const result = await studyData.deleteSession(SESSION_SUBJECT);
+
+        if (result?.error || result?.saved === false) {
+            throw new Error("刪除未完成測驗紀錄失敗。");
+        }
+    }
+
+    async function restoreSavedSession() {
+        const user = await getCurrentUser();
+        const studyData = getStudyData();
+
+        if (!user || !studyData?.getSession) return false;
+
+        try {
+            const result = await studyData.getSession(SESSION_SUBJECT);
+
+            if (result?.error) throw result.error;
+
+            const session = result?.data || result?.session || result;
+
+            if (!session || !Array.isArray(session.question_ids) ||
+                session.question_ids.length === 0) {
+                return false;
+            }
+
+            const questionMap = new Map(
+                questionBank.map((question) => [String(question.id), question])
+            );
+
+            const savedQuestions = session.question_ids
+                .map((id) => questionMap.get(String(id)))
+                .filter(Boolean);
+
+            if (!savedQuestions.length) return false;
+
+            const shouldRestore = confirm(
+                "發現尚未完成的測驗：\n" +
+                QUIZ_NAME + "\n\n" +
+                "已儲存 " + savedQuestions.length + " 題，" +
+                "目前題號 " +
+                Math.min(
+                    Number(session.current_index || 0) + 1,
+                    savedQuestions.length
+                ) + "。\n\n" +
+                "是否繼續上次的測驗？"
+            );
+
+            if (!shouldRestore) {
+                return false;
+            }
+
+            restoringSession = true;
+
+            quizQuestions = savedQuestions;
+            userAnswers = new Array(quizQuestions.length).fill(null);
+
+            const savedAnswers = session.answers || {};
+
+            quizQuestions.forEach((question, index) => {
+                const answer = savedAnswers[question.id];
+                if (LETTERS.includes(answer)) {
+                    userAnswers[index] = answer;
+                }
+            });
+
+            currentIndex = Math.max(
+                0,
+                Math.min(
+                    Number(session.current_index || 0),
+                    quizQuestions.length - 1
+                )
+            );
+
+            quizStartedAt = Date.now();
+            showScreen("quiz");
+            renderQuestion();
+
+            restoringSession = false;
+            return true;
+        } catch (error) {
+            restoringSession = false;
+            console.error("恢復未完成測驗失敗：", error);
+            alert("讀取未完成測驗失敗，請稍後再試。");
+            return false;
+        }
     }
 
     function createImage(src, alt, className) {
@@ -37,17 +197,15 @@
         img.style.maxWidth = "100%";
         img.style.margin = "8px auto";
 
-        if (className === "option-image" || className === "review-option-image") {
+        if (className === "option-image" ||
+            className === "review-option-image") {
             img.style.maxWidth = "min(100%, 320px)";
             img.style.maxHeight = "180px";
         } else {
             img.style.maxHeight = "240px";
         }
 
-        img.onerror = () => {
-            img.remove();
-        };
-
+        img.onerror = () => img.remove();
         return img;
     }
 
@@ -58,11 +216,15 @@
             });
 
             if (!response.ok) {
-                throw new Error("題庫載入失敗（HTTP " + response.status + "）。");
+                throw new Error(
+                    "題庫載入失敗（HTTP " + response.status + "）。"
+                );
             }
 
             const data = await response.json();
-            const rawQuestions = Array.isArray(data) ? data : data.questions;
+            const rawQuestions = Array.isArray(data)
+                ? data
+                : data.questions;
 
             if (!Array.isArray(rawQuestions)) {
                 throw new Error("題庫格式錯誤，找不到題目陣列。");
@@ -72,19 +234,22 @@
                 const options = question.options || {};
 
                 return {
-                    id: question.id || "exam-" + (index + 1),
+                    id: String(question.id || "exam-" + (index + 1)),
                     question: String(question.question || "").trim(),
                     image: question.image || "",
                     options,
                     optionImages: question.optionImages || {},
-                    answer: String(question.answer || "").trim().toUpperCase(),
+                    answer: String(question.answer || "")
+                        .trim().toUpperCase(),
                     explanation: typeof question.explanation === "string"
                         ? question.explanation
                         : ""
                 };
             }).filter((question) =>
                 question.question &&
-                LETTERS.every((letter) => question.options[letter] !== undefined)
+                LETTERS.every(
+                    (letter) => question.options[letter] !== undefined
+                )
             );
 
             if (!questionBank.length) {
@@ -94,18 +259,29 @@
             if ($("bankCount")) {
                 $("bankCount").textContent = questionBank.length;
             }
+
+            await restoreSavedSession();
         } catch (error) {
             if ($("bankCount")) {
                 $("bankCount").textContent = "載入失敗";
             }
             console.error(error);
+            alert("題庫載入失敗，請確認 major1.json 是否存在且格式正確。");
         }
     }
 
-    function startQuiz() {
+    async function startQuiz() {
         if (!questionBank.length) {
             alert("目前沒有可作答的題目或題庫尚未載入完成。");
             return;
+        }
+
+        if (quizQuestions.length &&
+            currentIndex >= 0 &&
+            $("quiz")?.classList.contains("active")) {
+            if (!confirm("確定要重新開始？目前作答內容將被取代。")) {
+                return;
+            }
         }
 
         quizQuestions = questionBank.slice(
@@ -115,48 +291,45 @@
 
         userAnswers = new Array(quizQuestions.length).fill(null);
         currentIndex = 0;
+        quizStartedAt = Date.now();
 
         showScreen("quiz");
         renderQuestion();
+        await saveSession();
     }
 
     function renderQuestion() {
         const question = quizQuestions[currentIndex];
         if (!question) return;
 
-        if ($("qNo")) {
-            $("qNo").textContent = currentIndex + 1;
-        }
-
-        if ($("total")) {
-            $("total").textContent = quizQuestions.length;
-        }
+        if ($("qNo")) $("qNo").textContent = currentIndex + 1;
+        if ($("total")) $("total").textContent = quizQuestions.length;
 
         if ($("progressBar")) {
             $("progressBar").style.width =
                 ((currentIndex + 1) / quizQuestions.length * 100) + "%";
         }
 
-        
         const textEl = $("questionText");
         if (textEl) {
             textEl.textContent = question.question;
             textEl.style.whiteSpace = "pre-line";
         }
 
-
         const imgEl = $("questionImage");
         if (imgEl) {
             if (question.image && question.image.trim()) {
-                imgEl.src = new URL(question.image.trim(), document.baseURI).href;
+                imgEl.src = new URL(
+                    question.image.trim(),
+                    document.baseURI
+                ).href;
                 imgEl.style.display = "block";
             } else {
-                imgEl.src = "";
+                imgEl.removeAttribute("src");
                 imgEl.style.display = "none";
             }
         }
 
-      
         const optionsBox = $("options");
         if (!optionsBox) return;
         optionsBox.innerHTML = "";
@@ -184,7 +357,7 @@
             button.appendChild(content);
 
             const image = createImage(
-                question.optionImages && question.optionImages[letter],
+                question.optionImages?.[letter],
                 letter + " 選項圖片",
                 "option-image"
             );
@@ -199,6 +372,7 @@
             button.addEventListener("click", () => {
                 userAnswers[currentIndex] = letter;
                 renderQuestion();
+                saveSession();
             });
 
             optionsBox.appendChild(button);
@@ -216,16 +390,84 @@
         }
     }
 
-    function finishQuiz() {
+    async function saveCompletedQuiz(correct, total) {
+        const user = await getCurrentUser();
+        const studyData = getStudyData();
+
+        if (!user || !studyData) return;
+
+        const answerMap = makeAnswerMap();
+        const duration = quizStartedAt
+            ? Math.max(0, Math.floor((Date.now() - quizStartedAt) / 1000))
+            : 0;
+
+        const errors = [];
+
+        try {
+            if (typeof studyData.saveAttempt === "function") {
+                const result = await studyData.saveAttempt({
+                    subject: SUBJECT,
+                    quiz_name: QUIZ_NAME,
+                    total_questions: total,
+                    correct_count: correct,
+                    score: correct * POINTS_PER_QUESTION,
+                    answers: answerMap,
+                    duration_seconds: duration
+                });
+
+                if (result?.error || result?.saved === false) {
+                    throw result.error || new Error("成績儲存失敗");
+                }
+            } else {
+                errors.push("找不到成績儲存功能");
+            }
+        } catch (error) {
+            console.error("成績同步失敗：", error);
+            errors.push("成績");
+        }
+
+        try {
+            if (typeof studyData.saveWrongQuestions === "function") {
+                const result = await studyData.saveWrongQuestions(
+                    SUBJECT,
+                    quizQuestions,
+                    answerMap
+                );
+
+                if (result?.error || result?.saved === false) {
+                    throw result.error || new Error("錯題儲存失敗");
+                }
+            } else {
+                errors.push("找不到錯題儲存功能");
+            }
+        } catch (error) {
+            console.error("錯題同步失敗：", error);
+            errors.push("錯題");
+        }
+
+        if (errors.length) {
+            alert(
+                "測驗已完成，但雲端同步有部分失敗：" +
+                errors.join("、") +
+                "。請確認登入狀態及 Supabase 設定。"
+            );
+            return;
+        }
+
+        try {
+            await deleteSession();
+        } catch (error) {
+            console.error(error);
+            alert("成績已處理，但未完成測驗紀錄未能刪除。");
+        }
+    }
+
+    async function finishQuiz() {
         const total = quizQuestions.length;
         let correct = 0;
 
         quizQuestions.forEach((question, index) => {
-            const answer = String(question.answer || "").trim().toUpperCase();
-
-            if (userAnswers[index] === answer) {
-                correct++;
-            }
+            if (userAnswers[index] === question.answer) correct++;
         });
 
         const wrong = total - correct;
@@ -238,8 +480,10 @@
 
         if ($("correctCount")) $("correctCount").textContent = correct;
         if ($("wrongCount")) $("wrongCount").textContent = wrong;
+
         if ($("accuracy")) {
-            $("accuracy").textContent = (total ? Math.round(correct / total * 100) : 0) + "%";
+            $("accuracy").textContent =
+                (total ? Math.round(correct / total * 100) : 0) + "%";
         }
 
         if ($("wrongSummary")) {
@@ -247,12 +491,13 @@
         }
 
         const wrongList = $("wrongList");
+
         if (wrongList) {
             wrongList.innerHTML = "";
 
             quizQuestions.forEach((question, index) => {
                 const selected = userAnswers[index];
-                const answer = String(question.answer || "").trim().toUpperCase();
+                const answer = question.answer;
 
                 if (selected === answer) return;
 
@@ -268,7 +513,6 @@
 
                 item.appendChild(title);
 
-                
                 const qTextDiv = document.createElement("div");
                 qTextDiv.style.fontWeight = "bold";
                 qTextDiv.style.margin = "8px 0";
@@ -277,7 +521,11 @@
                 item.appendChild(qTextDiv);
 
                 if (question.image && question.image.trim()) {
-                    const qImg = createImage(question.image, "專二題目圖片", "question-image");
+                    const qImg = createImage(
+                        question.image,
+                        "專一題目圖片",
+                        "question-image"
+                    );
                     if (qImg) item.appendChild(qImg);
                 }
 
@@ -289,21 +537,19 @@
 
                     const key = document.createElement("strong");
                     key.textContent = letter + ". ";
-
                     p.appendChild(key);
+
                     p.appendChild(
                         document.createTextNode(question.options[letter] || "")
                     );
 
                     const image = createImage(
-                        question.optionImages && question.optionImages[letter],
+                        question.optionImages?.[letter],
                         letter + " 選項圖片",
                         "review-option-image"
                     );
 
-                    if (image) {
-                        p.appendChild(image);
-                    }
+                    if (image) p.appendChild(image);
 
                     if (letter === answer) {
                         const mark = document.createElement("strong");
@@ -336,35 +582,41 @@
         }
 
         showScreen("result");
+
+        await sessionSaveQueue;
+        await saveCompletedQuiz(correct, total);
     }
 
-    document.addEventListener("click", (e) => {
+    document.addEventListener("click", async (e) => {
         const actionEl = e.target.closest("[data-action]");
         if (!actionEl) return;
+
         const action = actionEl.dataset.action;
 
         if (action === "start") {
-            startQuiz();
+            await startQuiz();
         } else if (action === "home") {
             showScreen("home");
         } else if (action === "quit") {
-            if (confirm("確定要退出測驗嗎？目前作答進度將會結束。")) {
+            if (confirm("確定要退出測驗嗎？登入後會保留目前作答進度。")) {
+                await saveSession();
                 showScreen("home");
             }
         }
     });
 
     if ($("prevBtn")) {
-        $("prevBtn").addEventListener("click", () => {
+        $("prevBtn").addEventListener("click", async () => {
             if (currentIndex > 0) {
                 currentIndex--;
                 renderQuestion();
+                await saveSession();
             }
         });
     }
 
     if ($("nextBtn")) {
-        $("nextBtn").addEventListener("click", () => {
+        $("nextBtn").addEventListener("click", async () => {
             if (!quizQuestions.length) return;
 
             if (!userAnswers[currentIndex]) {
@@ -375,8 +627,9 @@
             if (currentIndex < quizQuestions.length - 1) {
                 currentIndex++;
                 renderQuestion();
+                await saveSession();
             } else {
-                finishQuiz();
+                await finishQuiz();
             }
         });
     }
