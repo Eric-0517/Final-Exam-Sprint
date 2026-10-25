@@ -7,7 +7,7 @@
     const LETTERS = ["A", "B", "C", "D"];
 
     const SUBJECT = "商業概論";
-    const SESSION_SUBJECT = "business";
+    const SESSION_SUBJECT = "IntroductiontoBusiness";
     const QUIZ_NAME = "商業概論(第1次模擬考)啟芳";
 
     const $ = (id) => document.getElementById(id);
