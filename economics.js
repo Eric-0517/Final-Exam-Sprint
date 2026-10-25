@@ -22,6 +22,7 @@
     let quizStartedAt = 0;
     let savingSession = Promise.resolve();
     let finishingQuiz = false;
+    let quizCompleted = false;
 
     function swalBase() {
         return {
@@ -102,7 +103,10 @@
             const screen = $(screenId);
 
             if (screen) {
-                screen.classList.toggle("active", screenId === id);
+                screen.classList.toggle(
+                    "active",
+                    screenId === id
+                );
             }
         });
 
@@ -115,9 +119,12 @@
 
     async function isSignedIn() {
         try {
-            if (!window.sb?.auth) return false;
+            if (!window.sb?.auth) {
+                return false;
+            }
 
-            const { data, error } = await window.sb.auth.getSession();
+            const { data, error } =
+                await window.sb.auth.getSession();
 
             if (error) {
                 console.error("讀取登入狀態失敗：", error);
@@ -138,7 +145,11 @@
 
         const img = document.createElement("img");
 
-        img.src = new URL(src.trim(), document.baseURI).href;
+        img.src = new URL(
+            src.trim(),
+            document.baseURI
+        ).href;
+
         img.alt = alt;
         img.className = className;
         img.loading = "eager";
@@ -164,13 +175,19 @@
         return img;
     }
 
-    function renderQuestionContent(container, question, review = false) {
+    function renderQuestionContent(
+        container,
+        question,
+        review = false
+    ) {
         container.innerHTML = "";
 
         const image = createImage(
             question.image,
             "題目圖片",
-            review ? "review-question-image" : "question-image"
+            review
+                ? "review-question-image"
+                : "question-image"
         );
 
         if (image) {
@@ -178,7 +195,11 @@
         }
 
         const prompt = document.createElement("div");
-        prompt.className = review ? "review-question-text" : "";
+
+        prompt.className = review
+            ? "review-question-text"
+            : "";
+
         prompt.textContent = question.question || "";
 
         container.appendChild(prompt);
@@ -197,7 +218,9 @@
         const startButton = $("startBtn");
 
         if (!startButton) {
-            console.error("找不到開始測驗按鈕 startBtn。");
+            console.error(
+                "找不到開始測驗按鈕 startBtn。"
+            );
             return;
         }
 
@@ -216,7 +239,9 @@
 
             if (!response.ok) {
                 throw new Error(
-                    "題庫載入失敗（HTTP " + response.status + "）。"
+                    "題庫載入失敗（HTTP " +
+                    response.status +
+                    "）。"
                 );
             }
 
@@ -227,7 +252,9 @@
                 : data.questions;
 
             if (!Array.isArray(rawQuestions)) {
-                throw new Error("題庫格式錯誤，找不到題目陣列。");
+                throw new Error(
+                    "題庫格式錯誤，找不到題目陣列。"
+                );
             }
 
             questionBank = rawQuestions
@@ -237,14 +264,16 @@
                     return {
                         ...question,
                         id: String(
-                            question.id || "economics-" + (index + 1)
+                            question.id ||
+                            "economics-" + (index + 1)
                         ),
                         question: String(
                             question.question || ""
                         ).trim(),
                         image: question.image || "",
                         options,
-                        optionImages: question.optionImages || {},
+                        optionImages:
+                            question.optionImages || {},
                         answer: String(
                             question.answer || ""
                         ).trim().toUpperCase(),
@@ -263,10 +292,14 @@
                 );
 
             if (!questionBank.length) {
-                throw new Error("沒有格式正確的選擇題。");
+                throw new Error(
+                    "沒有格式正確的選擇題。"
+                );
             }
 
-            $("bankCount").textContent = questionBank.length;
+            $("bankCount").textContent =
+                questionBank.length;
+
             startButton.disabled = false;
 
             if ($("loadError")) {
@@ -283,10 +316,16 @@
 
             showLoadError(message);
 
-            console.error("經濟學題庫載入失敗：", error);
+            console.error(
+                "經濟學題庫載入失敗：",
+                error
+            );
 
             if (typeof Swal !== "undefined") {
-                await showError("題庫載入失敗", message);
+                await showError(
+                    "題庫載入失敗",
+                    message
+                );
             } else {
                 window.alert(message);
             }
@@ -297,21 +336,22 @@
         const answers = {};
 
         quizQuestions.forEach((question, index) => {
-            answers[question.id] = userAnswers[index] || null;
+            answers[question.id] =
+                userAnswers[index] || null;
         });
 
         return answers;
     }
 
     function queueSaveSession() {
-        if (finishingQuiz) {
+        if (finishingQuiz || quizCompleted) {
             return savingSession;
         }
 
         savingSession = savingSession
             .catch(() => {})
             .then(async () => {
-                if (finishingQuiz) {
+                if (finishingQuiz || quizCompleted) {
                     return;
                 }
 
@@ -326,7 +366,7 @@
                     return;
                 }
 
-                if (finishingQuiz) {
+                if (finishingQuiz || quizCompleted) {
                     return;
                 }
 
@@ -394,7 +434,9 @@
     }
 
     function normalizeSession(result) {
-        if (!result) return null;
+        if (!result) {
+            return null;
+        }
 
         if (result.data && !Array.isArray(result.data)) {
             return result.data;
@@ -435,21 +477,25 @@
                 return false;
             }
 
-            const savedQuestions = session.question_ids.map((id) =>
-                questionBank.find(
-                    (question) => question.id === String(id)
-                )
-            );
+            const savedQuestions =
+                session.question_ids.map((id) =>
+                    questionBank.find(
+                        (question) =>
+                            question.id === String(id)
+                    )
+                );
 
             if (
                 savedQuestions.some((question) => !question) ||
                 savedQuestions.length > QUESTIONS_PER_QUIZ
             ) {
-                await deleteSavedSession();
+                const deleted = await deleteSavedSession();
 
                 await showWarning(
                     "無法恢復測驗",
-                    "原本的題庫內容已變更，已嘗試清除舊進度，請重新開始測驗。"
+                    deleted
+                        ? "原本的題庫內容已變更，舊進度已清除，請重新開始測驗。"
+                        : "原本的題庫內容已變更，但舊進度尚未確認清除。請重新開始測驗，並確認個人中心的未完成測驗紀錄。"
                 );
 
                 return false;
@@ -457,8 +503,11 @@
 
             const savedAnswers = session.answers || {};
 
-            const hasAnswers = savedQuestions.some((question) =>
-                LETTERS.includes(savedAnswers[question.id])
+            const hasAnswers = savedQuestions.some(
+                (question) =>
+                    LETTERS.includes(
+                        savedAnswers[question.id]
+                    )
             );
 
             const shouldRestore = await confirmAction({
@@ -471,7 +520,15 @@
             });
 
             if (!shouldRestore) {
-                await deleteSavedSession();
+                const deleted = await deleteSavedSession();
+
+                if (!deleted) {
+                    await showWarning(
+                        "舊進度尚未清除",
+                        "系統未能確認舊的未完成測驗紀錄已刪除，請檢查網路連線後再確認。"
+                    );
+                }
+
                 return false;
             }
 
@@ -480,7 +537,9 @@
             userAnswers = quizQuestions.map((question) => {
                 const answer = savedAnswers[question.id];
 
-                return LETTERS.includes(answer) ? answer : null;
+                return LETTERS.includes(answer)
+                    ? answer
+                    : null;
             });
 
             currentIndex = Math.max(
@@ -493,15 +552,20 @@
 
             quizStartedAt = Date.now();
             finishingQuiz = false;
+            quizCompleted = false;
 
-            $("total").textContent = quizQuestions.length;
+            $("total").textContent =
+                quizQuestions.length;
 
             showScreen("quiz");
             renderQuestion();
 
             return true;
         } catch (error) {
-            console.error("恢復經濟學測驗失敗：", error);
+            console.error(
+                "恢復經濟學測驗失敗：",
+                error
+            );
 
             await showError(
                 "恢復測驗失敗",
@@ -532,15 +596,23 @@
 
         quizQuestions = questionBank.slice(
             0,
-            Math.min(QUESTIONS_PER_QUIZ, questionBank.length)
+            Math.min(
+                QUESTIONS_PER_QUIZ,
+                questionBank.length
+            )
         );
 
-        userAnswers = new Array(quizQuestions.length).fill(null);
+        userAnswers = new Array(
+            quizQuestions.length
+        ).fill(null);
+
         currentIndex = 0;
         quizStartedAt = Date.now();
         finishingQuiz = false;
+        quizCompleted = false;
 
-        $("total").textContent = quizQuestions.length;
+        $("total").textContent =
+            quizQuestions.length;
 
         showScreen("quiz");
         renderQuestion();
@@ -551,7 +623,9 @@
     function renderQuestion() {
         const question = quizQuestions[currentIndex];
 
-        if (!question) return;
+        if (!question) {
+            return;
+        }
 
         $("qNo").textContent = currentIndex + 1;
         $("total").textContent = quizQuestions.length;
@@ -563,7 +637,10 @@
                 100
             ) + "%";
 
-        renderQuestionContent($("questionText"), question);
+        renderQuestionContent(
+            $("questionText"),
+            question
+        );
 
         const optionsBox = $("options");
         optionsBox.innerHTML = "";
@@ -572,6 +649,7 @@
             const button = document.createElement("button");
 
             button.type = "button";
+
             button.className =
                 "option" +
                 (
@@ -593,7 +671,8 @@
 
             const content = document.createElement("span");
             content.className = "option-text";
-            content.textContent = question.options[letter] || "";
+            content.textContent =
+                question.options[letter] || "";
 
             button.appendChild(key);
             button.appendChild(content);
@@ -605,14 +684,18 @@
             );
 
             if (image) {
-                const wrapper = document.createElement("span");
+                const wrapper =
+                    document.createElement("span");
+
                 wrapper.className = "option-text";
                 wrapper.appendChild(image);
                 button.appendChild(wrapper);
             }
 
             button.addEventListener("click", () => {
-                if (finishingQuiz) return;
+                if (finishingQuiz || quizCompleted) {
+                    return;
+                }
 
                 userAnswers[currentIndex] = letter;
 
@@ -643,23 +726,31 @@
             .replace(/\.0$/, "");
 
         if ($("scoreLabel")) {
-            $("scoreLabel").textContent = "分（滿分 100 分）";
+            $("scoreLabel").textContent =
+                "分（滿分 100 分）";
         }
 
         $("correctCount").textContent = correct;
         $("wrongCount").textContent = wrong;
 
         $("accuracy").textContent =
-            (total ? Math.round(correct / total * 100) : 0) + "%";
+            (
+                total
+                    ? Math.round(correct / total * 100)
+                    : 0
+            ) + "%";
 
         if ($("gradingNotice")) {
             $("gradingNotice").textContent =
-                "已完成自動批改，共 " + total +
-                " 題，每題 " + POINTS_PER_QUESTION +
+                "已完成自動批改，共 " +
+                total +
+                " 題，每題 " +
+                POINTS_PER_QUESTION +
                 " 分，未作答的題目計為答錯。";
         }
 
-        $("wrongSummary").textContent = "共 " + wrong + " 題錯題";
+        $("wrongSummary").textContent =
+            "共 " + wrong + " 題錯題";
 
         const wrongList = $("wrongList");
         wrongList.innerHTML = "";
@@ -668,7 +759,9 @@
             const selected = userAnswers[index];
             const answer = question.answer;
 
-            if (selected === answer) return;
+            if (selected === answer) {
+                return;
+            }
 
             const item = document.createElement("article");
             item.className = "wrong-item";
@@ -677,13 +770,18 @@
             title.className = "wrong-question";
 
             title.textContent =
-                "第 " + (index + 1) +
-                " 題｜你的答案：" + (selected || "未作答") +
-                "｜正確答案：" + answer;
+                "第 " +
+                (index + 1) +
+                " 題｜你的答案：" +
+                (selected || "未作答") +
+                "｜正確答案：" +
+                answer;
 
             item.appendChild(title);
 
-            const questionContent = document.createElement("div");
+            const questionContent =
+                document.createElement("div");
+
             questionContent.className = "review-question";
 
             renderQuestionContent(
@@ -722,7 +820,8 @@
                 }
 
                 if (letter === answer) {
-                    const mark = document.createElement("strong");
+                    const mark =
+                        document.createElement("strong");
 
                     mark.textContent = " ✓ 正確答案";
                     mark.style.color = "#dc2626";
@@ -735,14 +834,16 @@
 
             item.appendChild(options);
 
-            const explanation = document.createElement("div");
+            const explanation =
+                document.createElement("div");
 
             explanation.className = "explanation";
+
             explanation.textContent =
-                question.explanation.trim() || "請重新閱讀題幹與選項。";
+                question.explanation.trim() ||
+                "請重新閱讀題幹與選項。";
 
             item.appendChild(explanation);
-
             wrongList.appendChild(item);
         });
 
@@ -772,13 +873,9 @@
         const studyData = getStudyData();
 
         if (!studyData) {
-            console.warn(
-                "StudyData 未載入，無法同步雲端資料。"
-            );
-
             await showWarning(
                 "雲端功能尚未準備完成",
-                "本次測驗結果已顯示，但雲端成績與錯題尚未確認儲存。"
+                "本次測驗已完成批改，但雲端成績與錯題尚未確認儲存。"
             );
 
             return;
@@ -824,18 +921,18 @@
 
         if (typeof studyData.saveAttempt === "function") {
             try {
-                const result = await studyData.saveAttempt(attempt);
+                const result =
+                    await studyData.saveAttempt(attempt);
 
                 attemptSaved = isSaveSuccessful(result);
 
                 if (!attemptSaved) {
-                    errors.push(
-                        result?.reason === "not_signed_in"
-                            ? "尚未登入，成績未儲存"
-                            : "成績儲存結果未獲確認"
-                    );
+                    errors.push("成績尚未確認儲存");
 
-                    console.error("經濟學成績儲存結果：", result);
+                    console.error(
+                        "經濟學成績儲存結果：",
+                        result
+                    );
                 }
             } catch (error) {
                 errors.push("成績儲存失敗");
@@ -853,22 +950,23 @@
             typeof studyData.saveWrongQuestions === "function"
         ) {
             try {
-                const result = await studyData.saveWrongQuestions(
-                    SUBJECT,
-                    quizQuestions,
-                    answerMap
-                );
-
-                wrongQuestionsSaved = isSaveSuccessful(result);
-
-                if (!wrongQuestionsSaved) {
-                    errors.push(
-                        result?.reason === "not_signed_in"
-                            ? "尚未登入，錯題未儲存"
-                            : "錯題儲存結果未獲確認"
+                const result =
+                    await studyData.saveWrongQuestions(
+                        SUBJECT,
+                        quizQuestions,
+                        answerMap
                     );
 
-                    console.error("經濟學錯題儲存結果：", result);
+                wrongQuestionsSaved =
+                    isSaveSuccessful(result);
+
+                if (!wrongQuestionsSaved) {
+                    errors.push("錯題尚未確認儲存");
+
+                    console.error(
+                        "經濟學錯題儲存結果：",
+                        result
+                    );
                 }
             } catch (error) {
                 errors.push("錯題儲存失敗");
@@ -885,12 +983,9 @@
         if (attemptSaved && wrongQuestionsSaved) {
             await showSuccess(
                 "測驗成績已儲存！",
-                "成績與錯題已成功同步至雲端。" +
-                (
-                    sessionDeleted
-                        ? " 未完成測驗紀錄已清除。"
-                        : " 未完成測驗紀錄尚未確認清除，請重新整理個人中心確認。"
-                )
+                sessionDeleted
+                    ? "本次成績與錯題已成功同步至雲端，未完成測驗紀錄也已清除。"
+                    : "本次成績與錯題已成功同步至雲端，但未完成測驗紀錄尚未確認清除。請重新整理個人中心確認。"
             );
 
             return;
@@ -903,14 +998,14 @@
 
         await showError(
             "雲端同步未完成",
-            "本次測驗分數仍會顯示，但成績或錯題尚未確認成功儲存。原因：" +
+            "本次測驗已完成批改，但部分資料尚未確認儲存：" +
             errors.join("、") +
-            "。請檢查網路連線、Supabase 設定及主控台錯誤。"
+            "。請檢查網路連線與 Supabase 設定。"
         );
     }
 
     async function finishQuiz() {
-        if (finishingQuiz || !quizQuestions.length) {
+        if (finishingQuiz || quizCompleted || !quizQuestions.length) {
             return;
         }
 
@@ -923,15 +1018,22 @@
                 ? "還有題目未作答"
                 : "確定要交卷？",
             text: unanswered > 0
-                ? "目前還有 " + unanswered +
+                ? "目前還有 " +
+                  unanswered +
                   " 題未作答，未作答的題目將計為答錯。確定要現在交卷嗎？"
                 : "交卷後將顯示本次測驗成績與錯題解析。",
             confirmText: "確定交卷",
             cancelText: "繼續作答",
-            icon: unanswered > 0 ? "warning" : "question"
+            icon: unanswered > 0
+                ? "warning"
+                : "question"
         });
 
-        if (!shouldSubmit || finishingQuiz) {
+        if (
+            !shouldSubmit ||
+            finishingQuiz ||
+            quizCompleted
+        ) {
             return;
         }
 
@@ -943,6 +1045,14 @@
 
         if ($("prevBtn")) {
             $("prevBtn").disabled = true;
+        }
+
+        if ($("quitBtn")) {
+            $("quitBtn").disabled = true;
+        }
+
+        if ($("startBtn")) {
+            $("startBtn").disabled = true;
         }
 
         try {
@@ -959,8 +1069,10 @@
             renderResults(correct, wrong);
             showScreen("result");
 
+            // 先等待交卷前已排隊的自動儲存完成
             await savingSession;
 
+            // 清除雲端未完成測驗紀錄
             let sessionDeleted = false;
 
             if (await isSignedIn()) {
@@ -973,6 +1085,10 @@
                 }
             }
 
+            // 標記測驗已完成，避免再次儲存未完成進度
+            quizCompleted = true;
+
+            // 儲存本次成績與錯題
             await saveCompletedQuiz(
                 correct,
                 wrong,
@@ -998,13 +1114,23 @@
             if ($("prevBtn")) {
                 $("prevBtn").disabled = currentIndex === 0;
             }
+
+            if ($("quitBtn")) {
+                $("quitBtn").disabled = false;
+            }
+
+            if ($("startBtn")) {
+                $("startBtn").disabled = false;
+            }
         }
     }
 
     $("startBtn").addEventListener("click", startQuiz);
 
     $("prevBtn").addEventListener("click", () => {
-        if (finishingQuiz) return;
+        if (finishingQuiz || quizCompleted) {
+            return;
+        }
 
         if (currentIndex > 0) {
             currentIndex--;
@@ -1015,7 +1141,11 @@
     });
 
     $("nextBtn").addEventListener("click", () => {
-        if (!quizQuestions.length || finishingQuiz) {
+        if (
+            !quizQuestions.length ||
+            finishingQuiz ||
+            quizCompleted
+        ) {
             return;
         }
 
@@ -1030,7 +1160,9 @@
     });
 
     $("quitBtn").addEventListener("click", async () => {
-        if (finishingQuiz) return;
+        if (finishingQuiz || quizCompleted) {
+            return;
+        }
 
         const shouldQuit = await confirmAction({
             title: "確定要離開測驗？",
@@ -1039,7 +1171,7 @@
             cancelText: "繼續作答"
         });
 
-        if (!shouldQuit || finishingQuiz) {
+        if (!shouldQuit || finishingQuiz || quizCompleted) {
             return;
         }
 
@@ -1048,7 +1180,9 @@
     });
 
     $("homeBtn").addEventListener("click", async () => {
-        if (finishingQuiz) return;
+        if (finishingQuiz) {
+            return;
+        }
 
         const shouldReturn = await confirmAction({
             title: "確定要回首頁？",
@@ -1063,7 +1197,9 @@
     });
 
     $("againBtn").addEventListener("click", async () => {
-        if (finishingQuiz) return;
+        if (finishingQuiz) {
+            return;
+        }
 
         const shouldRestart = await confirmAction({
             title: "確定要重新測驗？",
@@ -1077,7 +1213,18 @@
         }
 
         await savingSession;
-        await deleteSavedSession();
+
+        const deleted = await deleteSavedSession();
+
+        if (!deleted && await isSignedIn()) {
+            await showWarning(
+                "未完成紀錄尚未確認清除",
+                "系統未能確認舊進度已刪除，將開始新測驗。若個人中心仍顯示舊紀錄，請重新整理並檢查雲端資料。"
+            );
+        }
+
+        quizCompleted = false;
+        finishingQuiz = false;
 
         await startQuiz();
     });
