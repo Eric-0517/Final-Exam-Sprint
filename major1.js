@@ -20,6 +20,7 @@
     let sessionSaveQueue = Promise.resolve();
     let quizStartedAt = null;
     let restoringSession = false;
+    let quizSubmitted = false;
 
     function showScreen(id) {
         screens.forEach((screenId) => {
@@ -61,7 +62,11 @@
     }
 
     function saveSession() {
-        if (restoringSession || !quizQuestions.length) {
+        if (
+            restoringSession ||
+            quizSubmitted ||
+            !quizQuestions.length
+        ) {
             return Promise.resolve();
         }
 
@@ -80,7 +85,10 @@
             });
 
             if (result?.error || result?.saved === false) {
-                console.error("未完成測驗儲存失敗：", result.error || result);
+                console.error(
+                    "未完成測驗儲存失敗：",
+                    result.error || result
+                );
             }
         }).catch((error) => {
             console.error("未完成測驗儲存失敗：", error);
@@ -93,12 +101,43 @@
         const user = await getCurrentUser();
         const studyData = getStudyData();
 
-        if (!user || !studyData?.deleteSession) return;
+        if (!user) {
+            throw new Error("目前未登入，無法確認未完成測驗紀錄是否刪除。");
+        }
+
+        if (!studyData?.deleteSession) {
+            throw new Error("找不到刪除未完成測驗紀錄的功能。");
+        }
 
         const result = await studyData.deleteSession(SESSION_SUBJECT);
 
-        if (result?.error || result?.saved === false) {
+        if (
+            result === false ||
+            result?.error ||
+            result?.saved === false ||
+            result?.deleted === false
+        ) {
             throw new Error("刪除未完成測驗紀錄失敗。");
+        }
+
+        if (typeof studyData.getSession === "function") {
+            const remaining = await studyData.getSession(SESSION_SUBJECT);
+
+            if (remaining?.error) {
+                throw new Error("無法確認未完成測驗紀錄是否已刪除。");
+            }
+
+            const session = remaining?.data ||
+                remaining?.session ||
+                remaining;
+
+            if (
+                session &&
+                Array.isArray(session.question_ids) &&
+                session.question_ids.length > 0
+            ) {
+                throw new Error("刪除後仍存在未完成測驗紀錄。");
+            }
         }
     }
 
@@ -115,13 +154,19 @@
 
             const session = result?.data || result?.session || result;
 
-            if (!session || !Array.isArray(session.question_ids) ||
-                session.question_ids.length === 0) {
+            if (
+                !session ||
+                !Array.isArray(session.question_ids) ||
+                session.question_ids.length === 0
+            ) {
                 return false;
             }
 
             const questionMap = new Map(
-                questionBank.map((question) => [String(question.id), question])
+                questionBank.map((question) => [
+                    String(question.id),
+                    question
+                ])
             );
 
             const savedQuestions = session.question_ids
@@ -169,6 +214,8 @@
             );
 
             quizStartedAt = Date.now();
+            quizSubmitted = false;
+
             showScreen("quiz");
             renderQuestion();
 
@@ -197,8 +244,10 @@
         img.style.maxWidth = "100%";
         img.style.margin = "8px auto";
 
-        if (className === "option-image" ||
-            className === "review-option-image") {
+        if (
+            className === "option-image" ||
+            className === "review-option-image"
+        ) {
             img.style.maxWidth = "min(100%, 320px)";
             img.style.maxHeight = "180px";
         } else {
@@ -240,7 +289,8 @@
                     options,
                     optionImages: question.optionImages || {},
                     answer: String(question.answer || "")
-                        .trim().toUpperCase(),
+                        .trim()
+                        .toUpperCase(),
                     explanation: typeof question.explanation === "string"
                         ? question.explanation
                         : ""
@@ -265,6 +315,7 @@
             if ($("bankCount")) {
                 $("bankCount").textContent = "載入失敗";
             }
+
             console.error(error);
             alert("題庫載入失敗，請確認 major1.json 是否存在且格式正確。");
         }
@@ -276,9 +327,11 @@
             return;
         }
 
-        if (quizQuestions.length &&
+        if (
+            quizQuestions.length &&
             currentIndex >= 0 &&
-            $("quiz")?.classList.contains("active")) {
+            $("quiz")?.classList.contains("active")
+        ) {
             if (!confirm("確定要重新開始？目前作答內容將被取代。")) {
                 return;
             }
@@ -292,6 +345,7 @@
         userAnswers = new Array(quizQuestions.length).fill(null);
         currentIndex = 0;
         quizStartedAt = Date.now();
+        quizSubmitted = false;
 
         showScreen("quiz");
         renderQuestion();
@@ -324,6 +378,9 @@
                     document.baseURI
                 ).href;
                 imgEl.style.display = "block";
+                imgEl.onerror = () => {
+                    imgEl.style.display = "none";
+                };
             } else {
                 imgEl.removeAttribute("src");
                 imgEl.style.display = "none";
@@ -370,6 +427,8 @@
             }
 
             button.addEventListener("click", () => {
+                if (quizSubmitted) return;
+
                 userAnswers[currentIndex] = letter;
                 renderQuestion();
                 saveSession();
@@ -394,7 +453,15 @@
         const user = await getCurrentUser();
         const studyData = getStudyData();
 
-        if (!user || !studyData) return;
+        if (!user) {
+            alert("測驗已完成，但目前尚未登入，成績與錯題無法同步至雲端。");
+            return;
+        }
+
+        if (!studyData) {
+            alert("測驗已完成，但雲端同步模組尚未載入。");
+            return;
+        }
 
         const answerMap = makeAnswerMap();
         const duration = quizStartedAt
@@ -402,6 +469,8 @@
             : 0;
 
         const errors = [];
+        let attemptSaved = false;
+        let wrongSaved = false;
 
         try {
             if (typeof studyData.saveAttempt === "function") {
@@ -415,9 +484,15 @@
                     duration_seconds: duration
                 });
 
-                if (result?.error || result?.saved === false) {
-                    throw result.error || new Error("成績儲存失敗");
+                if (
+                    result === false ||
+                    result?.error ||
+                    result?.saved === false
+                ) {
+                    throw result?.error || new Error("成績儲存失敗");
                 }
+
+                attemptSaved = true;
             } else {
                 errors.push("找不到成績儲存功能");
             }
@@ -430,13 +505,21 @@
             if (typeof studyData.saveWrongQuestions === "function") {
                 const result = await studyData.saveWrongQuestions(
                     SUBJECT,
-                    quizQuestions,
+                    quizQuestions.filter((question, index) =>
+                        userAnswers[index] !== question.answer
+                    ),
                     answerMap
                 );
 
-                if (result?.error || result?.saved === false) {
-                    throw result.error || new Error("錯題儲存失敗");
+                if (
+                    result === false ||
+                    result?.error ||
+                    result?.saved === false
+                ) {
+                    throw result?.error || new Error("錯題儲存失敗");
                 }
+
+                wrongSaved = true;
             } else {
                 errors.push("找不到錯題儲存功能");
             }
@@ -456,13 +539,23 @@
 
         try {
             await deleteSession();
+
+            if (attemptSaved && wrongSaved) {
+                alert("測驗成績已儲存！");
+            }
         } catch (error) {
-            console.error(error);
-            alert("成績已處理，但未完成測驗紀錄未能刪除。");
+            console.error("刪除未完成測驗紀錄失敗：", error);
+            alert(
+                "成績與錯題已處理，但未完成測驗紀錄未能確認刪除。"
+            );
         }
     }
 
     async function finishQuiz() {
+        if (quizSubmitted) return;
+
+        quizSubmitted = true;
+
         const total = quizQuestions.length;
         let correct = 0;
 
@@ -526,6 +619,7 @@
                         "專一題目圖片",
                         "question-image"
                     );
+
                     if (qImg) item.appendChild(qImg);
                 }
 
@@ -540,7 +634,9 @@
                     p.appendChild(key);
 
                     p.appendChild(
-                        document.createTextNode(question.options[letter] || "")
+                        document.createTextNode(
+                            question.options[letter] || ""
+                        )
                     );
 
                     const image = createImage(
@@ -598,7 +694,11 @@
         } else if (action === "home") {
             showScreen("home");
         } else if (action === "quit") {
-            if (confirm("確定要退出測驗嗎？登入後會保留目前作答進度。")) {
+            if (
+                confirm(
+                    "確定要退出測驗嗎？登入後會保留目前作答進度。"
+                )
+            ) {
                 await saveSession();
                 showScreen("home");
             }
@@ -607,6 +707,8 @@
 
     if ($("prevBtn")) {
         $("prevBtn").addEventListener("click", async () => {
+            if (quizSubmitted) return;
+
             if (currentIndex > 0) {
                 currentIndex--;
                 renderQuestion();
@@ -617,7 +719,7 @@
 
     if ($("nextBtn")) {
         $("nextBtn").addEventListener("click", async () => {
-            if (!quizQuestions.length) return;
+            if (!quizQuestions.length || quizSubmitted) return;
 
             if (!userAnswers[currentIndex]) {
                 alert("請先選擇答案。");
