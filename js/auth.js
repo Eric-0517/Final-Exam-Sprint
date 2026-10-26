@@ -7,12 +7,14 @@
   let previousUserId = null;
   let loginAlertShown = false;
 
+  const LOGIN_ALERT_KEY = "auth_login_success_pending";
+
   function getClient() {
     return window.sb && window.sb.auth ? window.sb : null;
   }
 
   function showLoginSuccess() {
-    if (typeof window.Swal === "undefined") return;
+    if (typeof window.Swal !== "function") return;
 
     window.Swal.fire({
       icon: "success",
@@ -33,6 +35,7 @@
   function renderUser(user) {
     const loggedIn = Boolean(user);
     const metadata = user?.user_metadata || {};
+
     const displayName =
       metadata.full_name ||
       metadata.name ||
@@ -98,11 +101,7 @@
       }
     }
 
-    const hints = document.querySelectorAll(
-      ".nav-account-hint, #authHint"
-    );
-
-    hints.forEach(hint => {
+    document.querySelectorAll(".nav-account-hint, #authHint").forEach(hint => {
       hint.textContent = loggedIn
         ? "已登入：" + (user.email || displayName)
         : "登入後同步個人成績、錯題與收藏題型";
@@ -135,6 +134,8 @@
         window.location.pathname +
         window.location.search;
 
+      sessionStorage.setItem(LOGIN_ALERT_KEY, "true");
+
       const { error } = await client.auth.signInWithOAuth({
         provider: "google",
         options: { redirectTo }
@@ -142,8 +143,10 @@
 
       if (error) throw error;
     } catch (error) {
+      sessionStorage.removeItem(LOGIN_ALERT_KEY);
+
       console.error("Google 登入失敗：", error);
-      alert("Google 登入失敗：" + error.message);
+      alert("Google 登入失敗：" + (error.message || "請稍後再試。"));
 
       signingIn = false;
 
@@ -178,6 +181,7 @@
 
       if (error) throw error;
 
+      sessionStorage.removeItem(LOGIN_ALERT_KEY);
       renderUser(null);
       previousUserId = null;
 
@@ -199,7 +203,7 @@
       }
     } catch (error) {
       console.error("登出失敗：", error);
-      alert("登出失敗：" + error.message);
+      alert("登出失敗：" + (error.message || "請稍後再試。"));
     } finally {
       signingOut = false;
 
@@ -258,6 +262,16 @@
     renderUser(currentUser);
     previousUserId = currentUser?.id || null;
 
+    if (
+      currentUser &&
+      sessionStorage.getItem(LOGIN_ALERT_KEY) === "true"
+    ) {
+      sessionStorage.removeItem(LOGIN_ALERT_KEY);
+      loginAlertShown = true;
+      showLoginSuccess();
+      loginAlertShown = false;
+    }
+
     client.auth.onAuthStateChange((event, sessionNow) => {
       const user = sessionNow?.user || null;
       const currentUserId = user?.id || null;
@@ -267,15 +281,20 @@
       if (
         event === "SIGNED_IN" &&
         currentUserId &&
-        currentUserId !== previousUserId &&
-        !loginAlertShown
+        !loginAlertShown &&
+        sessionStorage.getItem(LOGIN_ALERT_KEY) === "true"
       ) {
+        sessionStorage.removeItem(LOGIN_ALERT_KEY);
         loginAlertShown = true;
 
         setTimeout(() => {
           showLoginSuccess();
           loginAlertShown = false;
-        }, 0);
+        }, 300);
+      }
+
+      if (event === "SIGNED_OUT") {
+        sessionStorage.removeItem(LOGIN_ALERT_KEY);
       }
 
       previousUserId = currentUserId;
