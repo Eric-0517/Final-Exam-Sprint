@@ -6,6 +6,7 @@
   let signingOut = false;
   let previousUserId = null;
   let loginAlertShown = false;
+  let initialized = false;
 
   const LOGIN_ALERT_KEY = "auth_login_success_pending";
 
@@ -13,16 +14,16 @@
     return window.sb && window.sb.auth ? window.sb : null;
   }
 
-  function showLoginSuccess() {
-    if (typeof window.Swal !== "function") return;
-
-    window.Swal.fire({
-      icon: "success",
-      title: "登入成功！",
-      showConfirmButton: false,
-      timer: 1500,
-      timerProgressBar: true
-    });
+  function showSuccess(title) {
+    if (typeof window.Swal === "function") {
+      window.Swal.fire({
+        icon: "success",
+        title,
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true
+      });
+    }
   }
 
   function setVisible(element, visible) {
@@ -182,6 +183,7 @@
       if (error) throw error;
 
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
+
       renderUser(null);
       previousUserId = null;
 
@@ -201,9 +203,21 @@
           }
         });
       }
+
+      showSuccess("登出成功！");
     } catch (error) {
       console.error("登出失敗：", error);
-      alert("登出失敗：" + (error.message || "請稍後再試。"));
+
+      if (typeof window.Swal === "function") {
+        window.Swal.fire({
+          icon: "error",
+          title: "登出失敗",
+          text: error.message || "請稍後再試。",
+          confirmButtonText: "確定"
+        });
+      } else {
+        alert("登出失敗：" + (error.message || "請稍後再試。"));
+      }
     } finally {
       signingOut = false;
 
@@ -214,9 +228,13 @@
   }
 
   async function initAuth() {
+    if (initialized) return;
+    initialized = true;
+
     const client = getClient();
 
     if (!client) {
+      initialized = false;
       console.error(
         "找不到 window.sb，請確認 Supabase SDK 與 js/supabase-client.js 的載入順序。"
       );
@@ -247,6 +265,34 @@
       }
     });
 
+    client.auth.onAuthStateChange((event, sessionNow) => {
+      const user = sessionNow?.user || null;
+      const currentUserId = user?.id || null;
+
+      renderUser(user);
+
+      if (event === "SIGNED_IN" && currentUserId) {
+        if (
+          sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
+          !loginAlertShown
+        ) {
+          sessionStorage.removeItem(LOGIN_ALERT_KEY);
+          loginAlertShown = true;
+
+          setTimeout(() => {
+            showSuccess("登入成功！");
+            loginAlertShown = false;
+          }, 300);
+        }
+      }
+
+      if (event === "SIGNED_OUT") {
+        sessionStorage.removeItem(LOGIN_ALERT_KEY);
+      }
+
+      previousUserId = currentUserId;
+    });
+
     const {
       data: { session },
       error
@@ -268,37 +314,12 @@
     ) {
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
       loginAlertShown = true;
-      showLoginSuccess();
-      loginAlertShown = false;
+
+      setTimeout(() => {
+        showSuccess("登入成功！");
+        loginAlertShown = false;
+      }, 300);
     }
-
-    client.auth.onAuthStateChange((event, sessionNow) => {
-      const user = sessionNow?.user || null;
-      const currentUserId = user?.id || null;
-
-      renderUser(user);
-
-      if (
-        event === "SIGNED_IN" &&
-        currentUserId &&
-        !loginAlertShown &&
-        sessionStorage.getItem(LOGIN_ALERT_KEY) === "true"
-      ) {
-        sessionStorage.removeItem(LOGIN_ALERT_KEY);
-        loginAlertShown = true;
-
-        setTimeout(() => {
-          showLoginSuccess();
-          loginAlertShown = false;
-        }, 300);
-      }
-
-      if (event === "SIGNED_OUT") {
-        sessionStorage.removeItem(LOGIN_ALERT_KEY);
-      }
-
-      previousUserId = currentUserId;
-    });
   }
 
   window.AuthUI = {
