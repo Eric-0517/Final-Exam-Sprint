@@ -2,9 +2,9 @@
   "use strict";
 
   const get = id => document.getElementById(id);
+
   let signingIn = false;
   let signingOut = false;
-  let previousUserId = null;
   let loginAlertShown = false;
   let initialized = false;
 
@@ -16,7 +16,7 @@
 
   function showSuccess(title) {
     if (typeof window.Swal === "function") {
-      window.Swal.fire({
+      return window.Swal.fire({
         icon: "success",
         title,
         showConfirmButton: false,
@@ -24,6 +24,22 @@
         timerProgressBar: true
       });
     }
+
+    return Promise.resolve();
+  }
+
+  function showError(title, message) {
+    if (typeof window.Swal === "function") {
+      return window.Swal.fire({
+        icon: "error",
+        title,
+        text: message,
+        confirmButtonText: "確定"
+      });
+    }
+
+    alert(title + "：" + message);
+    return Promise.resolve();
   }
 
   function setVisible(element, visible) {
@@ -147,8 +163,12 @@
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
 
       console.error("Google 登入失敗：", error);
-      alert("Google 登入失敗：" + (error.message || "請稍後再試。"));
 
+      await showError(
+        "登入失敗",
+        error.message || "請稍後再試。"
+      );
+    } finally {
       signingIn = false;
 
       buttons.forEach(button => {
@@ -185,7 +205,6 @@
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
 
       renderUser(null);
-      previousUserId = null;
 
       if (window.location.pathname.endsWith("/profile.html")) {
         const message = get("profileMessage");
@@ -204,20 +223,14 @@
         });
       }
 
-      showSuccess("登出成功！");
+      await showSuccess("登出成功！");
     } catch (error) {
       console.error("登出失敗：", error);
 
-      if (typeof window.Swal === "function") {
-        window.Swal.fire({
-          icon: "error",
-          title: "登出失敗",
-          text: error.message || "請稍後再試。",
-          confirmButtonText: "確定"
-        });
-      } else {
-        alert("登出失敗：" + (error.message || "請稍後再試。"));
-      }
+      await showError(
+        "登出失敗",
+        error.message || "請稍後再試。"
+      );
     } finally {
       signingOut = false;
 
@@ -229,17 +242,17 @@
 
   async function initAuth() {
     if (initialized) return;
-    initialized = true;
 
     const client = getClient();
 
     if (!client) {
-      initialized = false;
       console.error(
         "找不到 window.sb，請確認 Supabase SDK 與 js/supabase-client.js 的載入順序。"
       );
       return;
     }
+
+    initialized = true;
 
     [
       "googleLoginBtn",
@@ -266,12 +279,9 @@
     });
 
     client.auth.onAuthStateChange((event, sessionNow) => {
-      const user = sessionNow?.user || null;
-      const currentUserId = user?.id || null;
+      renderUser(sessionNow?.user || null);
 
-      renderUser(user);
-
-      if (event === "SIGNED_IN" && currentUserId) {
+      if (event === "SIGNED_IN" && sessionNow?.user) {
         if (
           sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
           !loginAlertShown
@@ -280,8 +290,9 @@
           loginAlertShown = true;
 
           setTimeout(() => {
-            showSuccess("登入成功！");
-            loginAlertShown = false;
+            showSuccess("登入成功！").finally(() => {
+              loginAlertShown = false;
+            });
           }, 300);
         }
       }
@@ -289,8 +300,6 @@
       if (event === "SIGNED_OUT") {
         sessionStorage.removeItem(LOGIN_ALERT_KEY);
       }
-
-      previousUserId = currentUserId;
     });
 
     const {
@@ -303,21 +312,20 @@
       return;
     }
 
-    const currentUser = session?.user || null;
-
-    renderUser(currentUser);
-    previousUserId = currentUser?.id || null;
+    renderUser(session?.user || null);
 
     if (
-      currentUser &&
-      sessionStorage.getItem(LOGIN_ALERT_KEY) === "true"
+      session?.user &&
+      sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
+      !loginAlertShown
     ) {
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
       loginAlertShown = true;
 
       setTimeout(() => {
-        showSuccess("登入成功！");
-        loginAlertShown = false;
+        showSuccess("登入成功！").finally(() => {
+          loginAlertShown = false;
+        });
       }, 300);
     }
   }
