@@ -4,9 +4,23 @@
   const get = id => document.getElementById(id);
   let signingIn = false;
   let signingOut = false;
+  let previousUserId = null;
+  let loginAlertShown = false;
 
   function getClient() {
     return window.sb && window.sb.auth ? window.sb : null;
+  }
+
+  function showLoginSuccess() {
+    if (typeof window.Swal === "undefined") return;
+
+    window.Swal.fire({
+      icon: "success",
+      title: "登入成功！",
+      showConfirmButton: false,
+      timer: 1500,
+      timerProgressBar: true
+    });
   }
 
   function setVisible(element, visible) {
@@ -27,7 +41,6 @@
 
     const avatarUrl = metadata.avatar_url || metadata.picture || "";
 
-    // 導覽列帳號
     const navUser = get("authUser");
     const navAvatar = get("authAvatar");
     const navName = get("authName");
@@ -54,7 +67,6 @@
       }
     }
 
-    // 個人中心頁面帳號
     const profileUser = get("profileUser");
     const profileAvatar = get("profileAvatar");
     const profileName = get("profileName");
@@ -132,7 +144,7 @@
     } catch (error) {
       console.error("Google 登入失敗：", error);
       alert("Google 登入失敗：" + error.message);
-    } finally {
+
       signingIn = false;
 
       buttons.forEach(button => {
@@ -167,6 +179,7 @@
       if (error) throw error;
 
       renderUser(null);
+      previousUserId = null;
 
       if (window.location.pathname.endsWith("/profile.html")) {
         const message = get("profileMessage");
@@ -240,10 +253,32 @@
       return;
     }
 
-    renderUser(session?.user || null);
+    const currentUser = session?.user || null;
 
-    client.auth.onAuthStateChange((_event, sessionNow) => {
-      renderUser(sessionNow?.user || null);
+    renderUser(currentUser);
+    previousUserId = currentUser?.id || null;
+
+    client.auth.onAuthStateChange((event, sessionNow) => {
+      const user = sessionNow?.user || null;
+      const currentUserId = user?.id || null;
+
+      renderUser(user);
+
+      if (
+        event === "SIGNED_IN" &&
+        currentUserId &&
+        currentUserId !== previousUserId &&
+        !loginAlertShown
+      ) {
+        loginAlertShown = true;
+
+        setTimeout(() => {
+          showLoginSuccess();
+          loginAlertShown = false;
+        }, 0);
+      }
+
+      previousUserId = currentUserId;
     });
   }
 
