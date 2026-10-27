@@ -1198,10 +1198,15 @@ body.nav-open {
   background: #fff;
 }
 
-.side-nav a .nav-exclusive-label > span:last-child {
+.side-nav a#exclusiveNavLink:not(.has-access)
+.nav-exclusive-label > span:last-child {
   opacity: 0.55;
 }
 
+.side-nav a#exclusiveNavLink.has-access
+.nav-exclusive-label > span:last-child {
+  opacity: 1;
+}
 
 .side-nav a .css-lock,
 .side-nav a .css-lock-shackle,
