@@ -138,27 +138,65 @@
     }));
   }
 
-  function initNavigation() {
-    const link = document.getElementById("exclusiveNavLink");
-    if (!link) return;
+ 
+function initNavigation() {
+  const link = document.getElementById("exclusiveNavLink");
 
-    link.addEventListener("click", handleExclusiveClick);
+  if (!link) {
+    console.error("[專屬教材] 找不到 #exclusiveNavLink，請檢查 index.html 的連結 ID。");
+    return;
+  }
 
-    getCurrentUser().then(async user => {
+  console.log("[專屬教材] 導覽列事件已綁定。");
+
+  link.addEventListener("click", async event => {
+    event.preventDefault();
+
+    console.log("[專屬教材] 已點擊連結。");
+
+    try {
+      const user = await getCurrentUser();
+
       if (!user) {
-        link.classList.remove("has-access");
+        await showMessage("無權限瀏覽", "請先使用 Google 帳號登入。", "warning");
         return;
       }
 
       const allowed = await hasAccess(user.id);
       link.classList.toggle("has-access", allowed);
-    });
+
+      if (allowed) {
+        window.location.href = EXCLUSIVE_URL;
+        return;
+      }
+
+      console.log("[專屬教材] 使用者沒有權限，顯示兌換碼視窗。");
+
+      const redeemed = await requestCode();
+
+      if (redeemed && await hasAccess(user.id)) {
+        window.location.href = EXCLUSIVE_URL;
+      }
+    } catch (error) {
+      console.error("[專屬教材] 權限檢查失敗：", error);
+      await showMessage("系統暫時無法使用", "請稍後再試，並確認網路連線。", "error");
+    }
+  });
+
+  async function refreshAccess() {
+    try {
+      const user = await getCurrentUser();
+      const allowed = user ? await hasAccess(user.id) : false;
+      link.classList.toggle("has-access", allowed);
+    } catch (error) {
+      link.classList.remove("has-access");
+      console.error("[專屬教材] 更新導覽列權限失敗：", error);
+    }
   }
 
-  if (location.pathname.endsWith("/exclusive.html") ||
-      location.pathname.endsWith("exclusive.html")) {
-    initExclusivePage();
-  } else {
-    initNavigation();
-  }
-})();
+  refreshAccess();
+
+  sb.auth.onAuthStateChange(() => {
+    refreshAccess();
+  });
+}
