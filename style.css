@@ -1198,8 +1198,11 @@ body.nav-open {
   background: #fff;
 }
 
-.side-nav a .nav-exclusive-label,
-.side-nav a .nav-exclusive-label span,
+.side-nav a .nav-exclusive-label > span:last-child {
+  opacity: 0.55;
+}
+
+
 .side-nav a .css-lock,
 .side-nav a .css-lock-shackle,
 .side-nav a .css-lock-body,
@@ -1207,6 +1210,7 @@ body.nav-open {
 .side-nav a .css-lock-keyhole::after {
   opacity: 1 !important;
 }
+
 
 .side-nav a .css-lock-shackle {
   border-color: #424242 !important;
@@ -1218,5 +1222,5 @@ body.nav-open {
 
 .side-nav a .css-lock-keyhole,
 .side-nav a .css-lock-keyhole::after {
-  background: #FFFFFF !important;
+  background: #ffffff !important;
 }
