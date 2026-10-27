@@ -1197,3 +1197,26 @@ body.nav-open {
   height: 3px;
   background: #fff;
 }
+
+.side-nav a .nav-exclusive-label,
+.side-nav a .nav-exclusive-label span,
+.side-nav a .css-lock,
+.side-nav a .css-lock-shackle,
+.side-nav a .css-lock-body,
+.side-nav a .css-lock-keyhole,
+.side-nav a .css-lock-keyhole::after {
+  opacity: 1 !important;
+}
+
+.side-nav a .css-lock-shackle {
+  border-color: #424242 !important;
+}
+
+.side-nav a .css-lock-body {
+  background: #424242 !important;
+}
+
+.side-nav a .css-lock-keyhole,
+.side-nav a .css-lock-keyhole::after {
+  background: #FFFFFF !important;
+}
