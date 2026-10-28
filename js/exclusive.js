@@ -88,7 +88,7 @@
 
     await showMessage(
       "開通成功",
-      data.message || "專屬學習資源權限已開通。",
+      data.message || "線上學習資源權限已開通。",
       "success"
     );
 
@@ -104,8 +104,8 @@
     }
 
     const result = await window.Swal.fire({
-      title: "開通專屬權限",
-      text: "請輸入你的專屬開通碼。",
+      title: "開通權限",
+      text: "請輸入你的開通碼。",
       input: "text",
       inputPlaceholder: "輸入開通碼",
       inputAttributes: {
@@ -151,7 +151,7 @@
       if (!user) {
         await showMessage(
           "無權限瀏覽",
-          "請先使用 Google 帳號登入，才能瀏覽專屬影音與教材。",
+          "請先使用 Google 帳號登入，才能瀏覽線上學習資源。",
           "warning"
         );
         return;
