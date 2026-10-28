@@ -1,4 +1,3 @@
-
 (() => {
   "use strict";
 
@@ -7,17 +6,19 @@
   const sb = window.sb;
 
   if (!sb) {
-    console.error("[專屬教材] Supabase 尚未初始化，請確認先載入 js/supabase-client.js。");
+    console.error("[專屬教材] Supabase 尚未初始化，請檢查 script 載入順序。");
     return;
   }
+
+  const isExclusivePage = () =>
+    /(^|\/)exclusive\.html$/.test(location.pathname);
+
+  let handlingClick = false;
 
   async function getCurrentUser() {
     const { data, error } = await sb.auth.getUser();
 
-    if (error) {
-      console.error("[專屬教材] 取得登入使用者失敗：", error.message);
-      return null;
-    }
+    if (error) throw error;
 
     return data.user || null;
   }
@@ -29,15 +30,12 @@
       .eq("user_id", userId)
       .maybeSingle();
 
-    if (error) {
-      console.error("[專屬教材] 讀取權限失敗：", error.message);
-      throw error;
-    }
+    if (error) throw error;
 
     return data?.has_access === true;
   }
 
-  function showMessage(title, message, icon = "info") {
+  async function showMessage(title, message, icon = "info") {
     if (window.Swal) {
       return window.Swal.fire({
         title,
@@ -51,7 +49,7 @@
     }
 
     alert(`${title}\n${message}`);
-    return Promise.resolve();
+    return { isConfirmed: true };
   }
 
   async function redeemCode(code) {
@@ -67,7 +65,7 @@
     });
 
     if (error) {
-      console.error("[專屬教材] 開通碼驗證失敗：", error.message);
+      console.error("[專屬教材] 開通碼驗證失敗：", error);
 
       await showMessage(
         "兌換失敗",
@@ -99,7 +97,7 @@
 
   async function requestCode() {
     if (!window.Swal) {
-      const code = window.prompt("請輸入開通碼");
+      const code = prompt("請輸入專屬開通碼：");
       if (!code?.trim()) return false;
 
       return redeemCode(code);
@@ -107,12 +105,12 @@
 
     const result = await window.Swal.fire({
       title: "開通專屬權限",
-      text: "此頁面僅限已開通帳號使用，請輸入開通碼。",
+      text: "請輸入你的專屬開通碼。",
       input: "text",
       inputPlaceholder: "輸入開通碼",
       inputAttributes: {
-        autocapitalize: "characters",
         autocomplete: "off",
+        autocapitalize: "characters",
         maxlength: "200"
       },
       showCancelButton: true,
@@ -122,13 +120,11 @@
         popup: "study-swal-popup"
       },
       inputValidator: value => {
-        if (!value?.trim()) {
-          return "請先輸入開通碼。";
-        }
+        if (!value?.trim()) return "請先輸入開通碼。";
       }
     });
 
-    if (!result.isConfirmed || !result.value) {
+    if (!result.isConfirmed || !result.value?.trim()) {
       return false;
     }
 
@@ -136,9 +132,18 @@
   }
 
   async function handleExclusiveClick(event) {
-    event.preventDefault();
+    const link = event.target instanceof Element
+      ? event.target.closest("#exclusiveNavLink")
+      : null;
 
-    const link = document.getElementById("exclusiveNavLink");
+    if (!link) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+
+    if (handlingClick) return;
+    handlingClick = true;
 
     try {
       const user = await getCurrentUser();
@@ -152,55 +157,46 @@
         return;
       }
 
-      const allowed = await hasAccess(user.id);
+      let allowed = await hasAccess(user.id);
 
-      if (link) {
+      link.classList.toggle("has-access", allowed);
+
+      if (!allowed) {
+        let confirmed = false;
+
+        if (window.Swal) {
+          const result = await window.Swal.fire({
+            title: "尚未開通",
+            text: "你目前沒有瀏覽權限，是否輸入開通碼？",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "輸入開通碼",
+            cancelButtonText: "取消",
+            customClass: {
+              popup: "study-swal-popup"
+            }
+          });
+
+          confirmed = result.isConfirmed;
+        } else {
+          confirmed = confirm("你目前沒有瀏覽權限，是否輸入開通碼？");
+        }
+
+        if (!confirmed) return;
+
+        const redeemed = await requestCode();
+        if (!redeemed) return;
+
+        allowed = await hasAccess(user.id);
         link.classList.toggle("has-access", allowed);
       }
 
       if (allowed) {
-        window.location.href = EXCLUSIVE_URL;
-        return;
-      }
-
-      if (window.Swal) {
-        const result = await window.Swal.fire({
-          title: "尚未開通",
-          text: "你目前沒有瀏覽權限，是否輸入開通碼？",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "輸入開通碼",
-          cancelButtonText: "取消",
-          customClass: {
-            popup: "study-swal-popup"
-          }
-        });
-
-        if (!result.isConfirmed) return;
-      } else {
-        const proceed = window.confirm(
-          "你目前沒有瀏覽權限，是否輸入開通碼？"
-        );
-
-        if (!proceed) return;
-      }
-
-      const redeemed = await requestCode();
-
-      if (!redeemed) return;
-
-      const updatedAccess = await hasAccess(user.id);
-
-      if (link) {
-        link.classList.toggle("has-access", updatedAccess);
-      }
-
-      if (updatedAccess) {
-        window.location.href = EXCLUSIVE_URL;
+        location.href = EXCLUSIVE_URL;
       } else {
         await showMessage(
           "尚未取得權限",
-          "目前尚未確認你的帳號已開通，請重新登入或稍後再試。",
+          "系統尚未確認你的帳號已開通，請稍後再試。",
           "warning"
         );
       }
@@ -209,25 +205,61 @@
 
       await showMessage(
         "系統暫時無法使用",
-        "權限檢查失敗，請稍後再試，並確認網路連線。",
+        "權限檢查失敗，請確認網路連線或稍後再試。",
         "error"
       );
+    } finally {
+      handlingClick = false;
     }
   }
 
+  async function refreshNavigationAccess() {
+    const link = document.getElementById("exclusiveNavLink");
+    if (!link) return;
+
+    try {
+      const user = await getCurrentUser();
+      const allowed = user ? await hasAccess(user.id) : false;
+
+      link.classList.toggle("has-access", allowed);
+    } catch (error) {
+      link.classList.remove("has-access");
+      console.error("[專屬教材] 更新導覽列權限失敗：", error);
+    }
+  }
+
+  function initNavigation() {
+    if (!document.getElementById("exclusiveNavLink")) {
+      console.error("[專屬教材] 找不到 #exclusiveNavLink，請檢查 index.html。");
+      return;
+    }
+
+    
+    document.addEventListener("click", handleExclusiveClick, true);
+
+    refreshNavigationAccess();
+
+    sb.auth.onAuthStateChange(() => {
+      refreshNavigationAccess();
+    });
+  }
+
   async function initExclusivePage() {
+    
+    document.documentElement.classList.remove("exclusive-authorized");
+
     try {
       const user = await getCurrentUser();
 
       if (!user) {
-        window.location.replace(HOME_URL);
+        location.replace(HOME_URL);
         return;
       }
 
       const allowed = await hasAccess(user.id);
 
       if (!allowed) {
-        window.location.replace(HOME_URL);
+        location.replace(HOME_URL);
         return;
       }
 
@@ -241,46 +273,20 @@
         })
       );
     } catch (error) {
-      console.error("[專屬教材] 頁面權限檢查失敗：", error);
-      window.location.replace(HOME_URL);
+      console.error("[專屬教材] 頁面權限驗證失敗：", error);
+      location.replace(HOME_URL);
     }
   }
 
-  function initNavigation() {
-    const link = document.getElementById("exclusiveNavLink");
-
-    if (!link) {
-      console.error(
-        "[專屬教材] 找不到 #exclusiveNavLink，請檢查 index.html 的連結 ID。"
-      );
-      return;
-    }
-
-    link.addEventListener("click", handleExclusiveClick);
-
-    async function refreshAccess() {
-      try {
-        const user = await getCurrentUser();
-        const allowed = user ? await hasAccess(user.id) : false;
-
-        link.classList.toggle("has-access", allowed);
-      } catch (error) {
-        link.classList.remove("has-access");
-        console.error("[專屬教材] 更新導覽列權限失敗：", error);
-      }
-    }
-
-    refreshAccess();
-
-    sb.auth.onAuthStateChange(() => {
-      refreshAccess();
-    });
-  }
-
-  if (location.pathname.endsWith("/exclusive.html") ||
-      location.pathname.endsWith("exclusive.html")) {
+  if (isExclusivePage()) {
     initExclusivePage();
   } else {
-    initNavigation();
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initNavigation, {
+        once: true
+      });
+    } else {
+      initNavigation();
+    }
   }
 })();
