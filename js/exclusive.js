@@ -204,8 +204,7 @@
       console.error("[專屬教材] 點擊處理失敗：", error);
 
       await showMessage(
-        "系統暫時無法使用",
-        "權限檢查失敗，請確認網路連線或稍後再試。",
+        "請先登入",
         "error"
       );
     } finally {
