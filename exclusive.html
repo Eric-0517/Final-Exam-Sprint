@@ -1,71 +1,183 @@
-
 <!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
-  <title>考前衝刺｜專屬線上學習資源</title>
+  <title>考前衝刺｜線上學習資源</title>
+
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="exclusive.css">
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/exclusive.js" defer></script>
-  <style>
-    .exclusive-wrap {
-      width: min(1000px, calc(100% - 32px));
-      margin: 32px auto 56px;
-    }
-
-    .exclusive-card {
-      padding: 28px;
-      background: #fff;
-      border: 1px solid #e4e8f0;
-      border-radius: 18px;
-      box-shadow: var(--shadow);
-    }
-
-    .exclusive-card h1 {
-      margin-top: 0;
-      font-size: clamp(24px, 4vw, 32px);
-    }
-
-    .exclusive-empty {
-      padding: 20px;
-      border-radius: 12px;
-      background: #f4f6fb;
-      color: #687386;
-    }
-  </style>
+  <script src="js/exclusive-resources.js" defer></script>
 </head>
+
 <body>
   <header class="topbar">
     <a class="brand" href="index.html">考前衝刺</a>
-    <span class="sub">專屬線上學習資源</span>
+    <span class="sub">線上學習資源</span>
   </header>
 
-  <main class="exclusive-wrap">
-    <section class="exclusive-card">
-      <h1>專屬線上學習資源</h1>
-      <p>這裡提供已開通使用者的專屬學習資源。</p>
+  <button
+    type="button"
+    class="nav-toggle"
+    id="navToggle"
+    aria-label="開啟導覽選單"
+    aria-expanded="false"
+    aria-controls="sideNav"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
 
-      <div id="exclusiveContent" class="exclusive-empty">
-        載入中……
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <nav class="side-nav" id="sideNav" aria-hidden="true" inert>
+    <div class="side-nav-title">網站導覽</div>
+
+    <div class="side-nav-links">
+      <a href="index.html">首頁 <span>›</span></a>
+      <a href="studynotes.html">重點整理 <span>›</span></a>
+      <a
+        href="https://score-1.exchuan.com.tw/#"
+        target="_blank"
+        rel="noopener noreferrer"
+      >成績查詢 <span>›</span></a>
+      <a href="downloads.html">檔案下載 <span>›</span></a>
+      <a href="profile.html" id="profileNavLink" hidden>
+        個人中心 <span>›</span>
+      </a>
+    </div>
+
+    <div class="nav-account">
+      <div class="nav-account-title">個人帳號</div>
+
+      <div id="authUser" hidden>
+        <img
+          id="authAvatar"
+          alt="Google 頭像"
+          hidden
+          width="48"
+          height="48"
+        >
+        <div id="authName"></div>
+        <div id="authEmail"></div>
+
+        <button id="logoutBtn" type="button">
+          登出 Google 帳號
+        </button>
+      </div>
+
+      <button class="google-login-btn" id="googleLoginBtn" type="button">
+        <img
+          src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          alt=""
+        >
+        <span>使用 Google 登入</span>
+      </button>
+
+      <div class="nav-account-hint" id="authHint">
+        登入後同步個人成績、錯題與收藏題型
+      </div>
+    </div>
+  </nav>
+
+  <main class="exclusive-wrap">
+    <header class="exclusive-heading">
+      <h1>專屬影音與教材</h1>
+      <p>集中管理專屬教學影片與學習檔案，方便隨時複習。</p>
+    </header>
+
+    <section class="exclusive-section" id="videos">
+      <div class="exclusive-section-header">
+        <div>
+          <h2>線上影片</h2>
+          <p>觀看教學影片，加強觀念與考試重點。</p>
+        </div>
+        <span class="exclusive-count">影音資源</span>
+      </div>
+
+      <div class="exclusive-grid" id="exclusiveVideoList">
+        <div class="exclusive-empty">正在載入影片……</div>
       </div>
     </section>
+
+    <section class="exclusive-section" id="downloads">
+      <div class="exclusive-section-header">
+        <div>
+          <h2>檔案下載</h2>
+          <p>下載講義、筆記、題庫與其他學習資料。</p>
+        </div>
+        <span class="exclusive-count">教材資源</span>
+      </div>
+
+      <div class="exclusive-grid" id="exclusiveFileList">
+        <div class="exclusive-empty">正在載入教材……</div>
+      </div>
+    </section>
+
+    <a class="exclusive-top-link" href="#">回到頁面頂端 ↑</a>
   </main>
 
-  <footer class="site-footer">
+  <footer class="exclusive-footer">
     <a href="index.html">返回首頁</a>
     <p>考前衝刺</p>
   </footer>
 
   <script>
-    document.addEventListener("exclusive-access-ready", () => {
-      const content = document.getElementById("exclusiveContent");
-      content.className = "";
-      content.textContent = "權限驗證成功。";
-    });
+    (() => {
+      "use strict";
+
+      const toggle = document.getElementById("navToggle");
+      const nav = document.getElementById("sideNav");
+      const overlay = document.getElementById("navOverlay");
+
+      if (!toggle || !nav || !overlay) {
+        console.error("找不到網站原本的導覽選單元件。");
+        return;
+      }
+
+      function setMenu(open) {
+        toggle.classList.toggle("active", open);
+        nav.classList.toggle("open", open);
+        overlay.classList.toggle("open", open);
+        document.body.classList.toggle("menu-open", open);
+
+        toggle.setAttribute("aria-expanded", String(open));
+        toggle.setAttribute(
+          "aria-label",
+          open ? "關閉導覽選單" : "開啟導覽選單"
+        );
+
+        nav.setAttribute("aria-hidden", String(!open));
+        nav.inert = !open;
+      }
+
+      toggle.addEventListener("click", () => {
+        setMenu(!nav.classList.contains("open"));
+      });
+
+      overlay.addEventListener("click", () => setMenu(false));
+
+      nav.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          if (link.getAttribute("href")?.startsWith("#")) {
+            setMenu(false);
+          }
+        });
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") setMenu(false);
+      });
+
+      setMenu(false);
+    })();
   </script>
 </body>
 </html>
