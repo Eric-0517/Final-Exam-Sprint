@@ -1231,8 +1231,6 @@ body.nav-open {
   background: #ffffff;
 }
 
-/*新加上*/
-/* 未開通：鎖頭顯示，文字淺灰色 */
 .side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
   display: inline-block !important;
 }
@@ -1242,7 +1240,7 @@ body.nav-open {
   opacity: 0.55 !important;
 }
 
-/* 已開通：隱藏鎖頭，文字改為深色 */
+
 .side-nav a#exclusiveNavLink.has-access .css-lock {
   display: none !important;
 }
