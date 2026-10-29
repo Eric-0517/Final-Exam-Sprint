@@ -1198,34 +1198,46 @@ body.nav-open {
   background: #fff;
 }
 
-.side-nav a#exclusiveNavLink:not(.has-access)
-.nav-exclusive-label > span:last-child {
+#exclusiveNavLink .css-lock {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+
+#exclusiveNavLink:not(.has-access) .css-lock {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
   opacity: 0.55;
 }
 
-.side-nav a#exclusiveNavLink.has-access
-.nav-exclusive-label > span:last-child {
+
+#exclusiveNavLink.has-access .css-lock {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+
+#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
   opacity: 1;
 }
 
-.side-nav a .css-lock,
-.side-nav a .css-lock-shackle,
-.side-nav a .css-lock-body,
-.side-nav a .css-lock-keyhole,
-.side-nav a .css-lock-keyhole::after {
-  opacity: 1 !important;
+
+#exclusiveNavLink .css-lock-shackle {
+  border-color: #424242;
+}
+
+#exclusiveNavLink .css-lock-body {
+  background: #424242;
 }
 
 
-.side-nav a .css-lock-shackle {
-  border-color: #424242 !important;
-}
-
-.side-nav a .css-lock-body {
-  background: #424242 !important;
-}
-
-.side-nav a .css-lock-keyhole,
-.side-nav a .css-lock-keyhole::after {
-  background: #ffffff !important;
+#exclusiveNavLink .css-lock-keyhole,
+#exclusiveNavLink .css-lock-keyhole::after {
+  background: #ffffff;
 }
