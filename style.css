@@ -1231,13 +1231,14 @@ body.nav-open {
   background: #ffffff;
 }
 
+
 .side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
   display: inline-block !important;
 }
 
 .side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
-  color: #424242 !important;
-  opacity: 0.55 !important;
+  color: #9E9E9E !important;
+  opacity: 1 !important;
 }
 
 
