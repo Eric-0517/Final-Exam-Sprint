@@ -322,6 +322,41 @@ body.menu-open {
   text-decoration: none;
 }
 
+
+#sideNav #exclusiveNavLink .nav-exclusive-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+
+#sideNav #exclusiveNavLink:not(.has-access) .css-lock {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  flex-shrink: 0;
+}
+
+#sideNav #exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
+  opacity: 0.55 !important;
+  transition: opacity .2s ease;
+}
+
+
+#sideNav #exclusiveNavLink.has-access .css-lock {
+  display: none !important;
+}
+
+#sideNav #exclusiveNavLink.has-access .nav-exclusive-label {
+  gap: 0;
+}
+
+#sideNav #exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
+  opacity: 1 !important;
+  transition: opacity .2s ease;
+}
+
 @media (max-width: 680px) {
   .exclusive-wrap {
     width: calc(100% - 24px);
@@ -345,50 +380,8 @@ body.menu-open {
   .exclusive-item,
   .exclusive-menu-toggle span,
   .exclusive-side-nav,
-  .exclusive-nav-overlay {
+  .exclusive-nav-overlay,
+  #sideNav #exclusiveNavLink .nav-exclusive-label > span:last-child {
     transition: none;
   }
-}
-
-.exclusive-side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
-  display: inline-block !important;
-  opacity: 1 !important;
-}
-
-.exclusive-side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
-  opacity: 0.55 !important;
-}
-
-
-.exclusive-side-nav a#exclusiveNavLink.has-access .css-lock {
-  display: none !important;
-}
-
-.exclusive-side-nav a#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
-  opacity: 1 !important;
-}
-
-
-#sideNav #exclusiveNavLink:not(.has-access) .css-lock {
-  display: inline-block !important;
-  opacity: 1 !important;
-  visibility: visible !important;
-}
-
-#sideNav #exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
-  opacity: 0.55 !important;
-}
-
-
-#sideNav #exclusiveNavLink.has-access .css-lock {
-  display: none !important;
-}
-
-#sideNav #exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
-  opacity: 1 !important;
-}
-
-
-#sideNav #exclusiveNavLink .nav-exclusive-label > span:last-child {
-  transition: opacity 0.2s ease;
 }
