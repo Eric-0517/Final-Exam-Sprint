@@ -14,6 +14,8 @@
     /(^|\/)exclusive\.html$/.test(location.pathname);
 
   let handlingClick = false;
+  let authSubscription = null;
+  let refreshSequence = 0;
 
   async function getCurrentUser() {
     const { data, error } = await sb.auth.getUser();
@@ -30,9 +32,37 @@
       .eq("user_id", userId)
       .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+      console.error("[專屬教材] 權限查詢失敗：", error);
+      throw error;
+    }
 
-    return data?.has_access === true;
+    const allowed = data?.has_access === true;
+
+    console.log("[專屬教材] 權限查詢結果：", {
+      userId,
+      hasAccess: allowed,
+      permissionData: data
+    });
+
+    return allowed;
+  }
+
+  function updateNavigationUI(link, allowed) {
+    if (!link) return;
+
+    link.classList.toggle("has-access", allowed === true);
+
+    console.log("[專屬教材] 導覽列已更新：", {
+      hasAccess: allowed === true,
+      className: link.className,
+      textOpacity: getComputedStyle(
+        link.querySelector(".nav-exclusive-label > span:last-child")
+      ).opacity,
+      lockDisplay: getComputedStyle(
+        link.querySelector(".css-lock")
+      ).display
+    });
   }
 
   async function showMessage(title, message, icon = "info") {
@@ -159,7 +189,7 @@
 
       let allowed = await hasAccess(user.id);
 
-      link.classList.toggle("has-access", allowed);
+      updateNavigationUI(link, allowed);
 
       if (!allowed) {
         let confirmed = false;
@@ -188,7 +218,8 @@
         if (!redeemed) return;
 
         allowed = await hasAccess(user.id);
-        link.classList.toggle("has-access", allowed);
+
+        updateNavigationUI(link, allowed);
       }
 
       if (allowed) {
@@ -204,8 +235,8 @@
       console.error("[專屬教材] 點擊處理失敗：", error);
 
       await showMessage(
-        "請先登入",
-        "尚未登入，請登入後再試。",
+        "尚未登入",
+        "目前無法確認帳號或權限，請登入後再試。",
         "error"
       );
     } finally {
@@ -214,38 +245,54 @@
   }
 
   async function refreshNavigationAccess() {
+    const sequence = ++refreshSequence;
     const link = document.getElementById("exclusiveNavLink");
+
     if (!link) return;
 
     try {
       const user = await getCurrentUser();
-      const allowed = user ? await hasAccess(user.id) : false;
 
-      link.classList.toggle("has-access", allowed);
+      if (sequence !== refreshSequence) return;
+
+      if (!user) {
+        updateNavigationUI(link, false);
+        return;
+      }
+
+      const allowed = await hasAccess(user.id);
+
+      if (sequence !== refreshSequence) return;
+
+      updateNavigationUI(link, allowed);
     } catch (error) {
-      link.classList.remove("has-access");
+      if (sequence !== refreshSequence) return;
+
+      updateNavigationUI(link, false);
       console.error("[專屬教材] 更新導覽列權限失敗：", error);
     }
   }
 
   function initNavigation() {
-    if (!document.getElementById("exclusiveNavLink")) {
+    const link = document.getElementById("exclusiveNavLink");
+
+    if (!link) {
       console.error("[專屬教材] 找不到 #exclusiveNavLink，請檢查 index.html。");
       return;
     }
 
-    
     document.addEventListener("click", handleExclusiveClick, true);
 
     refreshNavigationAccess();
 
-    sb.auth.onAuthStateChange(() => {
+    const { data } = sb.auth.onAuthStateChange(() => {
       refreshNavigationAccess();
     });
+
+    authSubscription = data?.subscription || null;
   }
 
   async function initExclusivePage() {
-    
     document.documentElement.classList.remove("exclusive-authorized");
 
     try {
