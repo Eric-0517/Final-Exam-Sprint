@@ -1140,8 +1140,6 @@ body.nav-open {
     font-weight: 600;
 }
 
-
-/* 專屬影音與教材：CSS 深灰色上鎖圖示 */
 .nav-exclusive-label {
   display: inline-flex;
   align-items: center;
@@ -1198,33 +1196,25 @@ body.nav-open {
   background: #fff;
 }
 
-#exclusiveNavLink .css-lock {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.2s ease, visibility 0.2s ease;
+
+.side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
+  opacity: 0.55 !important;
 }
 
 
-#exclusiveNavLink:not(.has-access) .css-lock {
-  opacity: 1;
-  visibility: visible;
+.side-nav a#exclusiveNavLink.has-access .css-lock {
+  display: none !important;
 }
 
 
-#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
-  opacity: 0.55;
-}
-
-
-#exclusiveNavLink.has-access .css-lock {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-
-#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
-  opacity: 1;
+.side-nav a#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
+  opacity: 1 !important;
 }
 
 
@@ -1235,7 +1225,6 @@ body.nav-open {
 #exclusiveNavLink .css-lock-body {
   background: #424242;
 }
-
 
 #exclusiveNavLink .css-lock-keyhole,
 #exclusiveNavLink .css-lock-keyhole::after {
