@@ -1230,3 +1230,26 @@ body.nav-open {
 #exclusiveNavLink .css-lock-keyhole::after {
   background: #ffffff;
 }
+
+/*新加上*/
+/* 未開通：鎖頭顯示，文字淺灰色 */
+.side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
+  display: inline-block !important;
+}
+
+.side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
+  color: #9ca3af !important;
+  opacity: 0.55 !important;
+}
+
+/* 已開通：隱藏鎖頭，文字改為深色 */
+.side-nav a#exclusiveNavLink.has-access .css-lock {
+  display: none !important;
+}
+
+.side-nav a#exclusiveNavLink.has-access .nav-exclusive-label,
+.side-nav a#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
+  color: #111827 !important;
+  opacity: 1 !important;
+  filter: none !important;
+}
