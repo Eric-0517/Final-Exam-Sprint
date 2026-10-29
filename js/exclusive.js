@@ -205,6 +205,7 @@
 
       await showMessage(
         "請先登入",
+        "尚未登入，請登入後再試。",
         "error"
       );
     } finally {
