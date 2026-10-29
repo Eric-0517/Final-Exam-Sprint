@@ -10,13 +10,6 @@
   <link rel="stylesheet" href="exclusive.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <style>
-    .side-nav-links a[hidden],
-    #profileNavLink[hidden] {
-      display: none !important;
-    }
-  </style>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/supabase-client.js"></script>
@@ -61,18 +54,20 @@
       >成績查詢 <span>›</span></a>
 
       <a href="downloads.html">檔案下載 <span>›</span></a>
-          <a href="exclusive.html" id="exclusiveNavLink">
-  <span class="nav-exclusive-label">
-    <span class="css-lock" aria-hidden="true">
-      <span class="css-lock-shackle"></span>
-      <span class="css-lock-body">
-        <span class="css-lock-keyhole"></span>
-      </span>
-    </span>
-    <span>專屬線上學習資源</span>
-  </span>
-  <span>›</span>
-</a>
+
+      <a href="exclusive.html" id="exclusiveNavLink">
+        <span class="nav-exclusive-label">
+          <span class="css-lock" aria-hidden="true">
+            <span class="css-lock-shackle"></span>
+            <span class="css-lock-body">
+              <span class="css-lock-keyhole"></span>
+            </span>
+          </span>
+          <span>專屬線上學習資源</span>
+        </span>
+        <span>›</span>
+      </a>
+
       <a href="profile.html" id="profileNavLink" hidden>
         個人中心 <span>›</span>
       </a>
@@ -155,6 +150,37 @@
     <p>聯絡方式(Gmail)：dev@eric0517.dpdns.org</p>
   </footer>
 
+  <!-- 影片播放器 -->
+  <div class="exclusive-video-modal" id="exclusiveVideoModal" hidden>
+    <div
+      class="exclusive-video-backdrop"
+      data-close-exclusive-video
+    ></div>
+
+    <div
+      class="exclusive-video-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="exclusiveVideoModalTitle"
+    >
+      <div class="exclusive-video-modal-header">
+        <h3 id="exclusiveVideoModalTitle">影片播放</h3>
+
+        <button
+          type="button"
+          class="exclusive-video-close"
+          id="exclusiveVideoClose"
+          aria-label="關閉播放器"
+        >×</button>
+      </div>
+
+      <div
+        class="exclusive-video-player"
+        id="exclusiveVideoPlayer"
+      ></div>
+    </div>
+  </div>
+
   <script>
     (() => {
       "use strict";
@@ -190,21 +216,22 @@
       }
 
       toggle.addEventListener("click", () => {
-        if (nav.classList.contains("open")) {
-          closeNav();
-        } else {
-          openNav();
-        }
+        nav.classList.contains("open") ? closeNav() : openNav();
       });
 
       overlay.addEventListener("click", closeNav);
 
-      document.addEventListener("keydown", event => {
-        if (event.key === "Escape") closeNav();
-      });
-
       nav.querySelectorAll("a").forEach(link => {
         link.addEventListener("click", closeNav);
+      });
+
+      document.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+          closeNav();
+          if (typeof window.closeExclusiveVideo === "function") {
+            window.closeExclusiveVideo();
+          }
+        }
       });
 
       closeNav();
