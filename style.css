@@ -1236,7 +1236,7 @@ body.nav-open {
 }
 
 .side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
-  color: #9ca3af !important;
+  color: #424242 !important;
   opacity: 0.55 !important;
 }
 
