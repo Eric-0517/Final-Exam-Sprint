@@ -349,3 +349,21 @@ body.menu-open {
     transition: none;
   }
 }
+
+.exclusive-side-nav a#exclusiveNavLink:not(.has-access) .css-lock {
+  display: inline-block !important;
+  opacity: 1 !important;
+}
+
+.exclusive-side-nav a#exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
+  opacity: 0.55 !important;
+}
+
+
+.exclusive-side-nav a#exclusiveNavLink.has-access .css-lock {
+  display: none !important;
+}
+
+.exclusive-side-nav a#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
+  opacity: 1 !important;
+}
