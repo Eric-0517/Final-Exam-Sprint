@@ -367,3 +367,28 @@ body.menu-open {
 .exclusive-side-nav a#exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
   opacity: 1 !important;
 }
+
+
+#sideNav #exclusiveNavLink:not(.has-access) .css-lock {
+  display: inline-block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+#sideNav #exclusiveNavLink:not(.has-access) .nav-exclusive-label > span:last-child {
+  opacity: 0.55 !important;
+}
+
+
+#sideNav #exclusiveNavLink.has-access .css-lock {
+  display: none !important;
+}
+
+#sideNav #exclusiveNavLink.has-access .nav-exclusive-label > span:last-child {
+  opacity: 1 !important;
+}
+
+
+#sideNav #exclusiveNavLink .nav-exclusive-label > span:last-child {
+  transition: opacity 0.2s ease;
+}
