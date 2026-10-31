@@ -12,6 +12,7 @@
     let currentVideoController = null;
     let resourceLoadPromise = null;
     let authSubscription = null;
+    let initialized = false;
 
     function showMessage(message, icon = "info") {
         if (window.Swal) {
@@ -107,9 +108,12 @@
     function renderVideoList(videos) {
         const container = $("exclusiveVideoList");
 
-        if (!container) return;
+        if (!container) {
+            console.error("[exclusive] 找不到 #exclusiveVideoList");
+            return;
+        }
 
-        if (!videos.length) {
+        if (!Array.isArray(videos) || videos.length === 0) {
             container.innerHTML = `
                 <div class="exclusive-empty">
                     目前沒有可觀看的影片
@@ -152,12 +156,17 @@
                 if (video) openVideo(video);
             });
         });
+
+        console.log("[exclusive] 影片清單已顯示：", videos.length);
     }
 
     async function loadDriveVideos() {
         const container = $("exclusiveVideoList");
 
-        if (!container) return;
+        if (!container) {
+            console.error("[exclusive] 找不到影片容器");
+            return;
+        }
 
         container.innerHTML = `
             <div class="exclusive-loading">
@@ -169,7 +178,10 @@
             const response = await driveRequest("/videos");
             const result = await response.json();
 
+            console.log("[exclusive] Google Drive 影片資料：", result);
+
             renderVideoList(result.videos || []);
+
         } catch (error) {
             console.error("[exclusive] 載入影片失敗：", error);
 
@@ -186,7 +198,10 @@
         const playerContainer = $("exclusiveVideoPlayer");
         const title = $("exclusiveVideoModalTitle");
 
-        if (!modal || !playerContainer) return;
+        if (!modal || !playerContainer) {
+            console.error("[exclusive] 找不到影片播放器");
+            return;
+        }
 
         closeVideo();
 
@@ -464,16 +479,25 @@
     }
 
     function initializeResources() {
+        if (initialized) return;
+
         const app = $("app");
 
-        if (!app) return;
+        if (!app) {
+            console.error("[exclusive] 找不到 #app");
+            return;
+        }
 
-        const start = () => {
+        initialized = true;
+
+        const start = async () => {
             if (!app.classList.contains("exclusive-authorized")) {
+                console.log("[exclusive] 尚未取得觀看權限");
                 return;
             }
 
-            loadResources();
+            console.log("[exclusive] 權限確認完成，開始載入資源");
+            await loadResources();
         };
 
         start();
@@ -484,19 +508,26 @@
         );
 
         if (window.sb?.auth) {
-            const { data } = window.sb.auth.onAuthStateChange(() => {
-                if (app.classList.contains("exclusive-authorized")) {
-                    loadResources();
-                } else {
-                    closeVideo();
+            const { data } = window.sb.auth.onAuthStateChange(
+                (event, session) => {
+                    setTimeout(() => {
+                        if (
+                            session &&
+                            app.classList.contains("exclusive-authorized")
+                        ) {
+                            loadResources();
+                        } else {
+                            closeVideo();
 
-                    const videos = $("exclusiveVideoList");
-                    const files = $("exclusiveFileList");
+                            const videos = $("exclusiveVideoList");
+                            const files = $("exclusiveFileList");
 
-                    if (videos) videos.innerHTML = "";
-                    if (files) files.innerHTML = "";
+                            if (videos) videos.innerHTML = "";
+                            if (files) files.innerHTML = "";
+                        }
+                    }, 0);
                 }
-            });
+            );
 
             authSubscription = data?.subscription || null;
         }
