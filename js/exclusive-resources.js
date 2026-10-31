@@ -626,7 +626,7 @@
       loadResources();
     }
 
-    window.addEventListener("exclusive-access-ready", () => {
+    document.addEventListener("exclusive-access-ready", () => {
       if (!resourcesLoaded) {
         loadResources();
       }
