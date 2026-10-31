@@ -726,7 +726,7 @@ button:disabled {
 }
 
 .side-nav a span {
-  opacity: 0.55;
+  opacity: 1;
 }
 
 body.nav-open {
@@ -850,8 +850,6 @@ body.nav-open {
   flex-shrink: 0;
 }
 
-
-/* ===== 個人中心 ===== */
 .profile-wrap {
   width: min(1000px, calc(100% - 32px));
   margin: 32px auto 56px;
