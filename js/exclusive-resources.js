@@ -306,6 +306,45 @@
             .replace(/\.(mp4|m4v|mov|mkv|webm|avi|mpeg|mpg)$/i, "");
     }
 
+    async function saveVideoWatchHistory(video) {
+        try {
+            if (!window.sb) return;
+
+            const {
+                data: { user },
+                error: userError
+            } = await window.sb.auth.getUser();
+
+            if (userError) throw userError;
+            if (!user) return;
+
+            const { error } = await window.sb
+                .from("video_watch_history")
+                .upsert({
+                    user_id: user.id,
+                    video_id: String(video.id),
+                    video_title: cleanVideoTitle(video.title),
+                    category: video.category || "線上影片",
+                    watched_at: new Date().toISOString()
+                }, {
+                    onConflict: "user_id,video_id"
+                });
+
+            if (error) throw error;
+
+            console.log(
+                "[exclusive] 觀看紀錄已儲存：",
+                video.title
+            );
+
+        } catch (error) {
+            console.error(
+                "[exclusive] 儲存觀看紀錄失敗：",
+                error
+            );
+        }
+    }
+
     function renderVideoList(videos) {
         const container = $("exclusiveVideoList");
 
@@ -351,7 +390,7 @@
         container.querySelectorAll("[data-play-video]").forEach(button => {
             button.addEventListener("click", () => {
                 const video = videos.find(
-                    item => item.id === button.dataset.playVideo
+                    item => String(item.id) === button.dataset.playVideo
                 );
 
                 if (video) openVideo(video);
@@ -449,6 +488,15 @@
             player.style.maxHeight = "75vh";
             player.style.display = "block";
             player.style.background = "#000";
+
+            let watchHistorySaved = false;
+
+            player.addEventListener("playing", () => {
+                if (watchHistorySaved) return;
+
+                watchHistorySaved = true;
+                saveVideoWatchHistory(video);
+            });
 
             player.addEventListener("loadedmetadata", () => {
                 console.log("[exclusive] 影片資訊載入完成", {
