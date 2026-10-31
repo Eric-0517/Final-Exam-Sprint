@@ -1,397 +1,259 @@
-(() => {
-  "use strict";
+let youtubePlayer = null;
+let youtubeApiReady = false;
+let pendingVideo = null;
 
-  const FILE_BUCKET = "exclusive-files";
-  const VIDEO_TABLE = "exclusive_videos";
-  const FILE_SIGNED_URL_SECONDS = 300;
-  const PAGE_SIZE = 100;
-
-  const sb = window.sb;
-  const $ = id => document.getElementById(id);
-
-  let isLoading = false;
-  let hasLoaded = false;
-
-  function formatName(filename) {
-    return filename.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
+function loadYouTubeAPI() {
+  if (window.YT && window.YT.Player) {
+    youtubeApiReady = true;
+    return Promise.resolve();
   }
 
-  function formatSize(bytes) {
-    if (!Number.isFinite(bytes) || bytes < 0) return "大小未知";
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    if (bytes < 1024 * 1024 * 1024) {
-      return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  return new Promise(resolve => {
+    if (window.onYouTubeIframeAPIReady) {
+      const previous = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        previous();
+        youtubeApiReady = true;
+        resolve();
+      };
+    } else {
+      window.onYouTubeIframeAPIReady = () => {
+        youtubeApiReady = true;
+        resolve();
+      };
     }
-    return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
-  }
 
-  function getExtension(filename) {
-    const index = filename.lastIndexOf(".");
-    return index >= 0 ? filename.slice(index + 1).toLowerCase() : "";
-  }
-
-  function showMessage(container, message) {
-    if (!container) return;
-
-    const element = document.createElement("div");
-    element.className = "exclusive-empty";
-    element.textContent = message;
-    container.replaceChildren(element);
-  }
-
-  async function withTimeout(promise, milliseconds, message) {
-    let timer;
-
-    try {
-      return await Promise.race([
-        promise,
-        new Promise((_, reject) => {
-          timer = setTimeout(() => reject(new Error(message)), milliseconds);
-        })
-      ]);
-    } finally {
-      clearTimeout(timer);
+    if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
+      const script = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(script);
     }
+  });
+}
+
+async function openVideo(video) {
+  const modal = $("exclusiveVideoModal");
+  const playerContainer = $("exclusiveVideoPlayer");
+  const title = $("exclusiveVideoModalTitle");
+
+  if (!modal || !playerContainer) return;
+
+  pendingVideo = video;
+  title.textContent = video.title || "影片播放";
+
+  modal.hidden = false;
+  document.body.classList.add("exclusive-video-open");
+
+  playerContainer.innerHTML = `
+    <div class="custom-youtube-player">
+      <div id="youtubePlayerFrame"></div>
+
+      <div class="custom-player-controls">
+        <button type="button" id="customPlayPause" aria-label="播放或暫停">
+          ▶
+        </button>
+
+        <span id="customCurrentTime">00:00</span>
+
+        <input
+          type="range"
+          id="customSeek"
+          min="0"
+          max="100"
+          value="0"
+          aria-label="影片進度"
+        >
+
+        <span id="customDuration">00:00</span>
+
+        <button type="button" id="customMute" aria-label="靜音">
+          音量
+        </button>
+      </div>
+    </div>
+  `;
+
+  await loadYouTubeAPI();
+
+  if (!modal || modal.hidden || pendingVideo !== video) return;
+
+  if (youtubePlayer) {
+    youtubePlayer.destroy();
+    youtubePlayer = null;
   }
 
-  async function listFiles(bucket) {
-    const files = [];
-    let offset = 0;
+  youtubePlayer = new YT.Player("youtubePlayerFrame", {
+    width: "100%",
+    height: "100%",
+    videoId: video.youtube_id,
+    playerVars: {
+      autoplay: 1,
+      controls: 0,
+      disablekb: 1,
+      fs: 0,
+      rel: 0,
+      playsinline: 1,
+      modestbranding: 1,
+      enablejsapi: 1
+    },
+    events: {
+      onReady: event => {
+        event.target.playVideo();
+        bindCustomControls();
+      },
+      onStateChange: event => {
+        const button = $("customPlayPause");
 
-    while (true) {
-      const result = await withTimeout(
-        sb.storage.from(bucket).list("", {
-          limit: PAGE_SIZE,
-          offset,
-          sortBy: { column: "name", order: "asc" }
-        }),
-        15000,
-        `讀取 ${bucket} 逾時，請檢查網路或 Supabase 設定。`
+        if (!button) return;
+
+        button.textContent =
+          event.data === YT.PlayerState.PLAYING ? "Ⅱ" : "▶";
+      }
+    }
+  });
+}
+
+function formatTime(seconds) {
+  if (!Number.isFinite(seconds)) return "00:00";
+
+  const minutes = Math.floor(seconds / 60);
+  const remaining = Math.floor(seconds % 60);
+
+  return `${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`;
+}
+
+function bindCustomControls() {
+  const playPause = $("customPlayPause");
+  const seek = $("customSeek");
+  const mute = $("customMute");
+
+  if (!playPause || !seek || !mute) return;
+
+  playPause.addEventListener("click", () => {
+    if (!youtubePlayer) return;
+
+    if (youtubePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
+      youtubePlayer.pauseVideo();
+    } else {
+      youtubePlayer.playVideo();
+    }
+  });
+
+  mute.addEventListener("click", () => {
+    if (!youtubePlayer) return;
+
+    if (youtubePlayer.isMuted()) {
+      youtubePlayer.unMute();
+      mute.textContent = "音量";
+    } else {
+      youtubePlayer.mute();
+      mute.textContent = "靜音";
+    }
+  });
+
+  seek.addEventListener("input", () => {
+    if (!youtubePlayer) return;
+
+    const duration = youtubePlayer.getDuration();
+
+    if (duration > 0) {
+      youtubePlayer.seekTo(
+        duration * Number(seek.value) / 100,
+        true
       );
+    }
+  });
 
-      const { data, error } = result;
+  if (window.youtubeProgressTimer) {
+    clearInterval(window.youtubeProgressTimer);
+  }
 
-      if (error) throw error;
-      if (!data || data.length === 0) break;
+  window.youtubeProgressTimer = setInterval(() => {
+    if (!youtubePlayer || !$("customSeek")) return;
 
-      files.push(
-        ...data.filter(file =>
-          file.name &&
-          !file.name.startsWith(".") &&
-          file.id
-        )
-      );
+    const duration = youtubePlayer.getDuration();
+    const current = youtubePlayer.getCurrentTime();
 
-      if (data.length < PAGE_SIZE) break;
-      offset += data.length;
+    if (duration > 0) {
+      $("customSeek").value = current / duration * 100;
     }
 
-    return files;
+    $("customCurrentTime").textContent = formatTime(current);
+    $("customDuration").textContent = formatTime(duration);
+  }, 500);
+}
+
+function closeVideo() {
+  const modal = $("exclusiveVideoModal");
+  const playerContainer = $("exclusiveVideoPlayer");
+
+  pendingVideo = null;
+
+  if (window.youtubeProgressTimer) {
+    clearInterval(window.youtubeProgressTimer);
+    window.youtubeProgressTimer = null;
   }
 
-  async function loadYouTubeVideos() {
-    const { data, error } = await withTimeout(
-      sb.from(VIDEO_TABLE)
-        .select("id,title,youtube_id,description,category,sort_order")
-        .eq("is_active", true)
-        .order("sort_order", { ascending: true }),
-      15000,
-      "讀取 YouTube 影片逾時，請檢查網路或 Supabase 設定。"
-    );
-
-    if (error) throw error;
-
-    return (data || []).filter(video =>
-      video.youtube_id &&
-      /^[a-zA-Z0-9_-]{11}$/.test(video.youtube_id)
-    );
+  if (youtubePlayer) {
+    youtubePlayer.destroy();
+    youtubePlayer = null;
   }
 
-  async function createFileUrl(filename) {
-    const { data, error } = await withTimeout(
-      sb.storage
-        .from(FILE_BUCKET)
-        .createSignedUrl(
-          filename,
-          FILE_SIGNED_URL_SECONDS,
-          { download: filename }
-        ),
-      15000,
-      `產生檔案網址逾時：${filename}`
-    );
-
-    if (error) throw error;
-    if (!data?.signedUrl) throw new Error("檔案下載網址產生失敗");
-
-    return data.signedUrl;
+  if (playerContainer) {
+    playerContainer.replaceChildren();
   }
 
-  function openVideo(video) {
-    const modal = $("exclusiveVideoModal");
-    const player = $("exclusiveVideoPlayer");
-    const title = $("exclusiveVideoModalTitle");
-
-    if (!modal || !player) return;
-
-    title.textContent = video.title || "影片播放";
-
-    const iframe = document.createElement("iframe");
-
-    iframe.src =
-      `https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.youtube_id)}` +
-      "?autoplay=1&rel=0&playsinline=1";
-
-    iframe.title = video.title || "YouTube 影片播放器";
-    iframe.allow =
-      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
-    iframe.allowFullscreen = true;
-    iframe.referrerPolicy = "strict-origin-when-cross-origin";
-
-    player.replaceChildren(iframe);
-
-    modal.hidden = false;
-    document.body.classList.add("exclusive-video-open");
-
-    $("exclusiveVideoClose")?.focus();
-  }
-
-  function closeVideo() {
-    const modal = $("exclusiveVideoModal");
-    const player = $("exclusiveVideoPlayer");
-
-    if (!modal) return;
-
-    if (player) {
-      player.replaceChildren();
-    }
-
+  if (modal) {
     modal.hidden = true;
-    document.body.classList.remove("exclusive-video-open");
   }
 
-  window.closeExclusiveVideo = closeVideo;
+  document.body.classList.remove("exclusive-video-open");
+}
 
-  function createVideoCard(video) {
-    const article = document.createElement("article");
-    article.className = "exclusive-item exclusive-youtube-item";
+window.closeExclusiveVideo = closeVideo;
 
-    const thumbnailButton = document.createElement("button");
-    thumbnailButton.type = "button";
-    thumbnailButton.className = "exclusive-youtube-thumbnail";
-    thumbnailButton.setAttribute(
-      "aria-label",
-      `播放影片：${video.title || "未命名影片"}`
-    );
+function createVideoCard(video) {
+  const article = document.createElement("article");
+  article.className = "exclusive-item";
 
-    const thumbnail = document.createElement("img");
-    thumbnail.src =
-      `https://img.youtube.com/vi/${encodeURIComponent(video.youtube_id)}/hqdefault.jpg`;
-    thumbnail.alt = "";
-    thumbnail.loading = "lazy";
+  const iconButton = document.createElement("button");
+  iconButton.type = "button";
+  iconButton.className = "exclusive-video-icon";
+  iconButton.setAttribute("aria-label", `播放影片：${video.title}`);
 
-    const playIcon = document.createElement("span");
-    playIcon.className = "exclusive-youtube-play";
-    playIcon.setAttribute("aria-hidden", "true");
-    playIcon.textContent = "▶";
+  const icon = document.createElement("img");
+  icon.src = "video.png";
+  icon.alt = "影片";
+  icon.loading = "lazy";
 
-    thumbnailButton.append(thumbnail, playIcon);
-    thumbnailButton.addEventListener("click", () => openVideo(video));
+  iconButton.appendChild(icon);
+  iconButton.addEventListener("click", () => openVideo(video));
 
-    const body = document.createElement("div");
-    body.className = "exclusive-item-body";
+  const body = document.createElement("div");
+  body.className = "exclusive-item-body";
 
-    const tag = document.createElement("span");
-    tag.className = "exclusive-tag";
-    tag.textContent = video.category || "線上影片";
+  const tag = document.createElement("span");
+  tag.className = "exclusive-tag";
+  tag.textContent = video.category || "線上影片";
 
-    const title = document.createElement("h3");
-    title.textContent = video.title || "未命名影片";
-
-    const description = document.createElement("p");
-    description.textContent = video.description || "觀看教學影片，加強觀念與考試重點。";
-
-    const playButton = document.createElement("button");
-    playButton.type = "button";
-    playButton.className = "exclusive-download-button";
-    playButton.textContent = "立即觀看";
-    playButton.addEventListener("click", () => openVideo(video));
-
-    body.append(tag, title, description, playButton);
-    article.append(thumbnailButton, body);
-
-    return article;
-  }
-
-  function createFileCard(file, url) {
-    const article = document.createElement("article");
-    article.className = "exclusive-item";
-
-    const preview = document.createElement("div");
-    preview.className = "exclusive-file-preview";
-    preview.setAttribute("aria-hidden", "true");
-
-    preview.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-           stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <path d="M14 2v6h6"/>
-        <path d="M8 13h8M8 17h8"/>
-      </svg>
-    `;
-
-    const body = document.createElement("div");
-    body.className = "exclusive-item-body";
-
-    const ext = getExtension(file.name).toUpperCase() || "FILE";
-
-    const tag = document.createElement("span");
-    tag.className = "exclusive-tag";
-    tag.textContent = `${ext} 教材`;
-
-    const title = document.createElement("h3");
-    title.textContent = formatName(file.name);
-
-    const description = document.createElement("p");
-    description.textContent = "檔案可下載。";
-
-    const actions = document.createElement("div");
-    actions.className = "exclusive-file-actions";
-
-    const size = document.createElement("span");
-    size.className = "exclusive-file-size";
-    size.textContent = formatSize(file.metadata?.size);
-
-    const download = document.createElement("a");
-    download.className = "exclusive-download-button";
-    download.href = url;
-    download.textContent = "下載檔案";
-    download.setAttribute("download", file.name);
-    download.rel = "noopener noreferrer";
-
-    actions.append(size, download);
-    body.append(tag, title, description, actions);
-    article.append(preview, body);
-
-    return article;
-  }
-
-  async function renderVideos() {
-    const container = $("exclusiveVideoList");
-    if (!container) return;
-
-    showMessage(container, "正在載入影片……");
-
-    try {
-      const videos = await loadYouTubeVideos();
-
-      if (!videos.length) {
-        showMessage(container, "目前尚無影片。");
-        return;
-      }
-
-      container.replaceChildren(
-        ...videos.map(createVideoCard)
-      );
-    } catch (error) {
-      console.error("[專屬教材] YouTube 影片載入失敗：", error);
-      showMessage(
-        container,
-        error.message || "影片載入失敗，請檢查 Supabase 資料表及權限。"
-      );
+  const title = document.createElement("h3");
+  title.textContent = video.title || "未命名影片";
+  title.tabIndex = 0;
+  title.className = "exclusive-video-title";
+  title.addEventListener("click", () => openVideo(video));
+  title.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openVideo(video);
     }
-  }
-
-  async function renderFiles() {
-    const container = $("exclusiveFileList");
-    if (!container) return;
-
-    showMessage(container, "正在載入教材……");
-
-    try {
-      const files = await listFiles(FILE_BUCKET);
-
-      if (!files.length) {
-        showMessage(container, "目前尚無檔案。");
-        return;
-      }
-
-      const cards = await Promise.all(
-        files.map(async file => {
-          try {
-            const url = await createFileUrl(file.name);
-            return createFileCard(file, url);
-          } catch (error) {
-            console.error(`[專屬教材] 無法載入檔案：${file.name}`, error);
-            return null;
-          }
-        })
-      );
-
-      const validCards = cards.filter(Boolean);
-
-      if (!validCards.length) {
-        showMessage(container, "檔案網址產生失敗，請檢查 Storage 權限及 Console 錯誤。");
-        return;
-      }
-
-      container.replaceChildren(...validCards);
-    } catch (error) {
-      console.error("[專屬教材] 檔案載入失敗：", error);
-      showMessage(
-        container,
-        error.message || "教材載入失敗，請檢查登入狀態、權限及網路連線。"
-      );
-    }
-  }
-
-  async function loadResources() {
-    if (isLoading || hasLoaded) return;
-
-    if (!sb) {
-      console.error("[專屬教材] Supabase 尚未初始化。");
-      showMessage($("exclusiveVideoList"), "Supabase 尚未初始化，請重新整理頁面。");
-      showMessage($("exclusiveFileList"), "Supabase 尚未初始化，請重新整理頁面。");
-      return;
-    }
-
-    const videoContainer = $("exclusiveVideoList");
-    const fileContainer = $("exclusiveFileList");
-
-    if (!videoContainer || !fileContainer) {
-      console.error("[專屬教材] 找不到影片或檔案容器，請檢查 HTML 的 ID。");
-      return;
-    }
-
-    isLoading = true;
-
-    try {
-      await Promise.all([
-        renderVideos(),
-        renderFiles()
-      ]);
-
-      hasLoaded = true;
-    } catch (error) {
-      console.error("[專屬教材] 資源載入失敗：", error);
-    } finally {
-      isLoading = false;
-    }
-  }
-
-  $("exclusiveVideoClose")?.addEventListener("click", closeVideo);
-
-  document.querySelectorAll("[data-close-exclusive-video]").forEach(element => {
-    element.addEventListener("click", closeVideo);
   });
 
-  document.addEventListener("keydown", event => {
-    if (event.key === "Escape") closeVideo();
-  });
+  const description = document.createElement("p");
+  description.textContent =
+    video.description || "目前就數學。";
 
-  document.addEventListener("exclusive-access-ready", loadResources);
+  body.append(tag, title, description);
+  article.append(iconButton, body);
 
-  if (document.documentElement.classList.contains("exclusive-authorized")) {
-    loadResources();
-  }
-})();
+  return article;
+}
