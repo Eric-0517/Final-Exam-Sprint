@@ -69,7 +69,7 @@
     </button>
 
     <div class="nav-account-hint">
-      登入後同步個人成績、錯題與收藏題型
+      登入後同步個人成績、錯題與觀看紀錄
     </div>
   </div>
 </nav>
@@ -89,7 +89,7 @@
     <div id="signedOut">
       <h1>登入個人帳號</h1>
       <p class="muted">
-        登入後可同步個人成績、錯題、收藏與未完成測驗。
+        登入後可同步個人成績、錯題、觀看紀錄與未完成測驗。
       </p>
     </div>
 
@@ -119,8 +119,8 @@
   </section>
 
   <section class="profile-section">
-    <h2>我的收藏</h2>
-    <div id="bookmarks"><div class="empty">載入中…</div></div>
+    <h2>觀看紀錄</h2>
+    <div id="watchHistory"><div class="empty">載入中…</div></div>
   </section>
 
   <section class="profile-section">
@@ -203,6 +203,13 @@
     if (element) element.textContent = text;
   };
 
+  function showEmpty(id, text) {
+    const element = $(id);
+    if (element) {
+      element.innerHTML = `<div class="empty">${esc(text)}</div>`;
+    }
+  }
+
   async function loadProfile() {
     if (!window.sb) return;
 
@@ -219,10 +226,8 @@
       $("signedOut").hidden = loggedIn;
 
       if (!loggedIn) {
-        ["attempts", "wrongQuestions", "bookmarks", "sessions"].forEach(id => {
-          $(id).innerHTML =
-            '<div class="empty">請先使用 Google 登入。</div>';
-        });
+        ["attempts", "wrongQuestions", "watchHistory", "sessions"]
+          .forEach(id => showEmpty(id, "請先使用 Google 登入。"));
         return;
       }
 
@@ -230,12 +235,12 @@
         throw new Error("StudyData 尚未載入。");
       }
 
-      const [attempts, wrong, bookmarks] = await Promise.all([
+      const [attempts, wrong] = await Promise.all([
         StudyData.getAttempts(),
-        StudyData.getWrongQuestions(),
-        StudyData.getBookmarks()
+        StudyData.getWrongQuestions()
       ]);
 
+      
       $("attempts").innerHTML = attempts.length ? `
         <table class="profile-table">
           <thead>
@@ -261,6 +266,7 @@
         </table>
       ` : '<div class="empty">目前還沒有成績紀錄。</div>';
 
+     
       $("wrongQuestions").innerHTML = wrong.length
         ? wrong.map(w => {
             const q = w.question_snapshot || {};
@@ -285,19 +291,34 @@
           }).join("")
         : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-      $("bookmarks").innerHTML = bookmarks.length
-        ? bookmarks.map(b => `
+      
+      const {
+        data: history,
+        error: historyError
+      } = await window.sb
+        .from("video_watch_history")
+        .select("id,video_id,video_title,category,watched_at")
+        .order("watched_at", { ascending: false })
+        .limit(100);
+
+      if (historyError) throw historyError;
+
+      $("watchHistory").innerHTML = history.length
+        ? history.map(item => `
             <div class="profile-item">
               <div class="profile-item-title">
-                ${esc(b.subject)}｜題目 ${esc(b.question_id)}
+                ${esc(item.video_title || "未命名影片")}
               </div>
               <div class="muted">
-                收藏時間：${esc(new Date(b.created_at).toLocaleString("zh-TW"))}
+                ${esc(item.category || "線上影片")}
+                ｜觀看時間：
+                ${esc(new Date(item.watched_at).toLocaleString("zh-TW"))}
               </div>
             </div>
           `).join("")
-        : '<div class="empty">目前沒有收藏題目。</div>';
+        : '<div class="empty">目前還沒有觀看紀錄。</div>';
 
+      
       const {
         data: sessions,
         error
@@ -326,12 +347,14 @@
         : '<div class="empty">目前沒有未完成測驗。</div>';
 
       msg("");
+
     } catch (error) {
       console.error("載入個人中心資料失敗：", error);
       msg("載入資料失敗，請確認登入狀態、Supabase 資料表與 RLS 設定。");
     }
   }
 
+  
   document.addEventListener("click", async event => {
     const target = event.target;
     if (!(target instanceof Element)) return;
@@ -351,6 +374,7 @@
 
       await StudyData.setMastered(id, !data.is_mastered);
       await loadProfile();
+
     } catch (error) {
       console.error("更新錯題狀態失敗：", error);
       msg("更新錯題狀態失敗。");
@@ -371,17 +395,21 @@
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initProfile, { once: true });
+    document.addEventListener("DOMContentLoaded", initProfile, {
+      once: true
+    });
   } else {
     initProfile();
   }
 })();
 </script>
+
 <footer class="site-footer">
   <a href="privacy.html">隱私權政策</a>
   <span>｜</span>
   <a href="terms.html">服務條款</a>
   <p>聯絡方式(Gmail)：dev@eric0517.dpdns.org</p>
 </footer>
+
 </body>
 </html>
