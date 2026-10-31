@@ -10,10 +10,12 @@
 
     let currentObjectUrl = null;
     let currentVideoController = null;
+    let resourceLoadPromise = null;
+    let authSubscription = null;
 
     function showMessage(message, icon = "info") {
         if (window.Swal) {
-            Swal.fire({
+            window.Swal.fire({
                 text: message,
                 icon,
                 confirmButtonText: "確定"
@@ -41,18 +43,26 @@
         return session;
     }
 
+    function getApiHeaders(session, extraHeaders = {}) {
+        const apiKey = window.SUPABASE_PUBLISHABLE_KEY;
+
+        if (!apiKey) {
+            throw new Error("找不到 Supabase Publishable Key");
+        }
+
+        return {
+            Authorization: `Bearer ${session.access_token}`,
+            apikey: apiKey,
+            ...extraHeaders
+        };
+    }
+
     async function driveRequest(path, options = {}) {
         const session = await getSession();
 
         const response = await fetch(`${DRIVE_API}${path}`, {
             ...options,
-            headers: {
-                "Authorization": `Bearer ${session.access_token}`,
-                "apikey": window.sb.supabaseKey ||
-                    window.SUPABASE_ANON_KEY ||
-                    "",
-                ...(options.headers || {})
-            }
+            headers: getApiHeaders(session, options.headers || {})
         });
 
         if (!response.ok) {
@@ -108,17 +118,19 @@
             return;
         }
 
-        container.innerHTML = videos.map((video, index) => `
+        container.innerHTML = videos.map(video => `
             <article class="exclusive-resource-card exclusive-video-card">
                 <div class="exclusive-resource-icon">
-                    <img src="video.png" alt="" onerror="this.style.display='none'">
+                    <img
+                        src="video.png"
+                        alt=""
+                        onerror="this.style.display='none'"
+                    >
                 </div>
 
                 <div class="exclusive-resource-info">
                     <h3>${escapeHTML(video.title)}</h3>
-                    <p>
-                        ${escapeHTML(formatSize(video.fileSize))}
-                    </p>
+                    <p>${escapeHTML(formatSize(video.fileSize))}</p>
                 </div>
 
                 <button
@@ -158,7 +170,6 @@
             const result = await response.json();
 
             renderVideoList(result.videos || []);
-
         } catch (error) {
             console.error("[exclusive] 載入影片失敗：", error);
 
@@ -217,27 +228,23 @@
                 </div>
             `;
 
-            
             const session = await getSession();
 
-            const streamResponse = await fetch(
-                ticketData.streamUrl,
-                {
-                    method: "GET",
-                    headers: {
-                        "Authorization": `Bearer ${session.access_token}`,
-                        "apikey": window.sb.supabaseKey ||
-                            window.SUPABASE_ANON_KEY ||
-                            ""
-                    },
-                    signal: controller.signal
-                }
-            );
+            const streamResponse = await fetch(ticketData.streamUrl, {
+                method: "GET",
+                headers: getApiHeaders(session),
+                signal: controller.signal
+            });
 
             if (!streamResponse.ok) {
-                throw new Error(
-                    `影片讀取失敗（${streamResponse.status}）`
-                );
+                let message = `影片讀取失敗（${streamResponse.status}）`;
+
+                try {
+                    const result = await streamResponse.json();
+                    message = result.error || message;
+                } catch (_) {}
+
+                throw new Error(message);
             }
 
             const blob = await streamResponse.blob();
@@ -250,36 +257,38 @@
 
             currentObjectUrl = URL.createObjectURL(blob);
 
-            playerContainer.innerHTML = `
-                <video
-                    id="exclusiveDrivePlayer"
-                    controls
-                    playsinline
-                    preload="metadata"
-                    controlsList="nodownload"
-                >
-                    <source
-                        src="${currentObjectUrl}"
-                        type="${escapeHTML(
-                            ticketData.file?.mimeType || "video/mp4"
-                        )}"
-                    >
-                    您的瀏覽器不支援影片播放。
-                </video>
-            `;
+            const player = document.createElement("video");
 
-            const player = $("exclusiveDrivePlayer");
+            player.id = "exclusiveDrivePlayer";
+            player.controls = true;
+            player.playsInline = true;
+            player.preload = "metadata";
+            player.setAttribute("controlsList", "nodownload");
+
+            const source = document.createElement("source");
+            source.src = currentObjectUrl;
+            source.type = ticketData.file?.mimeType || "video/mp4";
+
+            player.appendChild(source);
+
+            player.appendChild(
+                document.createTextNode("您的瀏覽器不支援影片播放。")
+            );
 
             player.addEventListener("error", () => {
-                showMessage("影片格式無法播放，請確認檔案是否為支援的 MP4 格式。", "error");
+                showMessage(
+                    "影片格式無法播放，請確認檔案是否為支援的 MP4 格式。",
+                    "error"
+                );
             });
+
+            playerContainer.innerHTML = "";
+            playerContainer.appendChild(player);
 
             const playResult = player.play();
 
             if (playResult && typeof playResult.catch === "function") {
-                playResult.catch(() => {
-                    
-                });
+                playResult.catch(() => {});
             }
 
         } catch (error) {
@@ -309,6 +318,11 @@
             if (player) {
                 player.pause();
                 player.removeAttribute("src");
+
+                player.querySelectorAll("source").forEach(source => {
+                    source.removeAttribute("src");
+                });
+
                 player.load();
             }
 
@@ -326,7 +340,6 @@
 
         document.body.style.overflow = "";
     }
-
 
     async function loadFiles() {
         const container = $("exclusiveFileList");
@@ -380,6 +393,7 @@
                             file.name,
                             error
                         );
+
                         return null;
                     }
 
@@ -392,6 +406,15 @@
             );
 
             const readyFiles = items.filter(Boolean);
+
+            if (!readyFiles.length) {
+                container.innerHTML = `
+                    <div class="exclusive-empty">
+                        目前沒有可下載的檔案
+                    </div>
+                `;
+                return;
+            }
 
             container.innerHTML = readyFiles.map(file => `
                 <article class="exclusive-resource-card">
@@ -427,13 +450,17 @@
         }
     }
 
-  
-
     async function loadResources() {
-        await Promise.all([
+        if (resourceLoadPromise) return resourceLoadPromise;
+
+        resourceLoadPromise = Promise.all([
             loadDriveVideos(),
             loadFiles()
-        ]);
+        ]).finally(() => {
+            resourceLoadPromise = null;
+        });
+
+        return resourceLoadPromise;
     }
 
     function initializeResources() {
@@ -456,19 +483,23 @@
             start
         );
 
-        window.sb?.auth?.onAuthStateChange(() => {
-            if (app.classList.contains("exclusive-authorized")) {
-                loadResources();
-            } else {
-                closeVideo();
+        if (window.sb?.auth) {
+            const { data } = window.sb.auth.onAuthStateChange(() => {
+                if (app.classList.contains("exclusive-authorized")) {
+                    loadResources();
+                } else {
+                    closeVideo();
 
-                const videos = $("exclusiveVideoList");
-                const files = $("exclusiveFileList");
+                    const videos = $("exclusiveVideoList");
+                    const files = $("exclusiveFileList");
 
-                if (videos) videos.innerHTML = "";
-                if (files) files.innerHTML = "";
-            }
-        });
+                    if (videos) videos.innerHTML = "";
+                    if (files) files.innerHTML = "";
+                }
+            });
+
+            authSubscription = data?.subscription || null;
+        }
 
         $("exclusiveVideoClose")?.addEventListener(
             "click",
