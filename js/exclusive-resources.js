@@ -138,9 +138,7 @@
 
     async function refreshVideoTicket(player) {
         if (refreshInProgress) return;
-
         if (!currentVideoId || !currentVideoController) return;
-
         if (currentVideoController.signal.aborted) return;
 
         const playerContainer = $("exclusiveVideoPlayer");
@@ -192,11 +190,6 @@
                 ) {
                     return;
                 }
-
-                player.removeEventListener(
-                    "loadedmetadata",
-                    restorePlayback
-                );
 
                 if (Number.isFinite(previousTime) && previousTime > 0) {
                     const targetTime = Math.min(
@@ -308,6 +301,11 @@
         })[char]);
     }
 
+    function cleanVideoTitle(filename) {
+        return String(filename || "")
+            .replace(/\.(mp4|m4v|mov|mkv|webm|avi|mpeg|mpg)$/i, "");
+    }
+
     function renderVideoList(videos) {
         const container = $("exclusiveVideoList");
 
@@ -336,7 +334,7 @@
                 </div>
 
                 <div class="exclusive-resource-info">
-                    <h3>${escapeHTML(video.title)}</h3>
+                    <h3>${escapeHTML(cleanVideoTitle(video.title))}</h3>
                     <p>${escapeHTML(formatSize(video.fileSize))}</p>
                 </div>
 
@@ -411,7 +409,9 @@
         modal.hidden = false;
         document.body.style.overflow = "hidden";
 
-        if (title) title.textContent = video.title;
+        if (title) {
+            title.textContent = cleanVideoTitle(video.title);
+        }
 
         playerContainer.innerHTML = `
             <div class="exclusive-player-loading">
@@ -431,7 +431,6 @@
             );
 
             if (controller.signal.aborted) return;
-
             if (currentVideoId !== video.id) return;
 
             currentStreamUrl = ticketData.streamUrl;
@@ -635,7 +634,11 @@
             container.innerHTML = readyFiles.map(file => `
                 <article class="exclusive-resource-card">
                     <div class="exclusive-resource-icon">
-                        <span>檔案</span>
+                        <img
+                            src="pdf.png"
+                            alt=""
+                            onerror="this.style.display='none'"
+                        >
                     </div>
 
                     <div class="exclusive-resource-info">
