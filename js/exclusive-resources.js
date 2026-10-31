@@ -8,7 +8,6 @@
 
     const $ = (id) => document.getElementById(id);
 
-    let currentObjectUrl = null;
     let currentVideoController = null;
     let resourceLoadPromise = null;
     let authSubscription = null;
@@ -71,7 +70,7 @@
 
             try {
                 const result = await response.json();
-                message = result.error || message;
+                message = result.error || result.message || message;
             } catch (_) {}
 
             throw new Error(message);
@@ -237,40 +236,7 @@
                 throw new Error("無法取得播放連線");
             }
 
-            playerContainer.innerHTML = `
-                <div class="exclusive-player-loading">
-                    正在載入影片，請稍候...
-                </div>
-            `;
-
-            const session = await getSession();
-
-            const streamResponse = await fetch(ticketData.streamUrl, {
-                method: "GET",
-                headers: getApiHeaders(session),
-                signal: controller.signal
-            });
-
-            if (!streamResponse.ok) {
-                let message = `影片讀取失敗（${streamResponse.status}）`;
-
-                try {
-                    const result = await streamResponse.json();
-                    message = result.error || message;
-                } catch (_) {}
-
-                throw new Error(message);
-            }
-
-            const blob = await streamResponse.blob();
-
             if (controller.signal.aborted) return;
-
-            if (!blob.size) {
-                throw new Error("影片內容是空的");
-            }
-
-            currentObjectUrl = URL.createObjectURL(blob);
 
             const player = document.createElement("video");
 
@@ -279,31 +245,63 @@
             player.playsInline = true;
             player.preload = "metadata";
             player.setAttribute("controlsList", "nodownload");
+            player.setAttribute("controls", "");
 
-            const source = document.createElement("source");
-            source.src = currentObjectUrl;
-            source.type = ticketData.file?.mimeType || "video/mp4";
+            player.style.width = "100%";
+            player.style.maxHeight = "75vh";
+            player.style.display = "block";
+            player.style.background = "#000";
 
-            player.appendChild(source);
-
-            player.appendChild(
-                document.createTextNode("您的瀏覽器不支援影片播放。")
-            );
+            player.addEventListener("loadedmetadata", () => {
+                console.log("[exclusive] 影片資訊載入完成", {
+                    duration: player.duration,
+                    width: player.videoWidth,
+                    height: player.videoHeight
+                });
+            });
 
             player.addEventListener("error", () => {
+                const mediaError = player.error;
+
+                console.error("[exclusive] 影片播放錯誤：", {
+                    code: mediaError?.code,
+                    message: mediaError?.message
+                });
+
                 showMessage(
-                    "影片格式無法播放，請確認檔案是否為支援的 MP4 格式。",
+                    "影片載入失敗，請重新開啟播放，或確認影片格式是否受瀏覽器支援。",
                     "error"
                 );
             });
 
+            player.addEventListener("waiting", () => {
+                console.log("[exclusive] 影片正在載入資料...");
+            });
+
+            player.addEventListener("canplay", () => {
+                console.log("[exclusive] 影片已可以播放");
+            });
+
+            player.addEventListener("seeking", () => {
+                console.log("[exclusive] 正在跳轉播放位置：", player.currentTime);
+            });
+
+            player.src = ticketData.streamUrl;
+
             playerContainer.innerHTML = "";
             playerContainer.appendChild(player);
+
+            player.load();
 
             const playResult = player.play();
 
             if (playResult && typeof playResult.catch === "function") {
-                playResult.catch(() => {});
+                playResult.catch(error => {
+                    console.log(
+                        "[exclusive] 瀏覽器未自動播放，請手動按播放鍵：",
+                        error.message
+                    );
+                });
             }
 
         } catch (error) {
@@ -333,20 +331,10 @@
             if (player) {
                 player.pause();
                 player.removeAttribute("src");
-
-                player.querySelectorAll("source").forEach(source => {
-                    source.removeAttribute("src");
-                });
-
                 player.load();
             }
 
             playerContainer.innerHTML = "";
-        }
-
-        if (currentObjectUrl) {
-            URL.revokeObjectURL(currentObjectUrl);
-            currentObjectUrl = null;
         }
 
         const modal = $("exclusiveVideoModal");
