@@ -683,3 +683,110 @@ body.menu-open {
     transition: none !important;
   }
 }
+
+
+
+/* 影片資源卡片 */
+.exclusive-video-icon {
+  width: 88px;
+  height: 88px;
+  min-width: 88px;
+  min-height: 88px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exclusive-video-icon img {
+  display: block;
+  width: 88px;
+  height: 88px;
+  object-fit: contain;
+}
+
+/* 影片播放器 */
+.custom-youtube-player {
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.custom-player-screen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+
+.custom-player-screen iframe,
+.custom-player-screen #youtubePlayerFrame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.custom-player-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #111827;
+  color: #fff;
+}
+
+.custom-player-controls button {
+  flex-shrink: 0;
+  min-width: 38px;
+  height: 36px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 6px;
+  background: #263449;
+  color: #fff;
+  cursor: pointer;
+}
+
+.custom-player-controls button:hover {
+  background: #3156d3;
+}
+
+.custom-player-controls span {
+  flex-shrink: 0;
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+#customSeek {
+  flex: 1;
+  min-width: 30px;
+  accent-color: #2563eb;
+  cursor: pointer;
+}
+
+@media (max-width: 520px) {
+  .custom-player-controls {
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .custom-player-controls button {
+    min-width: 32px;
+    height: 32px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+
+  .custom-player-controls span {
+    font-size: 10px;
+  }
+}
