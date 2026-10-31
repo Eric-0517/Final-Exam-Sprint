@@ -7,6 +7,7 @@
   let signingOut = false;
   let loginAlertShown = false;
   let initialized = false;
+  let permissionCheckId = 0;
 
   const LOGIN_ALERT_KEY = "auth_login_success_pending";
 
@@ -15,7 +16,7 @@
   }
 
   function showSuccess(title) {
-    if (typeof window.Swal === "function") {
+    if (window.Swal && typeof window.Swal.fire === "function") {
       return window.Swal.fire({
         icon: "success",
         title,
@@ -29,7 +30,7 @@
   }
 
   function showError(title, message) {
-    if (typeof window.Swal === "function") {
+    if (window.Swal && typeof window.Swal.fire === "function") {
       return window.Swal.fire({
         icon: "error",
         title,
@@ -125,6 +126,77 @@
     });
   }
 
+  function setExclusiveAccess(authorized) {
+    const app = get("app");
+    if (!app) return;
+
+    const wasAuthorized = app.classList.contains("exclusive-authorized");
+
+    app.classList.toggle("exclusive-authorized", authorized);
+
+    if (authorized) {
+      document.dispatchEvent(
+        new CustomEvent("exclusive-access-ready")
+      );
+    } else if (wasAuthorized) {
+      window.closeExclusiveVideo?.();
+
+      const videos = get("exclusiveVideoList");
+      const files = get("exclusiveFileList");
+
+      if (videos) videos.innerHTML = "";
+      if (files) files.innerHTML = "";
+    }
+  }
+
+  async function checkExclusivePermission(user) {
+    const checkId = ++permissionCheckId;
+
+    if (!user) {
+      setExclusiveAccess(false);
+      return false;
+    }
+
+    const client = getClient();
+
+    if (!client) {
+      setExclusiveAccess(false);
+      return false;
+    }
+
+    try {
+      const { data, error } = await client
+        .from("user_permissions")
+        .select("has_access")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (checkId !== permissionCheckId) return false;
+
+      if (error) throw error;
+
+      const authorized = data?.has_access === true;
+
+      setExclusiveAccess(authorized);
+
+      console.log(
+        "[auth] 專屬內容授權：",
+        authorized ? "已授權" : "未授權"
+      );
+
+      return authorized;
+
+    } catch (error) {
+      if (checkId !== permissionCheckId) return false;
+
+      console.error("[auth] 權限驗證失敗：", error);
+
+      setExclusiveAccess(false);
+
+      return false;
+    }
+  }
+
   async function signInWithGoogle() {
     const client = getClient();
 
@@ -159,6 +231,7 @@
       });
 
       if (error) throw error;
+
     } catch (error) {
       sessionStorage.removeItem(LOGIN_ALERT_KEY);
 
@@ -168,6 +241,7 @@
         "登入失敗",
         error.message || "請稍後再試。"
       );
+
     } finally {
       signingIn = false;
 
@@ -198,6 +272,10 @@
     });
 
     try {
+      ++permissionCheckId;
+
+      setExclusiveAccess(false);
+
       const { error } = await client.auth.signOut();
 
       if (error) throw error;
@@ -224,6 +302,7 @@
       }
 
       await showSuccess("登出成功！");
+
     } catch (error) {
       console.error("登出失敗：", error);
 
@@ -231,12 +310,40 @@
         "登出失敗",
         error.message || "請稍後再試。"
       );
+
     } finally {
       signingOut = false;
 
       buttons.forEach(button => {
         button.disabled = false;
       });
+    }
+  }
+
+  function handleLoginSuccess() {
+    if (
+      sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
+      !loginAlertShown
+    ) {
+      sessionStorage.removeItem(LOGIN_ALERT_KEY);
+      loginAlertShown = true;
+
+      setTimeout(() => {
+        showSuccess("登入成功！").finally(() => {
+          loginAlertShown = false;
+        });
+      }, 300);
+    }
+  }
+
+  async function syncSession(session) {
+    renderUser(session?.user || null);
+
+    if (session?.user) {
+      await checkExclusivePermission(session.user);
+    } else {
+      ++permissionCheckId;
+      setExclusiveAccess(false);
     }
   }
 
@@ -282,24 +389,16 @@
       renderUser(sessionNow?.user || null);
 
       if (event === "SIGNED_IN" && sessionNow?.user) {
-        if (
-          sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
-          !loginAlertShown
-        ) {
-          sessionStorage.removeItem(LOGIN_ALERT_KEY);
-          loginAlertShown = true;
-
-          setTimeout(() => {
-            showSuccess("登入成功！").finally(() => {
-              loginAlertShown = false;
-            });
-          }, 300);
-        }
+        handleLoginSuccess();
       }
 
       if (event === "SIGNED_OUT") {
         sessionStorage.removeItem(LOGIN_ALERT_KEY);
       }
+
+      setTimeout(() => {
+        syncSession(sessionNow);
+      }, 0);
     });
 
     const {
@@ -309,31 +408,22 @@
 
     if (error) {
       console.error("讀取登入狀態失敗：", error);
+      setExclusiveAccess(false);
       return;
     }
 
-    renderUser(session?.user || null);
+    await syncSession(session);
 
-    if (
-      session?.user &&
-      sessionStorage.getItem(LOGIN_ALERT_KEY) === "true" &&
-      !loginAlertShown
-    ) {
-      sessionStorage.removeItem(LOGIN_ALERT_KEY);
-      loginAlertShown = true;
-
-      setTimeout(() => {
-        showSuccess("登入成功！").finally(() => {
-          loginAlertShown = false;
-        });
-      }, 300);
+    if (session?.user) {
+      handleLoginSuccess();
     }
   }
 
   window.AuthUI = {
     init: initAuth,
     signInWithGoogle,
-    signOut
+    signOut,
+    checkExclusivePermission
   };
 
   if (document.readyState === "loading") {
