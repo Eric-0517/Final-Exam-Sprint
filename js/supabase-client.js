@@ -9,9 +9,8 @@
     return;
   }
 
-  if (SUPABASE_URL.includes("請填入") || SUPABASE_PUBLISHABLE_KEY.includes("請填入")) {
-    console.warn("請先設定 js/supabase-client.js 的 Supabase URL 與 Publishable Key。");
-  }
+  window.SUPABASE_URL = SUPABASE_URL;
+  window.SUPABASE_PUBLISHABLE_KEY = SUPABASE_PUBLISHABLE_KEY;
 
   window.sb = window.supabase.createClient(
     SUPABASE_URL,
