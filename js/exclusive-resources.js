@@ -1,3 +1,4 @@
+
 (() => {
   "use strict";
 
@@ -17,7 +18,6 @@
   function getSupabase() {
     if (window.sb) return window.sb;
     if (window.supabaseClient) return window.supabaseClient;
-
     throw new Error("找不到 Supabase Client，請確認 supabase-client.js 已正確載入。");
   }
 
@@ -33,38 +33,25 @@
 
   function showMessage(container, message) {
     if (!container) return;
-
-    container.innerHTML = `
-      <div class="exclusive-empty">
-        ${escapeHTML(message)}
-      </div>
-    `;
+    container.innerHTML = `<div class="exclusive-empty">${escapeHTML(message)}</div>`;
   }
 
   function loadYouTubeAPI() {
-    if (window.YT && window.YT.Player) {
-      return Promise.resolve();
-    }
-
-    if (youtubeApiPromise) {
-      return youtubeApiPromise;
-    }
+    if (window.YT?.Player) return Promise.resolve();
+    if (youtubeApiPromise) return youtubeApiPromise;
 
     youtubeApiPromise = new Promise((resolve, reject) => {
       let settled = false;
 
       const timeout = setTimeout(() => {
         if (settled) return;
-
         settled = true;
         youtubeApiPromise = null;
-
-        reject(new Error("YouTube 播放器 API 載入逾時，請檢查網路或瀏覽器是否封鎖 YouTube。"));
+        reject(new Error("YouTube 播放器 API 載入逾時。"));
       }, 20000);
 
       const finish = () => {
-        if (settled || !window.YT || !window.YT.Player) return;
-
+        if (settled || !window.YT?.Player) return;
         settled = true;
         clearTimeout(timeout);
         resolve();
@@ -74,13 +61,10 @@
 
       window.onYouTubeIframeAPIReady = function () {
         try {
-          if (typeof previousCallback === "function") {
-            previousCallback();
-          }
+          previousCallback?.();
         } catch (error) {
           console.error("原有 YouTube API callback 發生錯誤：", error);
         }
-
         finish();
       };
 
@@ -88,42 +72,32 @@
         const script = document.createElement("script");
         script.src = "https://www.youtube.com/iframe_api";
         script.async = true;
-
         script.onerror = () => {
           if (settled) return;
-
           settled = true;
           clearTimeout(timeout);
           youtubeApiPromise = null;
-
           reject(new Error("無法載入 YouTube 播放器 API。"));
         };
-
         document.head.appendChild(script);
       }
 
-      if (window.YT && window.YT.Player) {
-        finish();
-      }
+      if (window.YT?.Player) finish();
     });
 
     return youtubeApiPromise;
   }
 
   function formatTime(seconds) {
-    if (!Number.isFinite(seconds) || seconds < 0) {
-      return "00:00";
-    }
+    if (!Number.isFinite(seconds) || seconds < 0) return "00:00";
 
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
     const remaining = Math.floor(seconds % 60);
 
-    if (hours > 0) {
-      return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`;
-    }
-
-    return `${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`;
+    return hours > 0
+      ? `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`
+      : `${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`;
   }
 
   function updatePlayerControls() {
@@ -132,6 +106,7 @@
     const seek = $("customSeek");
     const currentTime = $("customCurrentTime");
     const durationText = $("customDuration");
+    const volume = $("customVolume");
 
     if (!seek || !currentTime || !durationText) return;
 
@@ -145,6 +120,10 @@
 
       currentTime.textContent = formatTime(current);
       durationText.textContent = formatTime(duration);
+
+      if (volume && document.activeElement !== volume) {
+        volume.value = String(youtubePlayer.getVolume());
+      }
     } catch (error) {
       console.warn("更新影片進度失敗：", error);
     }
@@ -156,13 +135,7 @@
     try {
       const current = youtubePlayer.getCurrentTime();
       const duration = youtubePlayer.getDuration();
-
-      const nextTime = Math.max(
-        0,
-        Math.min(duration, current + seconds)
-      );
-
-      youtubePlayer.seekTo(nextTime, true);
+      youtubePlayer.seekTo(Math.max(0, Math.min(duration, current + seconds)), true);
       updatePlayerControls();
     } catch (error) {
       console.warn("調整影片進度失敗：", error);
@@ -175,28 +148,24 @@
     const mute = $("customMute");
     const backward = $("customBackward");
     const forward = $("customForward");
+    const volume = $("customVolume");
+    const speed = $("customSpeed");
+    const fullscreen = $("customFullscreen");
 
     if (!playPause || !seek || !mute) return;
 
     playPause.addEventListener("click", () => {
       if (!youtubePlayer) return;
 
-      const state = youtubePlayer.getPlayerState();
-
-      if (state === YT.PlayerState.PLAYING) {
+      if (youtubePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
         youtubePlayer.pauseVideo();
       } else {
         youtubePlayer.playVideo();
       }
     });
 
-    backward?.addEventListener("click", () => {
-      seekVideo(-10);
-    });
-
-    forward?.addEventListener("click", () => {
-      seekVideo(10);
-    });
+    backward?.addEventListener("click", () => seekVideo(-10));
+    forward?.addEventListener("click", () => seekVideo(10));
 
     mute.addEventListener("click", () => {
       if (!youtubePlayer) return;
@@ -216,35 +185,45 @@
       if (!youtubePlayer) return;
 
       const duration = youtubePlayer.getDuration();
+      if (duration <= 0) return;
 
-      if (duration > 0) {
-        const target = duration * Number(seek.value) / 100;
+      const target = duration * Number(seek.value) / 100;
+      const currentTime = $("customCurrentTime");
 
-        const currentTime = $("customCurrentTime");
-
-        if (currentTime) {
-          currentTime.textContent = formatTime(target);
-        }
-      }
+      if (currentTime) currentTime.textContent = formatTime(target);
     });
 
     seek.addEventListener("change", () => {
       if (!youtubePlayer) return;
 
       const duration = youtubePlayer.getDuration();
-
       if (duration > 0) {
-        youtubePlayer.seekTo(
-          duration * Number(seek.value) / 100,
-          true
-        );
+        youtubePlayer.seekTo(duration * Number(seek.value) / 100, true);
       }
     });
 
-    if (youtubeProgressTimer) {
-      clearInterval(youtubeProgressTimer);
-    }
+    volume?.addEventListener("input", () => {
+      youtubePlayer?.setVolume(Number(volume.value));
+      if (Number(volume.value) > 0) youtubePlayer?.unMute();
+    });
 
+    speed?.addEventListener("change", () => {
+      youtubePlayer?.setPlaybackRate(Number(speed.value));
+    });
+
+    fullscreen?.addEventListener("click", () => {
+      const screen = document.querySelector(".custom-player-screen");
+
+      if (!screen) return;
+
+      if (document.fullscreenElement) {
+        document.exitFullscreen?.();
+      } else {
+        screen.requestFullscreen?.();
+      }
+    });
+
+    if (youtubeProgressTimer) clearInterval(youtubeProgressTimer);
     youtubeProgressTimer = setInterval(updatePlayerControls, 500);
   }
 
@@ -264,73 +243,51 @@
     }
 
     closeVideo();
-
     pendingVideo = video;
 
-    if (title) {
-      title.textContent = video.title || "影片播放";
-    }
+    if (title) title.textContent = video.title || "影片播放";
 
     modal.hidden = false;
     document.body.classList.add("exclusive-video-open");
 
     playerContainer.innerHTML = `
       <div class="custom-youtube-player">
-
         <div class="custom-player-screen">
           <div id="youtubePlayerFrame"></div>
+          <div class="custom-player-loading" id="customPlayerLoading">
+            正在載入影片...
+          </div>
         </div>
 
         <div class="custom-player-controls">
+          <div class="custom-player-progress">
+            <span id="customCurrentTime">00:00</span>
+            <input type="range" id="customSeek" min="0" max="100" step="0.1" value="0" aria-label="影片進度">
+            <span id="customDuration">00:00</span>
+          </div>
 
-          <button
-            type="button"
-            id="customBackward"
-            aria-label="後退10秒"
-            title="後退10秒"
-          >
-            -10
-          </button>
+          <div class="custom-player-toolbar">
+            <div class="custom-player-left">
+              <button type="button" id="customBackward" title="後退10秒">−10</button>
+              <button type="button" id="customPlayPause" aria-label="播放或暫停">▶</button>
+              <button type="button" id="customForward" title="前進10秒">+10</button>
+              <button type="button" id="customMute" aria-label="靜音">靜音</button>
+              <input type="range" id="customVolume" min="0" max="100" value="100" aria-label="音量">
+            </div>
 
-          <button
-            type="button"
-            id="customPlayPause"
-            aria-label="播放或暫停"
-          >
-            ▶
-          </button>
-
-          <button
-            type="button"
-            id="customForward"
-            aria-label="前進10秒"
-            title="前進10秒"
-          >
-            +10
-          </button>
-
-          <span id="customCurrentTime">00:00</span>
-
-          <input
-            type="range"
-            id="customSeek"
-            min="0"
-            max="100"
-            step="0.1"
-            value="0"
-            aria-label="影片進度"
-          >
-
-          <span id="customDuration">00:00</span>
-
-          <button
-            type="button"
-            id="customMute"
-            aria-label="靜音"
-          >
-            靜音
-          </button>
-
+            <div class="custom-player-right">
+              <select id="customSpeed" aria-label="播放速度">
+                <option value="0.5">0.5x</option>
+                <option value="0.75">0.75x</option>
+                <option value="1" selected>1.0x</option>
+                <option value="1.25">1.25x</option>
+                <option value="1.5">1.5x</option>
+                <option value="1.75">1.75x</option>
+                <option value="2">2.0x</option>
+              </select>
+              <button type="button" id="customFullscreen" aria-label="全螢幕">全螢幕</button>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -340,17 +297,10 @@
 
       if (modal.hidden || pendingVideo !== video) return;
 
-      if (youtubePlayer) {
-        youtubePlayer.destroy();
-        youtubePlayer = null;
-      }
-
       youtubePlayer = new YT.Player("youtubePlayerFrame", {
         width: "100%",
         height: "100%",
         videoId: video.youtube_id,
-
-        host: "https://www.youtube-nocookie.com",
 
         playerVars: {
           autoplay: 1,
@@ -360,7 +310,6 @@
           rel: 0,
           playsinline: 1,
           modestbranding: 1,
-          enablejsapi: 1,
           iv_load_policy: 3
         },
 
@@ -377,6 +326,8 @@
               iframe.setAttribute("allowfullscreen", "");
             }
 
+            $("customPlayerLoading")?.remove();
+            event.target.setVolume(100);
             event.target.playVideo();
 
             bindCustomControls();
@@ -415,7 +366,6 @@
 
     } catch (error) {
       console.error("播放器初始化失敗：", error);
-
       playerContainer.innerHTML = `
         <div class="exclusive-empty">
           ${escapeHTML(error.message || "播放器載入失敗")}
@@ -441,17 +391,11 @@
       } catch (error) {
         console.warn("關閉播放器時發生錯誤：", error);
       }
-
       youtubePlayer = null;
     }
 
-    if (playerContainer) {
-      playerContainer.replaceChildren();
-    }
-
-    if (modal) {
-      modal.hidden = true;
-    }
+    if (playerContainer) playerContainer.replaceChildren();
+    if (modal) modal.hidden = true;
 
     document.body.classList.remove("exclusive-video-open");
   }
@@ -465,19 +409,13 @@
     const iconButton = document.createElement("button");
     iconButton.type = "button";
     iconButton.className = "exclusive-video-icon";
-    iconButton.setAttribute(
-      "aria-label",
-      `播放影片：${video.title || "未命名影片"}`
-    );
+    iconButton.setAttribute("aria-label", `播放影片：${video.title || "未命名影片"}`);
 
     const icon = document.createElement("img");
     icon.src = "video.png";
     icon.alt = "影片";
     icon.loading = "lazy";
-
-    icon.onerror = () => {
-      icon.style.display = "none";
-    };
+    icon.onerror = () => icon.style.display = "none";
 
     iconButton.appendChild(icon);
     iconButton.addEventListener("click", () => openVideo(video));
@@ -545,17 +483,11 @@
         return;
       }
 
-      videos.forEach(video => {
-        container.appendChild(createVideoCard(video));
-      });
+      videos.forEach(video => container.appendChild(createVideoCard(video)));
 
     } catch (error) {
       console.error("影片列表載入失敗：", error);
-
-      showMessage(
-        container,
-        `影片載入失敗：${error.message || "未知錯誤"}`
-      );
+      showMessage(container, `影片載入失敗：${error.message || "未知錯誤"}`);
     }
   }
 
@@ -622,7 +554,6 @@
 
   async function loadFiles() {
     const container = $("exclusiveFileList");
-
     if (!container) return;
 
     showMessage(container, "正在載入教材...");
@@ -634,10 +565,7 @@
         .from(FILE_BUCKET)
         .list("", {
           limit: 100,
-          sortBy: {
-            column: "name",
-            order: "asc"
-          }
+          sortBy: { column: "name", order: "asc" }
         });
 
       if (error) throw error;
@@ -676,11 +604,7 @@
 
     } catch (error) {
       console.error("教材載入失敗：", error);
-
-      showMessage(
-        container,
-        `教材載入失敗：${error.message || "未知錯誤"}`
-      );
+      showMessage(container, `教材載入失敗：${error.message || "未知錯誤"}`);
     }
   }
 
@@ -690,13 +614,8 @@
     loadingResources = true;
 
     try {
-      await Promise.all([
-        loadYouTubeVideos(),
-        loadFiles()
-      ]);
-
+      await Promise.all([loadYouTubeVideos(), loadFiles()]);
       resourcesLoaded = true;
-
     } finally {
       loadingResources = false;
     }
@@ -710,17 +629,12 @@
     }
 
     document.querySelectorAll("[data-close-exclusive-video]")
-      .forEach(element => {
-        element.addEventListener("click", closeVideo);
-      });
+      .forEach(element => element.addEventListener("click", closeVideo));
 
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         const modal = $("exclusiveVideoModal");
-
-        if (modal && !modal.hidden) {
-          closeVideo();
-        }
+        if (modal && !modal.hidden) closeVideo();
       }
     });
   }
@@ -729,9 +643,7 @@
     initializeCloseEvents();
 
     document.addEventListener("exclusive-access-ready", () => {
-      if (!resourcesLoaded) {
-        loadResources();
-      }
+      if (!resourcesLoaded) loadResources();
     });
 
     if (document.documentElement.classList.contains("exclusive-authorized")) {
@@ -744,5 +656,4 @@
   } else {
     initializeResources();
   }
-
 })();
