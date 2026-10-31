@@ -1,659 +1,500 @@
-
 (() => {
-  "use strict";
+    "use strict";
 
-  const VIDEO_TABLE = "exclusive_videos";
-  const VIDEO_BUCKET = "exclusive-videos";
-  const FILE_BUCKET = "exclusive-files";
+    const DRIVE_API =
+        "https://hcegldjvhyrzfahkzmpp.supabase.co/functions/v1/drive-video";
 
-  const $ = id => document.getElementById(id);
+    const FILE_BUCKET = "exclusive-files";
 
-  let youtubePlayer = null;
-  let youtubeApiPromise = null;
-  let youtubeProgressTimer = null;
-  let pendingVideo = null;
-  let loadingResources = false;
-  let resourcesLoaded = false;
+    const $ = (id) => document.getElementById(id);
 
-  function getSupabase() {
-    if (window.sb) return window.sb;
-    if (window.supabaseClient) return window.supabaseClient;
-    throw new Error("找不到 Supabase Client，請確認 supabase-client.js 已正確載入。");
-  }
+    let currentObjectUrl = null;
+    let currentVideoController = null;
 
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, char => ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&#39;"
-    })[char]);
-  }
-
-  function showMessage(container, message) {
-    if (!container) return;
-    container.innerHTML = `<div class="exclusive-empty">${escapeHTML(message)}</div>`;
-  }
-
-  function loadYouTubeAPI() {
-    if (window.YT?.Player) return Promise.resolve();
-    if (youtubeApiPromise) return youtubeApiPromise;
-
-    youtubeApiPromise = new Promise((resolve, reject) => {
-      let settled = false;
-
-      const timeout = setTimeout(() => {
-        if (settled) return;
-        settled = true;
-        youtubeApiPromise = null;
-        reject(new Error("YouTube 播放器 API 載入逾時。"));
-      }, 20000);
-
-      const finish = () => {
-        if (settled || !window.YT?.Player) return;
-        settled = true;
-        clearTimeout(timeout);
-        resolve();
-      };
-
-      const previousCallback = window.onYouTubeIframeAPIReady;
-
-      window.onYouTubeIframeAPIReady = function () {
-        try {
-          previousCallback?.();
-        } catch (error) {
-          console.error("原有 YouTube API callback 發生錯誤：", error);
+    function showMessage(message, icon = "info") {
+        if (window.Swal) {
+            Swal.fire({
+                text: message,
+                icon,
+                confirmButtonText: "確定"
+            });
+        } else {
+            alert(message);
         }
-        finish();
-      };
-
-      if (!document.querySelector('script[src*="youtube.com/iframe_api"]')) {
-        const script = document.createElement("script");
-        script.src = "https://www.youtube.com/iframe_api";
-        script.async = true;
-        script.onerror = () => {
-          if (settled) return;
-          settled = true;
-          clearTimeout(timeout);
-          youtubeApiPromise = null;
-          reject(new Error("無法載入 YouTube 播放器 API。"));
-        };
-        document.head.appendChild(script);
-      }
-
-      if (window.YT?.Player) finish();
-    });
-
-    return youtubeApiPromise;
-  }
-
-  function formatTime(seconds) {
-    if (!Number.isFinite(seconds) || seconds < 0) return "00:00";
-
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remaining = Math.floor(seconds % 60);
-
-    return hours > 0
-      ? `${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`
-      : `${String(minutes).padStart(2, "0")}:${String(remaining).padStart(2, "0")}`;
-  }
-
-  function updatePlayerControls() {
-    if (!youtubePlayer) return;
-
-    const seek = $("customSeek");
-    const currentTime = $("customCurrentTime");
-    const durationText = $("customDuration");
-    const volume = $("customVolume");
-
-    if (!seek || !currentTime || !durationText) return;
-
-    try {
-      const duration = youtubePlayer.getDuration();
-      const current = youtubePlayer.getCurrentTime();
-
-      if (duration > 0 && !seek.matches(":active")) {
-        seek.value = String(current / duration * 100);
-      }
-
-      currentTime.textContent = formatTime(current);
-      durationText.textContent = formatTime(duration);
-
-      if (volume && document.activeElement !== volume) {
-        volume.value = String(youtubePlayer.getVolume());
-      }
-    } catch (error) {
-      console.warn("更新影片進度失敗：", error);
-    }
-  }
-
-  function seekVideo(seconds) {
-    if (!youtubePlayer) return;
-
-    try {
-      const current = youtubePlayer.getCurrentTime();
-      const duration = youtubePlayer.getDuration();
-      youtubePlayer.seekTo(Math.max(0, Math.min(duration, current + seconds)), true);
-      updatePlayerControls();
-    } catch (error) {
-      console.warn("調整影片進度失敗：", error);
-    }
-  }
-
-  function bindCustomControls() {
-    const playPause = $("customPlayPause");
-    const seek = $("customSeek");
-    const mute = $("customMute");
-    const backward = $("customBackward");
-    const forward = $("customForward");
-    const volume = $("customVolume");
-    const speed = $("customSpeed");
-    const fullscreen = $("customFullscreen");
-
-    if (!playPause || !seek || !mute) return;
-
-    playPause.addEventListener("click", () => {
-      if (!youtubePlayer) return;
-
-      if (youtubePlayer.getPlayerState() === YT.PlayerState.PLAYING) {
-        youtubePlayer.pauseVideo();
-      } else {
-        youtubePlayer.playVideo();
-      }
-    });
-
-    backward?.addEventListener("click", () => seekVideo(-10));
-    forward?.addEventListener("click", () => seekVideo(10));
-
-    mute.addEventListener("click", () => {
-      if (!youtubePlayer) return;
-
-      if (youtubePlayer.isMuted()) {
-        youtubePlayer.unMute();
-        mute.textContent = "靜音";
-        mute.setAttribute("aria-label", "靜音");
-      } else {
-        youtubePlayer.mute();
-        mute.textContent = "開啟音量";
-        mute.setAttribute("aria-label", "開啟音量");
-      }
-    });
-
-    seek.addEventListener("input", () => {
-      if (!youtubePlayer) return;
-
-      const duration = youtubePlayer.getDuration();
-      if (duration <= 0) return;
-
-      const target = duration * Number(seek.value) / 100;
-      const currentTime = $("customCurrentTime");
-
-      if (currentTime) currentTime.textContent = formatTime(target);
-    });
-
-    seek.addEventListener("change", () => {
-      if (!youtubePlayer) return;
-
-      const duration = youtubePlayer.getDuration();
-      if (duration > 0) {
-        youtubePlayer.seekTo(duration * Number(seek.value) / 100, true);
-      }
-    });
-
-    volume?.addEventListener("input", () => {
-      youtubePlayer?.setVolume(Number(volume.value));
-      if (Number(volume.value) > 0) youtubePlayer?.unMute();
-    });
-
-    speed?.addEventListener("change", () => {
-      youtubePlayer?.setPlaybackRate(Number(speed.value));
-    });
-
-    fullscreen?.addEventListener("click", () => {
-      const screen = document.querySelector(".custom-player-screen");
-
-      if (!screen) return;
-
-      if (document.fullscreenElement) {
-        document.exitFullscreen?.();
-      } else {
-        screen.requestFullscreen?.();
-      }
-    });
-
-    if (youtubeProgressTimer) clearInterval(youtubeProgressTimer);
-    youtubeProgressTimer = setInterval(updatePlayerControls, 500);
-  }
-
-  async function openVideo(video) {
-    const modal = $("exclusiveVideoModal");
-    const playerContainer = $("exclusiveVideoPlayer");
-    const title = $("exclusiveVideoModalTitle");
-
-    if (!modal || !playerContainer) {
-      console.error("找不到影片播放器 Modal，請確認 HTML 元素 ID。");
-      return;
     }
 
-    if (!video || !/^[a-zA-Z0-9_-]{11}$/.test(video.youtube_id || "")) {
-      alert("影片 ID 無效，請確認 Supabase 資料表中的 youtube_id。");
-      return;
-    }
-
-    closeVideo();
-    pendingVideo = video;
-
-    if (title) title.textContent = video.title || "影片播放";
-
-    modal.hidden = false;
-    document.body.classList.add("exclusive-video-open");
-
-    playerContainer.innerHTML = `
-      <div class="custom-youtube-player">
-        <div class="custom-player-screen">
-          <div id="youtubePlayerFrame"></div>
-          <div class="custom-player-loading" id="customPlayerLoading">
-            正在載入影片...
-          </div>
-        </div>
-
-        <div class="custom-player-controls">
-          <div class="custom-player-progress">
-            <span id="customCurrentTime">00:00</span>
-            <input type="range" id="customSeek" min="0" max="100" step="0.1" value="0" aria-label="影片進度">
-            <span id="customDuration">00:00</span>
-          </div>
-
-          <div class="custom-player-toolbar">
-            <div class="custom-player-left">
-              <button type="button" id="customBackward" title="後退10秒">−10</button>
-              <button type="button" id="customPlayPause" aria-label="播放或暫停">▶</button>
-              <button type="button" id="customForward" title="前進10秒">+10</button>
-              <button type="button" id="customMute" aria-label="靜音">靜音</button>
-              <input type="range" id="customVolume" min="0" max="100" value="100" aria-label="音量">
-            </div>
-
-            <div class="custom-player-right">
-              <select id="customSpeed" aria-label="播放速度">
-                <option value="0.5">0.5x</option>
-                <option value="0.75">0.75x</option>
-                <option value="1" selected>1.0x</option>
-                <option value="1.25">1.25x</option>
-                <option value="1.5">1.5x</option>
-                <option value="1.75">1.75x</option>
-                <option value="2">2.0x</option>
-              </select>
-              <button type="button" id="customFullscreen" aria-label="全螢幕">全螢幕</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
-
-    try {
-      await loadYouTubeAPI();
-
-      if (modal.hidden || pendingVideo !== video) return;
-
-      youtubePlayer = new YT.Player("youtubePlayerFrame", {
-        width: "100%",
-        height: "100%",
-        videoId: video.youtube_id,
-
-        playerVars: {
-          autoplay: 1,
-          controls: 0,
-          disablekb: 1,
-          fs: 0,
-          rel: 0,
-          playsinline: 1,
-          modestbranding: 1,
-          iv_load_policy: 3
-        },
-
-        events: {
-          onReady: event => {
-            if (pendingVideo !== video) return;
-
-            const iframe = event.target.getIframe();
-
-            if (iframe) {
-              iframe.setAttribute("title", video.title || "影片播放器");
-              iframe.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
-              iframe.setAttribute("allow", "autoplay; encrypted-media; picture-in-picture");
-              iframe.setAttribute("allowfullscreen", "");
-            }
-
-            $("customPlayerLoading")?.remove();
-            event.target.setVolume(100);
-            event.target.playVideo();
-
-            bindCustomControls();
-            updatePlayerControls();
-          },
-
-          onStateChange: event => {
-            if (pendingVideo !== video) return;
-
-            const button = $("customPlayPause");
-
-            if (button) {
-              button.textContent =
-                event.data === YT.PlayerState.PLAYING ? "Ⅱ" : "▶";
-            }
-
-            updatePlayerControls();
-          },
-
-          onError: event => {
-            console.error("YouTube 播放錯誤：", event.data);
-
-            const container = $("exclusiveVideoPlayer");
-
-            if (container) {
-              const errorMessage = document.createElement("div");
-              errorMessage.className = "exclusive-empty";
-              errorMessage.textContent =
-                `影片無法播放（錯誤代碼：${event.data}）。請確認影片允許嵌入播放。`;
-
-              container.appendChild(errorMessage);
-            }
-          }
+    async function getSession() {
+        if (!window.sb) {
+            throw new Error("Supabase 尚未初始化");
         }
-      });
 
-    } catch (error) {
-      console.error("播放器初始化失敗：", error);
-      playerContainer.innerHTML = `
-        <div class="exclusive-empty">
-          ${escapeHTML(error.message || "播放器載入失敗")}
-        </div>
-      `;
-    }
-  }
+        const { data, error } = await window.sb.auth.getSession();
 
-  function closeVideo() {
-    const modal = $("exclusiveVideoModal");
-    const playerContainer = $("exclusiveVideoPlayer");
+        if (error) throw error;
 
-    pendingVideo = null;
+        const session = data?.session;
 
-    if (youtubeProgressTimer) {
-      clearInterval(youtubeProgressTimer);
-      youtubeProgressTimer = null;
+        if (!session?.access_token) {
+            throw new Error("請先登入帳號");
+        }
+
+        return session;
     }
 
-    if (youtubePlayer) {
-      try {
-        youtubePlayer.destroy();
-      } catch (error) {
-        console.warn("關閉播放器時發生錯誤：", error);
-      }
-      youtubePlayer = null;
-    }
+    async function driveRequest(path, options = {}) {
+        const session = await getSession();
 
-    if (playerContainer) playerContainer.replaceChildren();
-    if (modal) modal.hidden = true;
-
-    document.body.classList.remove("exclusive-video-open");
-  }
-
-  window.closeExclusiveVideo = closeVideo;
-
-  function createVideoCard(video) {
-    const article = document.createElement("article");
-    article.className = "exclusive-item exclusive-video-card";
-
-    const iconButton = document.createElement("button");
-    iconButton.type = "button";
-    iconButton.className = "exclusive-video-icon";
-    iconButton.setAttribute("aria-label", `播放影片：${video.title || "未命名影片"}`);
-
-    const icon = document.createElement("img");
-    icon.src = "video.png";
-    icon.alt = "影片";
-    icon.loading = "lazy";
-    icon.onerror = () => icon.style.display = "none";
-
-    iconButton.appendChild(icon);
-    iconButton.addEventListener("click", () => openVideo(video));
-
-    const body = document.createElement("div");
-    body.className = "exclusive-item-body";
-
-    const tag = document.createElement("span");
-    tag.className = "exclusive-tag";
-    tag.textContent = video.category || "線上影片";
-
-    const title = document.createElement("h3");
-    title.className = "exclusive-video-title";
-    title.textContent = video.title || "未命名影片";
-    title.tabIndex = 0;
-    title.setAttribute("role", "button");
-
-    title.addEventListener("click", () => openVideo(video));
-
-    title.addEventListener("keydown", event => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        openVideo(video);
-      }
-    });
-
-    const description = document.createElement("p");
-    description.textContent = video.description || "線上教學影片";
-
-    body.append(tag, title, description);
-    article.append(iconButton, body);
-
-    return article;
-  }
-
-  async function loadYouTubeVideos() {
-    const container = $("exclusiveVideoList");
-
-    if (!container) {
-      console.error("找不到 exclusiveVideoList。");
-      return;
-    }
-
-    showMessage(container, "正在載入影片...");
-
-    try {
-      const supabase = getSupabase();
-
-      const { data, error } = await supabase
-        .from(VIDEO_TABLE)
-        .select("id,title,youtube_id,description,category,sort_order,is_active")
-        .eq("is_active", true)
-        .order("sort_order", { ascending: true });
-
-      if (error) throw error;
-
-      container.replaceChildren();
-
-      const videos = (data || []).filter(video =>
-        /^[a-zA-Z0-9_-]{11}$/.test(video.youtube_id || "")
-      );
-
-      if (videos.length === 0) {
-        showMessage(container, "目前沒有可觀看的影片。");
-        return;
-      }
-
-      videos.forEach(video => container.appendChild(createVideoCard(video)));
-
-    } catch (error) {
-      console.error("影片列表載入失敗：", error);
-      showMessage(container, `影片載入失敗：${error.message || "未知錯誤"}`);
-    }
-  }
-
-  function formatFileSize(bytes) {
-    if (!Number.isFinite(bytes) || bytes <= 0) return "大小未知";
-
-    const units = ["B", "KB", "MB", "GB"];
-    let size = bytes;
-    let index = 0;
-
-    while (size >= 1024 && index < units.length - 1) {
-      size /= 1024;
-      index++;
-    }
-
-    return `${size.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
-  }
-
-  function createFileCard(file, url) {
-    const article = document.createElement("article");
-    article.className = "exclusive-item";
-
-    const preview = document.createElement("div");
-    preview.className = "exclusive-file-preview";
-
-    preview.innerHTML = `
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"
-        aria-hidden="true">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <path d="M14 2v6h6"/>
-        <path d="M8 13h8M8 17h8"/>
-      </svg>
-    `;
-
-    const body = document.createElement("div");
-    body.className = "exclusive-item-body";
-
-    const title = document.createElement("h3");
-    title.textContent = file.name;
-
-    const description = document.createElement("p");
-    description.textContent = "專屬教材與學習資源";
-
-    const actions = document.createElement("div");
-    actions.className = "exclusive-file-actions";
-
-    const size = document.createElement("span");
-    size.className = "exclusive-file-size";
-    size.textContent = formatFileSize(file.metadata?.size);
-
-    const download = document.createElement("a");
-    download.className = "exclusive-download-button";
-    download.href = url;
-    download.download = file.name;
-    download.textContent = "下載檔案";
-
-    actions.append(size, download);
-    body.append(title, description, actions);
-    article.append(preview, body);
-
-    return article;
-  }
-
-  async function loadFiles() {
-    const container = $("exclusiveFileList");
-    if (!container) return;
-
-    showMessage(container, "正在載入教材...");
-
-    try {
-      const supabase = getSupabase();
-
-      const { data: files, error } = await supabase.storage
-        .from(FILE_BUCKET)
-        .list("", {
-          limit: 100,
-          sortBy: { column: "name", order: "asc" }
+        const response = await fetch(`${DRIVE_API}${path}`, {
+            ...options,
+            headers: {
+                "Authorization": `Bearer ${session.access_token}`,
+                "apikey": window.sb.supabaseKey ||
+                    window.SUPABASE_ANON_KEY ||
+                    "",
+                ...(options.headers || {})
+            }
         });
 
-      if (error) throw error;
+        if (!response.ok) {
+            let message = `請求失敗（${response.status}）`;
 
-      container.replaceChildren();
+            try {
+                const result = await response.json();
+                message = result.error || message;
+            } catch (_) {}
 
-      const validFiles = (files || []).filter(file =>
-        file.name &&
-        file.name !== ".emptyFolderPlaceholder" &&
-        !file.name.startsWith(".")
-      );
-
-      if (validFiles.length === 0) {
-        showMessage(container, "目前沒有可下載的教材。");
-        return;
-      }
-
-      for (const file of validFiles) {
-        const { data, error: urlError } = await supabase.storage
-          .from(FILE_BUCKET)
-          .createSignedUrl(file.name, 3600);
-
-        if (urlError) {
-          console.error(`取得檔案網址失敗：${file.name}`, urlError);
-          continue;
+            throw new Error(message);
         }
 
-        if (data?.signedUrl) {
-          container.appendChild(createFileCard(file, data.signedUrl));
+        return response;
+    }
+
+    function formatSize(bytes) {
+        if (!bytes || bytes <= 0) return "大小未知";
+
+        const units = ["B", "KB", "MB", "GB"];
+        let size = bytes;
+        let index = 0;
+
+        while (size >= 1024 && index < units.length - 1) {
+            size /= 1024;
+            index++;
         }
-      }
 
-      if (!container.children.length) {
-        showMessage(container, "目前沒有可下載的教材，或檔案權限不足。");
-      }
-
-    } catch (error) {
-      console.error("教材載入失敗：", error);
-      showMessage(container, `教材載入失敗：${error.message || "未知錯誤"}`);
-    }
-  }
-
-  async function loadResources() {
-    if (loadingResources || resourcesLoaded) return;
-
-    loadingResources = true;
-
-    try {
-      await Promise.all([loadYouTubeVideos(), loadFiles()]);
-      resourcesLoaded = true;
-    } finally {
-      loadingResources = false;
-    }
-  }
-
-  function initializeCloseEvents() {
-    const closeButton = $("exclusiveVideoClose");
-
-    if (closeButton) {
-      closeButton.addEventListener("click", closeVideo);
+        return `${size.toFixed(index === 0 ? 0 : 2)} ${units[index]}`;
     }
 
-    document.querySelectorAll("[data-close-exclusive-video]")
-      .forEach(element => element.addEventListener("click", closeVideo));
+    function escapeHTML(value) {
+        return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[char]);
+    }
 
-    document.addEventListener("keydown", event => {
-      if (event.key === "Escape") {
+    function renderVideoList(videos) {
+        const container = $("exclusiveVideoList");
+
+        if (!container) return;
+
+        if (!videos.length) {
+            container.innerHTML = `
+                <div class="exclusive-empty">
+                    目前沒有可觀看的影片
+                </div>
+            `;
+            return;
+        }
+
+        container.innerHTML = videos.map((video, index) => `
+            <article class="exclusive-resource-card exclusive-video-card">
+                <div class="exclusive-resource-icon">
+                    <img src="video.png" alt="" onerror="this.style.display='none'">
+                </div>
+
+                <div class="exclusive-resource-info">
+                    <h3>${escapeHTML(video.title)}</h3>
+                    <p>
+                        ${escapeHTML(formatSize(video.fileSize))}
+                    </p>
+                </div>
+
+                <button
+                    type="button"
+                    class="exclusive-resource-button"
+                    data-play-video="${escapeHTML(video.id)}"
+                >
+                    播放影片
+                </button>
+            </article>
+        `).join("");
+
+        container.querySelectorAll("[data-play-video]").forEach(button => {
+            button.addEventListener("click", () => {
+                const video = videos.find(
+                    item => item.id === button.dataset.playVideo
+                );
+
+                if (video) openVideo(video);
+            });
+        });
+    }
+
+    async function loadDriveVideos() {
+        const container = $("exclusiveVideoList");
+
+        if (!container) return;
+
+        container.innerHTML = `
+            <div class="exclusive-loading">
+                正在載入影片...
+            </div>
+        `;
+
+        try {
+            const response = await driveRequest("/videos");
+            const result = await response.json();
+
+            renderVideoList(result.videos || []);
+
+        } catch (error) {
+            console.error("[exclusive] 載入影片失敗：", error);
+
+            container.innerHTML = `
+                <div class="exclusive-error">
+                    ${escapeHTML(error.message)}
+                </div>
+            `;
+        }
+    }
+
+    async function openVideo(video) {
         const modal = $("exclusiveVideoModal");
-        if (modal && !modal.hidden) closeVideo();
-      }
-    });
-  }
+        const playerContainer = $("exclusiveVideoPlayer");
+        const title = $("exclusiveVideoModalTitle");
 
-  function initializeResources() {
-    initializeCloseEvents();
+        if (!modal || !playerContainer) return;
 
-    document.addEventListener("exclusive-access-ready", () => {
-      if (!resourcesLoaded) loadResources();
-    });
+        closeVideo();
 
-    if (document.documentElement.classList.contains("exclusive-authorized")) {
-      loadResources();
+        modal.hidden = false;
+        document.body.style.overflow = "hidden";
+
+        if (title) title.textContent = video.title;
+
+        playerContainer.innerHTML = `
+            <div class="exclusive-player-loading">
+                正在取得安全播放連線...
+            </div>
+        `;
+
+        const controller = new AbortController();
+        currentVideoController = controller;
+
+        try {
+            const ticketResponse = await driveRequest("/ticket", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fileId: video.id
+                }),
+                signal: controller.signal
+            });
+
+            const ticketData = await ticketResponse.json();
+
+            if (!ticketData.streamUrl) {
+                throw new Error("無法取得播放連線");
+            }
+
+            playerContainer.innerHTML = `
+                <div class="exclusive-player-loading">
+                    正在載入影片，請稍候...
+                </div>
+            `;
+
+            
+            const session = await getSession();
+
+            const streamResponse = await fetch(
+                ticketData.streamUrl,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${session.access_token}`,
+                        "apikey": window.sb.supabaseKey ||
+                            window.SUPABASE_ANON_KEY ||
+                            ""
+                    },
+                    signal: controller.signal
+                }
+            );
+
+            if (!streamResponse.ok) {
+                throw new Error(
+                    `影片讀取失敗（${streamResponse.status}）`
+                );
+            }
+
+            const blob = await streamResponse.blob();
+
+            if (controller.signal.aborted) return;
+
+            if (!blob.size) {
+                throw new Error("影片內容是空的");
+            }
+
+            currentObjectUrl = URL.createObjectURL(blob);
+
+            playerContainer.innerHTML = `
+                <video
+                    id="exclusiveDrivePlayer"
+                    controls
+                    playsinline
+                    preload="metadata"
+                    controlsList="nodownload"
+                >
+                    <source
+                        src="${currentObjectUrl}"
+                        type="${escapeHTML(
+                            ticketData.file?.mimeType || "video/mp4"
+                        )}"
+                    >
+                    您的瀏覽器不支援影片播放。
+                </video>
+            `;
+
+            const player = $("exclusiveDrivePlayer");
+
+            player.addEventListener("error", () => {
+                showMessage("影片格式無法播放，請確認檔案是否為支援的 MP4 格式。", "error");
+            });
+
+            const playResult = player.play();
+
+            if (playResult && typeof playResult.catch === "function") {
+                playResult.catch(() => {
+                    
+                });
+            }
+
+        } catch (error) {
+            if (error.name === "AbortError") return;
+
+            console.error("[exclusive] 播放失敗：", error);
+
+            playerContainer.innerHTML = `
+                <div class="exclusive-error">
+                    ${escapeHTML(error.message)}
+                </div>
+            `;
+        }
     }
-  }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initializeResources);
-  } else {
-    initializeResources();
-  }
+    function closeVideo() {
+        if (currentVideoController) {
+            currentVideoController.abort();
+            currentVideoController = null;
+        }
+
+        const playerContainer = $("exclusiveVideoPlayer");
+
+        if (playerContainer) {
+            const player = playerContainer.querySelector("video");
+
+            if (player) {
+                player.pause();
+                player.removeAttribute("src");
+                player.load();
+            }
+
+            playerContainer.innerHTML = "";
+        }
+
+        if (currentObjectUrl) {
+            URL.revokeObjectURL(currentObjectUrl);
+            currentObjectUrl = null;
+        }
+
+        const modal = $("exclusiveVideoModal");
+
+        if (modal) modal.hidden = true;
+
+        document.body.style.overflow = "";
+    }
+
+
+    async function loadFiles() {
+        const container = $("exclusiveFileList");
+
+        if (!container || !window.sb) return;
+
+        container.innerHTML = `
+            <div class="exclusive-loading">
+                正在載入檔案...
+            </div>
+        `;
+
+        try {
+            const { data: files, error } = await window.sb
+                .storage
+                .from(FILE_BUCKET)
+                .list("", {
+                    limit: 100,
+                    sortBy: {
+                        column: "name",
+                        order: "asc"
+                    }
+                });
+
+            if (error) throw error;
+
+            const validFiles = (files || []).filter(file =>
+                file.name &&
+                !file.name.startsWith(".")
+            );
+
+            if (!validFiles.length) {
+                container.innerHTML = `
+                    <div class="exclusive-empty">
+                        目前沒有可下載的檔案
+                    </div>
+                `;
+                return;
+            }
+
+            const items = await Promise.all(
+                validFiles.map(async file => {
+                    const { data, error } = await window.sb
+                        .storage
+                        .from(FILE_BUCKET)
+                        .createSignedUrl(file.name, 300);
+
+                    if (error) {
+                        console.error(
+                            "[exclusive] 檔案簽名失敗：",
+                            file.name,
+                            error
+                        );
+                        return null;
+                    }
+
+                    return {
+                        name: file.name,
+                        size: file.metadata?.size || 0,
+                        url: data.signedUrl
+                    };
+                })
+            );
+
+            const readyFiles = items.filter(Boolean);
+
+            container.innerHTML = readyFiles.map(file => `
+                <article class="exclusive-resource-card">
+                    <div class="exclusive-resource-icon">
+                        <span>檔案</span>
+                    </div>
+
+                    <div class="exclusive-resource-info">
+                        <h3>${escapeHTML(file.name)}</h3>
+                        <p>${escapeHTML(formatSize(file.size))}</p>
+                    </div>
+
+                    <a
+                        class="exclusive-resource-button"
+                        href="${escapeHTML(file.url)}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        download
+                    >
+                        下載檔案
+                    </a>
+                </article>
+            `).join("");
+
+        } catch (error) {
+            console.error("[exclusive] 載入檔案失敗：", error);
+
+            container.innerHTML = `
+                <div class="exclusive-error">
+                    ${escapeHTML(error.message)}
+                </div>
+            `;
+        }
+    }
+
+  
+
+    async function loadResources() {
+        await Promise.all([
+            loadDriveVideos(),
+            loadFiles()
+        ]);
+    }
+
+    function initializeResources() {
+        const app = $("app");
+
+        if (!app) return;
+
+        const start = () => {
+            if (!app.classList.contains("exclusive-authorized")) {
+                return;
+            }
+
+            loadResources();
+        };
+
+        start();
+
+        document.addEventListener(
+            "exclusive-access-ready",
+            start
+        );
+
+        window.sb?.auth?.onAuthStateChange(() => {
+            if (app.classList.contains("exclusive-authorized")) {
+                loadResources();
+            } else {
+                closeVideo();
+
+                const videos = $("exclusiveVideoList");
+                const files = $("exclusiveFileList");
+
+                if (videos) videos.innerHTML = "";
+                if (files) files.innerHTML = "";
+            }
+        });
+
+        $("exclusiveVideoClose")?.addEventListener(
+            "click",
+            closeVideo
+        );
+
+        document.querySelectorAll(
+            "[data-close-exclusive-video]"
+        ).forEach(element => {
+            element.addEventListener("click", closeVideo);
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") closeVideo();
+        });
+    }
+
+    window.closeExclusiveVideo = closeVideo;
+    window.loadExclusiveResources = loadResources;
+
+    if (document.readyState === "loading") {
+        document.addEventListener(
+            "DOMContentLoaded",
+            initializeResources
+        );
+    } else {
+        initializeResources();
+    }
 })();
