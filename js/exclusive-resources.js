@@ -6,9 +6,16 @@
 
     const FILE_BUCKET = "exclusive-files";
 
+    const TICKET_REFRESH_BEFORE = 300;
+    const TICKET_RETRY_DELAY = 30000;
+
     const $ = (id) => document.getElementById(id);
 
     let currentVideoController = null;
+    let currentVideoId = null;
+    let currentStreamUrl = null;
+    let ticketRefreshTimer = null;
+    let refreshInProgress = false;
     let resourceLoadPromise = null;
     let authSubscription = null;
     let initialized = false;
@@ -73,10 +80,207 @@
                 message = result.error || result.message || message;
             } catch (_) {}
 
-            throw new Error(message);
+            const error = new Error(message);
+            error.status = response.status;
+
+            throw error;
         }
 
         return response;
+    }
+
+    async function getVideoTicket(fileId, signal) {
+        const response = await driveRequest("/ticket", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                fileId
+            }),
+            signal
+        });
+
+        const result = await response.json();
+
+        if (!result.streamUrl) {
+            throw new Error("無法取得播放連線");
+        }
+
+        return result;
+    }
+
+    function clearTicketRefreshTimer() {
+        if (ticketRefreshTimer) {
+            clearTimeout(ticketRefreshTimer);
+            ticketRefreshTimer = null;
+        }
+    }
+
+    function scheduleTicketRefresh(ticketData, player) {
+        clearTicketRefreshTimer();
+
+        const expiresIn = Number(ticketData.expiresIn) || 1800;
+
+        const refreshSeconds = Math.max(
+            30,
+            expiresIn - TICKET_REFRESH_BEFORE
+        );
+
+        console.log(
+            `[exclusive] 將於 ${refreshSeconds} 秒後更新播放票券`
+        );
+
+        ticketRefreshTimer = setTimeout(() => {
+            refreshVideoTicket(player);
+        }, refreshSeconds * 1000);
+    }
+
+    async function refreshVideoTicket(player) {
+        if (refreshInProgress) return;
+
+        if (!currentVideoId || !currentVideoController) return;
+
+        if (currentVideoController.signal.aborted) return;
+
+        const playerContainer = $("exclusiveVideoPlayer");
+
+        if (
+            !playerContainer ||
+            playerContainer.querySelector("video") !== player
+        ) {
+            return;
+        }
+
+        refreshInProgress = true;
+
+        const videoId = currentVideoId;
+        const controller = currentVideoController;
+
+        try {
+            console.log("[exclusive] 開始更新播放票券");
+
+            const ticketData = await getVideoTicket(
+                videoId,
+                controller.signal
+            );
+
+            if (
+                controller.signal.aborted ||
+                currentVideoId !== videoId ||
+                currentVideoController !== controller ||
+                playerContainer.querySelector("video") !== player
+            ) {
+                return;
+            }
+
+            const previousTime = player.currentTime || 0;
+            const wasPlaying = !player.paused && !player.ended;
+
+            console.log("[exclusive] 播放票券更新成功");
+
+            currentStreamUrl = ticketData.streamUrl;
+
+            player.src = currentStreamUrl;
+            player.load();
+
+            const restorePlayback = () => {
+                if (
+                    controller.signal.aborted ||
+                    currentVideoId !== videoId ||
+                    playerContainer.querySelector("video") !== player
+                ) {
+                    return;
+                }
+
+                player.removeEventListener(
+                    "loadedmetadata",
+                    restorePlayback
+                );
+
+                if (Number.isFinite(previousTime) && previousTime > 0) {
+                    const targetTime = Math.min(
+                        previousTime,
+                        Number.isFinite(player.duration)
+                            ? Math.max(0, player.duration - 0.5)
+                            : previousTime
+                    );
+
+                    try {
+                        player.currentTime = targetTime;
+                    } catch (error) {
+                        console.warn(
+                            "[exclusive] 無法恢復播放位置：",
+                            error
+                        );
+                    }
+                }
+
+                if (wasPlaying) {
+                    const playResult = player.play();
+
+                    if (playResult?.catch) {
+                        playResult.catch(error => {
+                            console.warn(
+                                "[exclusive] 更新後無法自動恢復播放：",
+                                error.message
+                            );
+                        });
+                    }
+                }
+
+                console.log(
+                    "[exclusive] 已恢復播放位置：",
+                    player.currentTime
+                );
+            };
+
+            player.addEventListener(
+                "loadedmetadata",
+                restorePlayback,
+                { once: true }
+            );
+
+            scheduleTicketRefresh(ticketData, player);
+
+        } catch (error) {
+            if (error.name === "AbortError") return;
+
+            console.error(
+                "[exclusive] 更新播放票券失敗：",
+                error
+            );
+
+            if (
+                currentVideoId !== videoId ||
+                currentVideoController !== controller ||
+                controller.signal.aborted
+            ) {
+                return;
+            }
+
+            if (error.status === 401 || error.status === 403) {
+                clearTicketRefreshTimer();
+
+                showMessage(
+                    "登入或觀看權限已失效，請重新登入後再播放影片。",
+                    "warning"
+                );
+
+                return;
+            }
+
+            console.log("[exclusive] 將於 30 秒後重試更新票券");
+
+            clearTicketRefreshTimer();
+
+            ticketRefreshTimer = setTimeout(() => {
+                refreshVideoTicket(player);
+            }, TICKET_RETRY_DELAY);
+
+        } finally {
+            refreshInProgress = false;
+        }
     }
 
     function formatSize(bytes) {
@@ -216,27 +420,21 @@
         `;
 
         const controller = new AbortController();
+
         currentVideoController = controller;
+        currentVideoId = video.id;
 
         try {
-            const ticketResponse = await driveRequest("/ticket", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    fileId: video.id
-                }),
-                signal: controller.signal
-            });
-
-            const ticketData = await ticketResponse.json();
-
-            if (!ticketData.streamUrl) {
-                throw new Error("無法取得播放連線");
-            }
+            const ticketData = await getVideoTicket(
+                video.id,
+                controller.signal
+            );
 
             if (controller.signal.aborted) return;
+
+            if (currentVideoId !== video.id) return;
+
+            currentStreamUrl = ticketData.streamUrl;
 
             const player = document.createElement("video");
 
@@ -244,6 +442,7 @@
             player.controls = true;
             player.playsInline = true;
             player.preload = "metadata";
+
             player.setAttribute("controlsList", "nodownload");
             player.setAttribute("controls", "");
 
@@ -283,19 +482,24 @@
             });
 
             player.addEventListener("seeking", () => {
-                console.log("[exclusive] 正在跳轉播放位置：", player.currentTime);
+                console.log(
+                    "[exclusive] 正在跳轉播放位置：",
+                    player.currentTime
+                );
             });
 
-            player.src = ticketData.streamUrl;
+            player.src = currentStreamUrl;
 
             playerContainer.innerHTML = "";
             playerContainer.appendChild(player);
 
             player.load();
 
+            scheduleTicketRefresh(ticketData, player);
+
             const playResult = player.play();
 
-            if (playResult && typeof playResult.catch === "function") {
+            if (playResult?.catch) {
                 playResult.catch(error => {
                     console.log(
                         "[exclusive] 瀏覽器未自動播放，請手動按播放鍵：",
@@ -309,6 +513,8 @@
 
             console.error("[exclusive] 播放失敗：", error);
 
+            if (currentVideoController !== controller) return;
+
             playerContainer.innerHTML = `
                 <div class="exclusive-error">
                     ${escapeHTML(error.message)}
@@ -318,10 +524,17 @@
     }
 
     function closeVideo() {
+        clearTicketRefreshTimer();
+
+        refreshInProgress = false;
+
         if (currentVideoController) {
             currentVideoController.abort();
             currentVideoController = null;
         }
+
+        currentVideoId = null;
+        currentStreamUrl = null;
 
         const playerContainer = $("exclusiveVideoPlayer");
 
@@ -485,6 +698,7 @@
             }
 
             console.log("[exclusive] 權限確認完成，開始載入資源");
+
             await loadResources();
         };
 
