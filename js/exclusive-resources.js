@@ -1,9 +1,8 @@
 (() => {
   "use strict";
 
-  const VIDEO_BUCKET = "exclusive-videos";
   const FILE_BUCKET = "exclusive-files";
-  const VIDEO_SIGNED_URL_SECONDS = 300;
+  const VIDEO_TABLE = "exclusive_videos";
   const FILE_SIGNED_URL_SECONDS = 300;
   const PAGE_SIZE = 100;
 
@@ -14,9 +13,7 @@
   let hasLoaded = false;
 
   function formatName(filename) {
-    return filename
-      .replace(/\.[^.]+$/, "")
-      .replace(/[_-]+/g, " ");
+    return filename.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ");
   }
 
   function formatSize(bytes) {
@@ -32,18 +29,6 @@
   function getExtension(filename) {
     const index = filename.lastIndexOf(".");
     return index >= 0 ? filename.slice(index + 1).toLowerCase() : "";
-  }
-
-  function getVideoMime(filename) {
-    switch (getExtension(filename)) {
-      case "webm":
-        return "video/webm";
-      case "ogv":
-      case "ogg":
-        return "video/ogg";
-      default:
-        return "video/mp4";
-    }
   }
 
   function showMessage(container, message) {
@@ -105,19 +90,22 @@
     return files;
   }
 
-  async function createVideoUrl(filename) {
+  async function loadYouTubeVideos() {
     const { data, error } = await withTimeout(
-      sb.storage
-        .from(VIDEO_BUCKET)
-        .createSignedUrl(filename, VIDEO_SIGNED_URL_SECONDS),
+      sb.from(VIDEO_TABLE)
+        .select("id,title,youtube_id,description,category,sort_order")
+        .eq("is_active", true)
+        .order("sort_order", { ascending: true }),
       15000,
-      `產生影片網址逾時：${filename}`
+      "讀取 YouTube 影片逾時，請檢查網路或 Supabase 設定。"
     );
 
     if (error) throw error;
-    if (!data?.signedUrl) throw new Error("影片網址產生失敗");
 
-    return data.signedUrl;
+    return (data || []).filter(video =>
+      video.youtube_id &&
+      /^[a-zA-Z0-9_-]{11}$/.test(video.youtube_id)
+    );
   }
 
   async function createFileUrl(filename) {
@@ -139,40 +127,98 @@
     return data.signedUrl;
   }
 
-  function createVideoCard(file, url) {
+  function openVideo(video) {
+    const modal = $("exclusiveVideoModal");
+    const player = $("exclusiveVideoPlayer");
+    const title = $("exclusiveVideoModalTitle");
+
+    if (!modal || !player) return;
+
+    title.textContent = video.title || "影片播放";
+
+    const iframe = document.createElement("iframe");
+
+    iframe.src =
+      `https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.youtube_id)}` +
+      "?autoplay=1&rel=0&playsinline=1";
+
+    iframe.title = video.title || "YouTube 影片播放器";
+    iframe.allow =
+      "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+    iframe.allowFullscreen = true;
+    iframe.referrerPolicy = "strict-origin-when-cross-origin";
+
+    player.replaceChildren(iframe);
+
+    modal.hidden = false;
+    document.body.classList.add("exclusive-video-open");
+
+    $("exclusiveVideoClose")?.focus();
+  }
+
+  function closeVideo() {
+    const modal = $("exclusiveVideoModal");
+    const player = $("exclusiveVideoPlayer");
+
+    if (!modal) return;
+
+    if (player) {
+      player.replaceChildren();
+    }
+
+    modal.hidden = true;
+    document.body.classList.remove("exclusive-video-open");
+  }
+
+  window.closeExclusiveVideo = closeVideo;
+
+  function createVideoCard(video) {
     const article = document.createElement("article");
-    article.className = "exclusive-item";
+    article.className = "exclusive-item exclusive-youtube-item";
 
-    const video = document.createElement("video");
-    video.className = "exclusive-video";
-    video.controls = true;
-    video.preload = "metadata";
-    video.playsInline = true;
-    video.disablePictureInPicture = true;
-    video.setAttribute("controlsList", "nodownload noremoteplayback");
-    video.setAttribute("disableRemotePlayback", "");
-    video.setAttribute("aria-label", formatName(file.name));
+    const thumbnailButton = document.createElement("button");
+    thumbnailButton.type = "button";
+    thumbnailButton.className = "exclusive-youtube-thumbnail";
+    thumbnailButton.setAttribute(
+      "aria-label",
+      `播放影片：${video.title || "未命名影片"}`
+    );
 
-    const source = document.createElement("source");
-    source.src = url;
-    source.type = getVideoMime(file.name);
-    video.appendChild(source);
+    const thumbnail = document.createElement("img");
+    thumbnail.src =
+      `https://img.youtube.com/vi/${encodeURIComponent(video.youtube_id)}/hqdefault.jpg`;
+    thumbnail.alt = "";
+    thumbnail.loading = "lazy";
+
+    const playIcon = document.createElement("span");
+    playIcon.className = "exclusive-youtube-play";
+    playIcon.setAttribute("aria-hidden", "true");
+    playIcon.textContent = "▶";
+
+    thumbnailButton.append(thumbnail, playIcon);
+    thumbnailButton.addEventListener("click", () => openVideo(video));
 
     const body = document.createElement("div");
     body.className = "exclusive-item-body";
 
     const tag = document.createElement("span");
     tag.className = "exclusive-tag";
-    tag.textContent = "影片";
+    tag.textContent = video.category || "線上影片";
 
     const title = document.createElement("h3");
-    title.textContent = formatName(file.name);
+    title.textContent = video.title || "未命名影片";
 
-    const size = document.createElement("p");
-    size.textContent = formatSize(file.metadata?.size);
+    const description = document.createElement("p");
+    description.textContent = video.description || "觀看教學影片，加強觀念與考試重點。";
 
-    body.append(tag, title, size);
-    article.append(video, body);
+    const playButton = document.createElement("button");
+    playButton.type = "button";
+    playButton.className = "exclusive-download-button";
+    playButton.textContent = "立即觀看";
+    playButton.addEventListener("click", () => openVideo(video));
+
+    body.append(tag, title, description, playButton);
+    article.append(thumbnailButton, body);
 
     return article;
   }
@@ -230,31 +276,51 @@
     return article;
   }
 
-  async function renderBucket(
-    bucket,
-    containerId,
-    createUrl,
-    renderCard,
-    emptyText
-  ) {
-    const container = $(containerId);
+  async function renderVideos() {
+    const container = $("exclusiveVideoList");
     if (!container) return;
 
-    showMessage(container, "正在載入資源……");
+    showMessage(container, "正在載入影片……");
 
     try {
-      const files = await listFiles(bucket);
+      const videos = await loadYouTubeVideos();
+
+      if (!videos.length) {
+        showMessage(container, "目前尚無影片。");
+        return;
+      }
+
+      container.replaceChildren(
+        ...videos.map(createVideoCard)
+      );
+    } catch (error) {
+      console.error("[專屬教材] YouTube 影片載入失敗：", error);
+      showMessage(
+        container,
+        error.message || "影片載入失敗，請檢查 Supabase 資料表及權限。"
+      );
+    }
+  }
+
+  async function renderFiles() {
+    const container = $("exclusiveFileList");
+    if (!container) return;
+
+    showMessage(container, "正在載入教材……");
+
+    try {
+      const files = await listFiles(FILE_BUCKET);
 
       if (!files.length) {
-        showMessage(container, emptyText);
+        showMessage(container, "目前尚無檔案。");
         return;
       }
 
       const cards = await Promise.all(
         files.map(async file => {
           try {
-            const url = await createUrl(file.name);
-            return renderCard(file, url);
+            const url = await createFileUrl(file.name);
+            return createFileCard(file, url);
           } catch (error) {
             console.error(`[專屬教材] 無法載入檔案：${file.name}`, error);
             return null;
@@ -265,17 +331,16 @@
       const validCards = cards.filter(Boolean);
 
       if (!validCards.length) {
-        showMessage(container, "資源網址產生失敗，請檢查 Storage 權限及 Console 錯誤。");
+        showMessage(container, "檔案網址產生失敗，請檢查 Storage 權限及 Console 錯誤。");
         return;
       }
 
       container.replaceChildren(...validCards);
     } catch (error) {
-      console.error(`[專屬教材] 讀取 Bucket ${bucket} 失敗：`, error);
-
+      console.error("[專屬教材] 檔案載入失敗：", error);
       showMessage(
         container,
-        error.message || "載入失敗，請檢查登入狀態、權限及網路連線。"
+        error.message || "教材載入失敗，請檢查登入狀態、權限及網路連線。"
       );
     }
   }
@@ -302,20 +367,8 @@
 
     try {
       await Promise.all([
-        renderBucket(
-          VIDEO_BUCKET,
-          "exclusiveVideoList",
-          createVideoUrl,
-          createVideoCard,
-          "目前尚無影片。"
-        ),
-        renderBucket(
-          FILE_BUCKET,
-          "exclusiveFileList",
-          createFileUrl,
-          createFileCard,
-          "目前尚無檔案。"
-        )
+        renderVideos(),
+        renderFiles()
       ]);
 
       hasLoaded = true;
@@ -325,6 +378,16 @@
       isLoading = false;
     }
   }
+
+  $("exclusiveVideoClose")?.addEventListener("click", closeVideo);
+
+  document.querySelectorAll("[data-close-exclusive-video]").forEach(element => {
+    element.addEventListener("click", closeVideo);
+  });
+
+  document.addEventListener("keydown", event => {
+    if (event.key === "Escape") closeVideo();
+  });
 
   document.addEventListener("exclusive-access-ready", loadResources);
 
