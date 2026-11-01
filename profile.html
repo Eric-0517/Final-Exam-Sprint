@@ -439,13 +439,14 @@
           }).join("")
         : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-      const { data: history, error: historyError } = await window.sb
+     const { data: history, error: historyError } = await window.sb
     .from("video_watch_history")
     .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,completed_at")
+    .eq("user_id", user.id)
     .order("watched_at", { ascending: false })
     .limit(100);
 
-      if (historyError) throw historyError;
+if (historyError) throw historyError;
 
       $("watchHistory").innerHTML = history.length
         ? history.map(item => {
