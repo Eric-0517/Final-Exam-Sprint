@@ -424,7 +424,7 @@
     $("profileAccessDays").hidden = false;
 
     if (isPermanent) {
-      $("profileAccessDays").textContent = "授權期限：永久";
+      $("profileAccessDays").textContent = "授權期限：永久授權";
       return;
     }
 
@@ -433,13 +433,8 @@
       Math.ceil((expiresAt - Date.now()) / 86400000)
     );
 
-    const planName = [30, 60, 90].includes(planDays)
-      ? `${planDays} 天方案`
-      : "限期授權";
-
-    $("profileAccessDays").textContent =
-      `${planName}｜剩餘 ${remainingDays} 天`;
-  }
+   $("profileAccessDays").textContent =
+  `授權期限：剩餘${remainingDays}天`;
 
   async function loadProfile() {
     if (!window.sb) return;
