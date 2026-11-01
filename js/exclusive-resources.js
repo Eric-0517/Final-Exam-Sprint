@@ -8,11 +8,13 @@
 
     const TICKET_REFRESH_BEFORE = 300;
     const TICKET_RETRY_DELAY = 30000;
+    const PROGRESS_SAVE_INTERVAL = 10000;
 
     const $ = (id) => document.getElementById(id);
 
     let currentVideoController = null;
     let currentVideoId = null;
+    let currentVideo = null;
     let currentStreamUrl = null;
     let ticketRefreshTimer = null;
     let refreshInProgress = false;
@@ -179,6 +181,8 @@
 
             currentStreamUrl = ticketData.streamUrl;
 
+            player._refreshingTicket = true;
+
             player.src = currentStreamUrl;
             player.load();
 
@@ -186,6 +190,7 @@
                 if (
                     controller.signal.aborted ||
                     currentVideoId !== videoId ||
+                    currentVideoController !== controller ||
                     playerContainer.querySelector("video") !== player
                 ) {
                     return;
@@ -208,6 +213,8 @@
                         );
                     }
                 }
+
+                player._refreshingTicket = false;
 
                 if (wasPlaying) {
                     const playResult = player.play();
@@ -306,9 +313,21 @@
             .replace(/\.(mp4|m4v|mov|mkv|webm|avi|mpeg|mpg)$/i, "");
     }
 
-    async function saveVideoWatchHistory(video) {
+    function isValidPlayer(player, video, controller) {
+        const playerContainer = $("exclusiveVideoPlayer");
+
+        return Boolean(
+            playerContainer &&
+            playerContainer.querySelector("video") === player &&
+            currentVideoId === video.id &&
+            currentVideoController === controller &&
+            !controller.signal.aborted
+        );
+    }
+
+    async function getVideoWatchProgress(video) {
         try {
-            if (!window.sb) return;
+            if (!window.sb) return null;
 
             const {
                 data: { user },
@@ -316,32 +335,88 @@
             } = await window.sb.auth.getUser();
 
             if (userError) throw userError;
-            if (!user) return;
+            if (!user) return null;
+
+            const { data, error } = await window.sb
+                .from("video_watch_history")
+                .select("last_position_seconds,duration_seconds,completed_at")
+                .eq("user_id", user.id)
+                .eq("video_id", String(video.id))
+                .maybeSingle();
+
+            if (error) throw error;
+
+            return data;
+
+        } catch (error) {
+            console.error("[exclusive] 讀取播放進度失敗：", error);
+            return null;
+        }
+    }
+
+    async function saveVideoWatchHistory(
+        video,
+        position = 0,
+        duration = null,
+        completed = false
+    ) {
+        try {
+            if (!window.sb) return false;
+
+            const {
+                data: { user },
+                error: userError
+            } = await window.sb.auth.getUser();
+
+            if (userError) throw userError;
+            if (!user) return false;
+
+            const payload = {
+                user_id: user.id,
+                video_id: String(video.id),
+                video_title: cleanVideoTitle(video.title),
+                category: video.category || "線上影片",
+                watched_at: new Date().toISOString(),
+                last_position_seconds: completed
+                    ? 0
+                    : Math.max(0, Number(position) || 0),
+                duration_seconds:
+                    Number.isFinite(duration) && duration > 0
+                        ? duration
+                        : null,
+                completed_at: completed
+                    ? new Date().toISOString()
+                    : null
+            };
 
             const { error } = await window.sb
                 .from("video_watch_history")
-                .upsert({
-                    user_id: user.id,
-                    video_id: String(video.id),
-                    video_title: cleanVideoTitle(video.title),
-                    category: video.category || "線上影片",
-                    watched_at: new Date().toISOString()
-                }, {
+                .upsert(payload, {
                     onConflict: "user_id,video_id"
                 });
 
             if (error) throw error;
 
             console.log(
-                "[exclusive] 觀看紀錄已儲存：",
-                video.title
+                completed
+                    ? "[exclusive] 影片已完成"
+                    : "[exclusive] 播放進度已儲存",
+                {
+                    video: video.title,
+                    position: payload.last_position_seconds,
+                    duration: payload.duration_seconds
+                }
             );
+
+            return true;
 
         } catch (error) {
             console.error(
-                "[exclusive] 儲存觀看紀錄失敗：",
+                "[exclusive] 儲存觀看進度失敗：",
                 error
             );
+
+            return false;
         }
     }
 
@@ -443,7 +518,7 @@
             return;
         }
 
-        closeVideo();
+        await closeVideo();
 
         modal.hidden = false;
         document.body.style.overflow = "hidden";
@@ -462,12 +537,13 @@
 
         currentVideoController = controller;
         currentVideoId = video.id;
+        currentVideo = video;
 
         try {
-            const ticketData = await getVideoTicket(
-                video.id,
-                controller.signal
-            );
+            const [ticketData, savedProgress] = await Promise.all([
+                getVideoTicket(video.id, controller.signal),
+                getVideoWatchProgress(video)
+            ]);
 
             if (controller.signal.aborted) return;
             if (currentVideoId !== video.id) return;
@@ -489,24 +565,131 @@
             player.style.display = "block";
             player.style.background = "#000";
 
-            let watchHistorySaved = false;
+            let progressSaveTimer = null;
+            let restoredPosition = false;
+            let saveQueue = Promise.resolve();
+
+            const isCurrent = () => {
+                return isValidPlayer(player, video, controller);
+            };
+
+            const saveProgress = (completed = false) => {
+                if (!isCurrent()) return Promise.resolve(false);
+                if (player._refreshingTicket) return Promise.resolve(false);
+
+                const position = completed
+                    ? 0
+                    : Math.max(0, player.currentTime || 0);
+
+                const duration = player.duration;
+
+                const task = saveQueue.then(async () => {
+                    if (!isCurrent()) return false;
+
+                    return saveVideoWatchHistory(
+                        video,
+                        position,
+                        duration,
+                        completed
+                    );
+                });
+
+                saveQueue = task.catch(error => {
+                    console.error("[exclusive] 進度儲存佇列錯誤：", error);
+                });
+
+                return task;
+            };
+
+            player._saveProgress = saveProgress;
 
             player.addEventListener("playing", () => {
-                if (watchHistorySaved) return;
+                if (!isCurrent()) return;
 
-                watchHistorySaved = true;
-                saveVideoWatchHistory(video);
+                console.log("[exclusive] 開始播放：", video.title);
+            });
+
+            player.addEventListener("timeupdate", () => {
+                if (!isCurrent() || player._refreshingTicket) return;
+
+                if (progressSaveTimer) return;
+
+                progressSaveTimer = setTimeout(() => {
+                    progressSaveTimer = null;
+
+                    if (isCurrent() && !player.paused && !player.ended) {
+                        saveProgress();
+                    }
+                }, PROGRESS_SAVE_INTERVAL);
+            });
+
+            player.addEventListener("pause", () => {
+                if (
+                    !isCurrent() ||
+                    player.ended ||
+                    player._refreshingTicket
+                ) {
+                    return;
+                }
+
+                saveProgress();
+            });
+
+            player.addEventListener("ended", () => {
+                if (progressSaveTimer) {
+                    clearTimeout(progressSaveTimer);
+                    progressSaveTimer = null;
+                }
+
+                saveProgress(true);
             });
 
             player.addEventListener("loadedmetadata", () => {
+                if (!isCurrent()) return;
+
                 console.log("[exclusive] 影片資訊載入完成", {
                     duration: player.duration,
                     width: player.videoWidth,
                     height: player.videoHeight
                 });
+
+                if (restoredPosition) return;
+
+                restoredPosition = true;
+
+                const completed = Boolean(savedProgress?.completed_at);
+                const savedPosition = completed
+                    ? 0
+                    : Number(savedProgress?.last_position_seconds) || 0;
+
+                if (
+                    savedPosition > 5 &&
+                    Number.isFinite(player.duration) &&
+                    player.duration > 0 &&
+                    savedPosition < player.duration - 3
+                ) {
+                    try {
+                        player.currentTime = savedPosition;
+
+                        console.log(
+                            "[exclusive] 已恢復上次播放位置：",
+                            savedPosition
+                        );
+
+                    } catch (error) {
+                        console.warn(
+                            "[exclusive] 恢復播放位置失敗：",
+                            error
+                        );
+                    }
+                } else {
+                    console.log("[exclusive] 從頭開始播放");
+                }
             });
 
             player.addEventListener("error", () => {
+                if (!isCurrent()) return;
+
                 const mediaError = player.error;
 
                 console.error("[exclusive] 影片播放錯誤：", {
@@ -570,10 +753,28 @@
         }
     }
 
-    function closeVideo() {
+    async function closeVideo() {
         clearTicketRefreshTimer();
 
-        refreshInProgress = false;
+        const playerContainer = $("exclusiveVideoPlayer");
+        const player = playerContainer?.querySelector("video");
+
+        if (player && !player.ended && typeof player._saveProgress === "function") {
+            try {
+                await player._saveProgress();
+            } catch (error) {
+                console.error(
+                    "[exclusive] 關閉播放器時儲存進度失敗：",
+                    error
+                );
+            }
+        }
+
+        if (player) {
+            player.pause();
+            player.removeAttribute("src");
+            player.load();
+        }
 
         if (currentVideoController) {
             currentVideoController.abort();
@@ -581,19 +782,11 @@
         }
 
         currentVideoId = null;
+        currentVideo = null;
         currentStreamUrl = null;
-
-        const playerContainer = $("exclusiveVideoPlayer");
+        refreshInProgress = false;
 
         if (playerContainer) {
-            const player = playerContainer.querySelector("video");
-
-            if (player) {
-                player.pause();
-                player.removeAttribute("src");
-                player.load();
-            }
-
             playerContainer.innerHTML = "";
         }
 
