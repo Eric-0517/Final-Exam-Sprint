@@ -1255,18 +1255,25 @@ body.nav-open {
 }
 
 .access-check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;
+  display: inline-block;
   width: 16px;
   height: 16px;
   border-radius: 50%;
   background: #438bd1;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 800;
-  line-height: 1;
   flex-shrink: 0;
+}
+
+.access-check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  width: 4px;
+  height: 7px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }
 
 .profile-access-days {
