@@ -810,24 +810,13 @@
 
         try {
             const { data: files, error } = await window.sb
-                .storage
-                .from(FILE_BUCKET)
-                .list("", {
-                    limit: 100,
-                    sortBy: {
-                        column: "name",
-                        order: "asc"
-                    }
-                });
+                .from("exclusive_files")
+                .select("id,storage_path,display_name,category,file_type,created_at")
+                .order("created_at", { ascending: false });
 
             if (error) throw error;
 
-            const validFiles = (files || []).filter(file =>
-                file.name &&
-                !file.name.startsWith(".")
-            );
-
-            if (!validFiles.length) {
+            if (!files || files.length === 0) {
                 container.innerHTML = `
                     <div class="exclusive-empty">
                         目前沒有可下載的檔案
@@ -837,16 +826,28 @@
             }
 
             const items = await Promise.all(
-                validFiles.map(async file => {
+                files.map(async file => {
+                    if (!file.storage_path) return null;
+
+                    const displayName =
+                        file.display_name ||
+                        file.storage_path.split("/").pop();
+
                     const { data, error } = await window.sb
                         .storage
                         .from(FILE_BUCKET)
-                        .createSignedUrl(file.name, 300);
+                        .createSignedUrl(
+                            file.storage_path,
+                            300,
+                            {
+                                download: displayName
+                            }
+                        );
 
                     if (error) {
                         console.error(
                             "[exclusive] 檔案簽名失敗：",
-                            file.name,
+                            file.storage_path,
                             error
                         );
 
@@ -854,8 +855,12 @@
                     }
 
                     return {
-                        name: file.name,
-                        size: file.metadata?.size || 0,
+                        id: file.id,
+                        name: displayName,
+                        path: file.storage_path,
+                        category: file.category || "其他",
+                        fileType: file.file_type || "",
+                        createdAt: file.created_at,
                         url: data.signedUrl
                     };
                 })
@@ -866,7 +871,7 @@
             if (!readyFiles.length) {
                 container.innerHTML = `
                     <div class="exclusive-empty">
-                        目前沒有可下載的檔案
+                        檔案載入失敗，請稍後再試。
                     </div>
                 `;
                 return;
@@ -884,7 +889,12 @@
 
                     <div class="exclusive-resource-info">
                         <h3>${escapeHTML(file.name)}</h3>
-                        <p>${escapeHTML(formatSize(file.size))}</p>
+                        <p>
+                            ${escapeHTML(file.category)}
+                            ${file.fileType
+                                ? `｜${escapeHTML(file.fileType.toUpperCase())}`
+                                : ""}
+                        </p>
                     </div>
 
                     <a
@@ -892,12 +902,16 @@
                         href="${escapeHTML(file.url)}"
                         target="_blank"
                         rel="noopener noreferrer"
-                        download
                     >
                         下載檔案
                     </a>
                 </article>
             `).join("");
+
+            console.log(
+                "[exclusive] 中文檔案清單載入成功：",
+                readyFiles.length
+            );
 
         } catch (error) {
             console.error("[exclusive] 載入檔案失敗：", error);
