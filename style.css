@@ -1229,3 +1229,38 @@ body.nav-open {
   opacity: 1 !important;
   filter: none !important;
 }
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.profile-name-row h1 {
+  margin: 0;
+}
+
+.access-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: #e8f3ff;
+  color: #438bd1;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.access-check {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-access-days {
+  margin-top: 7px;
+  color: #6b8eae;
+  font-size: 13px;
+}
