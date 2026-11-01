@@ -5,11 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>考前衝刺｜個人中心</title>
 <link rel="stylesheet" href="style.css">
+<link rel="icon" type="image/png" href="favicon.png">
 
 <style>
 .side-nav-links a[hidden],
 #profileNavLink[hidden] {
   display: none !important;
+}
+
+.profile-head {
+  display: block;
+}
+
+.profile-user {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.profile-user > div {
+  min-width: 0;
 }
 
 .profile-name-row {
@@ -23,10 +38,14 @@
   margin: 0;
 }
 
+.profile-access-row {
+  margin-top: 7px;
+}
+
 .access-badge {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
   padding: 3px 10px;
   border-radius: 999px;
   background: #e8f3ff;
@@ -38,14 +57,56 @@
 }
 
 .access-check {
-  font-size: 13px;
-  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #438bd1;
+  flex-shrink: 0;
+}
+
+.access-check::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  width: 4px;
+  height: 7px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.access-badge.inactive {
+  background: transparent;
+  color: #7b8492;
+  padding: 3px 0;
+}
+
+.access-check.inactive {
+  display: none;
 }
 
 .profile-access-days {
-  margin-top: 7px;
+  margin-top: 5px;
   color: #6b8eae;
   font-size: 13px;
+}
+
+.profile-email {
+  margin-top: 7px;
+  color: #6b7280;
+  font-size: 14px;
+  word-break: break-all;
+}
+
+.profile-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
 }
 
 .profile-progress {
@@ -66,6 +127,7 @@
   background: #438bd1;
   border-radius: 99px;
 }
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -73,7 +135,6 @@
 <script src="js/supabase-client.js"></script>
 <script src="js/auth.js" defer></script>
 <script src="js/study-data.js" defer></script>
-<link rel="icon" type="image/png" href="favicon.png">
 </head>
 
 <body>
@@ -143,14 +204,17 @@
       <div>
         <div class="profile-name-row">
           <h1 id="profileName">使用者</h1>
+        </div>
 
-         <span id="profileAccessBadge" class="access-badge" hidden>
-  <span class="access-check"></span>
-  <span id="profileAccessText">已開通</span>
-</span>
+        <div class="profile-access-row">
+          <span id="profileAccessBadge" class="access-badge" hidden>
+            <span class="access-check"></span>
+            <span id="profileAccessText">已開通</span>
+          </span>
+        </div>
 
         <div id="profileAccessDays" class="profile-access-days" hidden></div>
-        <div id="profileEmail" class="muted"></div>
+        <div id="profileEmail" class="profile-email"></div>
       </div>
     </div>
 
@@ -277,7 +341,27 @@
   }
 
   function clearPermissionDisplay() {
-    $("profileAccessBadge").hidden = true;
+    const badge = $("profileAccessBadge");
+    const check = badge.querySelector(".access-check");
+
+    badge.hidden = true;
+    badge.classList.remove("inactive");
+    check.classList.remove("inactive");
+
+    $("profileAccessText").textContent = "已開通";
+    $("profileAccessDays").hidden = true;
+    $("profileAccessDays").textContent = "";
+  }
+
+  function showInactivePermission() {
+    const badge = $("profileAccessBadge");
+    const check = badge.querySelector(".access-check");
+
+    badge.hidden = false;
+    badge.classList.add("inactive");
+    check.classList.add("inactive");
+
+    $("profileAccessText").textContent = "未開通";
     $("profileAccessDays").hidden = true;
     $("profileAccessDays").textContent = "";
   }
@@ -292,7 +376,11 @@
       .maybeSingle();
 
     if (error) throw error;
-    if (!data) return;
+
+    if (!data) {
+      showInactivePermission();
+      return;
+    }
 
     const planDays = Number(data.plan_days);
     const isPermanent = planDays === 0;
@@ -311,7 +399,10 @@
         )
       );
 
-    if (!isValid) return;
+    if (!isValid) {
+      showInactivePermission();
+      return;
+    }
 
     $("profileAccessBadge").hidden = false;
     $("profileAccessDays").hidden = false;
@@ -438,14 +529,14 @@
           }).join("")
         : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-     const { data: history, error: historyError } = await window.sb
-    .from("video_watch_history")
-    .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,completed_at")
-    .eq("user_id", user.id)
-    .order("watched_at", { ascending: false })
-    .limit(100);
+      const { data: history, error: historyError } = await window.sb
+        .from("video_watch_history")
+        .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,completed_at")
+        .eq("user_id", user.id)
+        .order("watched_at", { ascending: false })
+        .limit(100);
 
-if (historyError) throw historyError;
+      if (historyError) throw historyError;
 
       $("watchHistory").innerHTML = history.length
         ? history.map(item => {
@@ -554,6 +645,33 @@ if (historyError) throw historyError;
     } catch (error) {
       console.error("更新錯題狀態失敗：", error);
       msg("更新錯題狀態失敗。");
+    }
+  });
+
+  $("profileLogoutBtn").addEventListener("click", async () => {
+    try {
+      const { error } = await window.sb.auth.signOut();
+      if (error) throw error;
+      location.reload();
+    } catch (error) {
+      console.error("登出失敗：", error);
+      msg("登出失敗，請稍後再試。");
+    }
+  });
+
+  $("profileGoogleLoginBtn").addEventListener("click", async () => {
+    try {
+      const { error } = await window.sb.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+          redirectTo: location.origin + location.pathname
+        }
+      });
+
+      if (error) throw error;
+    } catch (error) {
+      console.error("Google 登入失敗：", error);
+      msg("Google 登入失敗，請稍後再試。");
     }
   });
 
