@@ -435,6 +435,7 @@
 
    $("profileAccessDays").textContent =
   `授權期限：剩餘${remainingDays}天`;
+  }
 
   async function loadProfile() {
     if (!window.sb) return;
@@ -706,7 +707,7 @@
   } else {
     initProfile();
   }
-})();
+}();
 </script>
 
 <footer class="site-footer">
