@@ -439,15 +439,11 @@
           }).join("")
         : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-      const {
-        data: history,
-        error: historyError
-      } = await window.sb
-        .from("video_watch_history")
-        .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,is_completed")
-        .eq("user_id", user.id)
-        .order("watched_at", { ascending: false })
-        .limit(100);
+      const { data: history, error: historyError } = await window.sb
+    .from("video_watch_history")
+    .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,completed_at")
+    .order("watched_at", { ascending: false })
+    .limit(100);
 
       if (historyError) throw historyError;
 
@@ -479,7 +475,7 @@
                 </div>
 
                 <div class="muted">
-                  ${item.is_completed
+                  ${item.completed_at
                     ? "已完成觀看"
                     : duration > 0
                       ? `觀看進度：${timeText(position)} / ${timeText(duration)}（${progress}%）`
@@ -490,7 +486,7 @@
                   <div class="profile-progress">
                     <div class="profile-progress-track">
                       <div class="profile-progress-fill"
-                        style="width:${item.is_completed ? 100 : progress}%">
+                        style="width:${item.completed_at ? 100 : progress}%">
                       </div>
                     </div>
                   </div>
