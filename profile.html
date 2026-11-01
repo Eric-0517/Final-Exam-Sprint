@@ -5,12 +5,69 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>考前衝刺｜個人中心</title>
 <link rel="stylesheet" href="style.css">
+
 <style>
 .side-nav-links a[hidden],
 #profileNavLink[hidden] {
   display: none !important;
 }
+
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.profile-name-row h1 {
+  margin: 0;
+}
+
+.access-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #e8f3ff;
+  color: #438bd1;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.access-check {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.profile-access-days {
+  margin-top: 7px;
+  color: #6b8eae;
+  font-size: 13px;
+}
+
+.profile-progress {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 320px;
+}
+
+.profile-progress-track {
+  height: 7px;
+  overflow: hidden;
+  background: #e8edf5;
+  border-radius: 99px;
+}
+
+.profile-progress-fill {
+  height: 100%;
+  background: #438bd1;
+  border-radius: 99px;
+}
 </style>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/supabase-client.js"></script>
@@ -18,6 +75,7 @@
 <script src="js/study-data.js" defer></script>
 <link rel="icon" type="image/png" href="favicon.png">
 </head>
+
 <body>
 
 <header class="topbar">
@@ -77,11 +135,22 @@
 <main class="profile-wrap">
 
   <section class="profile-head">
+
     <div id="profileUser" class="profile-user" hidden>
       <img id="profileAvatar" class="profile-avatar"
         alt="使用者頭像" hidden>
+
       <div>
-        <h1 id="profileName">使用者</h1>
+        <div class="profile-name-row">
+          <h1 id="profileName">使用者</h1>
+
+          <span id="profileAccessBadge" class="access-badge" hidden>
+            <span class="access-check">✓</span>
+            已開通
+          </span>
+        </div>
+
+        <div id="profileAccessDays" class="profile-access-days" hidden></div>
         <div id="profileEmail" class="muted"></div>
       </div>
     </div>
@@ -97,9 +166,11 @@
       <button class="primary" id="profileGoogleLoginBtn" type="button">
         使用 Google 登入
       </button>
+
       <button class="secondary" id="profileLogoutBtn" type="button" hidden>
         登出
       </button>
+
       <a class="secondary" href="index.html" style="text-decoration:none">
         返回首頁
       </a>
@@ -164,11 +235,7 @@
     }
 
     toggle.addEventListener("click", () => {
-      if (nav.classList.contains("open")) {
-        closeNav();
-      } else {
-        openNav();
-      }
+      nav.classList.contains("open") ? closeNav() : openNav();
     });
 
     overlay.addEventListener("click", closeNav);
@@ -210,6 +277,64 @@
     }
   }
 
+  function clearPermissionDisplay() {
+    $("profileAccessBadge").hidden = true;
+    $("profileAccessDays").hidden = true;
+    $("profileAccessDays").textContent = "";
+  }
+
+  async function loadUserPermission(userId) {
+    clearPermissionDisplay();
+
+    const { data, error } = await window.sb
+      .from("user_permissions")
+      .select("has_access,plan_days,started_at,expires_at")
+      .eq("user_id", userId)
+      .maybeSingle();
+
+    if (error) throw error;
+    if (!data) return;
+
+    const planDays = Number(data.plan_days);
+    const isPermanent = planDays === 0;
+
+    const expiresAt = data.expires_at
+      ? new Date(data.expires_at).getTime()
+      : null;
+
+    const isValid = data.has_access === true &&
+      (
+        isPermanent ||
+        (
+          expiresAt !== null &&
+          Number.isFinite(expiresAt) &&
+          expiresAt > Date.now()
+        )
+      );
+
+    if (!isValid) return;
+
+    $("profileAccessBadge").hidden = false;
+    $("profileAccessDays").hidden = false;
+
+    if (isPermanent) {
+      $("profileAccessDays").textContent = "授權期限：永久";
+      return;
+    }
+
+    const remainingDays = Math.max(
+      0,
+      Math.ceil((expiresAt - Date.now()) / 86400000)
+    );
+
+    const planName = [30, 60, 90].includes(planDays)
+      ? `${planDays} 天方案`
+      : "限期授權";
+
+    $("profileAccessDays").textContent =
+      `${planName}｜剩餘 ${remainingDays} 天`;
+  }
+
   async function loadProfile() {
     if (!window.sb) return;
 
@@ -224,12 +349,37 @@
       const loggedIn = Boolean(session);
 
       $("signedOut").hidden = loggedIn;
+      $("profileUser").hidden = !loggedIn;
+      $("profileGoogleLoginBtn").hidden = loggedIn;
+      $("profileLogoutBtn").hidden = !loggedIn;
 
       if (!loggedIn) {
+        clearPermissionDisplay();
+
         ["attempts", "wrongQuestions", "watchHistory", "sessions"]
           .forEach(id => showEmpty(id, "請先使用 Google 登入。"));
+
         return;
       }
+
+      const user = session.user;
+      const metadata = user.user_metadata || {};
+
+      $("profileName").textContent =
+        metadata.full_name || metadata.name || user.email || "使用者";
+
+      $("profileEmail").textContent = user.email || "";
+
+      const avatar = metadata.avatar_url || metadata.picture || "";
+
+      if (avatar) {
+        $("profileAvatar").src = avatar;
+        $("profileAvatar").hidden = false;
+      } else {
+        $("profileAvatar").hidden = true;
+      }
+
+      await loadUserPermission(user.id);
 
       if (!window.StudyData) {
         throw new Error("StudyData 尚未載入。");
@@ -240,7 +390,6 @@
         StudyData.getWrongQuestions()
       ]);
 
-      
       $("attempts").innerHTML = attempts.length ? `
         <table class="profile-table">
           <thead>
@@ -266,7 +415,6 @@
         </table>
       ` : '<div class="empty">目前還沒有成績紀錄。</div>';
 
-     
       $("wrongQuestions").innerHTML = wrong.length
         ? wrong.map(w => {
             const q = w.question_snapshot || {};
@@ -291,34 +439,67 @@
           }).join("")
         : '<div class="empty">目前沒有錯題紀錄。</div>';
 
-      
       const {
         data: history,
         error: historyError
       } = await window.sb
         .from("video_watch_history")
-        .select("id,video_id,video_title,category,watched_at")
+        .select("id,video_id,video_title,category,watched_at,last_position_seconds,duration_seconds,is_completed")
+        .eq("user_id", user.id)
         .order("watched_at", { ascending: false })
         .limit(100);
 
       if (historyError) throw historyError;
 
       $("watchHistory").innerHTML = history.length
-        ? history.map(item => `
-            <div class="profile-item">
-              <div class="profile-item-title">
-                ${esc(item.video_title || "未命名影片")}
+        ? history.map(item => {
+            const position = Number(item.last_position_seconds || 0);
+            const duration = Number(item.duration_seconds || 0);
+
+            const progress = duration > 0
+              ? Math.min(100, Math.round(position / duration * 100))
+              : 0;
+
+            const timeText = seconds => {
+              const mins = Math.floor(seconds / 60);
+              const secs = Math.floor(seconds % 60);
+              return `${mins}:${String(secs).padStart(2, "0")}`;
+            };
+
+            return `
+              <div class="profile-item">
+                <div class="profile-item-title">
+                  ${esc(item.video_title || "未命名影片")}
+                </div>
+
+                <div class="muted">
+                  ${esc(item.category || "線上影片")}
+                  ｜觀看時間：
+                  ${esc(new Date(item.watched_at).toLocaleString("zh-TW"))}
+                </div>
+
+                <div class="muted">
+                  ${item.is_completed
+                    ? "已完成觀看"
+                    : duration > 0
+                      ? `觀看進度：${timeText(position)} / ${timeText(duration)}（${progress}%）`
+                      : "尚無播放進度資料"}
+                </div>
+
+                ${duration > 0 ? `
+                  <div class="profile-progress">
+                    <div class="profile-progress-track">
+                      <div class="profile-progress-fill"
+                        style="width:${item.is_completed ? 100 : progress}%">
+                      </div>
+                    </div>
+                  </div>
+                ` : ""}
               </div>
-              <div class="muted">
-                ${esc(item.category || "線上影片")}
-                ｜觀看時間：
-                ${esc(new Date(item.watched_at).toLocaleString("zh-TW"))}
-              </div>
-            </div>
-          `).join("")
+            `;
+          }).join("")
         : '<div class="empty">目前還沒有觀看紀錄。</div>';
 
-      
       const {
         data: sessions,
         error
@@ -354,7 +535,6 @@
     }
   }
 
-  
   document.addEventListener("click", async event => {
     const target = event.target;
     if (!(target instanceof Element)) return;
