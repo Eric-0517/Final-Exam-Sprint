@@ -119,6 +119,17 @@
       return redeemCode(code);
     }
 
+    if (!window.turnstile) {
+      await showMessage(
+        "驗證服務尚未載入",
+        "請重新整理頁面後再試一次。",
+        "warning"
+      );
+      return false;
+    }
+
+    let widgetId = null;
+
     const result = await window.Swal.fire({
       title: "開通權限",
       text: "請輸入你的開通碼。",
@@ -137,14 +148,97 @@
       },
       inputValidator: value => {
         if (!value?.trim()) return "請先輸入開通碼。";
+      },
+      html: `
+        <div style="margin-top:18px;">
+          <div id="redeemTurnstile"
+            style="display:flex;justify-content:center;">
+          </div>
+
+          <label style="
+            display:flex;
+            align-items:flex-start;
+            gap:8px;
+            margin-top:18px;
+            text-align:left;
+            font-size:14px;
+            line-height:1.7;
+            color:#475569;
+            cursor:pointer;
+          ">
+            <input
+              type="checkbox"
+              id="redeemConsent"
+              style="
+                width:17px;
+                height:17px;
+                margin-top:3px;
+                flex-shrink:0;
+                accent-color:#3156d3;
+                cursor:pointer;
+              "
+            >
+            <span>
+              我已閱讀並同意
+              <a
+                href="https://eric0517.dpdns.org/privacy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color:#3156d3;font-weight:600;"
+              >隱私權政策</a>
+              與
+              <a
+                href="https://eric0517.dpdns.org/terms.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                style="color:#3156d3;font-weight:600;"
+              >服務條款</a>
+            </span>
+          </label>
+        </div>
+      `,
+      didOpen: () => {
+        widgetId = window.turnstile.render("#redeemTurnstile", {
+          sitekey: "0x4AAAAAAFwabgielfrD3Lun",
+          theme: "light"
+        });
+      },
+      preConfirm: () => {
+        const consent = document.getElementById("redeemConsent");
+
+        if (!consent?.checked) {
+          window.Swal.showValidationMessage(
+            "請先閱讀並同意隱私權政策與服務條款。"
+          );
+          return false;
+        }
+
+        const token = window.turnstile.getResponse(widgetId);
+
+        if (!token) {
+          window.Swal.showValidationMessage(
+            "請先完成 Cloudflare 人機驗證。"
+          );
+          return false;
+        }
+
+        return {
+          code: document.querySelector(".swal2-input")?.value || "",
+          token
+        };
+      },
+      willClose: () => {
+        if (widgetId !== null && window.turnstile) {
+          window.turnstile.remove(widgetId);
+        }
       }
     });
 
-    if (!result.isConfirmed || !result.value?.trim()) {
+    if (!result.isConfirmed || !result.value?.code?.trim()) {
       return false;
     }
 
-    return redeemCode(result.value);
+    return redeemCode(result.value.code);
   }
 
   async function handleExclusiveClick(event) {
