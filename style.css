@@ -1297,49 +1297,67 @@ body.nav-open {
   display: none;
 }
 
-/* Cloudflare Footer */
 .cloudflare-footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    padding: 12px 10px;
-    color: #64748b;
-    font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 16px;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.cloudflare-footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cloudflare-shield {
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+}
+
+.cloudflare-footer-main img {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.cloudflare-footer-sub {
+  color: #94a3b8;
+  font-size: 11px;
+  letter-spacing: 0.4px;
+}
+
+.cloudflare-footer .cloudflare-shield {
+    display: inline-block !important;
+    width: 19px !important;
+    height: 19px !important;
+    min-width: 19px !important;
+    max-width: 19px !important;
+    flex: 0 0 19px !important;
+    vertical-align: middle;
+}
+
+.cloudflare-footer-main img {
+    display: inline-block !important;
+    width: 100px !important;
+    height: auto !important;
+    min-width: 100px !important;
+    max-width: 100px !important;
+    flex: 0 0 100px !important;
+    object-fit: contain;
+    vertical-align: middle;
 }
 
 .cloudflare-footer-main {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
     flex-wrap: nowrap;
-    line-height: 1;
-}
-
-.cloudflare-footer .cloudflare-shield {
-    display: block;
-    width: 14px !important;
-    height: 14px !important;
-    min-width: 14px;
-    max-width: 14px;
-    flex: 0 0 14px;
-}
-
-.cloudflare-footer-main img {
-    display: block;
-    width: 75px !important;
-    height: 18px !important;
-    min-width: 75px;
-    max-width: 75px;
-    flex: 0 0 75px;
-    object-fit: contain;
-}
-
-.cloudflare-footer-sub {
-    color: #94a3b8;
-    font-size: 10px;
-    line-height: 1.4;
-    letter-spacing: 0.3px;
+    gap: 8px;
 }
