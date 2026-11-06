@@ -2,7 +2,8 @@
     "use strict";
 
     const DRIVE_API =
-        "https://video.eric0517.dpdns.org";
+        "https://exam-sprint-video.0147zeo.workers.dev";
+    
     const FILE_BUCKET = "exclusive-files";
     const PROGRESS_SAVE_INTERVAL = 10000;
     const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000;
