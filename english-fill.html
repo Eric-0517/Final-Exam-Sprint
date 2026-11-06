@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="考前衝刺｜近10年統測歷屆英文填充">
+<title>考前衝刺｜近10年統測歷屆英文填充</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+.question-card {
+  padding: 24px;
+}
+
+.question-number {
+  font-size: 14px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.chinese-question {
+  font-size: 17px;
+  line-height: 1.8;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--text, #172033);
+}
+
+.english-question {
+  font-size: 16px;
+  line-height: 2;
+  color: var(--text, #172033);
+  margin-bottom: 24px;
+  overflow-wrap: anywhere;
+}
+
+.answer-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.answer-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answer-item label {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.answer-item input {
+  width: 100%;
+  min-width: 0;
+  padding: 13px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 16px;
+  outline: none;
+  background: #fff;
+  color: #172033;
+}
+
+.answer-item input:focus {
+  border-color: var(--primary, #3156d3);
+  box-shadow: 0 0 0 3px rgba(49,86,211,.12);
+}
+
+.quiz-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.timer {
+  font-weight: 700;
+  color: var(--primary, #3156d3);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.quiz-actions button {
+  min-width: 110px;
+}
+
+.submit-area {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.submit-area button {
+  width: 100%;
+  max-width: 260px;
+}
+
+.review-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 3px 12px rgba(15,23,42,.06);
+}
+
+.review-question {
+  font-weight: 700;
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+.review-english {
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+.review-answer {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.answer-correct {
+  color: #15803d;
+  font-weight: 700;
+}
+
+.answer-wrong {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.result-card .score {
+  font-size: 52px;
+}
+
+@media (max-width: 600px) {
+  .question-card {
+    padding: 18px;
+  }
+
+  .answer-area {
+    grid-template-columns: 1fr;
+  }
+
+  .quiz-actions button {
+    flex: 1;
+    min-width: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <a class="brand" href="index.html" style="text-decoration:none;color:inherit">
+    考前衝刺
+  </a>
+  <div class="sub">
+    近10年統測歷屆英文填充
+    <a href="index.html" style="color:inherit">切換題庫</a>
+  </div>
+</header>
+
+<main id="app">
+  <section id="home" class="screen active">
+    <div class="hero">
+      <span class="tag">ENGLISH FILL-IN-THE-BLANK</span>
+      <h1>近10年統測歷屆英文填充</h1>
+      <p>統測英文歷屆及全模填充。</p>
+    </div>
+
+    <div class="subject-card">
+      <div>
+        <div class="subject-title">近10年統測歷屆英文填充</div>
+        <div class="subject-meta">
+          <span id="bankCount">46</span> 題題庫
+          每回 10 題／每題 10 分
+        </div>
+      </div>
+      <button id="startBtn" class="primary">開始測驗</button>
+    </div>
+
+    <div id="loadError" style="color:red;margin-top:10px;" hidden></div>
+
+    <div class="info-grid">
+      <div><b>10題</b><span>隨機抽題</span></div>
+      <div><b>100分</b><span>滿分</span></div>
+      <div><b>自動批改</b><span>每格5分</span></div>
+    </div>
+
+    <div class="notice">
+      每題有兩格填充欄位，每格5分。答案須注意大小寫。
+    </div>
+  </section>
+
+  <!-- 測驗頁 -->
+  <section id="quiz" class="screen">
+
+    <div class="quiz-head">
+      <button id="quitBtn" class="ghost">退出</button>
+
+      <div class="progress-wrap">
+        <div class="progress-text">
+          <span id="qNo">1</span> / <span id="total">10</span>
+        </div>
+        <div class="progress">
+          <i id="progressBar"></i>
+        </div>
+      </div>
+
+      <div class="score-mini">每格 5 分</div>
+    </div>
+
+    <div class="quiz-info">
+      <span>英文填充題</span>
+      <span class="timer">作答時間：<span id="timer">00:00</span></span>
+    </div>
+
+    <article class="question-card">
+
+      <div class="question-number" id="questionNumber">
+        第 1 題
+      </div>
+
+      <div id="chineseText" class="chinese-question"></div>
+
+      <div id="englishText" class="english-question"></div>
+
+      <div class="answer-area">
+        <div class="answer-item">
+          <label for="answer1">第一格（5分）</label>
+          <input
+            type="text"
+            id="answer1"
+            autocomplete="off"
+            placeholder="請輸入答案"
+          >
+        </div>
+
+        <div class="answer-item">
+          <label for="answer2">第二格（5分）</label>
+          <input
+            type="text"
+            id="answer2"
+            autocomplete="off"
+            placeholder="請輸入答案"
+          >
+        </div>
+      </div>
+
+    </article>
+
+    <div class="quiz-actions">
+      <button id="prevBtn" class="secondary">上一題</button>
+      <button id="nextBtn" class="primary">下一題</button>
+    </div>
+
+    <div class="submit-area">
+      <button id="submitBtn" class="secondary">提早交卷</button>
+    </div>
+
+  </section>
+
+  <!-- 成績頁 -->
+  <section id="result" class="screen">
+
+    <div class="result-card">
+      <div class="tag">TEST RESULT</div>
+      <h2>測驗完成</h2>
+
+      <div class="score" id="score">0</div>
+      <div class="score-label">分</div>
+
+      <div class="result-stats">
+        <div>
+          <b id="correctCount">0</b>
+          <span>答對格數</span>
+        </div>
+        <div>
+          <b id="wrongCount">0</b>
+          <span>答錯格數</span>
+        </div>
+        <div>
+          <b id="accuracy">0%</b>
+          <span>正確率</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrong-head">
+      <h3>作答結果</h3>
+      <span id="wrongSummary"></span>
+    </div>
+
+    <div id="wrongList" class="wrong-list"></div>
+
+    <div class="result-actions">
+      <button id="homeBtn" class="secondary">回首頁</button>
+      <button id="againBtn" class="primary">再測一次</button>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/study-data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="english-fill.js"></script>
+
+</body>
+</html>
