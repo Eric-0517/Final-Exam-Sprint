@@ -1,0 +1,853 @@
+{
+  "title": "英文非選填充題題庫",
+  "version": 1,
+  "totalQuestions": 46,
+  "questionsPerQuiz": 10,
+  "pointsPerBlank": 5,
+  "totalPointsPerQuiz": 100,
+  "caseSensitive": true,
+  "answerRules": {
+    "slashSeparated": "有些題目有兩個答案，擇一即可",
+    "optionalParentheses": "該加s的記得加",
+    "trimWhitespace": true
+  },
+  "questions": [
+    {
+      "id": "english-fill-001",
+      "number": 1,
+      "chinese": "美國著名攀岩家霍諾德僅花 91 分鐘就成功到達台北 101 大樓的頂端。",
+      "question": "Famous American climber Alex Honnold managed to r_____ the top of Taipei 101 in only 91 m_____.",
+      "answers": [
+        [
+          "reach"
+        ],
+        [
+          "minutes"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-002",
+      "number": 2,
+      "chinese": "這位巨星在台北三場演唱會的所有門票在五分鐘內全部售完。",
+      "question": "All tickets for the superstar’s three c_____ in Taipei were s_____ out in just five minutes.",
+      "answers": [
+        [
+          "concerts"
+        ],
+        [
+          "sold"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-003",
+      "number": 3,
+      "chinese": "你比較喜歡用現金付款或是電子錢包？",
+      "question": "Would you p_____ to pay by cash or with an electronic w_____?",
+      "answers": [
+        [
+          "prefer"
+        ],
+        [
+          "wallet"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-004",
+      "number": 4,
+      "chinese": "在洗衣服的時候，你應該把白色和深色的衣服分開。",
+      "question": "When doing the l_____, you should s_____ white and dark clothes.",
+      "answers": [
+        [
+          "laundry"
+        ],
+        [
+          "separate"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-005",
+      "number": 5,
+      "chinese": "這項任務指派給對挑戰有正向態度的人。",
+      "question": "This m_____ is assigned to people who have a p_____ attitude toward challenges.",
+      "answers": [
+        [
+          "mission"
+        ],
+        [
+          "positive"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-006",
+      "number": 6,
+      "chinese": "為保持健康，均衡的飲食、充足的運動及避免過多的壓力是有必要的。",
+      "question": "To stay healthy, it is necessary to have a balanced diet and s_____ exercise, and to avoid too much p_____.",
+      "answers": [
+        [
+          "sufficient"
+        ],
+        [
+          "pressure"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-007",
+      "number": 7,
+      "chinese": "這炸雞很美味，但對我來說有點太鹹了！",
+      "question": "The fried c_____ is tasty, but a little bit too s_____ for me.",
+      "answers": [
+        [
+          "chicken"
+        ],
+        [
+          "salty"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-008",
+      "number": 8,
+      "chinese": "幸福的感覺就是讓每個小小的願望成真。",
+      "question": "The f_____ of being happy is about having each tiny wish come t_____.",
+      "answers": [
+        [
+          "feeling"
+        ],
+        [
+          "true"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-009",
+      "number": 9,
+      "chinese": "為了保持健美，我姊姊每週在健身房運動兩次。",
+      "question": "To keep fit, my sister w_____ out at the gym t_____ a week.",
+      "answers": [
+        [
+          "works"
+        ],
+        [
+          "twice"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-010",
+      "number": 10,
+      "chinese": "哈利波特系列已經獲得國際關注，而且在很多國家出版。",
+      "question": "The Harry Potter series has gained i_____ attention, and has also been published in many c_____.",
+      "answers": [
+        [
+          "international"
+        ],
+        [
+          "countries"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-011",
+      "number": 11,
+      "chinese": "我們必須在中午前到達機場，所以我們最好現在前往車站。",
+      "question": "We have to arrive at the a_____ before noon, so we had better l_____ for the station now.",
+      "answers": [
+        [
+          "airport"
+        ],
+        [
+          "leave"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-012",
+      "number": 12,
+      "chinese": "來臺灣的行程若沒去品嚐當地美食就不算完整。",
+      "question": "A trip to Taiwan is not c_____ without tasting the l_____ food.",
+      "answers": [
+        [
+          "complete"
+        ],
+        [
+          "local"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-013",
+      "number": 13,
+      "chinese": "一看見角落的老鼠，毛毛並沒有大聲尖叫，反而還保持冷靜，並且試圖用手去抓。",
+      "question": "Upon seeing the rat in the corner, Maud didn’t scream out loud. I_____, she r_____ calm and tried to catch it with her hands.",
+      "answers": [
+        [
+          "Instead"
+        ],
+        [
+          "remained"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-014",
+      "number": 14,
+      "chinese": "這個新的購物中心以各式各樣的高級餐廳為特色。",
+      "question": "This new shopping mall f_____ a v_____ of high-end restaurants.",
+      "answers": [
+        [
+          "features"
+        ],
+        [
+          "variety"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-015",
+      "number": 15,
+      "chinese": "博物館展出了不同文化的歷史文物。",
+      "question": "The m_____ displays h_____ artifacts from different cultures.",
+      "answers": [
+        [
+          "museum"
+        ],
+        [
+          "historical"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-016",
+      "number": 16,
+      "chinese": "你應在本週五截止日前申請暑期計畫。",
+      "question": "You should a_____ for the summer program before the d_____ this Friday.",
+      "answers": [
+        [
+          "apply"
+        ],
+        [
+          "deadline"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-017",
+      "number": 17,
+      "chinese": "當志工是一個寶貴的經驗；舉例來說，它有助於你培養重要的溝通技巧。",
+      "question": "Being a volunteer is a v_____ experience; for i_____, it helps you develop important communication skills.",
+      "answers": [
+        [
+          "valuable"
+        ],
+        [
+          "instance"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-018",
+      "number": 18,
+      "chinese": "現今，科學家還是無法精準預測地震。",
+      "question": "Nowadays, scientists are still unable to p_____ e_____ accurately.",
+      "answers": [
+        [
+          "predict"
+        ],
+        [
+          "earthquakes"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-019",
+      "number": 19,
+      "chinese": "這間餐廳以提供美味食物，同時維持嚴格的新鮮和品質標準而聞名。",
+      "question": "This restaurant is f_____ for serving delicious food while maintaining s_____ standards of freshness and quality.",
+      "answers": [
+        [
+          "famous",
+          "famed"
+        ],
+        [
+          "strict"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-020",
+      "number": 20,
+      "chinese": "吃太多甜食對身體和心理健康有負面的影響。",
+      "question": "Eating too much sweets will have a negative e_____ on both physical and m_____ health.",
+      "answers": [
+        [
+          "effect"
+        ],
+        [
+          "mental"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-021",
+      "number": 21,
+      "chinese": "太陽下山了，天空變成粉紅色和橙色，使海洋看起來很漂亮。",
+      "question": "The sun went down, and the sky t_____ pink and orange, making the o_____ look beautiful.",
+      "answers": [
+        [
+          "turned"
+        ],
+        [
+          "ocean"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-022",
+      "number": 22,
+      "chinese": "照顧狗和照顧嬰兒很不一樣。",
+      "question": "Looking after a dog is very d_____ from taking c_____ of a baby.",
+      "answers": [
+        [
+          "different"
+        ],
+        [
+          "care"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-023",
+      "number": 23,
+      "chinese": "Peter 時常參與志工活動以對社會做出貢獻。",
+      "question": "Peter often p_____ in volunteering activities to make a c_____ to the society.",
+      "answers": [
+        [
+          "participates"
+        ],
+        [
+          "contribution"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-024",
+      "number": 24,
+      "chinese": "夏令營是孩子們學習語言的一種有趣且身臨其境的方式。",
+      "question": "Summer c_____ are a fun and immersive way for children to learn a l_____.",
+      "answers": [
+        [
+          "camps"
+        ],
+        [
+          "language"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-025",
+      "number": 25,
+      "chinese": "即使老莫(Mort)明白成為一名合格教師很不容易，他仍然下定決心盡力一試。",
+      "question": "Even t_____ Mort knew that becoming a certified teacher was tough, he was still d_____ to give it his best shot.",
+      "answers": [
+        [
+          "though"
+        ],
+        [
+          "determined"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-026",
+      "number": 26,
+      "chinese": "這家公司不僅重視利潤，也在乎其對社會和環境的責任。",
+      "question": "This company not only values p_____ but also cares about its r_____ to society and the environment.",
+      "answers": [
+        [
+          "profit",
+          "profits"
+        ],
+        [
+          "responsibility",
+          "responsibilities"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-027",
+      "number": 27,
+      "chinese": "讓我們一起來種植樹木及拯救森林，為我們所住的星球降溫。",
+      "question": "Let’s p_____ trees and save forests together to cool the p_____ where we live.",
+      "answers": [
+        [
+          "plant"
+        ],
+        [
+          "planet"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-028",
+      "number": 28,
+      "chinese": "近年來，數位貨幣比從前更加普遍被使用了。",
+      "question": "In r_____ years, digital currencies have been used more c_____ than ever.",
+      "answers": [
+        [
+          "recent"
+        ],
+        [
+          "commonly"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-029",
+      "number": 29,
+      "chinese": "教練透過提供引導和訓練幫助該位學習者達成目標。",
+      "question": "The c_____ supports the learner to a_____ the goal by providing guidance and training.",
+      "answers": [
+        [
+          "coach"
+        ],
+        [
+          "achieve",
+          "accomplish"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-030",
+      "number": 30,
+      "chinese": "不論我們計畫搬去世界上哪個國家，都必須事先熟悉當地的風俗。",
+      "question": "W_____ country in the world we plan to move to, we must get f_____ with its local customs in advance.",
+      "answers": [
+        [
+          "Whichever"
+        ],
+        [
+          "familiar"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-031",
+      "number": 31,
+      "chinese": "如果你努力而實現了人生中的某些夢想，你必定會以自己為榮。",
+      "question": "If you work hard to f_____ certain dreams in life, you would definitely take p_____ in yourself.",
+      "answers": [
+        [
+          "fulfill"
+        ],
+        [
+          "pride"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-032",
+      "number": 32,
+      "chinese": "喬在一些親密的朋友因肺癌死亡後，下定決心要戒煙。",
+      "question": "After several of his close friends died of lung c_____, Joe made up his mind to q_____ smoking.",
+      "answers": [
+        [
+          "cancer"
+        ],
+        [
+          "quit"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-033",
+      "number": 33,
+      "chinese": "芮貝卡喜歡住在鄉下，因為她發現在熙熙攘攘的城市裡不太可能體驗安靜和寧靜。",
+      "question": "Rebecca enjoys living in the c_____ because she finds it unlikely to e_____ quietness and tranquility in the hustle and bustle of the city.",
+      "answers": [
+        [
+          "country",
+          "countryside"
+        ],
+        [
+          "experience"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-034",
+      "number": 34,
+      "chinese": "最好的技術人員是問題解決者，他們必須有隨機應變的能力。",
+      "question": "The best t_____ns are problem-solvers; they must have the a_____y to think on their feet.",
+      "answers": [
+        [
+          "technicians"
+        ],
+        [
+          "ability"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-035",
+      "number": 35,
+      "chinese": "令專家驚奇的是，一些沙漠中的動物沒有喝水也能存活。",
+      "question": "To experts’ a_____, some animals in the desert can survive w_____ drinking any water.",
+      "answers": [
+        [
+          "amazement",
+          "astonishment"
+        ],
+        [
+          "without"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-036",
+      "number": 36,
+      "chinese": "以沉痛的心情，林肯兒童動物園在此通知大眾，園區三隻雪豹上週因為感染 COVID-19 併發症而死亡。",
+      "question": "With deep sadness, the Lincoln Children’s Zoo is here to i_____ our community that three snow leopards d_____ last week due to complications of COVID-19.",
+      "answers": [
+        [
+          "inform"
+        ],
+        [
+          "died"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-037",
+      "number": 37,
+      "chinese": "沒有人可以否認當今世界仍存在種族問題的事實。",
+      "question": "No one can d_____ the fact that there exists a r_____ problem in the world nowadays.",
+      "answers": [
+        [
+          "deny"
+        ],
+        [
+          "racial",
+          "race"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-038",
+      "number": 38,
+      "chinese": "在臺灣，很多老師和家長憂心青少年對手遊上癮。",
+      "question": "In Taiwan, many teachers and parents are w_____ that teenagers are a_____ to mobile games.",
+      "answers": [
+        [
+          "worried",
+          "worrying"
+        ],
+        [
+          "addicted"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-039",
+      "number": 39,
+      "chinese": "阿俊的課業爛到爆。然而，他卻沒有花時間改善成績，反而整天都在玩線上遊戲。",
+      "question": "Jim’s schoolwork was terrible. However, he didn’t spend any time i_____ his grades; i_____, he was playing online games all day.",
+      "answers": [
+        [
+          "improving"
+        ],
+        [
+          "instead"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-040",
+      "number": 40,
+      "chinese": "我很喜歡恐怖片，因為它們讓我尖叫並讓我忘了我的煩惱。",
+      "question": "I enjoy h_____ movies a lot because they make me scream and have me f_____ my worries.",
+      "answers": [
+        [
+          "horror"
+        ],
+        [
+          "forget"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-041",
+      "number": 41,
+      "chinese": "臺北的平均房價貴多了，所以年輕人幾乎負擔不了。",
+      "question": "The average house p_____ in Taipei is much higher, so young people can h_____ afford it.",
+      "answers": [
+        [
+          "price"
+        ],
+        [
+          "hardly"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-042",
+      "number": 42,
+      "chinese": "只要你專心在你的工作上，這個計畫就有可能成功。",
+      "question": "As l_____ as you concentrate on your work, the project is likely to s_____.",
+      "answers": [
+        [
+          "long"
+        ],
+        [
+          "succeed"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-043",
+      "number": 43,
+      "chinese": "臺灣被譽為「科技島」，說明了我們在數位藝術領域幾乎擁有無限的潛力。",
+      "question": "Taiwan’s renown as a “t_____ island” suggests that we have almost unlimited p_____ within the field of digital art.",
+      "answers": [
+        [
+          "technology",
+          "technological"
+        ],
+        [
+          "potential"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-044",
+      "number": 44,
+      "chinese": "因為阿海自認是名愛國人士，所以他從不購買外國產品。",
+      "question": "S_____ Hal considers himself a patriot, he never buys foreign p_____.",
+      "answers": [
+        [
+          "Since"
+        ],
+        [
+          "products"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-045",
+      "number": 45,
+      "chinese": "你是否能獲得這工作或許取決於你的先前的工作態度。",
+      "question": "W_____ you can get the job may d_____ on your working attitude in the past.",
+      "answers": [
+        [
+          "Whether"
+        ],
+        [
+          "depend"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    },
+    {
+      "id": "english-fill-046",
+      "number": 46,
+      "chinese": "我不知道如何使用 Instagram，因為我對流行的社群媒體不熟悉。",
+      "question": "I don’t know how to use Instagram because I am not f_____ with popular social m_____ sites.",
+      "answers": [
+        [
+          "familiar"
+        ],
+        [
+          "media"
+        ]
+      ],
+      "points": [
+        5,
+        5
+      ]
+    }
+  ]
+}
