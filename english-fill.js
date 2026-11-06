@@ -15,13 +15,69 @@
   let timerInterval = null;
   let submitted = false;
 
-  const screens = ["home", "quiz", "result"];
+  function swalBase() {
+    return {
+      confirmButtonColor: "#2563eb",
+      cancelButtonColor: "#64748b",
+      reverseButtons: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false
+    };
+  }
+
+  async function showAlert({
+    title,
+    text = "",
+    icon = "info",
+    confirmText = "確定"
+  }) {
+    if (typeof Swal === "undefined") {
+      window.alert([title, text].filter(Boolean).join("\n\n"));
+      return;
+    }
+
+    return Swal.fire({
+      ...swalBase(),
+      title,
+      text,
+      icon,
+      confirmButtonText: confirmText
+    });
+  }
+
+  async function confirmAction({
+    title,
+    text = "",
+    icon = "question",
+    confirmText = "確定",
+    cancelText = "取消"
+  }) {
+    if (typeof Swal === "undefined") {
+      return window.confirm(
+        [title, text].filter(Boolean).join("\n\n")
+      );
+    }
+
+    const result = await Swal.fire({
+      ...swalBase(),
+      title,
+      text,
+      icon,
+      showCancelButton: true,
+      confirmButtonText: confirmText,
+      cancelButtonText: cancelText,
+      focusCancel: true
+    });
+
+    return result.isConfirmed;
+  }
 
   function showScreen(name) {
-    screens.forEach(id => {
+    ["home", "quiz", "result"].forEach(id => {
       $(id).classList.toggle("active", id === name);
     });
-    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    window.scrollTo(0, 0);
   }
 
   function shuffle(array) {
@@ -37,30 +93,87 @@
 
   async function loadQuestions() {
     try {
-      const response = await fetch(BANK_URL);
+      const response = await fetch(BANK_URL, {
+        cache: "no-store"
+      });
 
       if (!response.ok) {
-        throw new Error("無法讀取題庫檔案，請確認 JSON 檔案位置。");
+        throw new Error(
+          `題庫載入失敗（HTTP ${response.status}），請確認 JSON 檔案是否存在。`
+        );
       }
 
       const data = await response.json();
 
-      questionBank = Array.isArray(data) ? data : data.questions;
+      questionBank = Array.isArray(data)
+        ? data
+        : data.questions;
 
-      if (!Array.isArray(questionBank) || questionBank.length === 0) {
-        throw new Error("題庫格式錯誤或沒有題目。");
+      if (!Array.isArray(questionBank) || !questionBank.length) {
+        throw new Error("題庫格式錯誤，找不到題目資料。");
+      }
+
+      questionBank = questionBank.filter(question => {
+        return (
+          question &&
+          question.chinese &&
+          (question.question || question.english) &&
+          Array.isArray(question.answers) &&
+          question.answers.length >= 2
+        );
+      });
+
+      if (!questionBank.length) {
+        throw new Error("題庫內沒有符合格式的填充題。");
       }
 
       $("bankCount").textContent = questionBank.length;
+      $("startBtn").disabled = false;
+
     } catch (error) {
+      console.error("英文題庫載入失敗：", error);
+
+      $("bankCount").textContent = "載入失敗";
+      $("startBtn").disabled = true;
+
       $("loadError").hidden = false;
       $("loadError").textContent = error.message;
-      $("startBtn").disabled = true;
+
+      await showAlert({
+        title: "題庫載入失敗",
+        text: error.message +
+          "\n\n請確認 english-fill-questions.json 是否放在正確位置。",
+        icon: "error"
+      });
     }
   }
 
-  function startQuiz() {
-    if (questionBank.length === 0) return;
+  async function startQuiz() {
+    if (!questionBank.length) {
+      await showAlert({
+        title: "目前沒有可作答的題目",
+        text: "請確認題庫是否已成功載入，然後重新整理頁面。",
+        icon: "warning"
+      });
+
+      return;
+    }
+
+    if (submitted === false && quizQuestions.length &&
+        $("quiz").classList.contains("active")) {
+
+      const shouldRestart = await confirmAction({
+        title: "確定要重新開始？",
+        text: "目前的作答內容將會被清除。",
+        icon: "warning",
+        confirmText: "重新開始",
+        cancelText: "繼續作答"
+      });
+
+      if (!shouldRestart) return;
+    }
+
+    clearInterval(timerInterval);
 
     quizQuestions = shuffle(questionBank).slice(
       0,
@@ -74,7 +187,6 @@
 
     $("total").textContent = quizQuestions.length;
 
-    clearInterval(timerInterval);
     updateTimer();
 
     timerInterval = setInterval(() => {
@@ -109,26 +221,27 @@
     if (!question) return;
 
     $("qNo").textContent = currentIndex + 1;
+
     $("questionNumber").textContent =
       `第 ${currentIndex + 1} / ${quizQuestions.length} 題`;
 
     $("progressBar").style.width =
       ((currentIndex + 1) / quizQuestions.length * 100) + "%";
 
-    $("chineseText").textContent = question.chinese || "";
+    $("chineseText").textContent = question.chinese;
+
     $("englishText").textContent =
-      question.question || question.english || "";
+      question.question || question.english;
 
     $("answer1").value = answers[currentIndex][0];
     $("answer2").value = answers[currentIndex][1];
 
     $("prevBtn").disabled = currentIndex === 0;
 
-    if (currentIndex === quizQuestions.length - 1) {
-      $("nextBtn").textContent = "檢查並交卷";
-    } else {
-      $("nextBtn").textContent = "下一題";
-    }
+    $("nextBtn").textContent =
+      currentIndex === quizQuestions.length - 1
+        ? "檢查並交卷"
+        : "下一題";
   }
 
   function previousQuestion() {
@@ -140,14 +253,14 @@
     }
   }
 
-  function nextQuestion() {
+  async function nextQuestion() {
     saveCurrentAnswer();
 
     if (currentIndex < quizQuestions.length - 1) {
       currentIndex++;
       renderQuestion();
     } else {
-      submitQuiz();
+      await submitQuiz();
     }
   }
 
@@ -179,22 +292,31 @@
   }
 
   function getQuestionAnswers(question) {
-    if (Array.isArray(question.answers)) {
-      return question.answers;
-    }
-
-    return [
-      question.answer1 || question.answer?.[0] || "",
-      question.answer2 || question.answer?.[1] || ""
-    ];
+    return question.answers;
   }
 
-  function submitQuiz() {
+  async function submitQuiz() {
     if (submitted) return;
 
     saveCurrentAnswer();
 
-    const confirmed = window.confirm("確定要交卷嗎？交卷後將無法修改答案。");
+    const unanswered = answers.reduce((count, answer) => {
+      return count +
+        (normalizeAnswer(answer[0]) ? 0 : 1) +
+        (normalizeAnswer(answer[1]) ? 0 : 1);
+    }, 0);
+
+    const confirmed = await confirmAction({
+      title: unanswered > 0
+        ? "還有空格尚未作答"
+        : "確定要交卷？",
+      text: unanswered > 0
+        ? `目前還有 ${unanswered} 格未作答，未作答的空格將以 0 分計算。確定交卷嗎？`
+        : "交卷後將無法修改答案，並立即顯示測驗成績。",
+      icon: unanswered > 0 ? "warning" : "question",
+      confirmText: "確定交卷",
+      cancelText: "繼續作答"
+    });
 
     if (!confirmed) return;
 
@@ -202,6 +324,12 @@
     clearInterval(timerInterval);
 
     showResult();
+
+    await showAlert({
+      title: "測驗完成！",
+      text: "本次測驗已完成批改。",
+      icon: "success"
+    });
   }
 
   function showResult() {
@@ -211,11 +339,10 @@
 
     const results = quizQuestions.map((question, index) => {
       const correctAnswers = getQuestionAnswers(question);
+      const userAnswers = answers[index];
 
       const firstAccepted = getAcceptedAnswers(correctAnswers[0]);
       const secondAccepted = getAcceptedAnswers(correctAnswers[1]);
-
-      const userAnswers = answers[index];
 
       const firstCorrect = isCorrect(userAnswers[0], firstAccepted);
       const secondCorrect = isCorrect(userAnswers[1], secondAccepted);
@@ -260,9 +387,6 @@
       const answer1 = getAcceptedAnswers(result.correctAnswers[0]);
       const answer2 = getAcceptedAnswers(result.correctAnswers[1]);
 
-      const correctText1 = answer1.join(" / ");
-      const correctText2 = answer2.join(" / ");
-
       return `
         <div class="review-card">
           <div class="review-question">
@@ -278,14 +402,14 @@
               第一格：${escapeHTML(result.userAnswers[0] || "未作答")}
               ${result.firstCorrect ? "（正確，5分）" : "（錯誤，0分）"}
               <br>
-              正確答案：${escapeHTML(correctText1)}
+              正確答案：${escapeHTML(answer1.join(" / "))}
             </div>
 
             <div class="${result.secondCorrect ? "answer-correct" : "answer-wrong"}">
               第二格：${escapeHTML(result.userAnswers[1] || "未作答")}
               ${result.secondCorrect ? "（正確，5分）" : "（錯誤，0分）"}
               <br>
-              正確答案：${escapeHTML(correctText2)}
+              正確答案：${escapeHTML(answer2.join(" / "))}
             </div>
           </div>
         </div>
@@ -305,8 +429,14 @@
     })[char]);
   }
 
-  function quitQuiz() {
-    const confirmed = window.confirm("確定要退出測驗嗎？目前作答紀錄將不會保留。");
+  async function quitQuiz() {
+    const confirmed = await confirmAction({
+      title: "確定要退出測驗嗎？",
+      text: "目前的作答內容將不會保留。",
+      icon: "warning",
+      confirmText: "確定退出",
+      cancelText: "繼續作答"
+    });
 
     if (!confirmed) return;
 
