@@ -2,13 +2,11 @@
     "use strict";
 
     const DRIVE_API =
-        "https://hcegldjvhyrzfahkzmpp.supabase.co/functions/v1/drive-video";
+        "https://exam-sprint-video.0147zeo.workers.dev";
 
     const FILE_BUCKET = "exclusive-files";
-
-    const TICKET_REFRESH_BEFORE = 300;
-    const TICKET_RETRY_DELAY = 30000;
     const PROGRESS_SAVE_INTERVAL = 10000;
+    const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000;
 
     const $ = (id) => document.getElementById(id);
 
@@ -16,8 +14,7 @@
     let currentVideoId = null;
     let currentVideo = null;
     let currentStreamUrl = null;
-    let ticketRefreshTimer = null;
-    let refreshInProgress = false;
+    let sessionRefreshTimer = null;
     let resourceLoadPromise = null;
     let authSubscription = null;
     let initialized = false;
@@ -71,7 +68,11 @@
 
         const response = await fetch(`${DRIVE_API}${path}`, {
             ...options,
-            headers: getApiHeaders(session, options.headers || {})
+            credentials: "include",
+            headers: getApiHeaders(
+                session,
+                options.headers || {}
+            )
         });
 
         if (!response.ok) {
@@ -91,195 +92,61 @@
         return response;
     }
 
-    async function getVideoTicket(fileId, signal) {
-        const response = await driveRequest("/ticket", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                fileId
-            }),
-            signal
+    async function initializeDriveSession() {
+        await driveRequest("/session", {
+            method: "POST"
         });
 
-        const result = await response.json();
-
-        if (!result.streamUrl) {
-            throw new Error("無法取得播放連線");
-        }
-
-        return result;
+        console.log("[exclusive] Cloudflare 播放驗證完成");
     }
 
-    function clearTicketRefreshTimer() {
-        if (ticketRefreshTimer) {
-            clearTimeout(ticketRefreshTimer);
-            ticketRefreshTimer = null;
-        }
-    }
+    function scheduleSessionRefresh() {
+        clearTimeout(sessionRefreshTimer);
 
-    function scheduleTicketRefresh(ticketData, player) {
-        clearTicketRefreshTimer();
+        sessionRefreshTimer = setTimeout(async () => {
+            if (!currentVideoId || !currentVideoController) return;
+            if (currentVideoController.signal.aborted) return;
 
-        const expiresIn = Number(ticketData.expiresIn) || 1800;
+            try {
+                await initializeDriveSession();
 
-        const refreshSeconds = Math.max(
-            30,
-            expiresIn - TICKET_REFRESH_BEFORE
-        );
+                console.log("[exclusive] 播放驗證已更新");
+            } catch (error) {
+                console.error(
+                    "[exclusive] 更新播放驗證失敗：",
+                    error
+                );
 
-        console.log(
-            `[exclusive] 將於 ${refreshSeconds} 秒後更新播放票券`
-        );
-
-        ticketRefreshTimer = setTimeout(() => {
-            refreshVideoTicket(player);
-        }, refreshSeconds * 1000);
-    }
-
-    async function refreshVideoTicket(player) {
-        if (refreshInProgress) return;
-        if (!currentVideoId || !currentVideoController) return;
-        if (currentVideoController.signal.aborted) return;
-
-        const playerContainer = $("exclusiveVideoPlayer");
-
-        if (
-            !playerContainer ||
-            playerContainer.querySelector("video") !== player
-        ) {
-            return;
-        }
-
-        refreshInProgress = true;
-
-        const videoId = currentVideoId;
-        const controller = currentVideoController;
-
-        try {
-            console.log("[exclusive] 開始更新播放票券");
-
-            const ticketData = await getVideoTicket(
-                videoId,
-                controller.signal
-            );
-
-            if (
-                controller.signal.aborted ||
-                currentVideoId !== videoId ||
-                currentVideoController !== controller ||
-                playerContainer.querySelector("video") !== player
-            ) {
-                return;
-            }
-
-            const previousTime = player.currentTime || 0;
-            const wasPlaying = !player.paused && !player.ended;
-
-            console.log("[exclusive] 播放票券更新成功");
-
-            currentStreamUrl = ticketData.streamUrl;
-
-            player._refreshingTicket = true;
-
-            player.src = currentStreamUrl;
-            player.load();
-
-            const restorePlayback = () => {
-                if (
-                    controller.signal.aborted ||
-                    currentVideoId !== videoId ||
-                    currentVideoController !== controller ||
-                    playerContainer.querySelector("video") !== player
-                ) {
-                    return;
-                }
-
-                if (Number.isFinite(previousTime) && previousTime > 0) {
-                    const targetTime = Math.min(
-                        previousTime,
-                        Number.isFinite(player.duration)
-                            ? Math.max(0, player.duration - 0.5)
-                            : previousTime
+                if (error.status === 401 || error.status === 403) {
+                    showMessage(
+                        "登入或觀看權限已失效，請重新登入。",
+                        "warning"
                     );
 
-                    try {
-                        player.currentTime = targetTime;
-                    } catch (error) {
-                        console.warn(
-                            "[exclusive] 無法恢復播放位置：",
-                            error
-                        );
-                    }
+                    return;
                 }
+            }
 
-                player._refreshingTicket = false;
+            if (currentVideoId && currentVideoController) {
+                scheduleSessionRefresh();
+            }
+        }, SESSION_REFRESH_INTERVAL);
+    }
 
-                if (wasPlaying) {
-                    const playResult = player.play();
+    async function clearDriveSession() {
+        clearTimeout(sessionRefreshTimer);
+        sessionRefreshTimer = null;
 
-                    if (playResult?.catch) {
-                        playResult.catch(error => {
-                            console.warn(
-                                "[exclusive] 更新後無法自動恢復播放：",
-                                error.message
-                            );
-                        });
-                    }
-                }
-
-                console.log(
-                    "[exclusive] 已恢復播放位置：",
-                    player.currentTime
-                );
-            };
-
-            player.addEventListener(
-                "loadedmetadata",
-                restorePlayback,
-                { once: true }
-            );
-
-            scheduleTicketRefresh(ticketData, player);
-
+        try {
+            await fetch(`${DRIVE_API}/logout`, {
+                method: "POST",
+                credentials: "include"
+            });
         } catch (error) {
-            if (error.name === "AbortError") return;
-
-            console.error(
-                "[exclusive] 更新播放票券失敗：",
+            console.warn(
+                "[exclusive] 清除播放驗證失敗：",
                 error
             );
-
-            if (
-                currentVideoId !== videoId ||
-                currentVideoController !== controller ||
-                controller.signal.aborted
-            ) {
-                return;
-            }
-
-            if (error.status === 401 || error.status === 403) {
-                clearTicketRefreshTimer();
-
-                showMessage(
-                    "登入或觀看權限已失效，請重新登入後再播放影片。",
-                    "warning"
-                );
-
-                return;
-            }
-
-            console.log("[exclusive] 將於 30 秒後重試更新票券");
-
-            clearTicketRefreshTimer();
-
-            ticketRefreshTimer = setTimeout(() => {
-                refreshVideoTicket(player);
-            }, TICKET_RETRY_DELAY);
-
-        } finally {
-            refreshInProgress = false;
         }
     }
 
@@ -349,7 +216,11 @@
             return data;
 
         } catch (error) {
-            console.error("[exclusive] 讀取播放進度失敗：", error);
+            console.error(
+                "[exclusive] 讀取播放進度失敗：",
+                error
+            );
+
             return null;
         }
     }
@@ -529,7 +400,7 @@
 
         playerContainer.innerHTML = `
             <div class="exclusive-player-loading">
-                正在取得安全播放連線...
+                正在驗證播放權限...
             </div>
         `;
 
@@ -540,15 +411,18 @@
         currentVideo = video;
 
         try {
-            const [ticketData, savedProgress] = await Promise.all([
-                getVideoTicket(video.id, controller.signal),
+            const [_, savedProgress] = await Promise.all([
+                initializeDriveSession(),
                 getVideoWatchProgress(video)
             ]);
 
             if (controller.signal.aborted) return;
             if (currentVideoId !== video.id) return;
 
-            currentStreamUrl = ticketData.streamUrl;
+            currentStreamUrl =
+                `${DRIVE_API}/stream/${encodeURIComponent(video.id)}`;
+
+            scheduleSessionRefresh();
 
             const player = document.createElement("video");
 
@@ -556,9 +430,9 @@
             player.controls = true;
             player.playsInline = true;
             player.preload = "metadata";
+            player.crossOrigin = "use-credentials";
 
             player.setAttribute("controlsList", "nodownload");
-            player.setAttribute("controls", "");
 
             player.style.width = "100%";
             player.style.maxHeight = "75vh";
@@ -575,7 +449,6 @@
 
             const saveProgress = (completed = false) => {
                 if (!isCurrent()) return Promise.resolve(false);
-                if (player._refreshingTicket) return Promise.resolve(false);
 
                 const position = completed
                     ? 0
@@ -595,7 +468,10 @@
                 });
 
                 saveQueue = task.catch(error => {
-                    console.error("[exclusive] 進度儲存佇列錯誤：", error);
+                    console.error(
+                        "[exclusive] 進度儲存佇列錯誤：",
+                        error
+                    );
                 });
 
                 return task;
@@ -610,9 +486,7 @@
             });
 
             player.addEventListener("timeupdate", () => {
-                if (!isCurrent() || player._refreshingTicket) return;
-
-                if (progressSaveTimer) return;
+                if (!isCurrent() || progressSaveTimer) return;
 
                 progressSaveTimer = setTimeout(() => {
                     progressSaveTimer = null;
@@ -624,13 +498,7 @@
             });
 
             player.addEventListener("pause", () => {
-                if (
-                    !isCurrent() ||
-                    player.ended ||
-                    player._refreshingTicket
-                ) {
-                    return;
-                }
+                if (!isCurrent() || player.ended) return;
 
                 saveProgress();
             });
@@ -645,19 +513,12 @@
             });
 
             player.addEventListener("loadedmetadata", () => {
-                if (!isCurrent()) return;
-
-                console.log("[exclusive] 影片資訊載入完成", {
-                    duration: player.duration,
-                    width: player.videoWidth,
-                    height: player.videoHeight
-                });
-
-                if (restoredPosition) return;
+                if (!isCurrent() || restoredPosition) return;
 
                 restoredPosition = true;
 
                 const completed = Boolean(savedProgress?.completed_at);
+
                 const savedPosition = completed
                     ? 0
                     : Number(savedProgress?.last_position_seconds) || 0;
@@ -672,33 +533,28 @@
                         player.currentTime = savedPosition;
 
                         console.log(
-                            "[exclusive] 已恢復上次播放位置：",
+                            "[exclusive] 已恢復播放位置：",
                             savedPosition
                         );
-
                     } catch (error) {
                         console.warn(
                             "[exclusive] 恢復播放位置失敗：",
                             error
                         );
                     }
-                } else {
-                    console.log("[exclusive] 從頭開始播放");
                 }
             });
 
             player.addEventListener("error", () => {
                 if (!isCurrent()) return;
 
-                const mediaError = player.error;
-
                 console.error("[exclusive] 影片播放錯誤：", {
-                    code: mediaError?.code,
-                    message: mediaError?.message
+                    code: player.error?.code,
+                    message: player.error?.message
                 });
 
                 showMessage(
-                    "影片載入失敗，請重新開啟播放，或確認影片格式是否受瀏覽器支援。",
+                    "影片載入失敗，請確認播放驗證及網路連線。",
                     "error"
                 );
             });
@@ -711,13 +567,6 @@
                 console.log("[exclusive] 影片已可以播放");
             });
 
-            player.addEventListener("seeking", () => {
-                console.log(
-                    "[exclusive] 正在跳轉播放位置：",
-                    player.currentTime
-                );
-            });
-
             player.src = currentStreamUrl;
 
             playerContainer.innerHTML = "";
@@ -725,14 +574,12 @@
 
             player.load();
 
-            scheduleTicketRefresh(ticketData, player);
-
             const playResult = player.play();
 
             if (playResult?.catch) {
                 playResult.catch(error => {
                     console.log(
-                        "[exclusive] 瀏覽器未自動播放，請手動按播放鍵：",
+                        "[exclusive] 請手動按播放鍵：",
                         error.message
                     );
                 });
@@ -754,17 +601,22 @@
     }
 
     async function closeVideo() {
-        clearTicketRefreshTimer();
+        clearTimeout(sessionRefreshTimer);
+        sessionRefreshTimer = null;
 
         const playerContainer = $("exclusiveVideoPlayer");
         const player = playerContainer?.querySelector("video");
 
-        if (player && !player.ended && typeof player._saveProgress === "function") {
+        if (
+            player &&
+            !player.ended &&
+            typeof player._saveProgress === "function"
+        ) {
             try {
                 await player._saveProgress();
             } catch (error) {
                 console.error(
-                    "[exclusive] 關閉播放器時儲存進度失敗：",
+                    "[exclusive] 儲存進度失敗：",
                     error
                 );
             }
@@ -784,7 +636,6 @@
         currentVideoId = null;
         currentVideo = null;
         currentStreamUrl = null;
-        refreshInProgress = false;
 
         if (playerContainer) {
             playerContainer.innerHTML = "";
@@ -978,6 +829,7 @@
                             loadResources();
                         } else {
                             closeVideo();
+                            clearDriveSession();
 
                             const videos = $("exclusiveVideoList");
                             const files = $("exclusiveFileList");
