@@ -29,7 +29,6 @@
     let authSubscription = null;
     let initialized = false;
 
-    // 影片分類篩選
     let allDriveVideos = [];
     let selectedSubject = "全部";
 
@@ -206,50 +205,228 @@
         );
     }
 
-    /*
-     * 科目篩選
-     */
-
     function setupSubjectFilter() {
-        const select = $("exclusiveSubjectFilter");
+        const dropdown = $("exclusiveSubjectFilter");
+        const trigger = $("subjectDropdownTrigger");
+        const menu = $("subjectDropdownMenu");
+        const selectedText = $("subjectDropdownText");
 
-        if (!select) {
-            console.warn(
-                "[exclusive] 找不到 #exclusiveSubjectFilter"
-            );
+        if (!dropdown || !trigger || !menu || !selectedText) {
+            console.warn("[exclusive] 找不到科目下拉選單");
             return;
         }
 
-        // 建立科目選項
-        select.innerHTML = `
-            <option value="全部">全部</option>
-            ${SUBJECTS.map(subject => `
-                <option value="${escapeHTML(subject)}">
-                    ${escapeHTML(subject)}
-                </option>
-            `).join("")}
-        `;
+        if (dropdown.dataset.bound === "true") return;
+        dropdown.dataset.bound = "true";
 
-        select.value = selectedSubject;
+        const options = ["全部", ...SUBJECTS];
 
-        // 避免重複綁定事件
-        if (select.dataset.bound !== "true") {
-            select.addEventListener("change", () => {
-                selectedSubject = select.value || "全部";
-                filterDriveVideos();
+        function updateOptions() {
+            menu.querySelectorAll(".subject-dropdown-option").forEach(option => {
+                const active = option.dataset.subject === selectedSubject;
+
+                option.classList.toggle("active", active);
+                option.setAttribute("aria-selected", String(active));
+
+                const check = option.querySelector(
+                    ".subject-dropdown-check"
+                );
+
+                if (check) {
+                    check.textContent = active ? "✓" : "";
+                }
             });
-
-            select.dataset.bound = "true";
         }
+
+        function renderOptions() {
+            menu.innerHTML = options.map(subject => {
+                const active = subject === selectedSubject;
+
+                return `
+                    <button
+                        type="button"
+                        class="subject-dropdown-option ${active ? "active" : ""}"
+                        role="option"
+                        aria-selected="${active}"
+                        tabindex="-1"
+                        data-subject="${escapeHTML(subject)}"
+                    >
+                        <span>${escapeHTML(subject)}</span>
+                        <span class="subject-dropdown-check">
+                            ${active ? "✓" : ""}
+                        </span>
+                    </button>
+                `;
+            }).join("");
+        }
+
+        function openMenu(focusSelected = false) {
+            menu.hidden = false;
+            trigger.setAttribute("aria-expanded", "true");
+
+            if (focusSelected) {
+                const selectedOption = [...menu.querySelectorAll(
+                    ".subject-dropdown-option"
+                )].find(option => {
+                    return option.dataset.subject === selectedSubject;
+                });
+
+                selectedOption?.focus();
+            }
+        }
+
+        function closeMenu(returnFocus = false) {
+            menu.hidden = true;
+            trigger.setAttribute("aria-expanded", "false");
+
+            if (returnFocus) {
+                trigger.focus();
+            }
+        }
+
+        function selectSubject(subject) {
+            if (!options.includes(subject)) return;
+
+            selectedSubject = subject;
+            selectedText.textContent = subject;
+
+            updateOptions();
+            closeMenu(true);
+
+            filterDriveVideos();
+        }
+
+        trigger.addEventListener("click", () => {
+            if (menu.hidden) {
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        });
+
+        menu.addEventListener("click", event => {
+            const option = event.target.closest(
+                ".subject-dropdown-option"
+            );
+
+            if (!option) return;
+
+            selectSubject(option.dataset.subject);
+        });
+
+        trigger.addEventListener("keydown", event => {
+            if (
+                event.key === "ArrowDown" ||
+                event.key === "ArrowUp"
+            ) {
+                event.preventDefault();
+                openMenu(true);
+            }
+
+            if (event.key === "Escape") {
+                closeMenu();
+            }
+        });
+
+        menu.addEventListener("keydown", event => {
+            const optionElements = [
+                ...menu.querySelectorAll(".subject-dropdown-option")
+            ];
+
+            const currentIndex = optionElements.indexOf(
+                document.activeElement
+            );
+
+            if (event.key === "Escape") {
+                event.preventDefault();
+                closeMenu(true);
+                return;
+            }
+
+            if (event.key === "Tab") {
+                closeMenu();
+                return;
+            }
+
+            let nextIndex = currentIndex;
+
+            if (event.key === "ArrowDown") {
+                event.preventDefault();
+                nextIndex = (currentIndex + 1) % optionElements.length;
+            } else if (event.key === "ArrowUp") {
+                event.preventDefault();
+                nextIndex = (
+                    currentIndex - 1 + optionElements.length
+                ) % optionElements.length;
+            } else if (event.key === "Home") {
+                event.preventDefault();
+                nextIndex = 0;
+            } else if (event.key === "End") {
+                event.preventDefault();
+                nextIndex = optionElements.length - 1;
+            } else {
+                return;
+            }
+
+            optionElements[nextIndex]?.focus();
+        });
+
+        document.addEventListener("click", event => {
+            if (!dropdown.contains(event.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape" && !menu.hidden) {
+                closeMenu(true);
+            }
+        });
+
+        if (!options.includes(selectedSubject)) {
+            selectedSubject = "全部";
+        }
+
+        selectedText.textContent = selectedSubject;
+
+        renderOptions();
+        updateOptions();
+
+        console.log("[exclusive] 科目下拉選單初始化完成");
     }
 
     function resetSubjectFilter() {
         selectedSubject = "全部";
 
-        const select = $("exclusiveSubjectFilter");
+        const trigger = $("subjectDropdownTrigger");
+        const menu = $("subjectDropdownMenu");
+        const selectedText = $("subjectDropdownText");
 
-        if (select) {
-            select.value = "全部";
+        if (selectedText) {
+            selectedText.textContent = "全部";
+        }
+
+        if (trigger) {
+            trigger.setAttribute("aria-expanded", "false");
+        }
+
+        if (menu) {
+            menu.hidden = true;
+
+            menu.querySelectorAll(".subject-dropdown-option").forEach(option => {
+                const active = option.dataset.subject === "全部";
+
+                option.classList.toggle("active", active);
+                option.setAttribute("aria-selected", String(active));
+
+                const check = option.querySelector(
+                    ".subject-dropdown-check"
+                );
+
+                if (check) {
+                    check.textContent = active ? "✓" : "";
+                }
+            });
         }
     }
 
