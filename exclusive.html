@@ -10,6 +10,62 @@
   <link rel="stylesheet" href="exclusive.css">
   <link rel="icon" type="image/png" href="favicon.png">
 
+  <style>
+    .exclusive-subject-filter-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+    }
+
+    .exclusive-subject-filter-label {
+      color: #64748b;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    #exclusiveSubjectFilter {
+      appearance: none;
+      -webkit-appearance: none;
+      min-width: 112px;
+      max-width: 100%;
+      padding: 7px 32px 7px 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 999px;
+      outline: none;
+      background-color: #fff;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%233156d3' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      color: #3156d3;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    #exclusiveSubjectFilter:hover {
+      border-color: #3156d3;
+    }
+
+    #exclusiveSubjectFilter:focus {
+      border-color: #3156d3;
+      box-shadow: 0 0 0 3px rgba(49, 86, 211, .12);
+    }
+
+    @media (max-width: 480px) {
+      .exclusive-subject-filter-wrap {
+        margin-bottom: 14px;
+      }
+
+      #exclusiveSubjectFilter {
+        font-size: 12px;
+        padding: 7px 29px 7px 12px;
+      }
+    }
+  </style>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="js/supabase-client.js"></script>
@@ -117,9 +173,27 @@
       <div class="exclusive-section-header">
         <div>
           <h2>線上影片</h2>
-          <p>考前加強，每週更新（數學）。</p>
+          <p>考前加強，每週更新。</p>
         </div>
         <span class="exclusive-count">影音資源</span>
+      </div>
+
+      <div class="exclusive-subject-filter-wrap">
+        <label
+          class="exclusive-subject-filter-label"
+          for="exclusiveSubjectFilter"
+        >科目</label>
+
+        <select id="exclusiveSubjectFilter">
+          <option value="全部">全部</option>
+          <option value="國文">國文</option>
+          <option value="數學">數學</option>
+          <option value="英文">英文</option>
+          <option value="會計學">會計學</option>
+          <option value="經濟學">經濟學</option>
+          <option value="商業概論">商業概論</option>
+          <option value="數位科技概論(應用)">數位科技概論(應用)</option>
+        </select>
       </div>
 
       <div class="exclusive-grid" id="exclusiveVideoList">
@@ -150,25 +224,25 @@
     <a href="terms.html">服務條款</a>
     <p>聯絡方式（Gmail）：dev@eric0517.dpdns.org</p>
     <div class="cloudflare-footer">
-  <div class="cloudflare-footer-main">
-    <svg class="cloudflare-shield" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L21 5V11C21 16.5 17.2 20.5 12 22C6.8 20.5 3 16.5 3 11V5L12 2Z"
-        fill="#16A34A"/>
-      <path d="M8 12L10.5 14.5L16 9"
-        stroke="white" stroke-width="2"
-        stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <span>本網站由</span>
-    <img
-      src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg"
-      alt="Cloudflare"
-    >
-    <span>防護</span>
-  </div>
-  <div class="cloudflare-footer-sub">
-    Protected by Cloudflare
-  </div>
-</div>
+      <div class="cloudflare-footer-main">
+        <svg class="cloudflare-shield" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L21 5V11C21 16.5 17.2 20.5 12 22C6.8 20.5 3 16.5 3 11V5L12 2Z"
+            fill="#16A34A"/>
+          <path d="M8 12L10.5 14.5L16 9"
+            stroke="white" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>本網站由</span>
+        <img
+          src="https://www.cloudflare.com/img/logo-cloudflare-dark.svg"
+          alt="Cloudflare"
+        >
+        <span>防護</span>
+      </div>
+      <div class="cloudflare-footer-sub">
+        Protected by Cloudflare
+      </div>
+    </div>
   </footer>
 
   <div class="exclusive-video-modal" id="exclusiveVideoModal" hidden>
