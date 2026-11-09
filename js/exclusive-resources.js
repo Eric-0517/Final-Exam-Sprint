@@ -1,13 +1,22 @@
-
 (() => {
     "use strict";
 
     const DRIVE_API =
         "https://video.eric0517.dpdns.org";
-    
+
     const FILE_BUCKET = "exclusive-files";
     const PROGRESS_SAVE_INTERVAL = 10000;
     const SESSION_REFRESH_INTERVAL = 5 * 60 * 1000;
+
+    const SUBJECTS = [
+        "國文",
+        "數學",
+        "英文",
+        "會計學",
+        "經濟學",
+        "商業概論",
+        "數位科技概論(應用)"
+    ];
 
     const $ = (id) => document.getElementById(id);
 
@@ -19,6 +28,10 @@
     let resourceLoadPromise = null;
     let authSubscription = null;
     let initialized = false;
+
+    // 影片分類篩選
+    let allDriveVideos = [];
+    let selectedSubject = "全部";
 
     function showMessage(message, icon = "info") {
         if (window.Swal) {
@@ -193,6 +206,49 @@
         );
     }
 
+    /*
+     * 科目篩選
+     */
+    function setupSubjectFilter() {
+        const select = $("exclusiveSubjectFilter");
+
+        if (!select) {
+            console.warn(
+                "[exclusive] 找不到 #exclusiveSubjectFilter，請確認 exclusive.html 已加入科目選單"
+            );
+            return;
+        }
+
+        // 避免重複建立選項
+        select.innerHTML = `
+            <option value="全部">全部科目</option>
+            ${SUBJECTS.map(subject => `
+                <option value="${escapeHTML(subject)}">
+                    ${escapeHTML(subject)}
+                </option>
+            `).join("")}
+        `;
+
+        select.value = selectedSubject;
+
+        select.addEventListener("change", () => {
+            selectedSubject = select.value || "全部";
+            filterDriveVideos();
+        });
+    }
+
+    function filterDriveVideos() {
+        let filteredVideos = allDriveVideos;
+
+        if (selectedSubject !== "全部") {
+            filteredVideos = allDriveVideos.filter(video =>
+                String(video.subject || "").trim() === selectedSubject
+            );
+        }
+
+        renderVideoList(filteredVideos, selectedSubject);
+    }
+
     async function getVideoWatchProgress(video) {
         try {
             if (!window.sb) return null;
@@ -247,7 +303,7 @@
                 user_id: user.id,
                 video_id: String(video.id),
                 video_title: cleanVideoTitle(video.title),
-                category: video.category || "線上影片",
+                category: video.category || video.subject || "線上影片",
                 watched_at: new Date().toISOString(),
                 last_position_seconds: completed
                     ? 0
@@ -292,7 +348,7 @@
         }
     }
 
-    function renderVideoList(videos) {
+    function renderVideoList(videos, subject = "全部") {
         const container = $("exclusiveVideoList");
 
         if (!container) {
@@ -301,9 +357,13 @@
         }
 
         if (!Array.isArray(videos) || videos.length === 0) {
+            const message = subject === "全部"
+                ? "目前沒有可觀看的影片"
+                : `「${subject}」目前沒有影片`;
+
             container.innerHTML = `
                 <div class="exclusive-empty">
-                    目前沒有可觀看的影片
+                    ${escapeHTML(message)}
                 </div>
             `;
             return;
@@ -321,7 +381,12 @@
 
                 <div class="exclusive-resource-info">
                     <h3>${escapeHTML(cleanVideoTitle(video.title))}</h3>
-                    <p>${escapeHTML(formatSize(video.fileSize))}</p>
+                    <p>
+                        ${escapeHTML(video.subject || "尚未分類")}
+                        ${video.fileSize
+                            ? `｜${escapeHTML(formatSize(video.fileSize))}`
+                            : ""}
+                    </p>
                 </div>
 
                 <button
@@ -344,7 +409,12 @@
             });
         });
 
-        console.log("[exclusive] 影片清單已顯示：", videos.length);
+        console.log(
+            "[exclusive] 影片清單已顯示：",
+            videos.length,
+            "科目：",
+            subject
+        );
     }
 
     async function loadDriveVideos() {
@@ -367,10 +437,16 @@
 
             console.log("[exclusive] Google Drive 影片資料：", result);
 
-            renderVideoList(result.videos || []);
+            allDriveVideos = Array.isArray(result.videos)
+                ? result.videos
+                : [];
+
+            filterDriveVideos();
 
         } catch (error) {
             console.error("[exclusive] 載入影片失敗：", error);
+
+            allDriveVideos = [];
 
             container.innerHTML = `
                 <div class="exclusive-error">
@@ -801,6 +877,9 @@
 
         initialized = true;
 
+        // 初始化科目篩選選單
+        setupSubjectFilter();
+
         const start = async () => {
             if (!app.classList.contains("exclusive-authorized")) {
                 console.log("[exclusive] 尚未取得觀看權限");
@@ -831,6 +910,8 @@
                         } else {
                             closeVideo();
                             clearDriveSession();
+
+                            allDriveVideos = [];
 
                             const videos = $("exclusiveVideoList");
                             const files = $("exclusiveFileList");
