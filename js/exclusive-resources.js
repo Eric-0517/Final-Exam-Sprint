@@ -209,19 +209,20 @@
     /*
      * 科目篩選
      */
+
     function setupSubjectFilter() {
         const select = $("exclusiveSubjectFilter");
 
         if (!select) {
             console.warn(
-                "[exclusive] 找不到 #exclusiveSubjectFilter，請確認 exclusive.html 已加入科目選單"
+                "[exclusive] 找不到 #exclusiveSubjectFilter"
             );
             return;
         }
 
-        // 避免重複建立選項
+        // 建立科目選項
         select.innerHTML = `
-            <option value="全部">全部科目</option>
+            <option value="全部">全部</option>
             ${SUBJECTS.map(subject => `
                 <option value="${escapeHTML(subject)}">
                     ${escapeHTML(subject)}
@@ -231,19 +232,34 @@
 
         select.value = selectedSubject;
 
-        select.addEventListener("change", () => {
-            selectedSubject = select.value || "全部";
-            filterDriveVideos();
-        });
+        // 避免重複綁定事件
+        if (select.dataset.bound !== "true") {
+            select.addEventListener("change", () => {
+                selectedSubject = select.value || "全部";
+                filterDriveVideos();
+            });
+
+            select.dataset.bound = "true";
+        }
+    }
+
+    function resetSubjectFilter() {
+        selectedSubject = "全部";
+
+        const select = $("exclusiveSubjectFilter");
+
+        if (select) {
+            select.value = "全部";
+        }
     }
 
     function filterDriveVideos() {
         let filteredVideos = allDriveVideos;
 
         if (selectedSubject !== "全部") {
-            filteredVideos = allDriveVideos.filter(video =>
-                String(video.subject || "").trim() === selectedSubject
-            );
+            filteredVideos = allDriveVideos.filter(video => {
+                return String(video.subject || "").trim() === selectedSubject;
+            });
         }
 
         renderVideoList(filteredVideos, selectedSubject);
@@ -366,6 +382,7 @@
                     ${escapeHTML(message)}
                 </div>
             `;
+
             return;
         }
 
@@ -877,7 +894,6 @@
 
         initialized = true;
 
-        // 初始化科目篩選選單
         setupSubjectFilter();
 
         const start = async () => {
@@ -912,6 +928,7 @@
                             clearDriveSession();
 
                             allDriveVideos = [];
+                            resetSubjectFilter();
 
                             const videos = $("exclusiveVideoList");
                             const files = $("exclusiveFileList");
